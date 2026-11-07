@@ -31,6 +31,12 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - `python Tools/geo/build_provinces.py` illere `neighbors` (komşu plakalar) da ekler. `python Tools/geo/build_features.py` → `Resources/Data/turkey_features.json` (göller: Natural Earth + elle elips, tip bilgisiyle; barajlar akarsu çizgisine oturtulur; kıyı, UNESCO, milli park noktaları ve fay hatları `features_manual.json`'da). Akarsular ve göller Natural Earth'ten (`Tools/geo/ne_10m_rivers_turkey.geojson`, `ne_10m_lakes_turkey.geojson`); dağlar (sırt çizgisi), volkanlar (nokta), ovalar ve platolar (alan) `Tools/geo/features_manual.json` içinde elle, [boylam, enlem] olarak tanımlı ve KPSS bilgi notları içerir. Yeni yer şekli eklemek için bu dosyaya ekleyip scripti çalıştır.
 - Unity'de `Map/FeatureLayer.cs` + `Map/FeatureView.cs` çizer. Göller her zaman görünür (zemin). Akarsu, dağ, volkan, ova ve plato **her biri yalnızca kendi bölümünde, tek başına** gösterilir; türleri karıştıran bölüm yapılmaz (kullanıcı tercihi).
 
+## Görsel katmanlar ve erişilebilirlik
+- Kabartma: `python Tools/geo/build_relief.py` (AWS Terrain Tiles, zoom 8, `Tools/geo/cache/` git'e girmez) → `Resources/Textures/turkey_relief.png`; `Map/ReliefLayer.cs` illerin üstüne yarı saydam çizer (yer şekli bölümlerinde güçlü). Atıflar `docs/CREDITS.md`.
+- Komşu ülkeler (`countries`), dağ alanları (dış + koyu çekirdek, `innerVertices`), akarsu yatağından türetilen delta/graben ovaları ve bölge dış hatları (`regionOutlines`) veri scriptlerinde üretilir.
+- `UI/MapLabelLayer.cs`: deniz/boğaz/ülke adları her zaman; il adları yakınlaşınca ve sadece cevabı ele vermeyen modlarda (yer şekli [miras hariç], konu, KPSS sorusu) ve "Haritayı incele" görünümünde.
+- `Core/GameSettings.cs`: renk körü dostu palet (Okabe–Ito: doğru mavi, yanlış turuncu; `Theme.ApplyColorblind`, `MapPalette.ApplyColorblind`), büyük yazı (`UI/TextScaler.cs`, %15), efektler (`Map/MapEffects.cs`: bölge sınırı çizimi, ışıltı; HUD seri kenar parlaması).
+
 ## Reklamlar
 - Oyun kodu yalnızca `Ads/IAdService.cs` arayüzünü bilir. Şu an `Ads/MockAdService.cs` (ekranda test reklamı) bağlı.
 - Strateji: **Dengeli** (kullanıcı seçimi). Yerleşimler: ödüllü = elenince "+1 can ile devam" (bölüm başına 1 kez); geçiş = sonuç ekranından ayrılırken, oturumda 2 bölümden sonra ve en az 180 sn arayla (`Ads/AdPolicy.cs`, ayarlar `QuizConfig`).

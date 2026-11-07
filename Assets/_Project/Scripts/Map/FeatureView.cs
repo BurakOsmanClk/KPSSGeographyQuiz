@@ -62,12 +62,24 @@ namespace KPSSGeography.Map
                     foreach (var l in data.lines) b.AddPolyline(LineMeshBuilder.ToPoints(l.points), 0.05f, palette.river);
                     break;
                 case GeoFeature.Mountain:
+                    // KPSS haritalarındaki gibi: açık kahve dış alan, koyu kahve çekirdek, sırt boyunca küçük semboller
                     baseOrder = 24;
-                    foreach (var l in data.lines)
+                    if (data.vertices != null && data.vertices.Length > 0)
                     {
-                        var pts = LineMeshBuilder.ToPoints(l.points);
-                        b.AddPolyline(pts, 0.11f, palette.mountain);
-                        b.AddRidgeMarks(pts, 0.2f, 0.15f, palette.mountainMark);
+                        b.AddTriangles(data.vertices, data.triangles, palette.mountainLight);
+                        if (data.innerVertices != null && data.innerVertices.Length > 0)
+                            b.AddTriangles(data.innerVertices, data.innerTriangles, palette.mountain);
+                        foreach (var l in data.lines)
+                            b.AddRidgeMarks(LineMeshBuilder.ToPoints(l.points), 0.24f, 0.12f, palette.mountainMark);
+                    }
+                    else
+                    {
+                        foreach (var l in data.lines)
+                        {
+                            var pts = LineMeshBuilder.ToPoints(l.points);
+                            b.AddPolyline(pts, 0.11f, palette.mountain);
+                            b.AddRidgeMarks(pts, 0.2f, 0.15f, palette.mountainMark);
+                        }
                     }
                     break;
                 case GeoFeature.Volcano:

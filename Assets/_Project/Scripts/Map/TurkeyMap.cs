@@ -9,14 +9,17 @@ namespace KPSSGeography.Map
     {
         readonly List<ProvinceView> provinces = new List<ProvinceView>();
         readonly Dictionary<int, ProvinceView> byPlate = new Dictionary<int, ProvinceView>();
+        readonly Dictionary<string, List<Vector2[]>> regionRings = new Dictionary<string, List<Vector2[]>>();
 
         public IReadOnlyList<ProvinceView> Provinces => provinces;
         public Rect Bounds { get; private set; }
+        float[] projection;
         public Material SharedMaterial { get; private set; }
 
         public void Build(ProvinceDatabase db, MapPalette palette)
         {
             Bounds = db.Bounds;
+            projection = db.projection;
             SharedMaterial = CreateMaterial();
 
             foreach (var data in db.provinces)
@@ -28,6 +31,14 @@ namespace KPSSGeography.Map
                 provinces.Add(view);
                 byPlate[data.plate] = view;
             }
+
+            if (db.regionOutlines != null)
+                foreach (var ro in db.regionOutlines)
+                {
+                    var list = new List<Vector2[]>();
+                    foreach (var r in ro.rings) list.Add(LineMeshBuilder.ToPoints(r.points));
+                    regionRings[ro.region] = list;
+                }
 
             BuildShadow(db, palette);
             BuildSeaBackground(palette);
@@ -79,6 +90,17 @@ namespace KPSSGeography.Map
                     return provinces[i];
             return null;
         }
+
+        /// <summary>Boylam/enlemi harita koordinatına çevirir (illerle aynı projeksiyon).</summary>
+        public Vector3 LonLatToMap(float lon, float lat)
+        {
+            if (projection == null || projection.Length < 4) return Vector3.zero;
+            return new Vector3((lon - projection[0]) * projection[2], (lat - projection[1]) * projection[3], 0f) + transform.position;
+        }
+
+        /// <summary>Bölgenin dış hat halkaları (bölge sınırı animasyonu için).</summary>
+        public List<Vector2[]> GetRegionRings(string region) =>
+            regionRings.TryGetValue(region, out var r) ? r : new List<Vector2[]>();
 
         public ProvinceView GetByPlate(int plate) => byPlate.TryGetValue(plate, out var v) ? v : null;
 

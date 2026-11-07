@@ -42,6 +42,9 @@ namespace KPSSGeography.Map
         public Color lake = new Color32(0x4D, 0x9F, 0xD6, 0xFF);
         public Color lakeShore = new Color32(0x2F, 0x7F, 0xB8, 0xFF);
         public Color mountain = new Color32(0x8B, 0x5A, 0x3C, 0xFF);
+        public Color mountainLight = new Color32(0xC9, 0xA2, 0x7E, 0xEB);
+        public Color country = new Color32(0xD5, 0xD9, 0xDD, 0xFF);
+        public Color countryEdge = new Color32(0xB3, 0xBA, 0xC1, 0xFF);
         public Color mountainMark = new Color32(0x5E, 0x3A, 0x22, 0xFF);
         public Color volcano = new Color32(0x6D, 0x45, 0x2C, 0xFF);
         public Color lava = new Color32(0xF0, 0x55, 0x2E, 0xFF);
@@ -71,6 +74,18 @@ namespace KPSSGeography.Map
         public Color wrongFlash = new Color32(0xD9, 0x3B, 0x2F, 0xFF);
         public Color reveal = new Color32(0xFF, 0xB7, 0x03, 0xFF);
         public Color shadow = new Color(0.02f, 0.12f, 0.22f, 0.25f);
+
+        Color[] defaults;
+
+        /// <summary>Renk körü dostu durum renkleri (doğru = mavi, yanlış = turuncu).</summary>
+        public void ApplyColorblind(bool on)
+        {
+            if (defaults == null) defaults = new[] { missed, featureCorrect, featureMissed, wrongFlash };
+            missed = on ? new Color32(0xE6, 0x9F, 0x00, 0xFF) : defaults[0];
+            featureCorrect = on ? new Color32(0x00, 0x72, 0xB2, 0xFF) : defaults[1];
+            featureMissed = on ? new Color32(0xE6, 0x9F, 0x00, 0xFF) : defaults[2];
+            wrongFlash = on ? new Color32(0xD5, 0x5E, 0x00, 0xFF) : defaults[3];
+        }
 
         public Color RegionColor(string region) => region switch
         {

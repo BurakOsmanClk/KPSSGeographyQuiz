@@ -37,6 +37,12 @@ namespace KPSSGeography.Quiz
         MapCameraController cameraController;
         ProgressStore progress;
         QuestionBuilder builder;
+        ReliefLayer relief;
+        MapEffects effects;
+        readonly List<ReviewItem> history = new List<ReviewItem>();
+
+        /// <summary>Turda sorulan yerler ve sonuçları ("haritayı incele").</summary>
+        public IReadOnlyList<ReviewItem> History => history;
 
         List<Question> questions = new List<Question>();
         readonly HashSet<IMapTarget> found = new HashSet<IMapTarget>();
@@ -81,8 +87,11 @@ namespace KPSSGeography.Quiz
             1f + Mathf.Clamp(streak - 1, 0, config.maxStreakSteps) * config.streakStep;
 
         public void Initialize(QuizConfig quizConfig, TurkeyMap turkeyMap, FeatureLayer featureLayer, SfxPlayer sfxPlayer,
-            MapCameraController camController, ProgressStore progressStore, QuestionBuilder questionBuilder)
+            MapCameraController camController, ProgressStore progressStore, QuestionBuilder questionBuilder,
+            ReliefLayer reliefLayer, MapEffects mapEffects)
         {
+            relief = reliefLayer;
+            effects = mapEffects;
             config = quizConfig;
             map = turkeyMap;
             features = featureLayer;
@@ -112,6 +121,8 @@ namespace KPSSGeography.Quiz
             map.ResetAll();
             features.ShowDefault();
             cameraController.SetAttractMode();
+            effects?.Clear();
+            relief?.SetStrength(0.8f);
         }
 
         public void SetPaused(bool paused)
@@ -130,7 +141,17 @@ namespace KPSSGeography.Quiz
         IEnumerator StartRoutine()
         {
             map.ResetAll();
+            effects?.Clear();
+            history.Clear();
             Rect focus = SetupMap();
+            bool physical = Mode == QuizMode.Feature || Mode == QuizMode.FeatureChoice;
+            relief?.SetStrength(physical ? 1f : 0.55f);
+            if (Level.HasRegionFilter && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.RegionAll))
+            {
+                var rings = new List<Vector2[]>();
+                foreach (var region in Level.regions) rings.AddRange(map.GetRegionRings(region));
+                effects?.DrawOutline(rings, new Color(1f, 0.72f, 0.1f, 1f));
+            }
             Rect viewport = Mode == QuizMode.Mcq ? McqViewport : UsesChoices ? ChoiceViewport : FindViewport;
             cameraController.FocusOn(focus, viewport);
 
@@ -248,6 +269,23 @@ namespace KPSSGeography.Quiz
             else ResolveWrong(null, -1, true);
         }
 
+        // ================== Geçmiş ==================
+
+        void Record(IMapTarget target, Question q, bool correct)
+        {
+            if (target == null) return;
+            string label = q.Type == AnswerType.Choice && q.Focus == target && !string.IsNullOrEmpty(q.AnswerLabel)
+                ? $"{target.DisplayName}: {q.AnswerLabel}"
+                : target.DisplayName;
+            history.RemoveAll(h => ReferenceEquals(h.Target, target));
+            history.Add(new ReviewItem(target, label, q.Info, correct));
+        }
+
+        void Sparkle(IMapTarget target)
+        {
+            if (target != null) effects?.Sparkle(target.LabelWorldPosition, new Color(1f, 0.85f, 0.3f));
+        }
+
         // ================== Cevaplar ==================
 
         public void SubmitProvince(ProvinceView clicked)
@@ -294,6 +332,8 @@ namespace KPSSGeography.Quiz
                 clicked.SetState(ProvinceState.Correct);
                 clicked.PlayCorrect();
                 sfx.Play(Sfx.Correct);
+                Sparkle(clicked);
+                Record(clicked, Current, true);
 
                 bool done = found.Count >= Current.Correct.Count;
                 if (done)
@@ -324,7 +364,11 @@ namespace KPSSGeography.Quiz
         void RevealMissingAndFail()
         {
             foreach (var t in Current.Correct)
-                if (!found.Contains(t)) t.PlayReveal(config.wrongFeedback);
+                if (!found.Contains(t))
+                {
+                    t.PlayReveal(config.wrongFeedback);
+                    Record(t, Current, false);
+                }
             Mistakes = MaxMistakes;
             State = QuizState.Feedback;
             sfx.Play(Sfx.Wrong);
@@ -356,6 +400,8 @@ namespace KPSSGeography.Quiz
             {
                 mark.SetState(ProvinceState.Correct);
                 mark.PlayCorrect();
+                Sparkle(mark);
+                Record(mark, Current, true);
             }
             sfx.Play(Sfx.Correct);
 
@@ -377,6 +423,7 @@ namespace KPSSGeography.Quiz
             {
                 Current.Reveal.SetState(ProvinceState.Missed);
                 Current.Reveal.PlayReveal(delay);
+                Record(Current.Reveal, Current, false);
             }
             else if (Current.Type == AnswerType.Map)
             {
@@ -386,6 +433,7 @@ namespace KPSSGeography.Quiz
             {
                 Current.Focus.SetState(ProvinceState.Missed);
                 Current.Focus.PlayReveal(delay);
+                Record(Current.Focus, Current, false);
             }
 
             sfx.Play(Sfx.Wrong);
@@ -456,6 +504,9 @@ namespace KPSSGeography.Quiz
             yield return new WaitForSeconds(config.endDelay);
 
             bool regionAll = Mode == QuizMode.RegionAll && Current != null;
+            if (regionAll)
+                foreach (var t in Current.Correct)
+                    if (!found.Contains(t) && !history.Exists(h => ReferenceEquals(h.Target, t))) Record(t, Current, false);
             int total = regionAll ? Current.Correct.Count : questions.Count;
             int correct = regionAll ? found.Count : CorrectCount;
             int answered = regionAll ? found.Count + Mistakes : Mathf.Min(QuestionIndex + (completed ? 0 : 1), questions.Count);

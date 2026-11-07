@@ -33,6 +33,9 @@ namespace KPSSGeography.UI
         Button soundButton;
         Button unlockButton;
         Button resetButton;
+        Button colorblindButton;
+        Button bigTextButton;
+        Button effectsButton;
         bool resetArmed;
 
         public void Initialize(Transform parent, ProgressStore progressStore, SfxPlayer sfxPlayer)
@@ -144,25 +147,25 @@ namespace KPSSGeography.UI
 
         Modal BuildSettings(Transform parent)
         {
-            var m = Modal.Create(parent, "Settings", "AYARLAR", new Vector2(640, 640));
-            soundButton = UIFactory.Button("Sound", m.Content, "", Theme.NavyLight, new Vector2(500, 84), () =>
+            var m = Modal.Create(parent, "Settings", "AYARLAR", new Vector2(680, 900));
+            soundButton = UIFactory.Button("Sound", m.Content, "", Theme.NavyLight, new Vector2(540, 84), () =>
             {
                 sfx.Muted = !sfx.Muted;
                 sfx.Play(Sfx.Click);
                 RefreshSettings();
             }, null, 30);
-            soundButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -10), new Vector2(500, 84));
+            soundButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -10), new Vector2(540, 84));
 
-            unlockButton = UIFactory.Button("Unlock", m.Content, "", Theme.NavyLight, new Vector2(500, 84), () =>
+            unlockButton = UIFactory.Button("Unlock", m.Content, "", Theme.NavyLight, new Vector2(540, 84), () =>
             {
                 progress.UnlockAll = !progress.UnlockAll;
                 sfx.Play(Sfx.Click);
                 RefreshSettings();
                 RefreshStars();
             }, null, 26);
-            unlockButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -114), new Vector2(500, 84));
+            unlockButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -114), new Vector2(540, 84));
 
-            resetButton = UIFactory.Button("Reset", m.Content, "", Theme.NavyLight, new Vector2(500, 84), () =>
+            resetButton = UIFactory.Button("Reset", m.Content, "", Theme.NavyLight, new Vector2(540, 84), () =>
             {
                 sfx.Play(Sfx.Click);
                 if (!resetArmed)
@@ -177,7 +180,11 @@ namespace KPSSGeography.UI
                 RefreshStars();
                 ProgressReset?.Invoke();
             }, null, 26);
-            resetButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -218), new Vector2(500, 84));
+            resetButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -218), new Vector2(540, 84));
+
+            colorblindButton = SettingButton(m.Content, "Colorblind", -322, () => GameSettings.Colorblind = !GameSettings.Colorblind);
+            bigTextButton = SettingButton(m.Content, "BigText", -426, () => GameSettings.BigText = !GameSettings.BigText);
+            effectsButton = SettingButton(m.Content, "Effects", -530, () => GameSettings.Effects = !GameSettings.Effects);
 
             UIFactory.Button("Close", m.Content, "KAPAT", Theme.Amber, new Vector2(320, 84), () =>
                 {
@@ -188,12 +195,27 @@ namespace KPSSGeography.UI
             return m;
         }
 
+        Button SettingButton(Transform parent, string name, float y, System.Action toggle)
+        {
+            var b = UIFactory.Button(name, parent, "", Theme.NavyLight, new Vector2(540, 84), () =>
+            {
+                toggle();
+                sfx.Play(Sfx.Click);
+                RefreshSettings();
+            }, null, 26);
+            b.GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, y), new Vector2(540, 84));
+            return b;
+        }
+
         void RefreshSettings()
         {
             UIFactory.SetButtonLabel(soundButton, sfx.Muted ? "SES: KAPALI" : "SES: AÇIK");
             UIFactory.SetButtonLabel(unlockButton, progress.UnlockAll ? "TÜM BÖLÜMLER AÇIK (TEST)" : "TÜM BÖLÜMLERİ AÇ (TEST)");
             UIFactory.SetButtonLabel(resetButton, resetArmed ? "EMİN MİSİN? TEKRAR DOKUN" : "İLERLEMEYİ SIFIRLA");
             UIFactory.SetButtonColor(resetButton, resetArmed ? Theme.Error : Theme.NavyLight);
+            UIFactory.SetButtonLabel(colorblindButton, GameSettings.Colorblind ? "RENK KÖRÜ DOSTU: AÇIK" : "RENK KÖRÜ DOSTU: KAPALI");
+            UIFactory.SetButtonLabel(bigTextButton, GameSettings.BigText ? "BÜYÜK YAZI: AÇIK" : "BÜYÜK YAZI: KAPALI");
+            UIFactory.SetButtonLabel(effectsButton, GameSettings.Effects ? "EFEKTLER: AÇIK" : "EFEKTLER: KAPALI");
         }
 
         void RefreshStars() => starText.text = $"{progress.TotalStars} / {progress.MaxStars}";

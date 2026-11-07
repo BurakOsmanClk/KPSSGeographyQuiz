@@ -38,6 +38,9 @@ namespace KPSSGeography.Data
         public float[] vertices;
         public int[] triangles;
         public ProvinceRing[] outline;
+        /// <summary>Dağlar için koyu iç çekirdek alanı.</summary>
+        public float[] innerVertices;
+        public int[] innerTriangles;
 
         public Vector2 LabelPoint => new Vector2(label[0], label[1]);
         public bool IsLine => kind == "line";
@@ -62,6 +65,8 @@ namespace KPSSGeography.Data
         public string source;
         public GeoFeature[] features;
         public LakeData[] lakes;
+        /// <summary>Komşu ülkeler (dekor). Alan yapısı göllerle aynıdır.</summary>
+        public LakeData[] countries;
 
         public static GeoFeatureDatabase Load()
         {

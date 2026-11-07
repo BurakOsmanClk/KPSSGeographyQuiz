@@ -9,12 +9,15 @@ namespace KPSSGeography.UI
     /// </summary>
     public static class ShapeSprites
     {
-        static Sprite star, lockIcon, chevronRight, chevronLeft, check, gear, pause, circle, gradient;
+        static Sprite cross, star, lockIcon, chevronRight, chevronLeft, check, gear, pause, circle, gradient;
 
         public static Sprite Star => star != null ? star : star = Render("Star", 128, StarSdf);
         public static Sprite Lock => lockIcon != null ? lockIcon : lockIcon = Render("Lock", 128, LockSdf);
         public static Sprite ChevronRight => chevronRight != null ? chevronRight : chevronRight = Render("ChevronR", 96, p => ChevronSdf(p));
         public static Sprite ChevronLeft => chevronLeft != null ? chevronLeft : chevronLeft = Render("ChevronL", 96, p => ChevronSdf(new Vector2(-p.x, p.y)));
+        public static Sprite Cross => cross != null ? cross : cross = Render("Cross", 96, p =>
+            Mathf.Min(SegmentSdf(p, new Vector2(-0.45f, -0.45f), new Vector2(0.45f, 0.45f)),
+                      SegmentSdf(p, new Vector2(-0.45f, 0.45f), new Vector2(0.45f, -0.45f))) - 0.14f);
         public static Sprite Check => check != null ? check : check = Render("Check", 96, CheckSdf);
         public static Sprite Gear => gear != null ? gear : gear = Render("Gear", 128, GearSdf);
         public static Sprite Pause => pause != null ? pause : pause = Render("Pause", 96, PauseSdf);

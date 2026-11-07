@@ -4,7 +4,7 @@
 > **Etiketler:** **P0** = önce bunlar · **P1** = v1.0 için gerekli · **P2** = sonraki sürüm. **A** = Burak (oyun ve içerik) · **B** = Ortak (uygulama kabuğu ve platform) · **AB** = birlikte.
 > **Genel kurallar:** Her madde ayrı branch'te ve ayrı PR olarak yapılır. Unity işinden önce ilgili `unity:*` skill'i yüklenir. `.meta` dosyası üretilmez. Sahne/prefab YAML'ı elle düzenlenmez.
 
-> ✅ 23–34 tamamlandı (ilk sürüm). İçerik doğrulaması için 53. madde önemle önerilir.
+> ✅ 15–34 tamamlandı (ilk sürüm). İçerik doğrulaması için 53. madde önemle önerilir.
 
 ## Önerilen ilk 12 (sırasıyla)
 `1 → 9 → 11 → 10 → 2 → 6 → 47 → 48 → 42 → 35 → 23 → 53`
@@ -144,7 +144,7 @@ unity:unity-cli skill'ini yükle.
 
 ## 3. Harita ve görsellik
 
-### 15. [P1][A] Gölgeli kabartma (hillshade) zemin
+### 15. ✅ [P1][A] Gölgeli kabartma (hillshade) zemin
 ```
 Natural Earth'ün kamu malı "Shaded Relief" (SR_HR ya da NE1_HR) rasterinden Türkiye kesitini al.
 Tools/geo altına bir script yaz: illerin projeksiyonuyla hizalanmış, 2048 px genişliğinde bir PNG üretsin
@@ -154,7 +154,7 @@ Yer şekli bölümlerinde opaklık daha yüksek, il bölümlerinde düşük olsu
 PNG'nin import ayarlarını (sıkıştırma, mipmap) bana yaz.
 ```
 
-### 16. [P1][A] Komşu ülkeler, deniz ve boğaz isimleri
+### 16. ✅ [P1][A] Komşu ülkeler, deniz ve boğaz isimleri
 ```
 Natural Earth admin-0'dan Türkiye'ye komşu ülkelerin sınırlarını al (Yunanistan, Bulgaristan, Gürcistan, Ermenistan,
 Azerbaycan/Nahçıvan, İran, Irak, Suriye, Kıbrıs). Bunları açık gri ve tıklanamaz olarak çiz.
@@ -162,7 +162,7 @@ Denizlere (KARADENİZ, EGE DENİZİ, AKDENİZ, MARMARA DENİZİ) ve boğazlara (
 dünya koordinatlı etiketler ekle. Etiketler yakınlaşma düzeyine göre boyut değiştirsin.
 ```
 
-### 17. [P1][A] Dağları KPSS haritalarındaki gibi alan olarak çizme
+### 17. ✅ [P1][A] Dağları KPSS haritalarındaki gibi alan olarak çizme
 ```
 Dağlar şu an sırt çizgisi + üçgen sembolleriyle çiziliyor. KPSS haritalarındaki gibi kahverengi alanlar olarak çiz:
 - features_manual.json'daki her dağ için "width" (km) alanı ekle.
@@ -171,7 +171,7 @@ Dağlar şu an sırt çizgisi + üçgen sembolleriyle çiziliyor. KPSS haritalar
 Tıklama alanı da poligon olsun. Önce/sonra karşılaştırma PNG'si üret.
 ```
 
-### 18. [P1][A] Ova ve plato şekillerini gerçekçi yapma
+### 18. ✅ [P1][A] Ova ve plato şekillerini gerçekçi yapma
 ```
 features_manual.json'daki ova ve plato poligonları şematik elips gibi duruyor.
 Her biri için bilinen sınırları (akarsu vadileri, kıyı çizgisi, çevreleyen dağlar) dikkate alarak 12–20 noktalı daha gerçekçi
@@ -180,14 +180,14 @@ Her şekli il sınırları, akarsular ve göllerle birlikte çizen bir kontrol P
 Emin olmadığın şekilleri "doğrulanacak" diye işaretle.
 ```
 
-### 19. [P2][A] Yakınlaşınca il adları
+### 19. ✅ [P2][A] Yakınlaşınca il adları
 ```
 Keşfet ve öğrenme modlarında yakınlaşma düzeyine göre il adlarını göster: uzakta yalnız büyük iller, yakında hepsi.
 Etiketler üst üste binmesin (basit çakışma testi).
 Oyun modlarında etiketler kapalı kalsın. Plaka kodunu küçük yazıyla eklemek için bir seçenek olsun.
 ```
 
-### 20. [P1][A] Tur sonunda "haritayı incele"
+### 20. ✅ [P1][A] Tur sonunda "haritayı incele"
 ```
 Sonuç ekranına "HARİTAYI İNCELE" butonu ekle. Basınca kartlar kaybolsun, harita etkileşimli kalsın:
 - Turda sorulan her ilin ya da yer şeklinin adı küçük etiketlerle görünsün (doğrular yeşil, yanlışlar kırmızı çerçeveli).
@@ -195,14 +195,14 @@ Sonuç ekranına "HARİTAYI İNCELE" butonu ekle. Basınca kartlar kaybolsun, ha
 Bir "Geri" butonu sonuç ekranına dönsün.
 ```
 
-### 21. [P2][A] Renk körü dostu ve yüksek kontrast palet
+### 21. ✅ [P2][A] Renk körü dostu ve yüksek kontrast palet
 ```
 MapPalette ve Theme için ikinci bir "Renk körü dostu" palet tanımla. Doğru/yanlış için yeşil/kırmızı yerine mavi/turuncu
 kullan, desen ya da ikonla destekle (doğruda ✓, yanlışta ✕ işareti).
 Ayarlara palet seçimi ve "büyük yazı" seçeneği ekle.
 ```
 
-### 22. [P2][A] Harita animasyonları ve efektler
+### 22. ✅ [P2][A] Harita animasyonları ve efektler
 ```
 - Bölüm başlarken seçili bölgenin sınırını çizgi halinde "çizilerek" göster (0,6 sn).
 - Doğru cevapta ilin ya da yer şeklinin etrafında kısa bir parçacık/ışıltı efekti olsun. ParticleSystem yerine
