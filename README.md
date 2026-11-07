@@ -11,6 +11,16 @@ Unity 6 ile geliştirilen, KPSS Coğrafya konularını oyunlaştırarak çalış
 2. Unity Hub → *Add → Add project from disk* → klonlanan klasörü seç.
 3. Unity 6 ile aç.
 
+## Prototipi çalıştırma: İli Bul
+1. Unity'de üst menüden **KPSS → Prototip Sahnesini Oluştur**.
+2. **Play** tuşuna bas.
+
+Kurallar: rastgele 20 il, her il için 10 sn. Doğru cevap süreyi yeniler, yanlış tıklama ya da süre bitimi 1 hata sayılır. 3 hatada elenirsin.
+Kontroller: sol tık ile il seç, tekerlek ile yakınlaştır, sağ tık + sürükle ile kaydır, orta tık ile görünümü sıfırla.
+Kurallar ve renkler sahnedeki `Game` objesinin **GameBootstrap** bileşeninden değiştirilebilir.
+
+Harita verisi: Natural Earth (kamu malı).
+
 ## Klasör yapısı (Assets altında)
 ```
 Assets/
