@@ -560,7 +560,7 @@ namespace KPSSGeography.UI
                 items.Add((h.Target, h.Label, h.Correct, () => ShowReviewInfo(item)));
             }
             Labels.ShowReview(items);
-            Labels.SetProvinceLabels(true);
+            Labels.SetProvinceLabels(!game.HidesProvinces);
             PopIn("reviewbar", reviewBar, 0.9f, 0.3f);
         }
 
@@ -653,12 +653,9 @@ namespace KPSSGeography.UI
         /// <summary>İl adları cevabı ele vermiyorsa (yer şekli, konu haritası, KPSS sorusu) yakınlaşınca gösterilir.</summary>
         bool ProvinceNamesAllowed()
         {
-            var level = game.Level;
             switch (game.Mode)
             {
-                case QuizMode.Feature:
-                    return level.category != "unesco" && level.category != "park";
-                case QuizMode.FeatureChoice:
+                // Yer şekli bölümlerinde şehir adı yok (harita boş silüet); konu ve KPSS sorularında yakınlaşınca görünür
                 case QuizMode.Topic:
                 case QuizMode.Mcq:
                     return true;

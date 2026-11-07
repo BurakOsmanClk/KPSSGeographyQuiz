@@ -57,6 +57,13 @@ namespace KPSSGeography.Quiz
         /// </summary>
         public bool IsExam { get; private set; }
 
+        /// <summary>
+        /// Yer şekli bölümlerinde (dağ, ova, plato, akarsu, göl, kıyı, fay...) il sınırları ve il adları gizlenir;
+        /// harita yalnızca Türkiye'nin dış hattıyla boş silüet olarak görünür. UNESCO ve milli park bölümlerinde iller kalır.
+        /// </summary>
+        public bool HidesProvinces => Level != null && (Mode == QuizMode.Feature || Mode == QuizMode.FeatureChoice) &&
+                                      Level.category != "unesco" && Level.category != "park";
+
         float ScoreScale => IsExam ? config.examScoreMultiplier : 1f;
         string ProgressId => IsExam ? ProgressStore.ExamKey(Level.id) : Level.id;
         float QuestionTime => Mathf.Max(1f, Level.timePerQuestion * (IsExam ? config.examTimeScale : 1f));
@@ -206,10 +213,12 @@ namespace KPSSGeography.Quiz
             {
                 case QuizMode.Feature:
                     map.SetFocus(_ => false);
+                    map.SetBordersHidden(HidesProvinces);
                     features.ShowCategory(Level.category);
                     return map.Bounds;
                 case QuizMode.FeatureChoice:
                     map.SetFocus(_ => false);
+                    map.SetBordersHidden(HidesProvinces);
                     features.ShowCategory(Level.category, false);
                     return map.Bounds;
                 case QuizMode.FindProvince:

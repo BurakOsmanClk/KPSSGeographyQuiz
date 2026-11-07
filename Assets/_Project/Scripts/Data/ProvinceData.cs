@@ -43,6 +43,8 @@ namespace KPSSGeography.Data
         public float[] bounds;
         public ProvinceData[] provinces;
         public RegionOutline[] regionOutlines;
+        /// <summary>Türkiye'nin dış hattı (il içi sınırlar olmadan).</summary>
+        public ProvinceRing[] nationalOutline;
         /// <summary>[lon0, lat0, xScale, yScale]: x = (lon − lon0)·xScale, y = (lat − lat0)·yScale.</summary>
         public float[] projection;
 

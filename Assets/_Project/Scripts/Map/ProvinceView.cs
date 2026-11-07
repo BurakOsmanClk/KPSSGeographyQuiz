@@ -43,6 +43,7 @@ namespace KPSSGeography.Map
         Color correctColor;
         bool dimmed;
         bool neutral;
+        bool uniformDim;
         bool focused;
         float focusTime;
 
@@ -155,6 +156,8 @@ namespace KPSSGeography.Map
             hovered = false;
             dimmed = false;
             neutral = false;
+            uniformDim = false;
+            if (borderRenderer) borderRenderer.enabled = true;
             focused = false;
             flashTime = 0f;
             popTime = -1f;
@@ -170,6 +173,15 @@ namespace KPSSGeography.Map
 
         /// <summary>Nötr görünüm: bölge rengi gizlenir (cevabı ele vermesin) ama il tıklanabilir kalır.</summary>
         public void SetNeutral(bool value) => neutral = value;
+
+        /// <summary>İl içi sınır çizgisini göster/gizle (yer şekli haritalarında il sınırları görünmez).</summary>
+        public void SetBordersVisible(bool visible)
+        {
+            if (borderRenderer) borderRenderer.enabled = visible;
+        }
+
+        /// <summary>Soluk (odak dışı) iller bölge tonu taşımadan tek düz renk olsun (il kimliği sezdirilmesin).</summary>
+        public void SetUniformDim(bool value) => uniformDim = value;
 
         /// <summary>Bölge modunda sorulan ili cevaplanana kadar nabız gibi vurgular.</summary>
         public void SetFocused(bool value)
@@ -215,11 +227,11 @@ namespace KPSSGeography.Map
                 ProvinceState.Missed => palette.missed,
                 _ => baseColor
             };
-            if (dimmed && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, 0.82f);
+            if (dimmed && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, uniformDim ? 1f : 0.82f);
             else if (neutral && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, 0.78f);
             float exam = ExamLook.Blend;
             if (exam > 0f && State == ProvinceState.Idle)
-                target = Color.Lerp(target, dimmed ? palette.examDim : palette.examLand, exam);
+                target = Color.Lerp(target, dimmed && !uniformDim ? palette.examDim : palette.examLand, exam);
             if (hovered) target = Color.Lerp(target, palette.hover, 0.5f * (1f - exam)); // sınavda ipucu yok
 
             if (!Mathf.Approximately(exam, lastBlend))

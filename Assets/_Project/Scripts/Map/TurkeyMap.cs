@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using KPSSGeography.Core;
 using KPSSGeography.Data;
@@ -20,6 +21,9 @@ namespace KPSSGeography.Map
         MapPalette palette;
         Camera bgCamera;
         Mesh seaMesh;
+        Mesh outlineMesh;
+        Color[] outlineColors;
+        GameObject outlineObject;
         Color[] seaColors = new Color[8];
         Mesh shadowMesh;
         Color[] shadowColors;
@@ -51,6 +55,7 @@ namespace KPSSGeography.Map
                     regionRings[ro.region] = list;
                 }
 
+            BuildOutline(db, palette);
             BuildShadow(db, palette);
             BuildSeaBackground(palette);
         }
@@ -118,6 +123,40 @@ namespace KPSSGeography.Map
         public void ResetAll()
         {
             foreach (var p in provinces) p.ResetVisual();
+            if (outlineObject != null) outlineObject.SetActive(false);
+        }
+
+        /// <summary>
+        /// Yer şekli haritalarında il sınırları gizlenir ve yalnızca Türkiye'nin dış hattı çizilir
+        /// (gerçek KPSS fiziki haritalarındaki gibi: şehir yok, sadece silüet).
+        /// </summary>
+        public void SetBordersHidden(bool hidden)
+        {
+            foreach (var p in provinces)
+            {
+                p.SetBordersVisible(!hidden);
+                p.SetUniformDim(hidden);
+            }
+            if (outlineObject != null) outlineObject.SetActive(hidden);
+        }
+
+        void BuildOutline(ProvinceDatabase db, MapPalette mapPalette)
+        {
+            if (db.nationalOutline == null || db.nationalOutline.Length == 0) return;
+            var b = new LineMeshBuilder();
+            foreach (var r in db.nationalOutline)
+                b.AddPolyline(LineMeshBuilder.ToPoints(r.points), 0.03f, mapPalette.outline, true);
+            outlineMesh = b.ToMesh("NationalOutline");
+            outlineMesh.MarkDynamic();
+            outlineColors = b.Colors.ToArray();
+
+            outlineObject = new GameObject("NationalOutline");
+            outlineObject.transform.SetParent(transform, false);
+            outlineObject.AddComponent<MeshFilter>().sharedMesh = outlineMesh;
+            var mr = outlineObject.AddComponent<MeshRenderer>();
+            mr.sharedMaterial = SharedMaterial;
+            mr.sortingOrder = 3; // il dolgusunun ve kabartmanın üstünde, yer şekillerinin altında
+            outlineObject.SetActive(false);
         }
 
         /// <summary>Tüm Türkiye'nin altına hafif kaydırılmış yumuşak bir gölge çizer.</summary>
@@ -171,6 +210,12 @@ namespace KPSSGeography.Map
                 Color sc = Color.Lerp(palette.shadow, palette.examShadow, blend);
                 for (int i = 0; i < shadowColors.Length; i++) shadowColors[i] = sc;
                 shadowMesh.colors = shadowColors;
+            }
+            if (outlineMesh != null)
+            {
+                Color oc = Color.Lerp(palette.outline, palette.examBorder, blend);
+                for (int i = 0; i < outlineColors.Length; i++) outlineColors[i] = oc;
+                outlineMesh.colors = outlineColors;
             }
             if (bgCamera != null) bgCamera.backgroundColor = Color.Lerp(palette.seaBottom, palette.examSea, blend);
         }

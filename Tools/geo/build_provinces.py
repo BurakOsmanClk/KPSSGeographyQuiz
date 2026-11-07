@@ -154,6 +154,15 @@ def main():
             rings.append({"points": [round(c, 4) for p in pts for c in p]})
         region_outlines.append({"region": region, "rings": rings})
 
+    # Türkiye'nin dış hattı (il içi sınırlar olmadan): yer şekli bölümlerinde il sınırları gizlenir, bu çizgi kalır
+    merged = unary_union([g.buffer(0.004) for g in geoms]).buffer(-0.004).simplify(0.004)
+    national_rings = []
+    for part in sorted(list(merged.geoms) if isinstance(merged, MultiPolygon) else [merged], key=lambda q: -q.area):
+        if part.area < 0.0008:
+            continue
+        pts = [proj(x, y) for x, y in list(part.exterior.coords)[:-1]]
+        national_rings.append({"points": [round(c, 4) for p in pts for c in p]})
+
     out.sort(key=lambda p: p["plate"])
     assert [p["plate"] for p in out] == list(range(1, 82))
     bx0, by0 = proj(minx, miny)
@@ -163,6 +172,7 @@ def main():
         "bounds": [round(bx0, 4), round(by0, 4), round(bx1, 4), round(by1, 4)],
         "provinces": out,
         "regionOutlines": region_outlines,
+        "nationalOutline": national_rings,
         # Unity'de boylam/enlemden harita koordinatına çevirmek için: x = (lon - p[0]) * p[2], y = (lat - p[1]) * p[3]
         "projection": [round(lon0, 6), round(lat0, 6), round(kx * scale, 6), round(scale, 6)],
     }

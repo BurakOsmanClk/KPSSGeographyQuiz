@@ -38,6 +38,9 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - `UI/MapLabelLayer.cs`: deniz/boğaz/ülke adları her zaman; il adları yakınlaşınca ve sadece cevabı ele vermeyen modlarda (yer şekli [miras hariç], konu, KPSS sorusu) ve "Haritayı incele" görünümünde.
 - `Core/GameSettings.cs`: renk körü dostu palet (Okabe–Ito: doğru mavi, yanlış turuncu; `Theme.ApplyColorblind`, `MapPalette.ApplyColorblind`), büyük yazı (`UI/TextScaler.cs`, %15), efektler (`Map/MapEffects.cs`: bölge sınırı çizimi, ışıltı; HUD seri kenar parlaması).
 
+## Yer şekli haritalarında şehir yok
+- `feature` / `featurechoice` bölümlerinde (dağ, volkan, ova, plato, fay, akarsu, göl, baraj, boğaz/körfez, yarımada) il içi sınırlar ve il adları gizlenir; harita yalnızca Türkiye'nin dış hattıyla boş silüet olur (kullanıcı tercihi). **UNESCO ve milli park bölümleri hariç** (iller kalır). Kod: `CityQuizGame.HidesProvinces` → `TurkeyMap.SetBordersHidden` (dış hat `nationalOutline`, `build_provinces.py` üretir), il adları `QuizHud.ProvinceNamesAllowed`.
+
 ## Sınav modu
 - Açma/kapama: bölüm seçim ekranı sağ altı (`LevelSelectScreen`), `GameSettings.ExamMode` (PlayerPrefs). Giriş ekranında harita her zaman renklidir; bölüm seçimi ve oyunda sınav ayarı geçerlidir (`AppFlow` → `ExamModeController.SetLook`).
 - Görünüm: `Core/ExamLook.Blend` (0..1) tek ortak değerdir. `ProvinceView`, `FeatureView`, `FeatureLayer` (göl/ülke), `TurkeyMap` (deniz, gölge, kamera rengi), `ReliefLayer` ve `MapLabelLayer` bunu her karede okuyup renklerini soluk griye karıştırır. Renkler `MapPalette` "Sınav modu" başlığında. Yeni bir harita katmanı eklenirse `ExamLook.Blend`'i okumalı.

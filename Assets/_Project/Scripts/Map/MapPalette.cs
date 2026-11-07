@@ -65,6 +65,9 @@ namespace KPSSGeography.Map
         public Color featureCorrect = new Color32(0x2E, 0xB8, 0x5C, 0xFF);
         public Color featureMissed = new Color32(0xE5, 0x48, 0x4D, 0xFF);
 
+        [Header("Dış hat (il sınırları gizliyken)")]
+        public Color outline = new Color32(0x6F, 0x78, 0x84, 0xE6);
+
         [Header("Sınav modu (soluk, boş KPSS haritası)")]
         public Color examSea = new Color32(0xE6, 0xE9, 0xED, 0xFF);
         public Color examSeaTop = new Color32(0xF3, 0xF4, 0xF6, 0xFF);
