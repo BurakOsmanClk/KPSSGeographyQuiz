@@ -87,6 +87,19 @@ def main():
             pts = pts[:-1]
         return pts
 
+    # Komşuluk: sınır paylaşan iller (küçük tampon, nokta temaslarını elemek için ortak sınır uzunluğu)
+    plates = [int(f["properties"]["iso_3166_2"].split("-")[1]) for f in feats]
+    neighbors = {p: [] for p in plates}
+    buffered = [g.buffer(0.01) for g in geoms]
+    for i in range(len(geoms)):
+        for j in range(i + 1, len(geoms)):
+            if not buffered[i].intersects(buffered[j]):
+                continue
+            shared = buffered[i].intersection(buffered[j]).area
+            if shared > 0.0004:
+                neighbors[plates[i]].append(plates[j])
+                neighbors[plates[j]].append(plates[i])
+
     out = []
     for f, g in zip(feats, geoms):
         plate = int(f["properties"]["iso_3166_2"].split("-")[1])
@@ -117,6 +130,7 @@ def main():
             "name": NAMES[plate],
             "region": REGION_OF[plate],
             "label": [round(lx, 4), round(ly, 4)],
+            "neighbors": sorted(neighbors[plate]),
             "vertices": verts,
             "triangles": tris,
             "rings": rings,

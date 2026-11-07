@@ -7,6 +7,7 @@ Bu klasördeki promptlar Claude Code'a **olduğu gibi kopyalanıp yapıştırıl
 | [00_ONBOARDING.md](00_ONBOARDING.md) | **İkiniz de** (her yeni Claude Code oturumunun ilk mesajı) | Her oturum başında |
 | [A_BURAK.md](A_BURAK.md) | Burak (A: oyun çekirdeği ve içerik) | Sırayla, milestone milestone |
 | [B_ORTAK.md](B_ORTAK.md) | Ortak (B: uygulama kabuğu ve platform) | Sırayla, milestone milestone |
+| [BACKLOG.md](BACKLOG.md) | İkiniz de | 53 maddelik güncel yapılacaklar listesi (öncelik ve sahip etiketli) |
 
 **Kurallar:**
 - Bir prompt bitince Claude PR açar. Diğer kişi review edip merge eder, sonra sıradaki prompta geçilir.

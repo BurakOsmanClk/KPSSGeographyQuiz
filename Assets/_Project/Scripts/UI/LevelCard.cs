@@ -108,6 +108,9 @@ namespace KPSSGeography.UI
             UIFactory.Label("Text", soonRibbon, "YAKINDA", 22, Theme.Ink, TextAnchor.MiddleCenter, FontStyle.Bold).rectTransform.Stretch();
         }
 
+        /// <summary>Sekme içindeki sıra numarası.</summary>
+        public void SetNumber(int n) => number.text = n.ToString();
+
         public void Refresh(LevelCardState state, int starCount, int bestScore)
         {
             State = state;

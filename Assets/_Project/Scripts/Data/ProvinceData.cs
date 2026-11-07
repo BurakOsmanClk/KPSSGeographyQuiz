@@ -18,6 +18,8 @@ namespace KPSSGeography.Data
         public string name;
         public string region;
         public float[] label;
+        /// <summary>Sınır komşusu illerin plaka kodları.</summary>
+        public int[] neighbors;
         public float[] vertices;
         public int[] triangles;
         public ProvinceRing[] rings;

@@ -39,6 +39,13 @@ namespace KPSSGeography.UI
             Quiz.QuizMode.FindProvince => Teal,
             Quiz.QuizMode.Region => Orange,
             Quiz.QuizMode.Feature => Leaf,
+            Quiz.QuizMode.Topic => Hex(0xC2410C),
+            Quiz.QuizMode.Plate => Hex(0x6D5BD0),
+            Quiz.QuizMode.Neighbor => Hex(0x0E7490),
+            Quiz.QuizMode.Attribute => Hex(0x2A9D8F),
+            Quiz.QuizMode.FeatureChoice => Hex(0x3A86FF),
+            Quiz.QuizMode.RegionAll => Hex(0xE76F51),
+            Quiz.QuizMode.Mcq => Hex(0xB5179E),
             _ => Locked
         };
 

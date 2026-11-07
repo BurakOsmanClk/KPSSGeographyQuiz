@@ -22,14 +22,14 @@ namespace KPSSGeography.Quiz
 
     public readonly struct QuestionInfo
     {
-        public readonly IMapTarget Target;
+        public readonly Question Question;
         public readonly QuizMode Mode;
         public readonly int Index;
         public readonly int Total;
 
-        public QuestionInfo(IMapTarget target, QuizMode mode, int index, int total)
+        public QuestionInfo(Question question, QuizMode mode, int index, int total)
         {
-            Target = target;
+            Question = question;
             Mode = mode;
             Index = index;
             Total = total;
@@ -40,33 +40,36 @@ namespace KPSSGeography.Quiz
     {
         public readonly AnswerOutcome Outcome;
         public readonly QuizMode Mode;
-        public readonly IMapTarget Target;
-        /// <summary>Haritada tıklanan il ya da yer şekli (süre dolduysa / bölge modunda null).</summary>
+        public readonly Question Question;
+        /// <summary>Haritada tıklanan il ya da yer şekli (butonlu sorularda / süre dolduysa null).</summary>
         public readonly IMapTarget Clicked;
-        /// <summary>Bölge modunda seçilen bölge (süre dolduysa null).</summary>
-        public readonly string ChosenRegion;
+        /// <summary>Seçilen buton (haritadan seçmeli sorularda -1).</summary>
+        public readonly int ChosenIndex;
         public readonly int Points;
         public readonly int Streak;
         public readonly float Multiplier;
         public readonly int Mistakes;
+        /// <summary>"Hepsini bul" sorularında ara cevap mı (soru henüz bitmedi)?</summary>
+        public readonly bool Partial;
+        public readonly int Found;
 
         public bool IsCorrect => Outcome == AnswerOutcome.Correct;
-        public string CorrectRegion => (Target as ProvinceView)?.Data.region;
-        /// <summary>Yer şekli sorularında KPSS bilgi notu.</summary>
-        public string Info => (Target as FeatureView)?.Data.info;
+        public string Info => Question.Info;
 
-        public AnswerResult(AnswerOutcome outcome, QuizMode mode, IMapTarget target, IMapTarget clicked, string chosenRegion,
-            int points, int streak, float multiplier, int mistakes)
+        public AnswerResult(AnswerOutcome outcome, QuizMode mode, Question question, IMapTarget clicked, int chosenIndex,
+            int points, int streak, float multiplier, int mistakes, bool partial = false, int found = 0)
         {
             Outcome = outcome;
             Mode = mode;
-            Target = target;
+            Question = question;
             Clicked = clicked;
-            ChosenRegion = chosenRegion;
+            ChosenIndex = chosenIndex;
             Points = points;
             Streak = streak;
             Multiplier = multiplier;
             Mistakes = mistakes;
+            Partial = partial;
+            Found = found;
         }
     }
 

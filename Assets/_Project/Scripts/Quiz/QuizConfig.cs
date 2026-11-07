@@ -38,6 +38,6 @@ namespace KPSSGeography.Quiz
 
         [Header("Test")]
         [Tooltip("Açıkken tüm bölümler kilitsiz görünür (geliştirme için).")]
-        public bool unlockAllLevels;
+        public bool unlockAllLevels = true;
     }
 }

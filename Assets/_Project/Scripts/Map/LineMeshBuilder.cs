@@ -45,6 +45,42 @@ namespace KPSSGeography.Map
             }
         }
 
+        /// <summary>Kesik çizgi (fay hatları için).</summary>
+        public void AddDashedPolyline(IReadOnlyList<Vector2> pts, float width, float dash, float gap, Color color)
+        {
+            var seg = new List<Vector2>();
+            bool drawing = true;
+            float remaining = dash;
+            seg.Add(pts[0]);
+            for (int i = 0; i < pts.Count - 1; i++)
+            {
+                Vector2 a = pts[i], b = pts[i + 1];
+                float len = Vector2.Distance(a, b);
+                float pos = 0f;
+                while (len - pos > remaining)
+                {
+                    pos += remaining;
+                    Vector2 p = Vector2.Lerp(a, b, pos / len);
+                    if (drawing)
+                    {
+                        seg.Add(p);
+                        AddPolyline(seg, width, color);
+                        seg.Clear();
+                    }
+                    else seg.Add(p);
+                    drawing = !drawing;
+                    remaining = drawing ? dash : gap;
+                }
+                remaining -= len - pos;
+                if (drawing) seg.Add(b);
+            }
+            if (drawing && seg.Count >= 2) AddPolyline(seg, width, color);
+        }
+
+        /// <summary>Dörtgen (baklava) işaret.</summary>
+        public void AddDiamond(Vector2 c, float r, Color color) =>
+            AddQuad(c + new Vector2(0f, -r), c + new Vector2(r, 0f), c + new Vector2(0f, r), c + new Vector2(-r, 0f), color);
+
         public void AddTriangles(float[] flatVertices, int[] triangles, Color color)
         {
             int start = Vertices.Count;

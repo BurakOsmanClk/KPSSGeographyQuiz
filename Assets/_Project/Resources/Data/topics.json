@@ -1,0 +1,827 @@
+{
+ "topics": [
+  {
+   "id": "findik",
+   "set": "tarim1",
+   "title": "Fındık",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    52,
+    28,
+    55,
+    54,
+    81,
+    61
+   ],
+   "info": "Fındık Karadeniz kıyısında yetişir; üretimde Ordu ilk sıradadır.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "cay",
+   "set": "tarim1",
+   "title": "Çay",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    53,
+    61,
+    8,
+    28
+   ],
+   "info": "Çay, bol ve her mevsim yağış isteyen Doğu Karadeniz kıyısında yetişir; Rize ilk sıradadır.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "pamuk",
+   "set": "tarim1",
+   "title": "Pamuk",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    63,
+    9,
+    31,
+    21,
+    1
+   ],
+   "info": "Pamuk sıcak ve sulanabilen ovalarda yetişir; GAP ile Şanlıurfa (Harran) ilk sıraya yükselmiştir.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "zeytin",
+   "set": "tarim1",
+   "title": "Zeytin",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    9,
+    35,
+    48,
+    45,
+    10,
+    31,
+    16
+   ],
+   "info": "Zeytin Akdeniz iklimine özgüdür; Ege kıyıları en önemli üretim alanıdır.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "tutun",
+   "set": "tarim1",
+   "title": "Tütün",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    45,
+    35,
+    2,
+    20,
+    55
+   ],
+   "info": "Tütün Ege (Manisa, İzmir), Güneydoğu (Adıyaman) ve Karadeniz'de (Samsun-Bafra) yetiştirilir.",
+   "source": "TÜİK / MEB"
+  },
+  {
+   "id": "seker-pancari",
+   "set": "tarim1",
+   "title": "Şeker Pancarı",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    42,
+    26,
+    3,
+    38,
+    68
+   ],
+   "info": "Şeker pancarı sulanabilen iç bölge ovalarında yetişir; Konya ilk sıradadır. Taşıma maliyeti yüksek olduğundan fabrikalar üretim alanına yakın kurulur.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "bugday",
+   "set": "tarim1",
+   "title": "Buğday",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    42,
+    6,
+    63,
+    21,
+    59
+   ],
+   "info": "Buğday en geniş alanda ekilen tahıldır; İç Anadolu (Konya, Ankara) ve Güneydoğu öne çıkar.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "aycicegi",
+   "set": "tarim1",
+   "title": "Ayçiçeği",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    59,
+    22,
+    39,
+    42
+   ],
+   "info": "Ayçiçeği üretiminde Trakya (Ergene Ovası) öne çıkar.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "muz",
+   "set": "tarim2",
+   "title": "Muz",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    33,
+    7
+   ],
+   "info": "Muz, mikroklima özelliği gösteren Anamur (Mersin) ve Alanya–Gazipaşa (Antalya) kıyılarında yetişir.",
+   "source": "MEB"
+  },
+  {
+   "id": "kayisi",
+   "set": "tarim2",
+   "title": "Kayısı",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    44,
+    23,
+    76
+   ],
+   "info": "Kuru kayısı üretiminde Malatya dünyada öne çıkar.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "incir",
+   "set": "tarim2",
+   "title": "İncir",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    9,
+    35,
+    16
+   ],
+   "info": "İncir üretiminde Büyük ve Küçük Menderes ovaları (Aydın) ilk sıradadır.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "uzum",
+   "set": "tarim2",
+   "title": "Üzüm",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    45,
+    20,
+    35
+   ],
+   "info": "Çekirdeksiz (sultaniye) üzümde Manisa ve Gediz Ovası öne çıkar.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "antep-fistigi",
+   "set": "tarim2",
+   "title": "Antep Fıstığı",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    27,
+    63,
+    56,
+    2
+   ],
+   "info": "Antep fıstığı Güneydoğu Anadolu'nun kurak, sıcak yamaçlarında yetişir.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "turuncgil",
+   "set": "tarim2",
+   "title": "Turunçgiller",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    33,
+    1,
+    7,
+    31
+   ],
+   "info": "Portakal, limon ve mandalina kışları ılık geçen Akdeniz kıyılarında yetişir.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "hashas",
+   "set": "tarim2",
+   "title": "Haşhaş",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    3,
+    64,
+    20,
+    15
+   ],
+   "info": "Haşhaş, devlet izniyle (TMO denetiminde) belirli illerde ekilir; Afyonkarahisar öne çıkar.",
+   "source": "TMO / MEB"
+  },
+  {
+   "id": "gul",
+   "set": "tarim2",
+   "title": "Yağ Gülü",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    32,
+    15
+   ],
+   "info": "Gül yağı üretiminde Isparta dünyada öne çıkar.",
+   "source": "MEB"
+  },
+  {
+   "id": "elma",
+   "set": "tarim2",
+   "title": "Elma",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    32,
+    70,
+    51,
+    7
+   ],
+   "info": "Elma üretiminde Isparta ve Karaman ilk sıralardadır.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "celtik",
+   "set": "tarim2",
+   "title": "Çeltik (Pirinç)",
+   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    22,
+    55,
+    10,
+    19
+   ],
+   "info": "Çeltik bol su ister; Meriç–Ergene (Edirne) ve Bafra–Çarşamba (Samsun) ovaları öne çıkar.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "buyukbas",
+   "set": "hayvan",
+   "title": "Büyükbaş Hayvancılık",
+   "question": "YAYGIN OLDUĞU BİR İL SEÇ",
+   "plates": [
+    25,
+    36,
+    75,
+    42
+   ],
+   "info": "Büyükbaş hayvancılık gür çayırların bulunduğu Erzurum–Kars yöresinde yaygındır; Konya da öne çıkar.",
+   "source": "TÜİK / MEB"
+  },
+  {
+   "id": "kucukbas",
+   "set": "hayvan",
+   "title": "Küçükbaş Hayvancılık",
+   "question": "YAYGIN OLDUĞU BİR İL SEÇ",
+   "plates": [
+    65,
+    42,
+    63,
+    4
+   ],
+   "info": "Küçükbaş (koyun, keçi) bozkır alanlarında yaygındır; Van ve Konya öne çıkar.",
+   "source": "TÜİK / MEB"
+  },
+  {
+   "id": "ipekbocegi",
+   "set": "hayvan",
+   "title": "İpek Böcekçiliği",
+   "question": "YAPILDIĞI BİR İL SEÇ",
+   "plates": [
+    16,
+    21
+   ],
+   "info": "İpek böcekçiliği dut ağacına bağlıdır; Bursa ve Diyarbakır öne çıkar.",
+   "source": "MEB"
+  },
+  {
+   "id": "aricilik",
+   "set": "hayvan",
+   "title": "Arıcılık (Bal)",
+   "question": "ÜRETİMDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    52,
+    48
+   ],
+   "info": "Bal üretiminde Ordu ve çam balıyla Muğla öne çıkar.",
+   "source": "TÜİK"
+  },
+  {
+   "id": "bor",
+   "set": "maden",
+   "title": "Bor",
+   "question": "ÇIKARILDIĞI BİR İL SEÇ",
+   "plates": [
+    26,
+    43,
+    10,
+    16
+   ],
+   "info": "Dünya bor rezervinin büyük kısmı Türkiye'dedir: Kırka (Eskişehir), Emet (Kütahya), Bigadiç (Balıkesir), Kestelek (Bursa).",
+   "source": "MTA / Eti Maden"
+  },
+  {
+   "id": "krom",
+   "set": "maden",
+   "title": "Krom",
+   "question": "ÇIKARILDIĞI BİR İL SEÇ",
+   "plates": [
+    23,
+    48,
+    16,
+    26
+   ],
+   "info": "Krom: Guleman (Elazığ), Fethiye (Muğla), Orhaneli (Bursa).",
+   "source": "MTA"
+  },
+  {
+   "id": "bakir",
+   "set": "maden",
+   "title": "Bakır",
+   "question": "ÇIKARILDIĞI BİR İL SEÇ",
+   "plates": [
+    8,
+    37,
+    23,
+    53
+   ],
+   "info": "Bakır: Murgul (Artvin), Küre (Kastamonu), Maden (Elazığ), Çayeli (Rize).",
+   "source": "MTA"
+  },
+  {
+   "id": "demir",
+   "set": "maden",
+   "title": "Demir",
+   "question": "ÇIKARILDIĞI BİR İL SEÇ",
+   "plates": [
+    58,
+    44,
+    38
+   ],
+   "info": "Demir: Divriği (Sivas), Hekimhan (Malatya), Yahyalı (Kayseri).",
+   "source": "MTA"
+  },
+  {
+   "id": "linyit",
+   "set": "maden",
+   "title": "Linyit",
+   "question": "ÇIKARILDIĞI BİR İL SEÇ",
+   "plates": [
+    46,
+    45,
+    43,
+    48,
+    58
+   ],
+   "info": "Linyit: Afşin–Elbistan (K.Maraş), Soma (Manisa), Seyitömer–Tunçbilek (Kütahya), Yatağan (Muğla), Kangal (Sivas).",
+   "source": "MTA / TKİ"
+  },
+  {
+   "id": "taskomuru",
+   "set": "maden",
+   "title": "Taşkömürü",
+   "question": "ÇIKARILDIĞI BİR İL SEÇ",
+   "plates": [
+    67,
+    74
+   ],
+   "info": "Taşkömürü yalnızca Zonguldak–Bartın (Amasra) havzasında çıkarılır.",
+   "source": "TTK / MTA"
+  },
+  {
+   "id": "boksit",
+   "set": "maden",
+   "title": "Boksit (Alüminyum)",
+   "question": "ÇIKARILDIĞI BİR İL SEÇ",
+   "plates": [
+    42,
+    7
+   ],
+   "info": "Boksit: Seydişehir (Konya) ve Akseki (Antalya); Seydişehir'de alüminyum tesisi vardır.",
+   "source": "MTA"
+  },
+  {
+   "id": "mermer",
+   "set": "maden",
+   "title": "Mermer",
+   "question": "ÇIKARILDIĞI BİR İL SEÇ",
+   "plates": [
+    3,
+    10,
+    20,
+    11
+   ],
+   "info": "Mermer: Afyonkarahisar (İscehisar), Marmara Adası (Balıkesir), Denizli, Bilecik.",
+   "source": "MTA"
+  },
+  {
+   "id": "altin",
+   "set": "maden",
+   "title": "Altın",
+   "question": "ÇIKARILDIĞI BİR İL SEÇ",
+   "plates": [
+    35,
+    64,
+    24,
+    29
+   ],
+   "info": "Altın: Ovacık–Bergama (İzmir), Kışladağ (Uşak), İliç (Erzincan), Gümüşhane.",
+   "source": "MTA"
+  },
+  {
+   "id": "tuz",
+   "set": "maden",
+   "title": "Kaya Tuzu ve Göl Tuzu",
+   "question": "ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    18,
+    68
+   ],
+   "info": "Kaya tuzu Çankırı'da çıkarılır; göl tuzu Tuz Gölü'nden (Aksaray–Konya) elde edilir.",
+   "source": "MTA / MEB"
+  },
+  {
+   "id": "kukurt",
+   "set": "maden",
+   "title": "Kükürt",
+   "question": "ÇIKARILDIĞI BİR İL SEÇ",
+   "plates": [
+    32
+   ],
+   "info": "Kükürt Keçiborlu'da (Isparta) çıkarılır.",
+   "source": "MTA"
+  },
+  {
+   "id": "petrol",
+   "set": "enerji",
+   "title": "Petrol",
+   "question": "ÇIKARILDIĞI BİR İL SEÇ",
+   "plates": [
+    72,
+    2,
+    21,
+    73
+   ],
+   "info": "Petrol: Batman (Raman), Adıyaman, Diyarbakır ve son yıllarda Gabar (Şırnak).",
+   "source": "TPAO / ETKB"
+  },
+  {
+   "id": "dogalgaz",
+   "set": "enerji",
+   "title": "Doğal Gaz",
+   "question": "ÜRETİMDE ÖNE ÇIKAN BİR İL SEÇ",
+   "plates": [
+    39,
+    59,
+    67
+   ],
+   "info": "Doğal gaz: Trakya (Kırklareli–Hamitabat, Tekirdağ) ve Karadeniz'deki Sakarya Gaz Sahası (Filyos–Zonguldak).",
+   "source": "TPAO / ETKB"
+  },
+  {
+   "id": "jeotermal",
+   "set": "enerji",
+   "title": "Jeotermal Enerji",
+   "question": "SANTRALLERİNİN BULUNDUĞU BİR İL SEÇ",
+   "plates": [
+    20,
+    9,
+    45
+   ],
+   "info": "Jeotermal santraller fay hatlarının yoğun olduğu Ege grabenlerinde: Kızıldere (Denizli), Germencik (Aydın).",
+   "source": "ETKB"
+  },
+  {
+   "id": "ruzgar",
+   "set": "enerji",
+   "title": "Rüzgâr Enerjisi",
+   "question": "KURULU GÜCÜN YÜKSEK OLDUĞU BİR İL SEÇ",
+   "plates": [
+    35,
+    10,
+    17,
+    45
+   ],
+   "info": "Rüzgâr santralleri en çok Ege ve Marmara kıyılarında (İzmir, Balıkesir, Çanakkale) kuruludur.",
+   "source": "ETKB"
+  },
+  {
+   "id": "gunes",
+   "set": "enerji",
+   "title": "Güneş Enerjisi",
+   "question": "BÜYÜK SANTRALLERİN BULUNDUĞU BİR İL SEÇ",
+   "plates": [
+    42,
+    70
+   ],
+   "info": "Konya Karapınar'da Türkiye'nin en büyük güneş enerjisi santrali bulunur.",
+   "source": "ETKB"
+  },
+  {
+   "id": "termik",
+   "set": "enerji",
+   "title": "Termik Santral (Kömür)",
+   "question": "BULUNDUĞU BİR İL SEÇ",
+   "plates": [
+    46,
+    48,
+    45,
+    43,
+    67
+   ],
+   "info": "Termik santraller kömür havzalarına yakın kurulur: Afşin–Elbistan, Yatağan, Soma, Seyitömer, Çatalağzı.",
+   "source": "ETKB"
+  },
+  {
+   "id": "en-kalabalik",
+   "set": "nufus",
+   "title": "En Kalabalık İller",
+   "question": "İLK 5 İÇİNDEN BİR İL SEÇ",
+   "plates": [
+    34,
+    6,
+    35,
+    16,
+    7
+   ],
+   "info": "Nüfusu en fazla iller: İstanbul, Ankara, İzmir, Bursa, Antalya (TÜİK ADNKS 2023).",
+   "source": "TÜİK ADNKS 2023"
+  },
+  {
+   "id": "en-az-nufus",
+   "set": "nufus",
+   "title": "En Az Nüfuslu İller",
+   "question": "SON 5 İÇİNDEN BİR İL SEÇ",
+   "plates": [
+    69,
+    62,
+    75,
+    29,
+    79
+   ],
+   "info": "Nüfusu en az iller: Bayburt, Tunceli, Ardahan, Gümüşhane, Kilis (TÜİK ADNKS 2023).",
+   "source": "TÜİK ADNKS 2023"
+  },
+  {
+   "id": "yogunluk-yuksek",
+   "set": "nufus",
+   "title": "Nüfus Yoğunluğu En Yüksek",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    34,
+    41,
+    35,
+    27
+   ],
+   "info": "Nüfus yoğunluğu sanayi ve ticaretin geliştiği illerde yüksektir; İstanbul ilk sıradadır.",
+   "source": "TÜİK ADNKS 2023"
+  },
+  {
+   "id": "yogunluk-dusuk",
+   "set": "nufus",
+   "title": "Nüfus Yoğunluğu En Düşük",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    62,
+    75,
+    24
+   ],
+   "info": "Engebeli ve sert iklimli Doğu Anadolu'da nüfus yoğunluğu düşüktür; en az Tunceli'dir.",
+   "source": "TÜİK ADNKS 2023"
+  },
+  {
+   "id": "dogurganlik",
+   "set": "nufus",
+   "title": "Doğurganlık Hızı En Yüksek",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    63,
+    73,
+    4,
+    56,
+    49
+   ],
+   "info": "Doğurganlık hızı Güneydoğu ve Doğu Anadolu'da yüksektir; Şanlıurfa ilk sıradadır.",
+   "source": "TÜİK Doğum İstatistikleri"
+  },
+  {
+   "id": "yasli",
+   "set": "nufus",
+   "title": "Yaşlı Nüfus Oranı En Yüksek",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    57,
+    37,
+    28
+   ],
+   "info": "Göç veren Karadeniz illerinde yaşlı nüfus oranı yüksektir; Sinop ilk sıradadır.",
+   "source": "TÜİK"
+  }
+ ],
+ "attributes": [
+  {
+   "id": "climate",
+   "prompt": "BU İLDE HANGİ İKLİM TİPİ GÖRÜLÜR?",
+   "choices": [
+    "Karadeniz",
+    "Akdeniz",
+    "Karasal",
+    "Marmara (Geçiş)"
+   ],
+   "colors": [
+    "#4FAE6A",
+    "#F2A541",
+    "#C9A26B",
+    "#7FB7E3"
+   ],
+   "infos": [
+    "Karadeniz iklimi: her mevsim yağışlı, yazlar serin, kışlar ılık. Doğal bitki örtüsü ormandır.",
+    "Akdeniz iklimi: yazlar sıcak ve kurak, kışlar ılık ve yağışlı. Doğal bitki örtüsü makidir.",
+    "Karasal iklim: yazlar sıcak ve kurak, kışlar soğuk ve kar yağışlı. Doğal bitki örtüsü bozkırdır.",
+    "Marmara (geçiş) iklimi: Karadeniz, Akdeniz ve karasal iklim arasında geçiş özellikleri gösterir."
+   ],
+   "groups": [
+    {
+     "choice": 0,
+     "plates": [
+      81,
+      67,
+      74,
+      37,
+      57,
+      55,
+      52,
+      28,
+      61,
+      53,
+      8
+     ]
+    },
+    {
+     "choice": 1,
+     "plates": [
+      35,
+      9,
+      48,
+      7,
+      33,
+      1,
+      31,
+      80,
+      45
+     ]
+    },
+    {
+     "choice": 2,
+     "plates": [
+      6,
+      42,
+      26,
+      38,
+      58,
+      66,
+      40,
+      50,
+      51,
+      68,
+      70,
+      71,
+      18,
+      25,
+      36,
+      75,
+      4,
+      65,
+      49,
+      24,
+      44,
+      23,
+      13,
+      12,
+      21,
+      63,
+      72
+     ]
+    },
+    {
+     "choice": 3,
+     "plates": [
+      34,
+      41,
+      77,
+      16,
+      59,
+      54
+     ]
+    }
+   ]
+  },
+  {
+   "id": "vegetation",
+   "prompt": "BU İLİN DOĞAL BİTKİ ÖRTÜSÜ HANGİSİDİR?",
+   "choices": [
+    "Orman",
+    "Maki",
+    "Bozkır",
+    "Dağ Çayırı"
+   ],
+   "colors": [
+    "#3E9B5C",
+    "#9BC53D",
+    "#D9B26F",
+    "#6FC1A6"
+   ],
+   "infos": [
+    "Orman: her mevsim yağış alan Karadeniz kıyılarında gür ormanlar (kayın, gürgen, ladin) yaygındır.",
+    "Maki: yaz kuraklığına dayanıklı, her dem yeşil çalılar; Akdeniz ve Ege kıyılarında görülür.",
+    "Bozkır: ilkbahar yağışlarıyla yeşerip yazın kuruyan otlar; İç Anadolu ve Güneydoğu'da yaygındır.",
+    "Dağ çayırı: yaz yağışlarıyla gürleşen yüksek çayırlar; Erzurum–Kars yöresinde büyükbaş hayvancılığı besler."
+   ],
+   "groups": [
+    {
+     "choice": 0,
+     "plates": [
+      81,
+      67,
+      74,
+      37,
+      57,
+      52,
+      28,
+      61,
+      53,
+      8
+     ]
+    },
+    {
+     "choice": 1,
+     "plates": [
+      35,
+      9,
+      48,
+      7,
+      33,
+      31
+     ]
+    },
+    {
+     "choice": 2,
+     "plates": [
+      6,
+      42,
+      26,
+      40,
+      50,
+      51,
+      68,
+      70,
+      71,
+      66,
+      21,
+      63
+     ]
+    },
+    {
+     "choice": 3,
+     "plates": [
+      25,
+      36,
+      75
+     ]
+    }
+   ]
+  },
+  {
+   "id": "laketype",
+   "prompt": "BU GÖL OLUŞUMUNA GÖRE HANGİ TÜRDENDİR?",
+   "choices": [
+    "Tektonik",
+    "Volkanik",
+    "Karstik",
+    "Heyelan set",
+    "Alüvyal set",
+    "Kıyı set",
+    "Baraj (yapay)"
+   ],
+   "colors": [
+    "#7FB7E3",
+    "#E07A5F",
+    "#81B29A",
+    "#C9A26B",
+    "#F2CC8F",
+    "#9AD1D4",
+    "#B8B8D1"
+   ],
+   "infos": [
+    "Tektonik göl: yer kabuğu hareketleriyle oluşan çukurlarda birikir (Tuz, İznik, Burdur, Hazar).",
+    "Volkanik göl: lav akıntılarının vadiyi kapatmasıyla (Van, Çıldır) ya da kraterlerde (Meke) oluşur.",
+    "Karstik göl: kalkerli arazide erime çukurlarında oluşur (Salda, Avlan).",
+    "Heyelan set gölü: heyelanla vadinin önünün kapanmasıyla oluşur (Tortum, Sera, Abant).",
+    "Alüvyal set gölü: akarsuların taşıdığı alüvyonların önünü kapatmasıyla oluşur (Bafa, Marmara, Mogan).",
+    "Kıyı set gölü (lagün): kıyı kordonlarının körfez ağzını kapatmasıyla oluşur (Küçükçekmece, Terkos, Akyatan).",
+    "Baraj gölü: akarsu üzerine yapılan barajın arkasında oluşan yapay göldür (Atatürk, Keban)."
+   ],
+   "groups": []
+  }
+ ]
+}

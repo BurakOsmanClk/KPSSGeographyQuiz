@@ -1,0 +1,484 @@
+{
+ "questions": [
+  {
+   "id": "q1",
+   "set": "1",
+   "text": "Tamamı Türkiye topraklarında doğup denize dökülen en uzun akarsu hangisidir?",
+   "options": [
+    "Fırat",
+    "Kızılırmak",
+    "Sakarya",
+    "Yeşilırmak",
+    "Dicle"
+   ],
+   "answer": 1,
+   "explanation": "Kızılırmak (1.355 km) tamamı Türkiye sınırları içinde kalan en uzun akarsudur; Bafra'da Karadeniz'e dökülür.",
+   "highlight": "feature:kizilirmak"
+  },
+  {
+   "id": "q2",
+   "set": "1",
+   "text": "Van Gölü oluşumu bakımından hangi göl türüne girer?",
+   "options": [
+    "Tektonik",
+    "Volkanik set",
+    "Karstik",
+    "Heyelan set",
+    "Alüvyal set"
+   ],
+   "answer": 1,
+   "explanation": "Nemrut Dağı'nın lavları vadinin önünü kapatmış ve Van Gölü volkanik set gölü olarak oluşmuştur.",
+   "highlight": "feature:gol-van"
+  },
+  {
+   "id": "q3",
+   "set": "1",
+   "text": "Aşağıdaki göllerden hangisi heyelan set gölüdür?",
+   "options": [
+    "Tuz Gölü",
+    "Salda Gölü",
+    "Tortum Gölü",
+    "Bafa Gölü",
+    "Burdur Gölü"
+   ],
+   "answer": 2,
+   "explanation": "Tortum Gölü, heyelanla vadinin önünün kapanmasıyla oluşmuştur.",
+   "highlight": "feature:gol-tortum"
+  },
+  {
+   "id": "q4",
+   "set": "1",
+   "text": "Aşağıdaki göllerden hangisi alüvyal set gölüdür?",
+   "options": [
+    "Bafa Gölü",
+    "Sapanca Gölü",
+    "Çıldır Gölü",
+    "Salda Gölü",
+    "Hazar Gölü"
+   ],
+   "answer": 0,
+   "explanation": "Bafa Gölü, Büyük Menderes'in alüvyonlarının eski körfezin önünü kapatmasıyla oluşmuştur.",
+   "highlight": "feature:gol-bafa"
+  },
+  {
+   "id": "q5",
+   "set": "1",
+   "text": "Aşağıdaki göllerden hangisi karstik kökenlidir?",
+   "options": [
+    "İznik Gölü",
+    "Salda Gölü",
+    "Van Gölü",
+    "Tortum Gölü",
+    "Küçükçekmece Gölü"
+   ],
+   "answer": 1,
+   "explanation": "Salda Gölü kalkerli arazide erime (karstlaşma) sonucu oluşmuş bir göldür.",
+   "highlight": "feature:gol-salda"
+  },
+  {
+   "id": "q6",
+   "set": "1",
+   "text": "Türkiye'nin en yüksek dağı hangisidir?",
+   "options": [
+    "Erciyes Dağı",
+    "Süphan Dağı",
+    "Kaçkar Dağı",
+    "Ağrı Dağı",
+    "Uludağ"
+   ],
+   "answer": 3,
+   "explanation": "Ağrı Dağı 5.137 m ile Türkiye'nin en yüksek dağıdır ve sönmüş bir volkandır.",
+   "highlight": "feature:agri"
+  },
+  {
+   "id": "q7",
+   "set": "1",
+   "text": "Çukurova'yı oluşturan akarsular hangileridir?",
+   "options": [
+    "Gediz – Bakırçay",
+    "Kızılırmak – Yeşilırmak",
+    "Seyhan – Ceyhan",
+    "Fırat – Dicle",
+    "Sakarya – Porsuk"
+   ],
+   "answer": 2,
+   "explanation": "Çukurova, Seyhan ve Ceyhan nehirlerinin taşıdığı alüvyonlarla oluşmuş bir delta ovasıdır.",
+   "highlight": "feature:cukurova"
+  },
+  {
+   "id": "q8",
+   "set": "1",
+   "text": "Aşağıdaki ovalardan hangisi delta ovası değildir?",
+   "options": [
+    "Bafra Ovası",
+    "Çarşamba Ovası",
+    "Çukurova",
+    "Silifke Ovası",
+    "Konya Ovası"
+   ],
+   "answer": 4,
+   "explanation": "Konya Ovası kapalı bir havzadadır; denize ulaşan bir akarsuyun deltası değildir.",
+   "highlight": "feature:konya"
+  },
+  {
+   "id": "q9",
+   "set": "1",
+   "text": "Aşağıdaki ovalardan hangisi Ege'deki graben ovalarından biri değildir?",
+   "options": [
+    "Gediz Ovası",
+    "Büyük Menderes Ovası",
+    "Küçük Menderes Ovası",
+    "Bakırçay Ovası",
+    "Harran Ovası"
+   ],
+   "answer": 4,
+   "explanation": "Harran Ovası Güneydoğu Anadolu'dadır; Ege'deki ovalar ise horst-graben sistemiyle oluşmuştur.",
+   "highlight": "feature:harran"
+  },
+  {
+   "id": "q10",
+   "set": "1",
+   "text": "Kapadokya'daki peri bacalarını oluşturan tüf örtüleri hangi dağların volkanik faaliyetleriyle oluşmuştur?",
+   "options": [
+    "Ağrı – Süphan – Tendürek",
+    "Erciyes – Hasan – Melendiz",
+    "Nemrut – Süphan – Tendürek",
+    "Karacadağ – Kula",
+    "Uludağ – Kaz Dağı"
+   ],
+   "answer": 1,
+   "explanation": "Erciyes, Hasan ve Melendiz dağlarının püskürttüğü volkanik küller tüf örtülerini oluşturmuş, aşınma peri bacalarını şekillendirmiştir.",
+   "highlight": "feature:erciyes"
+  },
+  {
+   "id": "q11",
+   "set": "1",
+   "text": "Türkiye'nin en kuzey ucu hangisidir?",
+   "options": [
+    "Anamur Burnu",
+    "Baba Burnu",
+    "İnceburun",
+    "Kerempe Burnu",
+    "Karaburun"
+   ],
+   "answer": 2,
+   "explanation": "İnceburun (Sinop) Türkiye'nin en kuzey ucudur; en güney ucu Anamur Burnu'dur.",
+   "highlight": "feature:inceburun"
+  },
+  {
+   "id": "q12",
+   "set": "1",
+   "text": "Anadolu'nun (Asya kıtasının) en batı ucu hangisidir?",
+   "options": [
+    "Baba Burnu",
+    "İnceburun",
+    "Anamur Burnu",
+    "Gelibolu",
+    "Datça"
+   ],
+   "answer": 0,
+   "explanation": "Baba Burnu (Çanakkale) Anadolu'nun en batı ucudur.",
+   "highlight": "feature:bababurnu"
+  },
+  {
+   "id": "q13",
+   "set": "1",
+   "text": "Atatürk Barajı hangi akarsu üzerindedir?",
+   "options": [
+    "Dicle",
+    "Kızılırmak",
+    "Fırat",
+    "Seyhan",
+    "Çoruh"
+   ],
+   "answer": 2,
+   "explanation": "Atatürk Barajı Fırat üzerindedir ve GAP'ın merkezidir.",
+   "highlight": "feature:baraj-ataturk"
+  },
+  {
+   "id": "q14",
+   "set": "1",
+   "text": "Ilısu Barajı hangi akarsu üzerine kurulmuştur?",
+   "options": [
+    "Fırat",
+    "Dicle",
+    "Aras",
+    "Murat",
+    "Ceyhan"
+   ],
+   "answer": 1,
+   "explanation": "Ilısu Barajı Dicle üzerindedir; yapımında Hasankeyf sular altında kalmıştır.",
+   "highlight": "feature:baraj-ilisu"
+  },
+  {
+   "id": "q15",
+   "set": "1",
+   "text": "Aşağıdaki illerden hangisi Kuzey Anadolu Fay Hattı üzerinde değildir?",
+   "options": [
+    "Erzincan",
+    "Bolu",
+    "Kocaeli",
+    "Konya",
+    "Tokat"
+   ],
+   "answer": 3,
+   "explanation": "Kuzey Anadolu Fay Hattı Marmara'dan Erzincan'a uzanır; Konya bu hat üzerinde değildir.",
+   "highlight": "feature:kaf"
+  },
+  {
+   "id": "q16",
+   "set": "1",
+   "text": "6 Şubat 2023'te yaşanan büyük depremlerin merkez üssü olan il hangisidir?",
+   "options": [
+    "Kahramanmaraş",
+    "Erzincan",
+    "Van",
+    "Düzce",
+    "Elazığ"
+   ],
+   "answer": 0,
+   "explanation": "6 Şubat 2023 depremleri Doğu Anadolu Fay Zonu üzerinde, Kahramanmaraş (Pazarcık ve Elbistan) merkezli meydana gelmiştir.",
+   "highlight": "feature:daf"
+  },
+  {
+   "id": "q17",
+   "set": "2",
+   "text": "Akdeniz iklimine özgü doğal bitki örtüsü hangisidir?",
+   "options": [
+    "Bozkır",
+    "Maki",
+    "Dağ çayırı",
+    "Tundra",
+    "Savan"
+   ],
+   "answer": 1,
+   "explanation": "Maki, yaz kuraklığına dayanıklı, her dem yeşil çalılardan oluşur ve Akdeniz iklimine özgüdür.",
+   "highlight": ""
+  },
+  {
+   "id": "q18",
+   "set": "2",
+   "text": "İç Anadolu'da yaygın olan doğal bitki örtüsü hangisidir?",
+   "options": [
+    "Orman",
+    "Maki",
+    "Bozkır",
+    "Garig",
+    "Dağ çayırı"
+   ],
+   "answer": 2,
+   "explanation": "İç Anadolu'da karasal iklim nedeniyle ilkbaharda yeşerip yazın kuruyan bozkırlar yaygındır.",
+   "highlight": "plate:42"
+  },
+  {
+   "id": "q19",
+   "set": "2",
+   "text": "Her mevsim yağışlı, yazları serin ve kışları ılık geçen iklim tipi hangisidir?",
+   "options": [
+    "Akdeniz iklimi",
+    "Karasal iklim",
+    "Karadeniz iklimi",
+    "Çöl iklimi",
+    "Muson iklimi"
+   ],
+   "answer": 2,
+   "explanation": "Karadeniz iklimi her mevsim yağışlıdır; doğal bitki örtüsü ormandır.",
+   "highlight": "plate:53"
+  },
+  {
+   "id": "q20",
+   "set": "2",
+   "text": "Fındık üretiminde ilk sırada yer alan il hangisidir?",
+   "options": [
+    "Rize",
+    "Ordu",
+    "Trabzon",
+    "Samsun",
+    "Sakarya"
+   ],
+   "answer": 1,
+   "explanation": "Fındık üretiminde Ordu ilk sıradadır.",
+   "highlight": "plate:52"
+  },
+  {
+   "id": "q21",
+   "set": "2",
+   "text": "Türkiye'de çay üretiminin en fazla yapıldığı il hangisidir?",
+   "options": [
+    "Artvin",
+    "Giresun",
+    "Trabzon",
+    "Rize",
+    "Ordu"
+   ],
+   "answer": 3,
+   "explanation": "Çay üretiminin en fazla yapıldığı il Rize'dir.",
+   "highlight": "plate:53"
+  },
+  {
+   "id": "q22",
+   "set": "2",
+   "text": "Muz yetiştiriciliğinin yapıldığı yöre hangisidir?",
+   "options": [
+    "Rize – Hopa",
+    "Anamur – Alanya",
+    "Bafra – Çarşamba",
+    "Edirne – Kırklareli",
+    "Muş – Bitlis"
+   ],
+   "answer": 1,
+   "explanation": "Muz, mikroklima özelliği gösteren Anamur ve Alanya kıyılarında yetişir.",
+   "highlight": "plate:33"
+  },
+  {
+   "id": "q23",
+   "set": "2",
+   "text": "Doğu Anadolu'da mikroklima özelliği sayesinde pamuk yetiştirilebilen ova hangisidir?",
+   "options": [
+    "Muş Ovası",
+    "Iğdır Ovası",
+    "Erzurum–Pasinler Ovası",
+    "Malatya Ovası",
+    "Elazığ Uluova"
+   ],
+   "answer": 1,
+   "explanation": "Iğdır Ovası, çevresine göre alçak ve sıcak olması nedeniyle mikroklima özelliği gösterir.",
+   "highlight": "feature:igdir"
+  },
+  {
+   "id": "q24",
+   "set": "2",
+   "text": "Aşağıdaki illerin hangisinde bor madeni çıkarılmaz?",
+   "options": [
+    "Eskişehir",
+    "Kütahya",
+    "Balıkesir",
+    "Bursa",
+    "Zonguldak"
+   ],
+   "answer": 4,
+   "explanation": "Bor; Eskişehir (Kırka), Kütahya (Emet), Balıkesir (Bigadiç) ve Bursa'da (Kestelek) çıkarılır. Zonguldak taşkömürüyle bilinir.",
+   "highlight": ""
+  },
+  {
+   "id": "q25",
+   "set": "2",
+   "text": "Türkiye'de taşkömürünün çıkarıldığı havza hangisidir?",
+   "options": [
+    "Soma",
+    "Zonguldak",
+    "Afşin – Elbistan",
+    "Tunçbilek",
+    "Yatağan"
+   ],
+   "answer": 1,
+   "explanation": "Taşkömürü yalnızca Zonguldak havzasında çıkarılır; diğer seçenekler linyit sahalarıdır.",
+   "highlight": "plate:67"
+  },
+  {
+   "id": "q26",
+   "set": "2",
+   "text": "Divriği (Sivas) hangi madenin çıkarılmasıyla bilinir?",
+   "options": [
+    "Bakır",
+    "Krom",
+    "Demir",
+    "Boksit",
+    "Bor"
+   ],
+   "answer": 2,
+   "explanation": "Divriği, Türkiye'nin önemli demir yataklarındandır.",
+   "highlight": "plate:58"
+  },
+  {
+   "id": "q27",
+   "set": "2",
+   "text": "Jeotermal enerji santrallerinin yoğunlaştığı yöre hangisidir?",
+   "options": [
+    "Doğu Karadeniz",
+    "Büyük Menderes Grabeni (Denizli–Aydın)",
+    "Konya Ovası",
+    "Erzurum–Kars Platosu",
+    "Çukurova"
+   ],
+   "answer": 1,
+   "explanation": "Jeotermal kaynaklar fay hatlarının yoğun olduğu Ege grabenlerinde (Kızıldere, Germencik) toplanmıştır.",
+   "highlight": "plate:20"
+  },
+  {
+   "id": "q28",
+   "set": "2",
+   "text": "Seyitömer ve Tunçbilek linyit sahaları hangi ildedir?",
+   "options": [
+    "Manisa",
+    "Muğla",
+    "Kütahya",
+    "Kahramanmaraş",
+    "Sivas"
+   ],
+   "answer": 2,
+   "explanation": "Seyitömer ve Tunçbilek, Kütahya'daki linyit sahalarıdır.",
+   "highlight": "plate:43"
+  },
+  {
+   "id": "q29",
+   "set": "2",
+   "text": "Türkiye'nin ilk milli parkı hangisidir?",
+   "options": [
+    "Uludağ",
+    "Yozgat Çamlığı",
+    "Kuşcenneti",
+    "Köprülü Kanyon",
+    "Kaçkar Dağları"
+   ],
+   "answer": 1,
+   "explanation": "Yozgat Çamlığı 1958'de Türkiye'nin ilk milli parkı ilan edilmiştir.",
+   "highlight": "feature:p-yozgat"
+  },
+  {
+   "id": "q30",
+   "set": "2",
+   "text": "Nüfus yoğunluğunun en az olduğu il hangisidir?",
+   "options": [
+    "Tunceli",
+    "İstanbul",
+    "Kocaeli",
+    "Rize",
+    "Hatay"
+   ],
+   "answer": 0,
+   "explanation": "Engebeli ve sert iklimli Tunceli, nüfus yoğunluğunun en az olduğu ildir.",
+   "highlight": "plate:62"
+  },
+  {
+   "id": "q31",
+   "set": "2",
+   "text": "Harran Ovası'nın sulanmasında kullanılan su hangi barajdan sağlanır?",
+   "options": [
+    "Keban",
+    "Atatürk",
+    "Ilısu",
+    "Hirfanlı",
+    "Seyhan"
+   ],
+   "answer": 1,
+   "explanation": "Atatürk Barajı'ndaki su, Şanlıurfa tünelleriyle Harran Ovası'na ulaştırılır.",
+   "highlight": "feature:harran"
+  },
+  {
+   "id": "q32",
+   "set": "2",
+   "text": "Göreme ve Kapadokya hangi ilimizdedir ve hangi listede yer alır?",
+   "options": [
+    "Kayseri – Ramsar",
+    "Nevşehir – UNESCO Dünya Mirası",
+    "Niğde – Milli Park",
+    "Aksaray – Tabiat Parkı",
+    "Konya – Jeopark"
+   ],
+   "answer": 1,
+   "explanation": "Göreme ve Kapadokya (Nevşehir) 1985'te UNESCO Dünya Mirası Listesi'ne girmiştir.",
+   "highlight": "feature:u-goreme"
+  }
+ ]
+}

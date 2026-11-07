@@ -24,7 +24,11 @@ namespace KPSSGeography.UI
         SfxPlayer sfx;
         Canvas canvas;
 
+        readonly List<LevelCard> allCards = new List<LevelCard>();
+        /// <summary>Etkin sekmedeki kartlar (karusel bunları dizer).</summary>
         readonly List<LevelCard> cards = new List<LevelCard>();
+        readonly List<Button> tabButtons = new List<Button>();
+        string activeGroup;
         RectTransform track;
         RectTransform dotsRow;
         Image[] dots;
@@ -94,9 +98,28 @@ namespace KPSSGeography.UI
             starTotal = UIFactory.Label("Total", pill.transform, "0 / 0", 32, Theme.Text, TextAnchor.MiddleLeft, FontStyle.Bold);
             starTotal.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), new Vector2(84, 0), new Vector2(140, 50));
 
+            // --- Sekmeler (bölüm grupları) ---
+            var tabs = UIFactory.Rect("Tabs", Root).Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -148), new Vector2(1840, 60));
+            int n = catalog.groups.Length;
+            float tw = Mathf.Min(220f, (1840f - 10f * (n - 1)) / n);
+            float ttotal = n * tw + (n - 1) * 10f;
+            for (int i = 0; i < n; i++)
+            {
+                string gid = catalog.groups[i].id;
+                var tb = UIFactory.Button("Tab_" + gid, tabs, catalog.groups[i].title, Theme.NavyPanel, new Vector2(tw, 60), () =>
+                {
+                    if (gid == activeGroup) return;
+                    sfx.Play(Sfx.Click);
+                    SetGroup(gid, null);
+                }, null, n > 7 ? 19 : 22);
+                tb.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),
+                    new Vector2(-ttotal / 2f + tw / 2f + i * (tw + 10f), 0f), new Vector2(tw, 60));
+                tabButtons.Add(tb);
+            }
+
             // --- Karusel ---
             var area = UIFactory.Solid("CarouselArea", Root, new Color(0f, 0f, 0f, 0f), true);
-            area.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 10), new Vector2(1920, 640));
+            area.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -12), new Vector2(1920, 600));
             var input = area.gameObject.AddComponent<CarouselInput>();
             input.DragBegan += _ => { dragging = true; dragVelocity = 0f; };
             input.Dragged += OnDrag;
@@ -106,7 +129,7 @@ namespace KPSSGeography.UI
 
             track = UIFactory.Rect("Track", area.transform).Stretch();
             foreach (var level in catalog.Levels)
-                cards.Add(new LevelCard(track, level));
+                allCards.Add(new LevelCard(track, level));
 
             prevButton = UIFactory.IconButton("Prev", Root, ShapeSprites.ChevronLeft, Theme.NavyPanel, 96, () => Step(-1));
             prevButton.GetComponent<RectTransform>().Place(new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), new Vector2(48, 10), new Vector2(96, 96));
@@ -118,11 +141,13 @@ namespace KPSSGeography.UI
             footerGroup = footer.gameObject.AddComponent<CanvasGroup>();
 
             dotsRow = UIFactory.Rect("Dots", footer).Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), Vector2.zero, new Vector2(600, 24));
-            dots = new Image[cards.Count];
+            int maxInGroup = 1;
+            foreach (var g in catalog.groups) maxInGroup = Mathf.Max(maxInGroup, catalog.InGroup(g.id).Count);
+            dots = new Image[maxInGroup];
             for (int i = 0; i < dots.Length; i++)
             {
                 var d = UIFactory.Icon("Dot" + i, dotsRow, ShapeSprites.Circle, Theme.TextFaint);
-                d.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2((i - (dots.Length - 1) / 2f) * 30f, 0), new Vector2(14, 14));
+                d.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(14, 14));
                 dots[i] = d;
             }
 
@@ -136,8 +161,9 @@ namespace KPSSGeography.UI
         public void Open(LevelDefinition focus = null)
         {
             RefreshCards();
-            int index = focus != null ? focus.index : SuggestedIndex();
-            position = target = index;
+            var focusLevel = focus ?? (allCards.Count > 0 ? allCards[SuggestedIndex()].Level : null);
+            string group = focusLevel != null ? focusLevel.group : (catalog.groups.Length > 0 ? catalog.groups[0].id : "");
+            SetGroup(group, focusLevel, false);
             velocity = 0f;
             selected = -1;
             introStart = Time.unscaledTime;
@@ -149,12 +175,59 @@ namespace KPSSGeography.UI
             SlideIn("footer", footer, footerGroup, 0.15f, 40f);
         }
 
+        /// <summary>Sekmeyi değiştirir; karusel o gruptaki bölümleri gösterir.</summary>
+        void SetGroup(string groupId, LevelDefinition focus, bool animate = true)
+        {
+            activeGroup = groupId;
+            cards.Clear();
+            foreach (var c in allCards)
+            {
+                bool inGroup = string.IsNullOrEmpty(groupId) || c.Level.group == groupId;
+                if (inGroup)
+                {
+                    cards.Add(c);
+                    c.SetNumber(cards.Count);
+                }
+                else c.Rect.gameObject.SetActive(false);
+            }
+
+            int index = 0;
+            if (focus != null) index = Mathf.Max(0, cards.FindIndex(c => c.Level == focus));
+            else
+            {
+                for (int i = 0; i < cards.Count; i++)
+                    if (cards[i].State == LevelCardState.Unlocked && progress.GetStars(cards[i].Level.id) == 0) { index = i; break; }
+            }
+            position = target = index;
+            velocity = 0f;
+            selected = -1;
+            introStart = Time.unscaledTime;
+
+            for (int i = 0; i < tabButtons.Count; i++)
+            {
+                bool on = catalog.groups[i].id == groupId;
+                UIFactory.SetButtonColor(tabButtons[i], on ? Theme.Amber : Theme.NavyPanel);
+                tabButtons[i].GetComponentInChildren<Text>().color = on ? Theme.Ink : Theme.TextMuted;
+            }
+            for (int i = 0; i < dots.Length; i++)
+            {
+                bool on = i < cards.Count;
+                dots[i].gameObject.SetActive(on);
+                if (on) dots[i].rectTransform.anchoredPosition = new Vector2((i - (cards.Count - 1) / 2f) * 30f, 0f);
+            }
+            if (animate && IsVisible)
+            {
+                LayoutCards();
+                UpdateSelection();
+            }
+        }
+
         int SuggestedIndex()
         {
             int last = 0;
-            for (int i = 0; i < cards.Count; i++)
+            for (int i = 0; i < allCards.Count; i++)
             {
-                var l = cards[i].Level;
+                var l = allCards[i].Level;
                 if (!progress.IsUnlocked(l)) continue;
                 last = i;
                 if (progress.GetStars(l.id) == 0) return i;
@@ -164,7 +237,7 @@ namespace KPSSGeography.UI
 
         void RefreshCards()
         {
-            foreach (var c in cards)
+            foreach (var c in allCards)
             {
                 var l = c.Level;
                 var state = !l.IsPlayable ? LevelCardState.ComingSoon
@@ -276,10 +349,22 @@ namespace KPSSGeography.UI
             }
 
             // Ortadaki kart en önde olsun
-            for (int k = 0; k < cards.Count; k++) order[k] = k;
-            Array.Sort(order, 0, cards.Count, Comparer<int>.Create((a, b) =>
-                Mathf.Abs(b - position).CompareTo(Mathf.Abs(a - position))));
-            for (int k = 0; k < cards.Count; k++) cards[order[k]].Rect.SetSiblingIndex(k);
+            // Ortadaki kart en önde: uzaktan yakına sırala (ekleme sıralaması, bellek ayırmaz)
+            int count = Mathf.Min(cards.Count, order.Length);
+            for (int k = 0; k < count; k++) order[k] = k;
+            for (int a = 1; a < count; a++)
+            {
+                int key = order[a];
+                float kd = Mathf.Abs(key - position);
+                int b = a - 1;
+                while (b >= 0 && Mathf.Abs(order[b] - position) < kd)
+                {
+                    order[b + 1] = order[b];
+                    b--;
+                }
+                order[b + 1] = key;
+            }
+            for (int k = 0; k < count; k++) cards[order[k]].Rect.SetSiblingIndex(k);
         }
 
         readonly int[] order = new int[64];
@@ -287,12 +372,13 @@ namespace KPSSGeography.UI
 
         void UpdateSelection()
         {
+            if (cards.Count == 0) return;
             int idx = Mathf.Clamp(Mathf.RoundToInt(position), 0, cards.Count - 1);
             if (idx == selected) return;
             if (selected >= 0) sfx.Play(Sfx.Swipe);
             selected = idx;
 
-            for (int i = 0; i < dots.Length; i++)
+            for (int i = 0; i < cards.Count && i < dots.Length; i++)
             {
                 bool on = i == idx;
                 dots[i].color = on ? Theme.Amber : Theme.TextFaint;
