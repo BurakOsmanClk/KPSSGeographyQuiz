@@ -1,3 +1,4 @@
+using KPSSGeography.Ads;
 using KPSSGeography.Data;
 using KPSSGeography.Map;
 using KPSSGeography.Meta;
@@ -55,6 +56,10 @@ namespace KPSSGeography.Core
             var map = new GameObject("TurkeyMap").AddComponent<TurkeyMap>();
             map.Build(db, palette);
 
+            // Fiziki harita (göller, akarsular, dağlar, volkanlar, ovalar, platolar)
+            var features = new GameObject("PhysicalFeatures").AddComponent<FeatureLayer>();
+            features.Build(GeoFeatureDatabase.Load(), map.SharedMaterial, palette);
+
             // Kamera
             var camController = cam.GetComponent<MapCameraController>();
             if (camController == null) camController = cam.gameObject.AddComponent<MapCameraController>();
@@ -65,12 +70,17 @@ namespace KPSSGeography.Core
 
             // Oyun
             var game = new GameObject("CityQuizGame").AddComponent<CityQuizGame>();
-            game.Initialize(quizConfig, map, sfx, camController, progress);
+            game.Initialize(quizConfig, map, features, sfx, camController, progress);
 
             var pointer = map.gameObject.AddComponent<MapPointer>();
             pointer.Initialize(map, cam);
             pointer.CanInteract = () => game.AcceptsMapInput;
             pointer.ProvinceClicked += game.SubmitProvince;
+
+            var featurePointer = features.gameObject.AddComponent<FeaturePointer>();
+            featurePointer.Initialize(features, cam);
+            featurePointer.CanInteract = () => game.AcceptsFeatureInput;
+            featurePointer.FeatureClicked += game.SubmitFeature;
 
             // Arayüz
             var canvas = CreateCanvas(out RectTransform uiRoot);
@@ -81,10 +91,15 @@ namespace KPSSGeography.Core
             var title = new GameObject("TitleController").AddComponent<TitleScreen>();
             title.Initialize(uiRoot, progress, sfx);
 
-            var flow = gameObject.AddComponent<AppFlow>();
-            flow.Initialize(game, hud, title, levels, catalog, progress);
+            // Reklamlar: Ads Mediation (LevelPlay) kurulana kadar test reklamı
+            var mockAds = new GameObject("MockAdsController").AddComponent<MockAdService>();
+            mockAds.Initialize(uiRoot, sfx);
+            var adPolicy = new AdPolicy(mockAds, quizConfig);
 
-            Debug.Log($"[KPSS] Hazır: {map.Provinces.Count} il, {catalog.levels.Length} bölüm yüklendi.");
+            var flow = gameObject.AddComponent<AppFlow>();
+            flow.Initialize(game, hud, title, levels, catalog, progress, adPolicy);
+
+            Debug.Log($"[KPSS] Hazır: {map.Provinces.Count} il, {features.Features.Count} yer şekli, {catalog.levels.Length} bölüm yüklendi.");
         }
 
         static Canvas CreateCanvas(out RectTransform root)

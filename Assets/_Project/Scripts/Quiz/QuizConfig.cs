@@ -24,6 +24,17 @@ namespace KPSSGeography.Quiz
         public float correctFeedback = 0.7f;
         public float wrongFeedback = 1.8f;
         public float endDelay = 0.7f;
+        [Tooltip("Yer şekli sorularında yanlış cevaptan sonra bilgi notunu okumak için ek süre.")]
+        public float featureFeedbackBonus = 1.2f;
+
+        [Header("Reklam")]
+        public bool adsEnabled = true;
+        [Tooltip("Elenince ödüllü reklamla +1 can ile devam teklifi (bölüm başına 1 kez).")]
+        public bool offerContinue = true;
+        [Tooltip("Oturumda kaç bölüm bittikten sonra geçiş reklamı gösterilmeye başlansın.")]
+        public int interstitialAfterLevels = 2;
+        [Tooltip("İki geçiş reklamı arasında en az kaç saniye olsun.")]
+        public float interstitialMinInterval = 180f;
 
         [Header("Test")]
         [Tooltip("Açıkken tüm bölümler kilitsiz görünür (geliştirme için).")]

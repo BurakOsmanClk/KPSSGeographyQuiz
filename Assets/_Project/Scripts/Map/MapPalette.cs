@@ -37,6 +37,21 @@ namespace KPSSGeography.Map
         public Color doguAnadolu = new Color32(0xC8, 0xB6, 0xF2, 0xFF);
         public Color guneydoguAnadolu = new Color32(0xF5, 0xBE, 0x6E, 0xFF);
 
+        [Header("Fiziki harita")]
+        public Color river = new Color32(0x1F, 0x78, 0xC8, 0xFF);
+        public Color lake = new Color32(0x4D, 0x9F, 0xD6, 0xFF);
+        public Color lakeShore = new Color32(0x2F, 0x7F, 0xB8, 0xFF);
+        public Color mountain = new Color32(0x8B, 0x5A, 0x3C, 0xFF);
+        public Color mountainMark = new Color32(0x5E, 0x3A, 0x22, 0xFF);
+        public Color volcano = new Color32(0x6D, 0x45, 0x2C, 0xFF);
+        public Color lava = new Color32(0xF0, 0x55, 0x2E, 0xFF);
+        public Color plain = new Color32(0x72, 0xC4, 0x72, 0xE0);
+        public Color plainEdge = new Color32(0x3E, 0x8E, 0x41, 0xFF);
+        public Color plateau = new Color32(0xD9, 0xA5, 0x5B, 0xE0);
+        public Color plateauEdge = new Color32(0xA0, 0x6F, 0x2E, 0xFF);
+        public Color featureCorrect = new Color32(0x2E, 0xB8, 0x5C, 0xFF);
+        public Color featureMissed = new Color32(0xE5, 0x48, 0x4D, 0xFF);
+
         [Header("Durumlar")]
         public Color border = new Color(1f, 1f, 1f, 0.9f);
         public Color hover = Color.white;

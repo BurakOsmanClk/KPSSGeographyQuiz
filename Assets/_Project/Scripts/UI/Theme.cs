@@ -18,6 +18,7 @@ namespace KPSSGeography.UI
         public static readonly Color Orange = Hex(0xFB8500);
         public static readonly Color Cream = Hex(0xFFF8EC);
         public static readonly Color Success = Hex(0x3BB273);
+        public static readonly Color Leaf = Hex(0x43AA8B);
         public static readonly Color Error = Hex(0xE5484D);
         public static readonly Color Locked = Hex(0x4A5D70);
         public static readonly Color Soon = Hex(0x2B3A4A);
@@ -37,6 +38,7 @@ namespace KPSSGeography.UI
         {
             Quiz.QuizMode.FindProvince => Teal,
             Quiz.QuizMode.Region => Orange,
+            Quiz.QuizMode.Feature => Leaf,
             _ => Locked
         };
 
