@@ -255,56 +255,134 @@
    "source": "TÜİK"
   },
   {
-   "id": "buyukbas",
+   "id": "sigir",
    "set": "hayvan",
-   "title": "Büyükbaş Hayvancılık",
-   "question": "YAYGIN OLDUĞU BİR İL SEÇ",
+   "title": "Sığır (Büyükbaş)",
+   "question": "EN FAZLA YETİŞTİRİLDİĞİ BİR İL SEÇ",
    "plates": [
     25,
     36,
-    75,
-    42
+    75
    ],
-   "info": "Büyükbaş hayvancılık gür çayırların bulunduğu Erzurum–Kars yöresinde yaygındır; Konya da öne çıkar.",
-   "source": "TÜİK / MEB"
+   "info": "Büyükbaş hayvancılık, yaz yağışlarıyla gürleşen çayırların bulunduğu Erzurum–Kars yöresinde yaygındır.",
+   "source": "MEB / KPSS"
   },
   {
-   "id": "kucukbas",
+   "id": "koyun",
    "set": "hayvan",
-   "title": "Küçükbaş Hayvancılık",
-   "question": "YAYGIN OLDUĞU BİR İL SEÇ",
+   "title": "Koyun",
+   "question": "EN FAZLA YETİŞTİRİLDİĞİ BİR İL SEÇ",
    "plates": [
     65,
     42,
     63,
-    4
+    21
    ],
-   "info": "Küçükbaş (koyun, keçi) bozkır alanlarında yaygındır; Van ve Konya öne çıkar.",
-   "source": "TÜİK / MEB"
+   "info": "Koyun, bozkır ve step alanlarında yaygındır; küçükbaş sayısında Van, Konya ve Şanlıurfa ilk üçtedir.",
+   "source": "Tarım ve Orman Bakanlığı (2024) / KPSS"
+  },
+  {
+   "id": "kil-kecisi",
+   "set": "hayvan",
+   "title": "Kıl Keçisi",
+   "question": "EN FAZLA YETİŞTİRİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    33,
+    7,
+    73
+   ],
+   "info": "Kıl keçisi kalkerli, makilik Akdeniz yamaçlarında yaygındır; en çok keçi Mersin, Antalya ve Şırnak'tadır.",
+   "source": "TÜİK (2021)"
+  },
+  {
+   "id": "tiftik-kecisi",
+   "set": "hayvan",
+   "title": "Tiftik (Ankara) Keçisi",
+   "question": "EN FAZLA YETİŞTİRİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    6,
+    26
+   ],
+   "info": "Tiftik (Ankara) keçisi İç Anadolu'da Ankara ve Eskişehir çevresinde yetiştirilir; tiftik (mohair) elde edilir.",
+   "source": "MEB / KPSS"
+  },
+  {
+   "id": "manda",
+   "set": "hayvan",
+   "title": "Manda",
+   "question": "EN FAZLA YETİŞTİRİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    55,
+    21,
+    34
+   ],
+   "info": "Manda sulak ve bataklık alanları sever; Samsun ve Diyarbakır başta olmak üzere İstanbul'da da yetiştirilir.",
+   "source": "Akademik çalışma (TÜİK verisi)"
+  },
+  {
+   "id": "kovan",
+   "set": "ari",
+   "title": "Arı (Kovan Sayısı)",
+   "question": "EN ÇOK KOVAN BULUNAN BİR İL SEÇ",
+   "plates": [
+    48,
+    52,
+    1,
+    33,
+    35
+   ],
+   "info": "Kovan sayısında Muğla, Ordu, Adana, Mersin ve İzmir ilk sıralardadır.",
+   "source": "Tarım ve Orman Bakanlığı (2023)"
+  },
+  {
+   "id": "bal-uretimi",
+   "set": "ari",
+   "title": "Bal Üretimi",
+   "question": "EN FAZLA BAL ÜRETEN BİR İL SEÇ",
+   "plates": [
+    52,
+    1,
+    48,
+    58,
+    35
+   ],
+   "info": "2023'te en fazla bal Ordu, Adana, Muğla, Sivas ve İzmir'de üretilmiştir.",
+   "source": "Tarım ve Orman Bakanlığı (2023)"
+  },
+  {
+   "id": "cam-bali",
+   "set": "ari",
+   "title": "Çam Balı",
+   "question": "ÇAM BALI ÜRETİMİNDE ÖNE ÇIKAN İLİ SEÇ",
+   "plates": [
+    48
+   ],
+   "info": "Çam balı, çam ağaçlarının özsuyunu emen böceğin salgısından elde edilir ve Muğla'da yoğun üretilir.",
+   "source": "MEB / KPSS"
+  },
+  {
+   "id": "anzer-bali",
+   "set": "ari",
+   "title": "Anzer Balı",
+   "question": "ANZER BALININ ÜRETİLDİĞİ İLİ SEÇ",
+   "plates": [
+    53
+   ],
+   "info": "Anzer balı, Rize'nin İkizdere yöresindeki Anzer Yaylası'nda yüksek yayla çiçeklerinden elde edilir.",
+   "source": "MEB / KPSS"
   },
   {
    "id": "ipekbocegi",
-   "set": "hayvan",
-   "title": "İpek Böcekçiliği",
-   "question": "YAPILDIĞI BİR İL SEÇ",
+   "set": "ari",
+   "title": "İpek Böceği",
+   "question": "YETİŞTİRİLDİĞİ BİR İL SEÇ",
    "plates": [
     16,
+    11,
     21
    ],
-   "info": "İpek böcekçiliği dut ağacına bağlıdır; Bursa ve Diyarbakır öne çıkar.",
-   "source": "MEB"
-  },
-  {
-   "id": "aricilik",
-   "set": "hayvan",
-   "title": "Arıcılık (Bal)",
-   "question": "ÜRETİMDE ÖNE ÇIKAN BİR İL SEÇ",
-   "plates": [
-    52,
-    48
-   ],
-   "info": "Bal üretiminde Ordu ve çam balıyla Muğla öne çıkar.",
-   "source": "TÜİK"
+   "info": "İpek böceği dut yaprağıyla beslenir; Bursa ve Bilecik gelenekseldir, Diyarbakır da öne çıkar.",
+   "source": "MEB / KPSS"
   },
   {
    "id": "bor",

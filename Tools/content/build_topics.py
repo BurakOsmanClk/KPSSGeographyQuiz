@@ -21,6 +21,7 @@ def plates(*names):
 
 
 Q_PROD = "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ"
+Q_ANIMAL = "EN FAZLA YETİŞTİRİLDİĞİ BİR İL SEÇ"
 TOPICS = [
     # ---- Tarım I ----
     ("tarim1", "findik", "Fındık", Q_PROD, ("Ordu", "Giresun", "Samsun", "Sakarya", "Düzce", "Trabzon"),
@@ -60,15 +61,28 @@ TOPICS = [
      "Elma üretiminde Isparta ve Karaman ilk sıralardadır.", "TÜİK"),
     ("tarim2", "celtik", "Çeltik (Pirinç)", Q_PROD, ("Edirne", "Samsun", "Balıkesir", "Çorum"),
      "Çeltik bol su ister; Meriç–Ergene (Edirne) ve Bafra–Çarşamba (Samsun) ovaları öne çıkar.", "TÜİK"),
-    # ---- Hayvancılık ----
-    ("hayvan", "buyukbas", "Büyükbaş Hayvancılık", "YAYGIN OLDUĞU BİR İL SEÇ", ("Erzurum", "Kars", "Ardahan", "Konya"),
-     "Büyükbaş hayvancılık gür çayırların bulunduğu Erzurum–Kars yöresinde yaygındır; Konya da öne çıkar.", "TÜİK / MEB"),
-    ("hayvan", "kucukbas", "Küçükbaş Hayvancılık", "YAYGIN OLDUĞU BİR İL SEÇ", ("Van", "Konya", "Şanlıurfa", "Ağrı"),
-     "Küçükbaş (koyun, keçi) bozkır alanlarında yaygındır; Van ve Konya öne çıkar.", "TÜİK / MEB"),
-    ("hayvan", "ipekbocegi", "İpek Böcekçiliği", "YAPILDIĞI BİR İL SEÇ", ("Bursa", "Diyarbakır"),
-     "İpek böcekçiliği dut ağacına bağlıdır; Bursa ve Diyarbakır öne çıkar.", "MEB"),
-    ("hayvan", "aricilik", "Arıcılık (Bal)", "ÜRETİMDE ÖNE ÇIKAN BİR İL SEÇ", ("Ordu", "Muğla"),
-     "Bal üretiminde Ordu ve çam balıyla Muğla öne çıkar.", "TÜİK"),
+    # ---- Hayvancılık (hayvan türüne göre en fazla yetiştirildiği iller) ----
+    ("hayvan", "sigir", "Sığır (Büyükbaş)", Q_ANIMAL, ("Erzurum", "Kars", "Ardahan"),
+     "Büyükbaş hayvancılık, yaz yağışlarıyla gürleşen çayırların bulunduğu Erzurum–Kars yöresinde yaygındır.", "MEB / KPSS"),
+    ("hayvan", "koyun", "Koyun", Q_ANIMAL, ("Van", "Konya", "Şanlıurfa", "Diyarbakır"),
+     "Koyun, bozkır ve step alanlarında yaygındır; küçükbaş sayısında Van, Konya ve Şanlıurfa ilk üçtedir.", "Tarım ve Orman Bakanlığı (2024) / KPSS"),
+    ("hayvan", "kil-kecisi", "Kıl Keçisi", Q_ANIMAL, ("Mersin", "Antalya", "Şırnak"),
+     "Kıl keçisi kalkerli, makilik Akdeniz yamaçlarında yaygındır; en çok keçi Mersin, Antalya ve Şırnak'tadır.", "TÜİK (2021)"),
+    ("hayvan", "tiftik-kecisi", "Tiftik (Ankara) Keçisi", Q_ANIMAL, ("Ankara", "Eskişehir"),
+     "Tiftik (Ankara) keçisi İç Anadolu'da Ankara ve Eskişehir çevresinde yetiştirilir; tiftik (mohair) elde edilir.", "MEB / KPSS"),
+    ("hayvan", "manda", "Manda", Q_ANIMAL, ("Samsun", "Diyarbakır", "İstanbul"),
+     "Manda sulak ve bataklık alanları sever; Samsun ve Diyarbakır başta olmak üzere İstanbul'da da yetiştirilir.", "Akademik çalışma (TÜİK verisi)"),
+    # ---- Arıcılık ve ipek böcekçiliği ----
+    ("ari", "kovan", "Arı (Kovan Sayısı)", "EN ÇOK KOVAN BULUNAN BİR İL SEÇ", ("Muğla", "Ordu", "Adana", "Mersin", "İzmir"),
+     "Kovan sayısında Muğla, Ordu, Adana, Mersin ve İzmir ilk sıralardadır.", "Tarım ve Orman Bakanlığı (2023)"),
+    ("ari", "bal-uretimi", "Bal Üretimi", "EN FAZLA BAL ÜRETEN BİR İL SEÇ", ("Ordu", "Adana", "Muğla", "Sivas", "İzmir"),
+     "2023'te en fazla bal Ordu, Adana, Muğla, Sivas ve İzmir'de üretilmiştir.", "Tarım ve Orman Bakanlığı (2023)"),
+    ("ari", "cam-bali", "Çam Balı", "ÇAM BALI ÜRETİMİNDE ÖNE ÇIKAN İLİ SEÇ", ("Muğla",),
+     "Çam balı, çam ağaçlarının özsuyunu emen böceğin salgısından elde edilir ve Muğla'da yoğun üretilir.", "MEB / KPSS"),
+    ("ari", "anzer-bali", "Anzer Balı", "ANZER BALININ ÜRETİLDİĞİ İLİ SEÇ", ("Rize",),
+     "Anzer balı, Rize'nin İkizdere yöresindeki Anzer Yaylası'nda yüksek yayla çiçeklerinden elde edilir.", "MEB / KPSS"),
+    ("ari", "ipekbocegi", "İpek Böceği", "YETİŞTİRİLDİĞİ BİR İL SEÇ", ("Bursa", "Bilecik", "Diyarbakır"),
+     "İpek böceği dut yaprağıyla beslenir; Bursa ve Bilecik gelenekseldir, Diyarbakır da öne çıkar.", "MEB / KPSS"),
     # ---- Madenler ----
     ("maden", "bor", "Bor", "ÇIKARILDIĞI BİR İL SEÇ", ("Eskişehir", "Kütahya", "Balıkesir", "Bursa"),
      "Dünya bor rezervinin büyük kısmı Türkiye'dedir: Kırka (Eskişehir), Emet (Kütahya), Bigadiç (Balıkesir), Kestelek (Bursa).", "MTA / Eti Maden"),
