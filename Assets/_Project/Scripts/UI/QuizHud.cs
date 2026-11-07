@@ -1,5 +1,6 @@
 using System;
 using KPSSGeography.Core;
+using KPSSGeography.Data;
 using KPSSGeography.Map;
 using KPSSGeography.Quiz;
 using UnityEngine;
@@ -51,7 +52,24 @@ namespace KPSSGeography.UI
         Image nameTagImage;
         Text nameTagText;
         CanvasGroup nameTagGroup;
-        ProvinceView nameTagTarget;
+        IMapTarget nameTagTarget;
+
+        // Bilgi notu (yer şekli soruları)
+        Text infoText;
+        CanvasGroup infoGroup;
+
+        // Devam teklifi
+        RectTransform continueScreen;
+        CanvasGroup continueGroup;
+        RectTransform continueCard;
+        RectTransform continueFill;
+        Button continueAdButton;
+        float continueDeadline;
+        bool continueWaiting;
+        const float ContinueSeconds = 8f;
+
+        /// <summary>Ödüllü reklam isteği: AppFlow reklam servisine yönlendirir.</summary>
+        public Action<Action<bool>> RequestRewarded;
 
         // Duraklatma
         RectTransform pauseScreen;
@@ -89,12 +107,15 @@ namespace KPSSGeography.UI
             BuildRegionBar();
             BuildNameTag();
             BuildPauseScreen();
+            BuildContinueScreen();
             BuildEndScreen();
 
             game.GameStarted += OnGameStarted;
             game.CountdownTick += OnCountdown;
             game.QuestionStarted += OnQuestion;
             game.AnswerResolved += OnAnswer;
+            game.ContinueOffered += OnContinueOffered;
+            game.ContinueGranted += OnContinueGranted;
             game.GameEnded += OnGameEnded;
         }
 
@@ -105,6 +126,8 @@ namespace KPSSGeography.UI
             game.CountdownTick -= OnCountdown;
             game.QuestionStarted -= OnQuestion;
             game.AnswerResolved -= OnAnswer;
+            game.ContinueOffered -= OnContinueOffered;
+            game.ContinueGranted -= OnContinueGranted;
             game.GameEnded -= OnGameEnded;
         }
 
@@ -174,6 +197,14 @@ namespace KPSSGeography.UI
             outline.effectDistance = new Vector2(2f, -2f);
             feedbackGroup = feedbackText.gameObject.AddComponent<CanvasGroup>();
             feedbackGroup.alpha = 0f;
+
+            var infoBg = UIFactory.Card("Info", hud, Theme.NavyPanel);
+            infoBg.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -258), new Vector2(1100, 84));
+            infoText = UIFactory.Label("Text", infoBg.transform, "", 26, Theme.Text, TextAnchor.MiddleCenter);
+            infoText.horizontalOverflow = HorizontalWrapMode.Wrap;
+            infoText.rectTransform.Stretch(28, 28, 8, 8);
+            infoGroup = infoBg.gameObject.AddComponent<CanvasGroup>();
+            infoGroup.alpha = 0f;
 
             // --- Kontrol ipucu ---
             hintText = UIFactory.Label("Hint", hud,
@@ -258,6 +289,42 @@ namespace KPSSGeography.UI
                 .GetComponent<RectTransform>().Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -384), new Vector2(400, 80));
 
             pauseScreen.gameObject.SetActive(false);
+        }
+
+        void BuildContinueScreen()
+        {
+            var dim = UIFactory.Solid("ContinueScreen", Root, Theme.Overlay, true);
+            continueScreen = dim.rectTransform.Stretch();
+            continueGroup = dim.gameObject.AddComponent<CanvasGroup>();
+
+            var card = UIFactory.Card("Card", continueScreen, Theme.NavyPanel, true);
+            continueCard = card.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(720, 600));
+
+            var heart = UIFactory.Icon("Heart", continueCard, UIFactory.Heart, Theme.HeartOn);
+            heart.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -40), new Vector2(120, 120));
+            heart.gameObject.AddComponent<PulseScale>().amount = 0.08f;
+
+            UIFactory.Label("Title", continueCard, "CANIN BİTTİ!", 60, Theme.Text, TextAnchor.MiddleCenter, FontStyle.Bold, true)
+                .rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -176), new Vector2(680, 70));
+            var body = UIFactory.Label("Body", continueCard, "Kısa bir reklam izle, <b>1 can</b> kazan ve kaldığın yerden devam et.",
+                28, Theme.TextMuted, TextAnchor.MiddleCenter);
+            body.horizontalOverflow = HorizontalWrapMode.Wrap;
+            body.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -256), new Vector2(600, 80));
+
+            var bar = UIFactory.Panel("Bar", continueCard, new Color(1f, 1f, 1f, 0.12f));
+            bar.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0, 222), new Vector2(560, 12));
+            continueFill = UIFactory.Panel("Fill", bar.transform, Theme.Amber).rectTransform;
+            continueFill.anchorMin = Vector2.zero;
+            continueFill.anchorMax = Vector2.one;
+            continueFill.offsetMin = Vector2.zero;
+            continueFill.offsetMax = Vector2.zero;
+
+            continueAdButton = UIFactory.Button("Watch", continueCard, "REKLAM İZLE  +1 CAN", Theme.Amber, new Vector2(520, 96), OnContinueWatch, Theme.Ink, 34);
+            continueAdButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0, 110), new Vector2(520, 96));
+            UIFactory.Button("Decline", continueCard, "HAYIR, BİTİR", Theme.NavyLight, new Vector2(320, 70), OnContinueDecline, null, 26)
+                .GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0, 26), new Vector2(320, 70));
+
+            continueScreen.gameObject.SetActive(false);
         }
 
         void BuildEndScreen()
@@ -360,7 +427,14 @@ namespace KPSSGeography.UI
             displayedScore = 0;
             scoreText.text = "0";
             streakText.text = "";
-            promptText.text = regionMode ? "BU İL HANGİ BÖLGEDE?" : "BU İLİ HARİTADA BUL";
+            promptText.text = game.Mode switch
+            {
+                QuizMode.Region => "BU İL HANGİ BÖLGEDE?",
+                QuizMode.Feature => $"BU {GeoFeatureDatabase.CategoryNoun(game.Level.category)} HARİTADA BUL",
+                _ => "BU İLİ HARİTADA BUL"
+            };
+            continueScreen.gameObject.SetActive(false);
+            infoGroup.alpha = 0f;
             targetName.text = game.Level.title.ToUpper(TR);
             progressText.text = $"SORU 0 / {game.TotalQuestions}";
             SetTimerVisual(1f, game.TimeLimit);
@@ -414,6 +488,8 @@ namespace KPSSGeography.UI
                 if (!r.IsCorrect && r.ChosenRegion != null) HighlightRegionButton(r.ChosenRegion, Theme.Error);
             }
 
+            if (!string.IsNullOrEmpty(r.Info)) ShowInfo(r.Info, r.IsCorrect ? 1.6f : 2.9f);
+
             if (r.IsCorrect)
             {
                 ShowFeedback(r.Streak >= 3 ? "HARİKA!" : "DOĞRU!", Theme.Success);
@@ -443,6 +519,8 @@ namespace KPSSGeography.UI
         void OnGameEnded(GameResult res)
         {
             HideNameTag(false);
+            continueScreen.gameObject.SetActive(false);
+            continueWaiting = false;
             Animate("hud", Tween.Run(0.25f, t => hudGroup.alpha = 1f - t));
 
             endLevel.text = $"{res.Level.index + 1}. BÖLÜM  •  {res.Level.title.ToUpper(TR)}";
@@ -479,11 +557,68 @@ namespace KPSSGeography.UI
         /// <summary>Sonraki bölümün açık olup olmadığını AppFlow söyler.</summary>
         public Func<LevelDefinition, bool> NextAvailable;
 
+        // ================== Devam teklifi (ödüllü reklam) ==================
+
+        void OnContinueOffered()
+        {
+            HideNameTag(false);
+            continueScreen.gameObject.SetActive(true);
+            continueScreen.SetAsLastSibling();
+            continueAdButton.interactable = true;
+            continueDeadline = Time.unscaledTime + ContinueSeconds;
+            continueWaiting = true;
+            Animate("continue", Tween.Run(0.25f, t => continueGroup.alpha = t));
+            PopIn("continuecard", continueCard, 0.85f, 0.4f);
+        }
+
+        void OnContinueWatch()
+        {
+            if (!continueWaiting) return;
+            continueWaiting = false;
+            continueAdButton.interactable = false;
+            sfx.Play(Sfx.Click);
+            if (RequestRewarded == null)
+            {
+                game.DeclineContinue();
+                return;
+            }
+            RequestRewarded(granted =>
+            {
+                continueScreen.gameObject.SetActive(false);
+                if (granted) game.AcceptContinue();
+                else game.DeclineContinue();
+            });
+        }
+
+        void OnContinueDecline()
+        {
+            if (!continueWaiting) return;
+            continueWaiting = false;
+            sfx.Play(Sfx.Click);
+            continueScreen.gameObject.SetActive(false);
+            game.DeclineContinue();
+        }
+
+        void OnContinueGranted()
+        {
+            if (heartsShown >= hearts.Length) return;
+            var h = hearts[heartsShown];
+            heartsShown++;
+            var rt = h.rectTransform;
+            Animate("heartback", Tween.Run(0.5f, t =>
+            {
+                h.color = Color.Lerp(Theme.HeartOff, Theme.HeartOn, Mathf.Clamp01(t * 3f));
+                float s = Mathf.LerpUnclamped(1.8f, 1f, Tween.EaseOutBack(t));
+                rt.localScale = new Vector3(s, s, 1f);
+            }));
+            ShowFeedback("DEVAM!", Theme.Success);
+        }
+
         // ================== Duraklatma ==================
 
         void OnPauseClicked()
         {
-            if (!game.IsRunning || game.State == QuizState.Finished) return;
+            if (!game.IsRunning || game.State == QuizState.ContinueOffer) return;
             sfx.Play(Sfx.Click);
             game.SetPaused(true);
             pauseScreen.gameObject.SetActive(true);
@@ -547,6 +682,13 @@ namespace KPSSGeography.UI
         {
             if (game == null) return;
 
+            if (continueWaiting)
+            {
+                float left = continueDeadline - Time.unscaledTime;
+                continueFill.anchorMax = new Vector2(Mathf.Clamp01(left / ContinueSeconds), 1f);
+                if (left <= 0f) OnContinueDecline();
+            }
+
             if (game.State == QuizState.Playing && !game.IsPaused)
             {
                 SetTimerVisual(game.TimeRatio, game.TimeRemaining);
@@ -574,7 +716,7 @@ namespace KPSSGeography.UI
         void LateUpdate()
         {
             if (nameTagTarget != null)
-                nameTag.anchoredPosition = WorldToCanvas(nameTagTarget.transform.position) + new Vector2(0f, 18f);
+                nameTag.anchoredPosition = WorldToCanvas(nameTagTarget.LabelWorldPosition) + new Vector2(0f, 18f);
         }
 
         void SetTimerVisual(float ratio, float seconds)
@@ -616,7 +758,18 @@ namespace KPSSGeography.UI
             }));
         }
 
-        void ShowNameTag(ProvinceView target, Color accent)
+        void ShowInfo(string text, float seconds)
+        {
+            infoText.text = text;
+            Animate("info", Tween.Run(seconds, t =>
+            {
+                float fadeIn = Mathf.Clamp01(t * seconds / 0.2f);
+                float fadeOut = Mathf.Clamp01((1f - t) * seconds / 0.3f);
+                infoGroup.alpha = Mathf.Min(fadeIn, fadeOut);
+            }));
+        }
+
+        void ShowNameTag(IMapTarget target, Color accent)
         {
             nameTagTarget = target;
             nameTagText.text = target.DisplayName;
@@ -647,14 +800,14 @@ namespace KPSSGeography.UI
             }));
         }
 
-        void SpawnFloatingText(string text, ProvinceView at, Color color)
+        void SpawnFloatingText(string text, IMapTarget at, Color color)
         {
             var label = UIFactory.Label("Floating", Root, text, 50, color, TextAnchor.MiddleCenter, FontStyle.Bold);
             var o = label.gameObject.AddComponent<Outline>();
             o.effectColor = new Color(0f, 0f, 0f, 0.55f);
             o.effectDistance = new Vector2(2f, -2f);
             var rt = label.rectTransform.Place(Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(300, 60));
-            Vector2 start = WorldToCanvas(at.transform.position) + new Vector2(0f, 96f);
+            Vector2 start = WorldToCanvas(at.LabelWorldPosition) + new Vector2(0f, 96f);
             StartCoroutine(Tween.Run(0.9f, t =>
             {
                 rt.anchoredPosition = start + new Vector2(0f, 70f * Tween.EaseOutCubic(t));

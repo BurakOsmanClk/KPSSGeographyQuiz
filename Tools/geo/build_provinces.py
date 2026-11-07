@@ -52,11 +52,17 @@ REGION_OF = {p: r for r, plates in REGIONS.items() for p in plates}
 assert len(REGION_OF) == 81
 
 
-def main():
+def load_provinces():
     data = json.load(open(SRC, encoding="utf-8"))
     feats = data["features"]
     geoms = [shape(f["geometry"]) for f in feats]
+    return feats, geoms
 
+
+def get_projection(geoms=None):
+    """İllerin sınırından eşdikdörtgen projeksiyon üretir. build_features.py de aynısını kullanır."""
+    if geoms is None:
+        geoms = load_provinces()[1]
     minx = min(g.bounds[0] for g in geoms)
     miny = min(g.bounds[1] for g in geoms)
     maxx = max(g.bounds[2] for g in geoms)
@@ -67,6 +73,13 @@ def main():
 
     def proj(lon, lat):
         return ((lon - lon0) * kx * scale, (lat - lat0) * scale)
+
+    return proj, (minx, miny, maxx, maxy)
+
+
+def main():
+    feats, geoms = load_provinces()
+    proj, (minx, miny, maxx, maxy) = get_projection(geoms)
 
     def ring_xy(coords):
         pts = [proj(x, y) for x, y in coords]

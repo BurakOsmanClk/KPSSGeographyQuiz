@@ -1,3 +1,5 @@
+using System;
+using KPSSGeography.Ads;
 using KPSSGeography.Meta;
 using KPSSGeography.Quiz;
 using KPSSGeography.UI;
@@ -17,10 +19,12 @@ namespace KPSSGeography.Core
         LevelSelectScreen levels;
         LevelCatalog catalog;
         ProgressStore progress;
+        AdPolicy ads;
 
         public void Initialize(CityQuizGame quizGame, QuizHud quizHud, TitleScreen titleScreen, LevelSelectScreen levelSelect,
-            LevelCatalog levelCatalog, ProgressStore progressStore)
+            LevelCatalog levelCatalog, ProgressStore progressStore, AdPolicy adPolicy)
         {
+            ads = adPolicy;
             game = quizGame;
             hud = quizHud;
             title = titleScreen;
@@ -32,14 +36,17 @@ namespace KPSSGeography.Core
             levels.BackRequested += ShowTitle;
             levels.PlayRequested += Play;
 
-            hud.LevelsRequested += () => ShowLevels(game.Level);
-            hud.RetryRequested += () => Play(game.Level);
-            hud.NextRequested += () =>
+            hud.LevelsRequested += () => AfterResults(() => ShowLevels(game.Level));
+            hud.RetryRequested += () => AfterResults(() => Play(game.Level));
+            hud.NextRequested += () => AfterResults(() =>
             {
                 var next = catalog.NextPlayable(game.Level);
                 if (next != null && progress.IsUnlocked(next)) Play(next);
                 else ShowLevels(game.Level);
-            };
+            });
+            hud.RequestRewarded = done => ads.ShowRewarded("continue", done);
+            game.CanOfferContinue = () => ads.CanOfferContinue;
+            game.GameEnded += _ => ads.OnLevelFinished();
             hud.NextAvailable = level =>
             {
                 var next = catalog.NextPlayable(level);
@@ -47,6 +54,13 @@ namespace KPSSGeography.Core
             };
 
             ShowTitle();
+        }
+
+        /// <summary>Sonuç ekranından ayrılırken uygunsa geçiş reklamı gösterir (duraklatma menüsünden ayrılışta göstermez).</summary>
+        void AfterResults(Action next)
+        {
+            if (game.State == QuizState.Finished) ads.BeforeLeavingResults(next);
+            else next();
         }
 
         void ShowTitle()

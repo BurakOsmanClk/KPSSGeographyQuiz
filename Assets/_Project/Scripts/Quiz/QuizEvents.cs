@@ -8,6 +8,8 @@ namespace KPSSGeography.Quiz
         Countdown,
         Playing,
         Feedback,
+        /// <summary>Canlar bitti; oyuncuya reklam izleyip devam etme teklif ediliyor.</summary>
+        ContinueOffer,
         Finished
     }
 
@@ -20,12 +22,12 @@ namespace KPSSGeography.Quiz
 
     public readonly struct QuestionInfo
     {
-        public readonly ProvinceView Target;
+        public readonly IMapTarget Target;
         public readonly QuizMode Mode;
         public readonly int Index;
         public readonly int Total;
 
-        public QuestionInfo(ProvinceView target, QuizMode mode, int index, int total)
+        public QuestionInfo(IMapTarget target, QuizMode mode, int index, int total)
         {
             Target = target;
             Mode = mode;
@@ -38,9 +40,9 @@ namespace KPSSGeography.Quiz
     {
         public readonly AnswerOutcome Outcome;
         public readonly QuizMode Mode;
-        public readonly ProvinceView Target;
-        /// <summary>İli Bul modunda tıklanan il (süre dolduysa null).</summary>
-        public readonly ProvinceView Clicked;
+        public readonly IMapTarget Target;
+        /// <summary>Haritada tıklanan il ya da yer şekli (süre dolduysa / bölge modunda null).</summary>
+        public readonly IMapTarget Clicked;
         /// <summary>Bölge modunda seçilen bölge (süre dolduysa null).</summary>
         public readonly string ChosenRegion;
         public readonly int Points;
@@ -49,9 +51,11 @@ namespace KPSSGeography.Quiz
         public readonly int Mistakes;
 
         public bool IsCorrect => Outcome == AnswerOutcome.Correct;
-        public string CorrectRegion => Target.Data.region;
+        public string CorrectRegion => (Target as ProvinceView)?.Data.region;
+        /// <summary>Yer şekli sorularında KPSS bilgi notu.</summary>
+        public string Info => (Target as FeatureView)?.Data.info;
 
-        public AnswerResult(AnswerOutcome outcome, QuizMode mode, ProvinceView target, ProvinceView clicked, string chosenRegion,
+        public AnswerResult(AnswerOutcome outcome, QuizMode mode, IMapTarget target, IMapTarget clicked, string chosenRegion,
             int points, int streak, float multiplier, int mistakes)
         {
             Outcome = outcome;

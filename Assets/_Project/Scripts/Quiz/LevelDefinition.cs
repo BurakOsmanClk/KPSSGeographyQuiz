@@ -10,6 +10,8 @@ namespace KPSSGeography.Quiz
         FindProvince,
         /// <summary>Haritada vurgulanan ilin coğrafi bölgesini seç.</summary>
         Region,
+        /// <summary>Yer şekli (akarsu, dağ, volkan, ova, plato) bul.</summary>
+        Feature,
         /// <summary>Henüz hazır olmayan bölüm ("Yakında").</summary>
         ComingSoon
     }
@@ -26,6 +28,8 @@ namespace KPSSGeography.Quiz
         public int questionCount;
         public float timePerQuestion;
         public int maxMistakes = 3;
+        /// <summary>Yer şekli bölümleri için: river | mountain | volcano | plain | plateau | mixed</summary>
+        public string category;
 
         [NonSerialized] public int index;
 
@@ -33,6 +37,7 @@ namespace KPSSGeography.Quiz
         {
             "find" => QuizMode.FindProvince,
             "region" => QuizMode.Region,
+            "feature" => QuizMode.Feature,
             _ => QuizMode.ComingSoon
         };
 
@@ -43,6 +48,7 @@ namespace KPSSGeography.Quiz
         {
             QuizMode.FindProvince => "İLİ BUL",
             QuizMode.Region => "BÖLGE MODU",
+            QuizMode.Feature => "YER ŞEKLİ",
             _ => "YAKINDA"
         };
 

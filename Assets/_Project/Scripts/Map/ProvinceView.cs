@@ -14,13 +14,14 @@ namespace KPSSGeography.Map
     /// Tek bir ilin görseli ve tıklama alanı. Mesh, il etiket noktası (pivot) etrafında kurulur;
     /// böylece "pop" animasyonu ilin kendi merkezinde ölçeklenir.
     /// </summary>
-    public class ProvinceView : MonoBehaviour
+    public class ProvinceView : MonoBehaviour, IMapTarget
     {
         const int BaseFillOrder = 0;
         const int RaisedFillOrder = 10;
 
         public ProvinceData Data { get; private set; }
         public string DisplayName => Data.name;
+        public Vector3 LabelWorldPosition => transform.position;
         public ProvinceState State { get; private set; }
         public bool IsDimmed => dimmed;
         public Color BaseColor => baseColor;
