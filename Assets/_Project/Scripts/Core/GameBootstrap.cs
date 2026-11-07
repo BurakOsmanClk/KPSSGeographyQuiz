@@ -76,7 +76,8 @@ namespace KPSSGeography.Core
 
             // Oyun
             var game = new GameObject("CityQuizGame").AddComponent<CityQuizGame>();
-            game.Initialize(quizConfig, map, features, sfx, camController, progress);
+            var builder = new QuestionBuilder(map, features, TopicDatabase.Load(), McqDatabase.Load(), palette);
+            game.Initialize(quizConfig, map, features, sfx, camController, progress, builder);
 
             var pointer = map.gameObject.AddComponent<MapPointer>();
             pointer.Initialize(map, cam);

@@ -38,6 +38,7 @@ namespace KPSSGeography.Map
         Color baseColor;
         Color correctColor;
         bool dimmed;
+        bool neutral;
         bool focused;
         float focusTime;
 
@@ -149,6 +150,7 @@ namespace KPSSGeography.Map
             State = ProvinceState.Idle;
             hovered = false;
             dimmed = false;
+            neutral = false;
             focused = false;
             flashTime = 0f;
             popTime = -1f;
@@ -161,6 +163,9 @@ namespace KPSSGeography.Map
         public void SetState(ProvinceState state) => State = state;
         public void SetHovered(bool value) => hovered = value;
         public void SetDimmed(bool value) => dimmed = value;
+
+        /// <summary>Nötr görünüm: bölge rengi gizlenir (cevabı ele vermesin) ama il tıklanabilir kalır.</summary>
+        public void SetNeutral(bool value) => neutral = value;
 
         /// <summary>Bölge modunda sorulan ili cevaplanana kadar nabız gibi vurgular.</summary>
         public void SetFocused(bool value)
@@ -207,6 +212,7 @@ namespace KPSSGeography.Map
                 _ => baseColor
             };
             if (dimmed && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, 0.82f);
+            else if (neutral && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, 0.78f);
             if (hovered) target = Color.Lerp(target, palette.hover, 0.5f);
 
             smoothedColor = Color.Lerp(smoothedColor, target, 1f - Mathf.Exp(-20f * dt));

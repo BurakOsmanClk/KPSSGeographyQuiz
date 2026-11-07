@@ -44,16 +44,38 @@ namespace KPSSGeography.Map
             }
         }
 
-        /// <summary>Yer şekli bölümü: yalnızca o kategorideki öğeleri gösterir ve tıklanabilir yapar.</summary>
-        public void ShowCategory(string category)
+        /// <summary>Yer şekli bölümü: yalnızca o kategorideki öğeleri gösterir (isteğe bağlı tıklanabilir).</summary>
+        public void ShowCategory(string category, bool interactive = true)
         {
             foreach (var f in features)
             {
                 f.ResetVisual();
                 bool match = Matches(category, f.Category);
                 f.gameObject.SetActive(match);
-                f.Interactive = match;
+                f.Interactive = match && interactive;
             }
+        }
+
+        /// <summary>Tek bir öğeyi gösterir (ör. KPSS sorusunda vurgulanan göl), diğerlerini gizler.</summary>
+        public void ShowOnly(FeatureView target)
+        {
+            foreach (var f in features)
+            {
+                f.ResetVisual();
+                f.gameObject.SetActive(f == target);
+            }
+        }
+
+        public void ClearStates()
+        {
+            foreach (var f in features) f.SetState(ProvinceState.Idle);
+        }
+
+        public FeatureView Find(string id)
+        {
+            foreach (var f in features)
+                if (f.Data.id == id) return f;
+            return null;
         }
 
         /// <summary>İmlecin altındaki (piksel toleranslı) en uygun öğe. Küçük öğeler (nokta, çizgi) önceliklidir.</summary>
@@ -65,7 +87,7 @@ namespace KPSSGeography.Map
             {
                 if (!f.Interactive || !f.gameObject.activeSelf) continue;
                 float d = f.DistanceInPixels(mapPoint, unitsPerPixel);
-                float limit = f.Data.IsPoint ? 30f : f.Data.IsLine ? 16f : 6f;
+                float limit = f.Data.IsPoint ? 30f : f.Data.IsLine ? 16f : f.IsSmall ? 16f : 6f;
                 if (d > limit) continue;
                 float score = d - (f.Data.IsPoint ? 20f : f.Data.IsLine ? 10f : 0f);
                 if (score < bestScore) { bestScore = score; best = f; }

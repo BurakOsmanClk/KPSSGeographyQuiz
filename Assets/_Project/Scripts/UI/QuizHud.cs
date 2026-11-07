@@ -42,10 +42,17 @@ namespace KPSSGeography.UI
         Text countdownText;
         Text hintText;
 
-        // Bölge butonları
-        RectTransform regionBar;
-        CanvasGroup regionBarGroup;
-        Button[] regionButtons;
+        // Seçenek butonları (bölge, iklim, plaka, göl tipi, KPSS şıkları)
+        const int MaxChoices = 8;
+        RectTransform choiceBar;
+        CanvasGroup choiceBarGroup;
+        readonly Button[] choiceButtons = new Button[MaxChoices];
+        readonly Text[] choiceLabels = new Text[MaxChoices];
+        readonly Color[] choiceBase = new Color[MaxChoices];
+        readonly Color[] choiceText = new Color[MaxChoices];
+        int activeChoices;
+        bool choiceBarVisible;
+        Question currentQuestion;
 
         // İl adı etiketi
         RectTransform nameTag;
@@ -104,7 +111,7 @@ namespace KPSSGeography.UI
 
             CreateRoot(parent, "QuizHUD");
             BuildHud();
-            BuildRegionBar();
+            BuildChoiceBar();
             BuildNameTag();
             BuildPauseScreen();
             BuildContinueScreen();
@@ -221,30 +228,125 @@ namespace KPSSGeography.UI
             countdownText.gameObject.SetActive(false);
         }
 
-        void BuildRegionBar()
+        void BuildChoiceBar()
         {
-            var bar = UIFactory.Rect("RegionBar", Root);
-            regionBar = bar.Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0, 26), new Vector2(1800, 96));
-            regionBarGroup = bar.gameObject.AddComponent<CanvasGroup>();
-
-            var names = Regions.All;
-            regionButtons = new Button[names.Length];
-            const float w = 240f, spacing = 14f;
-            float total = names.Length * w + (names.Length - 1) * spacing;
-            for (int i = 0; i < names.Length; i++)
+            var bar = UIFactory.Rect("ChoiceBar", Root);
+            choiceBar = bar.Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0, 26), new Vector2(1840, 300));
+            choiceBar.pivot = new Vector2(0.5f, 0f);
+            choiceBarGroup = bar.gameObject.AddComponent<CanvasGroup>();
+            for (int i = 0; i < MaxChoices; i++)
             {
-                string region = names[i];
-                string label = region == Regions.GuneydoguAnadolu ? "Güneydoğu\nAnadolu"
-                    : region == Regions.DoguAnadolu ? "Doğu\nAnadolu"
-                    : region == Regions.IcAnadolu ? "İç\nAnadolu" : region;
-                var btn = UIFactory.Button("Region_" + i, bar, label, palette.RegionColor(region), new Vector2(w, 96),
-                    () => OnRegionClicked(region), Theme.Ink, 27);
-                btn.GetComponentInChildren<Text>().lineSpacing = 0.9f;
-                btn.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),
-                    new Vector2(-total / 2f + w / 2f + i * (w + spacing), 0f), new Vector2(w, 96));
-                regionButtons[i] = btn;
+                int idx = i;
+                var btn = UIFactory.Button("Choice_" + i, bar, "", Theme.NavyPanel, new Vector2(240, 96), () => OnChoiceClicked(idx), Theme.Ink, 27);
+                choiceLabels[i] = btn.GetComponentInChildren<Text>();
+                choiceLabels[i].lineSpacing = 0.9f;
+                choiceButtons[i] = btn;
             }
             bar.gameObject.SetActive(false);
+        }
+
+        /// <summary>Sorunun seçeneklerini yerleştirir: kısa seçenekler tek satırda, KPSS şıkları iki sütunlu ızgarada.</summary>
+        void SetupChoices(Question q)
+        {
+            activeChoices = Mathf.Min(q.Choices.Length, MaxChoices);
+            bool grid = q.LongTitle;
+            for (int i = 0; i < MaxChoices; i++)
+            {
+                var btn = choiceButtons[i];
+                bool on = i < activeChoices;
+                btn.gameObject.SetActive(on);
+                if (!on) continue;
+
+                bool colored = q.ChoiceColors != null && i < q.ChoiceColors.Length;
+                choiceBase[i] = colored ? q.ChoiceColors[i] : Theme.NavyPanel;
+                choiceText[i] = colored ? Theme.Ink : Theme.Text;
+                string label = q.Choices[i];
+                if (!grid && label.Length > 10 && label.Contains(" ") && !label.Contains("\n"))
+                {
+                    int sp = label.IndexOf(' ');
+                    label = label.Substring(0, sp) + "\n" + label.Substring(sp + 1);
+                }
+                choiceLabels[i].text = label;
+                choiceLabels[i].alignment = grid ? TextAnchor.MiddleLeft : TextAnchor.MiddleCenter;
+                choiceLabels[i].fontSize = grid ? 26 : (activeChoices > 6 ? 24 : 27);
+                choiceLabels[i].horizontalOverflow = grid ? HorizontalWrapMode.Wrap : HorizontalWrapMode.Overflow;
+                choiceLabels[i].rectTransform.offsetMin = new Vector2(grid ? 26 : 6, 4);
+                choiceLabels[i].rectTransform.offsetMax = new Vector2(grid ? -18 : -6, -4);
+
+                var rt = btn.GetComponent<RectTransform>();
+                if (grid)
+                {
+                    const float w = 880f, h = 78f, gx = 24f, gy = 14f;
+                    int rows = Mathf.CeilToInt(activeChoices / 2f);
+                    int row = i / 2, col = i % 2;
+                    bool lastAlone = i == activeChoices - 1 && activeChoices % 2 == 1;
+                    float x = lastAlone ? 0f : (col == 0 ? -(w + gx) / 2f : (w + gx) / 2f);
+                    float y = (rows - 1 - row) * (h + gy) + h / 2f;
+                    rt.Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0.5f), new Vector2(x, y), new Vector2(w, h));
+                }
+                else
+                {
+                    float spacing = 14f;
+                    float w = Mathf.Min(260f, (1840f - spacing * (activeChoices - 1)) / activeChoices);
+                    float total = activeChoices * w + (activeChoices - 1) * spacing;
+                    rt.Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0.5f),
+                        new Vector2(-total / 2f + w / 2f + i * (w + spacing), 48f), new Vector2(w, 96f));
+                }
+                ResetChoice(i);
+                btn.interactable = true;
+            }
+        }
+
+        void ResetChoice(int i)
+        {
+            var b = choiceButtons[i];
+            UIFactory.SetButtonColor(b, choiceBase[i]);
+            var c = b.colors;
+            c.disabledColor = choiceBase[i] * new Color(1f, 1f, 1f, 0.7f);
+            b.colors = c;
+            choiceLabels[i].color = choiceText[i];
+            b.transform.localScale = Vector3.one;
+        }
+
+        void HighlightChoice(int i, Color color)
+        {
+            if (i < 0 || i >= activeChoices) return;
+            var b = choiceButtons[i];
+            var c = b.colors;
+            c.disabledColor = color;
+            b.colors = c;
+            choiceLabels[i].color = Color.white;
+            PunchScale("choice" + i, b.transform, 0.12f, 0.3f);
+        }
+
+        void SetChoicesInteractable(bool value)
+        {
+            for (int i = 0; i < activeChoices; i++) choiceButtons[i].interactable = value;
+        }
+
+        void ShowChoiceBar(bool show)
+        {
+            if (show == choiceBarVisible && choiceBar.gameObject.activeSelf == show) return;
+            choiceBarVisible = show;
+            choiceBar.gameObject.SetActive(show);
+            if (show) SlideIn("choicebar", choiceBar, choiceBarGroup, 0.05f, 50f);
+        }
+
+        void OnChoiceClicked(int index)
+        {
+            if (!game.AcceptsChoiceInput) return;
+            game.SubmitChoice(index);
+        }
+
+        /// <summary>Hedef kartını soru türüne göre boyutlandırır (KPSS sorusunda geniş ve çok satırlı).</summary>
+        void LayoutTargetCard(bool longText)
+        {
+            targetCard.sizeDelta = longText ? new Vector2(1240, 236) : new Vector2(760, 160);
+            targetName.fontSize = longText ? 34 : 64;
+            targetName.horizontalOverflow = longText ? HorizontalWrapMode.Wrap : HorizontalWrapMode.Overflow;
+            targetName.lineSpacing = longText ? 1.1f : 1f;
+            targetName.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, longText ? -50 : -48),
+                new Vector2(longText ? 1160 : 720, longText ? 130 : 68));
         }
 
         void BuildNameTag()
@@ -421,29 +523,23 @@ namespace KPSSGeography.UI
             Show();
             endScreen.gameObject.SetActive(false);
             pauseScreen.gameObject.SetActive(false);
+            continueScreen.gameObject.SetActive(false);
             HideNameTag(true);
 
-            bool regionMode = game.Mode == QuizMode.Region;
             displayedScore = 0;
             scoreText.text = "0";
             streakText.text = "";
-            promptText.text = game.Mode switch
-            {
-                QuizMode.Region => "BU İL HANGİ BÖLGEDE?",
-                QuizMode.Feature => $"BU {GeoFeatureDatabase.CategoryNoun(game.Level.category)} HARİTADA BUL",
-                _ => "BU İLİ HARİTADA BUL"
-            };
-            continueScreen.gameObject.SetActive(false);
             infoGroup.alpha = 0f;
+            currentQuestion = null;
+            LayoutTargetCard(false);
+            promptText.text = game.Level.ModeLabel;
             targetName.text = game.Level.title.ToUpper(TR);
             progressText.text = $"SORU 0 / {game.TotalQuestions}";
             SetTimerVisual(1f, game.TimeLimit);
             RebuildHearts(game.MaxMistakes);
-            hintText.gameObject.SetActive(!regionMode);
-            regionBar.gameObject.SetActive(regionMode);
-            ResetRegionButtons();
-            SetRegionButtonsInteractable(false);
-            if (regionMode) SlideIn("regionbar", regionBar, regionBarGroup, 0.2f, 60f);
+            hintText.gameObject.SetActive(!game.UsesChoices);
+            choiceBarVisible = false;
+            choiceBar.gameObject.SetActive(false);
 
             Animate("hud", Tween.Run(0.3f, t => hudGroup.alpha = t));
             PopIn("card", targetCard, 0.9f);
@@ -464,37 +560,75 @@ namespace KPSSGeography.UI
             }));
         }
 
-        void OnQuestion(QuestionInfo q)
+        void OnQuestion(QuestionInfo info)
         {
+            var q = info.Question;
+            currentQuestion = q;
             HideNameTag(false);
-            targetName.text = q.Target.DisplayName.ToUpper(TR);
-            progressText.text = $"SORU {q.Index + 1} / {q.Total}";
+            LayoutTargetCard(q.LongTitle);
+            promptText.text = q.Prompt;
+            targetName.text = q.Title;
+            progressText.text = q.RequireAll ? $"BULUNAN 0 / {q.Correct.Count}" : $"SORU {info.Index + 1} / {info.Total}";
             lastTickSecond = Mathf.CeilToInt(game.TimeLimit) + 1;
-            PunchScale("card", targetCard, 0.08f, 0.3f);
+            PunchScale("card", targetCard, q.LongTitle ? 0.03f : 0.08f, 0.3f);
 
-            if (q.Mode == QuizMode.Region)
-            {
-                ResetRegionButtons();
-                SetRegionButtonsInteractable(true);
-            }
+            bool choice = q.Type == AnswerType.Choice;
+            if (choice) SetupChoices(q);
+            ShowChoiceBar(choice);
+            hintText.gameObject.SetActive(!choice);
         }
 
         void OnAnswer(AnswerResult r)
         {
-            if (r.Mode == QuizMode.Region)
+            var q = r.Question;
+
+            if (q.Type == AnswerType.Choice)
             {
-                SetRegionButtonsInteractable(false);
-                HighlightRegionButton(r.CorrectRegion, Theme.Success);
-                if (!r.IsCorrect && r.ChosenRegion != null) HighlightRegionButton(r.ChosenRegion, Theme.Error);
+                SetChoicesInteractable(false);
+                HighlightChoice(q.CorrectChoice, Theme.Success);
+                if (!r.IsCorrect && r.ChosenIndex >= 0) HighlightChoice(r.ChosenIndex, Theme.Error);
             }
 
-            if (!string.IsNullOrEmpty(r.Info)) ShowInfo(r.Info, r.IsCorrect ? 1.6f : 2.9f);
+            // "Hepsini bul": ara cevaplar
+            if (r.Partial)
+            {
+                progressText.text = $"BULUNAN {r.Found} / {q.Correct.Count}";
+                if (r.IsCorrect)
+                {
+                    SpawnFloatingText($"+{r.Points}", r.Clicked, Theme.Amber);
+                    ShowNameTag(r.Clicked, Theme.Success);
+                    if (r.Streak >= 3)
+                    {
+                        streakText.text = $"SERİ x{r.Streak}";
+                        PunchScale("streak", streakText.rectTransform, 0.25f, 0.3f);
+                    }
+                }
+                else
+                {
+                    ShowFeedback($"YANLIŞ! {r.Clicked.DisplayName} bu bölgede değil", Theme.Error);
+                    streakText.text = "";
+                    LoseHeart();
+                }
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(r.Info)) ShowInfo(r.Info, r.IsCorrect ? 2.0f : 3.2f);
+            IMapTarget tag = r.IsCorrect && r.Clicked != null ? r.Clicked : q.TagTarget;
 
             if (r.IsCorrect)
             {
+                if (q.RequireAll)
+                {
+                    progressText.text = $"BULUNAN {r.Found} / {q.Correct.Count}";
+                    ShowFeedback("BÖLGE TAMAMLANDI!", Theme.Success);
+                    return;
+                }
                 ShowFeedback(r.Streak >= 3 ? "HARİKA!" : "DOĞRU!", Theme.Success);
-                SpawnFloatingText($"+{r.Points}", r.Target, Theme.Amber);
-                ShowNameTag(r.Target, Theme.Success);
+                if (tag != null)
+                {
+                    SpawnFloatingText($"+{r.Points}", tag, Theme.Amber);
+                    ShowNameTag(tag, Theme.Success);
+                }
                 if (r.Streak >= 2)
                 {
                     streakText.text = $"SERİ x{r.Streak}   (puan ×{r.Multiplier:0.0})";
@@ -503,16 +637,18 @@ namespace KPSSGeography.UI
             }
             else
             {
-                string answer = r.Mode == QuizMode.Region ? r.CorrectRegion : r.Target.DisplayName;
-                string msg = r.Outcome == AnswerOutcome.TimedOut
-                    ? $"SÜRE DOLDU!  Doğru cevap: {answer}"
-                    : r.Mode == QuizMode.Region
-                        ? $"YANLIŞ!  {r.Target.DisplayName} → {answer}"
-                        : $"YANLIŞ! ({r.Clicked.DisplayName})  Doğru cevap: {answer}";
+                string answer = q.AnswerLabel;
+                string msg;
+                if (r.Outcome == AnswerOutcome.TimedOut)
+                    msg = q.RequireAll ? $"SÜRE DOLDU!  {r.Found} / {q.Correct.Count} il bulundu" : $"SÜRE DOLDU!  Doğru cevap: {answer}";
+                else if (r.Clicked != null)
+                    msg = $"YANLIŞ! ({r.Clicked.DisplayName})  Doğru cevap: {answer}";
+                else
+                    msg = $"YANLIŞ!  Doğru cevap: {answer}";
                 ShowFeedback(msg, Theme.Error);
-                ShowNameTag(r.Target, Theme.Error);
+                if (tag != null) ShowNameTag(tag, Theme.Error);
                 streakText.text = "";
-                LoseHeart();
+                if (!q.RequireAll) LoseHeart();
             }
         }
 
@@ -523,7 +659,7 @@ namespace KPSSGeography.UI
             continueWaiting = false;
             Animate("hud", Tween.Run(0.25f, t => hudGroup.alpha = 1f - t));
 
-            endLevel.text = $"{res.Level.index + 1}. BÖLÜM  •  {res.Level.title.ToUpper(TR)}";
+            endLevel.text = $"{res.Level.ModeLabel}  •  {res.Level.title.ToUpper(TR)}";
             endTitle.text = res.Completed ? (res.Stars == 3 ? "MÜKEMMEL!" : "TEBRİKLER!") : "ELENDİN!";
             endTitle.color = res.Completed ? Theme.Text : Theme.Error;
             endScore.text = res.Score.ToString();
@@ -636,44 +772,6 @@ namespace KPSSGeography.UI
         {
             game.SetPaused(false);
             pauseScreen.gameObject.SetActive(false);
-        }
-
-        // ================== Bölge butonları ==================
-
-        void OnRegionClicked(string region)
-        {
-            if (!game.AcceptsRegionInput) return;
-            game.SubmitRegion(region);
-        }
-
-        void SetRegionButtonsInteractable(bool value)
-        {
-            foreach (var b in regionButtons) b.interactable = value;
-        }
-
-        void ResetRegionButtons()
-        {
-            for (int i = 0; i < regionButtons.Length; i++)
-            {
-                UIFactory.SetButtonColor(regionButtons[i], palette.RegionColor(Regions.All[i]));
-                var c = regionButtons[i].colors;
-                c.disabledColor = palette.RegionColor(Regions.All[i]) * new Color(1f, 1f, 1f, 0.75f);
-                regionButtons[i].colors = c;
-                regionButtons[i].GetComponentInChildren<Text>().color = Theme.Ink;
-                regionButtons[i].transform.localScale = Vector3.one;
-            }
-        }
-
-        void HighlightRegionButton(string region, Color color)
-        {
-            int i = Array.IndexOf(Regions.All, region);
-            if (i < 0) return;
-            var b = regionButtons[i];
-            var c = b.colors;
-            c.disabledColor = color;
-            b.colors = c;
-            b.GetComponentInChildren<Text>().color = Color.white;
-            PunchScale("regionbtn" + i, b.transform, 0.15f, 0.3f);
         }
 
         // ================== Her kare ==================

@@ -19,6 +19,9 @@ namespace KPSSGeography.Map
         public Vector3 LabelWorldPosition => new Vector3(Data.label[0], Data.label[1], 0f) + transform.parent.position;
         public ProvinceState State { get; private set; }
 
+        /// <summary>Küçük alanlar (ör. küçük göller) için daha geniş tıklama toleransı.</summary>
+        public bool IsSmall => Data.IsPolygon && bounds.width + bounds.height < 0.35f;
+
         /// <summary>Bu öğe şu an soru olarak tıklanabilir mi?</summary>
         public bool Interactive { get; set; }
 
@@ -76,6 +79,25 @@ namespace KPSSGeography.Map
                     b.AddQuad(c + new Vector2(-0.065f, 0.12f), c + new Vector2(0.065f, 0.12f), c + new Vector2(0.05f, 0.17f), c + new Vector2(-0.05f, 0.17f), palette.lava);
                     b.AddTriangle(c + new Vector2(-0.03f, 0.17f), c + new Vector2(0f, 0.26f), c + new Vector2(0.03f, 0.17f), palette.lava);
                     break;
+                case GeoFeature.Lake:
+                    baseOrder = 21;
+                    b.AddTriangles(data.vertices, data.triangles, palette.lake);
+                    foreach (var r in data.outline)
+                        b.AddPolyline(LineMeshBuilder.ToPoints(r.points), 0.02f, palette.lakeShore, true);
+                    break;
+                case GeoFeature.Fault:
+                    baseOrder = 23;
+                    foreach (var l in data.lines)
+                        b.AddDashedPolyline(LineMeshBuilder.ToPoints(l.points), 0.065f, 0.16f, 0.09f, palette.fault);
+                    break;
+                case GeoFeature.Dam:
+                case GeoFeature.Gulf:
+                case GeoFeature.Peninsula:
+                case GeoFeature.Unesco:
+                case GeoFeature.Park:
+                    baseOrder = 27;
+                    BuildMarker(b, data);
+                    break;
                 case GeoFeature.Plain:
                 case GeoFeature.Plateau:
                     bool plain = data.category == GeoFeature.Plain;
@@ -107,6 +129,44 @@ namespace KPSSGeography.Map
             }
             point = data.LabelPoint;
             bounds = ComputeBounds();
+        }
+
+        /// <summary>Nokta türü öğeler için tür/alt türe göre harita işareti.</summary>
+        void BuildMarker(LineMeshBuilder b, GeoFeature data)
+        {
+            Vector2 c = data.LabelPoint;
+            Color edge = palette.markerEdge;
+            b.AddCircle(c + new Vector2(0.012f, -0.02f), 0.16f, new Color(0f, 0f, 0f, 0.2f));
+            switch (data.category)
+            {
+                case GeoFeature.Dam:
+                    b.AddCircle(c, 0.14f, Color.white);
+                    b.AddCircle(c, 0.115f, palette.dam);
+                    b.AddQuad(c + new Vector2(-0.075f, -0.025f), c + new Vector2(0.075f, -0.025f),
+                        c + new Vector2(0.075f, 0.025f), c + new Vector2(-0.075f, 0.025f), Color.white);
+                    break;
+                case GeoFeature.Gulf:
+                    Color water = data.subtype == "strait" ? palette.strait : palette.gulf;
+                    b.AddCircle(c, 0.145f, water);
+                    b.AddCircle(c, 0.09f, Color.white);
+                    b.AddCircle(c, 0.05f, water);
+                    break;
+                case GeoFeature.Peninsula:
+                    Color fill = data.subtype == "island" ? palette.island : data.subtype == "cape" ? palette.cape : palette.peninsula;
+                    b.AddCircle(c, 0.145f, edge);
+                    b.AddCircle(c, 0.115f, fill);
+                    break;
+                case GeoFeature.Unesco:
+                    b.AddDiamond(c, 0.18f, edge);
+                    b.AddDiamond(c, 0.145f, palette.unesco);
+                    b.AddDiamond(c, 0.055f, Color.white);
+                    break;
+                case GeoFeature.Park:
+                    b.AddCircle(c, 0.145f, Color.white);
+                    b.AddCircle(c, 0.12f, palette.park);
+                    b.AddTriangle(c + new Vector2(-0.07f, -0.05f), c + new Vector2(0f, 0.08f), c + new Vector2(0.07f, -0.05f), Color.white);
+                    break;
+            }
         }
 
         Rect ComputeBounds()

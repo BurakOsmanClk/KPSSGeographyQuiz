@@ -1,115 +1,2640 @@
 {
-  "_aciklama": "KPSS ders haritalarındaki konumlarına göre elle çizilmiş yer şekilleri. Koordinatlar [boylam, enlem]. Dağlar sırt çizgisi (line), volkanlar nokta (point), ova ve platolar alan (polygon). build_features.py bu şekilleri yumuşatır (Chaikin) ve haritaya yansıtır. Şekiller şematiktir; gerektikçe nokta eklenerek iyileştirilebilir.",
-  "mountains": [
-    { "id": "yildiz", "name": "Yıldız Dağları", "info": "Istranca Dağları olarak da bilinir; Trakya'nın kuzeyinde Karadeniz kıyısına paralel uzanır.",
-      "line": [[27.05, 42.02], [27.45, 41.85], [27.85, 41.66], [28.2, 41.45]] },
-    { "id": "koroglu", "name": "Köroğlu Dağları", "info": "Bolu'nun güneyinde uzanan, Kuzey Anadolu Dağları'na ait kıvrım dağları.",
-      "line": [[30.9, 40.5], [31.5, 40.55], [32.1, 40.55], [32.7, 40.62]] },
-    { "id": "ilgaz", "name": "Ilgaz Dağları", "info": "Kastamonu ile Çankırı arasında uzanır; kış turizmi ve milli parkıyla bilinir.",
-      "line": [[33.2, 41.05], [33.7, 41.08], [34.3, 41.05]] },
-    { "id": "kure", "name": "Küre Dağları", "info": "Batı Karadeniz'de kıyıya paralel uzanır (Bartın–Kastamonu–Sinop).",
-      "line": [[32.5, 41.62], [33.1, 41.75], [33.8, 41.8], [34.5, 41.72], [35.0, 41.55]] },
-    { "id": "canik", "name": "Canik Dağları", "info": "Orta Karadeniz'de, Samsun ile Ordu arasında kıyıya paralel uzanır.",
-      "line": [[36.1, 41.02], [36.7, 40.9], [37.3, 40.8], [37.8, 40.72]] },
-    { "id": "giresun", "name": "Giresun Dağları", "info": "Giresun'un güneyinde, Doğu Karadeniz Dağları'nın batı uzantısıdır.",
-      "line": [[38.0, 40.55], [38.5, 40.52], [39.0, 40.5]] },
-    { "id": "dogu-karadeniz", "name": "Kaçkar Dağları", "info": "Doğu Karadeniz Dağları'nın en yüksek kesimi; Kaçkar Tepesi yaklaşık 3.937 m'dir.",
-      "line": [[39.3, 40.6], [40.0, 40.68], [40.6, 40.8], [41.15, 40.88], [41.6, 41.15]] },
-    { "id": "allahuekber", "name": "Allahuekber Dağları", "info": "Erzurum ile Kars arasında, Sarıkamış yakınında uzanır.",
-      "line": [[42.0, 40.3], [42.35, 40.45], [42.7, 40.6]] },
-    { "id": "palandoken", "name": "Palandöken Dağları", "info": "Erzurum'un güneyinde; kış turizmi merkezi.",
-      "line": [[40.9, 39.82], [41.3, 39.8], [41.7, 39.78]] },
-    { "id": "munzur", "name": "Munzur Dağları", "info": "Tunceli ile Erzincan arasında uzanır; Munzur Vadisi Milli Parkı buradadır.",
-      "line": [[38.7, 39.3], [39.2, 39.42], [39.7, 39.5], [40.1, 39.55]] },
-    { "id": "uludag", "name": "Uludağ", "info": "Bursa'da, Marmara Bölgesi'nin en yüksek dağı (2.543 m); kış turizmi.",
-      "line": [[28.95, 40.05], [29.2, 40.08], [29.45, 40.13]] },
-    { "id": "kazdagi", "name": "Kaz Dağı", "info": "Biga Yarımadası'nda, Edremit Körfezi'nin kuzeyinde yükselen dağ.",
-      "line": [[26.55, 39.68], [26.85, 39.72], [27.15, 39.75]] },
-    { "id": "madra", "name": "Madra Dağı", "info": "Balıkesir ile İzmir arasında, Ege'de horst (yükselmiş blok) dağı.",
-      "line": [[26.95, 39.35], [27.2, 39.33], [27.45, 39.35]] },
-    { "id": "bozdaglar", "name": "Bozdağlar", "info": "Gediz ve Küçük Menderes grabenleri arasında yükselen horst.",
-      "line": [[27.6, 38.32], [28.0, 38.35], [28.4, 38.38]] },
-    { "id": "aydin", "name": "Aydın Dağları", "info": "Küçük Menderes ile Büyük Menderes grabenleri arasında uzanan horst.",
-      "line": [[27.45, 38.02], [27.9, 38.06], [28.4, 38.08]] },
-    { "id": "mentese", "name": "Menteşe Dağları", "info": "Muğla çevresinde, Ege Bölgesi'nin güneyinde uzanır.",
-      "line": [[28.0, 37.25], [28.4, 37.12], [28.85, 37.0]] },
-    { "id": "sultan", "name": "Sultan Dağları", "info": "Afyonkarahisar ile Konya arasında, Göller Yöresi'nin kuzeydoğusunda uzanır.",
-      "line": [[30.95, 38.65], [31.25, 38.45], [31.6, 38.2]] },
-    { "id": "bey", "name": "Bey Dağları", "info": "Batı Toroslar'da, Antalya'nın batısında yükselir.",
-      "line": [[29.95, 36.45], [30.15, 36.65], [30.3, 36.9], [30.35, 37.1]] },
-    { "id": "geyik", "name": "Geyik Dağları", "info": "Orta Toroslar'ın batı kesiminde, Antalya ile Konya arasında uzanır.",
-      "line": [[31.7, 36.95], [32.1, 36.9], [32.5, 36.88], [32.9, 36.95]] },
-    { "id": "bolkar", "name": "Bolkar Dağları", "info": "Orta Toroslar'da, Niğde ile Mersin arasında uzanır.",
-      "line": [[33.9, 37.3], [34.3, 37.35], [34.7, 37.4], [35.0, 37.45]] },
-    { "id": "aladaglar", "name": "Aladağlar", "info": "Orta Toroslar'da; en yüksek noktası Demirkazık Tepesi (3.756 m).",
-      "line": [[35.05, 37.62], [35.15, 37.8], [35.3, 37.98]] },
-    { "id": "nur", "name": "Nur (Amanos) Dağları", "info": "Hatay'da, İskenderun Körfezi'ne paralel uzanır.",
-      "line": [[36.05, 36.3], [36.2, 36.6], [36.35, 36.95], [36.55, 37.25]] },
-    { "id": "guneydogu-toroslar", "name": "Güneydoğu Toroslar", "info": "Güneydoğu Anadolu'yu kuzeyden bir yay gibi çevreleyen sıradağlar.",
-      "line": [[37.3, 37.95], [38.2, 38.2], [39.2, 38.35], [40.2, 38.45], [41.2, 38.3], [42.2, 37.95], [43.2, 37.55], [43.9, 37.35]] }
-  ],
-  "volcanoes": [
-    { "id": "agri", "name": "Ağrı Dağı", "info": "Türkiye'nin en yüksek dağı (5.137 m); sönmüş bir volkandır.", "point": [44.3, 39.7] },
-    { "id": "suphan", "name": "Süphan Dağı", "info": "Van Gölü'nün kuzeyinde yükselen volkanik dağ (4.058 m).", "point": [42.83, 38.93] },
-    { "id": "nemrut", "name": "Nemrut Dağı", "info": "Van Gölü'nün batısında; kraterinde göl vardır. Lavları Van Gölü'nün önünü kapatarak set gölü oluşturmuştur.", "point": [42.23, 38.65] },
-    { "id": "tendurek", "name": "Tendürek Dağı", "info": "Ağrı ile Van arasında, geniş tabanlı (kalkan tipi) volkan.", "point": [43.87, 39.37] },
-    { "id": "erciyes", "name": "Erciyes Dağı", "info": "Kayseri'de; İç Anadolu'nun en yüksek dağı (3.917 m).", "point": [35.45, 38.53] },
-    { "id": "hasan", "name": "Hasan Dağı", "info": "Aksaray ile Niğde arasında; Kapadokya'daki tüf örtülerini oluşturan volkanlardandır.", "point": [34.17, 38.13] },
-    { "id": "melendiz", "name": "Melendiz Dağı", "info": "Niğde'de, Kapadokya volkanik alanında yer alır.", "point": [34.6, 38.03] },
-    { "id": "karacadag", "name": "Karacadağ", "info": "Diyarbakır ile Şanlıurfa arasında, geniş bazalt örtüleri bırakmış kalkan tipi volkan.", "point": [39.83, 37.67] },
-    { "id": "kula", "name": "Kula Volkanları", "info": "Manisa'da; Türkiye'nin en genç volkanik konilerindendir (Kula Jeoparkı).", "point": [28.65, 38.58] },
-    { "id": "karadag", "name": "Karadağ", "info": "Karaman'da, Konya Ovası'nın güneydoğusunda yükselen sönmüş volkan.", "point": [33.15, 37.4] }
-  ],
-  "plains": [
-    { "id": "cukurova", "name": "Çukurova", "info": "Seyhan ve Ceyhan nehirlerinin alüvyonlarıyla oluşmuş delta ovası; pamuk ve turunçgil.",
-      "polygon": [[34.9, 36.8], [35.2, 37.0], [35.6, 37.12], [36.05, 37.08], [36.1, 36.85], [35.8, 36.62], [35.4, 36.6], [35.05, 36.68]] },
-    { "id": "konya", "name": "Konya Ovası", "info": "Türkiye'nin en geniş ovası; kapalı havzadadır ve tahıl ambarı olarak bilinir.",
-      "polygon": [[32.3, 37.95], [32.85, 38.08], [33.45, 37.95], [33.75, 37.6], [33.55, 37.32], [33.0, 37.3], [32.5, 37.48], [32.25, 37.7]] },
-    { "id": "bafra", "name": "Bafra Ovası", "info": "Kızılırmak'ın Karadeniz'e döküldüğü yerde oluşturduğu delta ovası.",
-      "polygon": [[35.68, 41.5], [35.85, 41.72], [36.08, 41.68], [36.18, 41.55], [35.98, 41.42], [35.78, 41.42]] },
-    { "id": "carsamba", "name": "Çarşamba Ovası", "info": "Yeşilırmak'ın Karadeniz'e döküldüğü yerde oluşturduğu delta ovası.",
-      "polygon": [[36.45, 41.22], [36.6, 41.38], [36.88, 41.35], [37.0, 41.22], [36.8, 41.12], [36.55, 41.12]] },
-    { "id": "buyuk-menderes", "name": "Büyük Menderes Ovası", "info": "Graben (çöküntü) ovası; incir, pamuk ve zeytin tarımı yaygındır.",
-      "polygon": [[27.3, 37.5], [27.8, 37.78], [28.4, 37.9], [29.0, 37.92], [29.05, 37.8], [28.4, 37.78], [27.85, 37.62], [27.35, 37.4]] },
-    { "id": "gediz", "name": "Gediz Ovası", "info": "Graben ovası; Manisa çevresinde üzüm (sultaniye) tarımıyla bilinir.",
-      "polygon": [[27.2, 38.6], [27.7, 38.55], [28.2, 38.5], [28.55, 38.45], [28.5, 38.33], [28.0, 38.42], [27.5, 38.48], [27.15, 38.52]] },
-    { "id": "ergene", "name": "Ergene Ovası", "info": "Trakya'da; ayçiçeği ve buğday tarımının yoğun olduğu ova.",
-      "polygon": [[26.85, 41.35], [27.3, 41.48], [27.85, 41.38], [27.9, 41.2], [27.4, 41.08], [26.95, 41.15]] },
-    { "id": "harran", "name": "Harran Ovası", "info": "Şanlıurfa'da; GAP ile sulanmaya başlanmış, pamuk üretiminde öne çıkan ova.",
-      "polygon": [[38.85, 36.95], [39.15, 37.12], [39.38, 37.0], [39.35, 36.75], [39.05, 36.65], [38.85, 36.72]] },
-    { "id": "amik", "name": "Amik Ovası", "info": "Hatay'da, Asi Nehri çevresindeki verimli ova; pamuk ve buğday.",
-      "polygon": [[36.22, 36.38], [36.45, 36.5], [36.62, 36.35], [36.55, 36.15], [36.3, 36.15]] },
-    { "id": "mus", "name": "Muş Ovası", "info": "Doğu Anadolu'da tektonik ova; tahıl ve şeker pancarı yetiştirilir.",
-      "polygon": [[41.2, 38.78], [41.55, 38.88], [41.92, 38.8], [41.85, 38.66], [41.45, 38.64], [41.2, 38.68]] },
-    { "id": "pasinler", "name": "Erzurum-Pasinler Ovası", "info": "Yaklaşık 1.800 m yükseltideki tektonik ova; hayvancılık önemlidir.",
-      "polygon": [[41.0, 39.95], [41.45, 40.02], [41.95, 39.98], [42.0, 39.88], [41.5, 39.84], [41.05, 39.86]] },
-    { "id": "igdir", "name": "Iğdır Ovası", "info": "Aras vadisinde, mikroklima özelliği gösteren ova; pamuk ve kayısı.",
-      "polygon": [[43.75, 39.95], [44.15, 40.05], [44.6, 39.98], [44.5, 39.85], [44.1, 39.82], [43.8, 39.86]] },
-    { "id": "bursa", "name": "Bursa Ovası", "info": "Marmara'da verimli tektonik ova; şeftali ve sebze tarımı.",
-      "polygon": [[28.85, 40.24], [29.15, 40.28], [29.4, 40.22], [29.35, 40.13], [29.05, 40.14], [28.85, 40.17]] },
-    { "id": "adapazari", "name": "Adapazarı Ovası", "info": "Sakarya Nehri'nin oluşturduğu ova; mısır ve sebze tarımı.",
-      "polygon": [[30.2, 40.85], [30.45, 40.95], [30.65, 40.85], [30.6, 40.68], [30.35, 40.68], [30.2, 40.75]] }
-  ],
-  "plateaus": [
-    { "id": "teke", "name": "Teke Platosu", "info": "Batı Toroslar'da, Antalya–Burdur–Muğla arasında yer alan karstik plato.",
-      "polygon": [[29.3, 36.95], [29.75, 37.25], [30.2, 37.15], [30.25, 36.85], [29.95, 36.55], [29.45, 36.6]] },
-    { "id": "taseli", "name": "Taşeli Platosu", "info": "Orta Toroslar'da, Mersin–Karaman arasında yer alan karstik plato.",
-      "polygon": [[32.6, 36.62], [33.1, 36.88], [33.7, 36.85], [33.95, 36.62], [33.55, 36.35], [32.95, 36.32]] },
-    { "id": "obruk", "name": "Obruk Platosu", "info": "Konya ile Aksaray arasında; obruk adı verilen karstik çöküntülerle bilinir.",
-      "polygon": [[32.95, 38.4], [33.45, 38.48], [33.95, 38.3], [33.85, 38.08], [33.35, 38.02], [32.95, 38.15]] },
-    { "id": "cihanbeyli", "name": "Cihanbeyli Platosu", "info": "Konya'nın kuzeyinde, Tuz Gölü'nün batısında; tahıl tarımı ve hayvancılık.",
-      "polygon": [[32.45, 38.98], [32.95, 39.02], [33.2, 38.82], [33.1, 38.55], [32.65, 38.5], [32.4, 38.72]] },
-    { "id": "haymana", "name": "Haymana Platosu", "info": "Ankara'nın güneyinde; tahıl tarımı ve küçükbaş hayvancılık.",
-      "polygon": [[32.2, 39.68], [32.75, 39.72], [32.95, 39.5], [32.8, 39.3], [32.35, 39.3], [32.15, 39.48]] },
-    { "id": "bozok", "name": "Bozok Platosu", "info": "Yozgat çevresinde; tahıl tarımı ve hayvancılık.",
-      "polygon": [[34.6, 39.98], [35.3, 40.08], [35.95, 39.85], [35.9, 39.5], [35.2, 39.38], [34.65, 39.55]] },
-    { "id": "uzunyayla", "name": "Uzunyayla Platosu", "info": "Kayseri ile Sivas arasında; at yetiştiriciliğiyle bilinir.",
-      "polygon": [[35.95, 38.98], [36.45, 39.08], [36.85, 38.9], [36.75, 38.62], [36.25, 38.58], [35.95, 38.75]] },
-    { "id": "erzurum-kars", "name": "Erzurum-Kars Platosu", "info": "Volkanik plato; büyükbaş hayvancılığın en yaygın olduğu yerlerdendir.",
-      "polygon": [[41.8, 40.65], [42.5, 40.95], [43.3, 40.95], [43.65, 40.6], [43.3, 40.2], [42.4, 40.12], [41.9, 40.3]] },
-    { "id": "gaziantep", "name": "Gaziantep Platosu", "info": "Güneydoğu'da; Antep fıstığı ve zeytin tarımı yaygındır.",
-      "polygon": [[36.95, 37.25], [37.45, 37.35], [37.95, 37.25], [38.0, 36.95], [37.5, 36.82], [37.0, 36.95]] },
-    { "id": "yazilikaya", "name": "Yazılıkaya Platosu", "info": "Eskişehir ile Afyonkarahisar arasında; tüf örtüleri ve Frig Vadisi.",
-      "polygon": [[30.35, 39.35], [30.75, 39.4], [31.0, 39.22], [30.9, 39.0], [30.5, 38.98], [30.3, 39.15]] }
+ "_aciklama": "KPSS ders haritalarındaki konumlarına göre elle çizilmiş yer şekilleri. Koordinatlar [boylam, enlem]. Dağlar sırt çizgisi (line), volkanlar nokta (point), ova ve platolar alan (polygon). build_features.py bu şekilleri yumuşatır (Chaikin) ve haritaya yansıtır. Şekiller şematiktir; gerektikçe nokta eklenerek iyileştirilebilir.",
+ "mountains": [
+  {
+   "id": "yildiz",
+   "name": "Yıldız Dağları",
+   "info": "Istranca Dağları olarak da bilinir; Trakya'nın kuzeyinde Karadeniz kıyısına paralel uzanır.",
+   "line": [
+    [
+     27.05,
+     42.02
+    ],
+    [
+     27.45,
+     41.85
+    ],
+    [
+     27.85,
+     41.66
+    ],
+    [
+     28.2,
+     41.45
+    ]
+   ]
+  },
+  {
+   "id": "koroglu",
+   "name": "Köroğlu Dağları",
+   "info": "Bolu'nun güneyinde uzanan, Kuzey Anadolu Dağları'na ait kıvrım dağları.",
+   "line": [
+    [
+     30.9,
+     40.5
+    ],
+    [
+     31.5,
+     40.55
+    ],
+    [
+     32.1,
+     40.55
+    ],
+    [
+     32.7,
+     40.62
+    ]
+   ]
+  },
+  {
+   "id": "ilgaz",
+   "name": "Ilgaz Dağları",
+   "info": "Kastamonu ile Çankırı arasında uzanır; kış turizmi ve milli parkıyla bilinir.",
+   "line": [
+    [
+     33.2,
+     41.05
+    ],
+    [
+     33.7,
+     41.08
+    ],
+    [
+     34.3,
+     41.05
+    ]
+   ]
+  },
+  {
+   "id": "kure",
+   "name": "Küre Dağları",
+   "info": "Batı Karadeniz'de kıyıya paralel uzanır (Bartın–Kastamonu–Sinop).",
+   "line": [
+    [
+     32.5,
+     41.62
+    ],
+    [
+     33.1,
+     41.75
+    ],
+    [
+     33.8,
+     41.8
+    ],
+    [
+     34.5,
+     41.72
+    ],
+    [
+     35.0,
+     41.55
+    ]
+   ]
+  },
+  {
+   "id": "canik",
+   "name": "Canik Dağları",
+   "info": "Orta Karadeniz'de, Samsun ile Ordu arasında kıyıya paralel uzanır.",
+   "line": [
+    [
+     36.1,
+     41.02
+    ],
+    [
+     36.7,
+     40.9
+    ],
+    [
+     37.3,
+     40.8
+    ],
+    [
+     37.8,
+     40.72
+    ]
+   ]
+  },
+  {
+   "id": "giresun",
+   "name": "Giresun Dağları",
+   "info": "Giresun'un güneyinde, Doğu Karadeniz Dağları'nın batı uzantısıdır.",
+   "line": [
+    [
+     38.0,
+     40.55
+    ],
+    [
+     38.5,
+     40.52
+    ],
+    [
+     39.0,
+     40.5
+    ]
+   ]
+  },
+  {
+   "id": "dogu-karadeniz",
+   "name": "Kaçkar Dağları",
+   "info": "Doğu Karadeniz Dağları'nın en yüksek kesimi; Kaçkar Tepesi yaklaşık 3.937 m'dir.",
+   "line": [
+    [
+     39.3,
+     40.6
+    ],
+    [
+     40.0,
+     40.68
+    ],
+    [
+     40.6,
+     40.8
+    ],
+    [
+     41.15,
+     40.88
+    ],
+    [
+     41.6,
+     41.15
+    ]
+   ]
+  },
+  {
+   "id": "allahuekber",
+   "name": "Allahuekber Dağları",
+   "info": "Erzurum ile Kars arasında, Sarıkamış yakınında uzanır.",
+   "line": [
+    [
+     42.0,
+     40.3
+    ],
+    [
+     42.35,
+     40.45
+    ],
+    [
+     42.7,
+     40.6
+    ]
+   ]
+  },
+  {
+   "id": "palandoken",
+   "name": "Palandöken Dağları",
+   "info": "Erzurum'un güneyinde; kış turizmi merkezi.",
+   "line": [
+    [
+     40.9,
+     39.82
+    ],
+    [
+     41.3,
+     39.8
+    ],
+    [
+     41.7,
+     39.78
+    ]
+   ]
+  },
+  {
+   "id": "munzur",
+   "name": "Munzur Dağları",
+   "info": "Tunceli ile Erzincan arasında uzanır; Munzur Vadisi Milli Parkı buradadır.",
+   "line": [
+    [
+     38.7,
+     39.3
+    ],
+    [
+     39.2,
+     39.42
+    ],
+    [
+     39.7,
+     39.5
+    ],
+    [
+     40.1,
+     39.55
+    ]
+   ]
+  },
+  {
+   "id": "uludag",
+   "name": "Uludağ",
+   "info": "Bursa'da, Marmara Bölgesi'nin en yüksek dağı (2.543 m); kış turizmi.",
+   "line": [
+    [
+     28.95,
+     40.05
+    ],
+    [
+     29.2,
+     40.08
+    ],
+    [
+     29.45,
+     40.13
+    ]
+   ]
+  },
+  {
+   "id": "kazdagi",
+   "name": "Kaz Dağı",
+   "info": "Biga Yarımadası'nda, Edremit Körfezi'nin kuzeyinde yükselen dağ.",
+   "line": [
+    [
+     26.55,
+     39.68
+    ],
+    [
+     26.85,
+     39.72
+    ],
+    [
+     27.15,
+     39.75
+    ]
+   ]
+  },
+  {
+   "id": "madra",
+   "name": "Madra Dağı",
+   "info": "Balıkesir ile İzmir arasında, Ege'de horst (yükselmiş blok) dağı.",
+   "line": [
+    [
+     26.95,
+     39.35
+    ],
+    [
+     27.2,
+     39.33
+    ],
+    [
+     27.45,
+     39.35
+    ]
+   ]
+  },
+  {
+   "id": "bozdaglar",
+   "name": "Bozdağlar",
+   "info": "Gediz ve Küçük Menderes grabenleri arasında yükselen horst.",
+   "line": [
+    [
+     27.6,
+     38.32
+    ],
+    [
+     28.0,
+     38.35
+    ],
+    [
+     28.4,
+     38.38
+    ]
+   ]
+  },
+  {
+   "id": "aydin",
+   "name": "Aydın Dağları",
+   "info": "Küçük Menderes ile Büyük Menderes grabenleri arasında uzanan horst.",
+   "line": [
+    [
+     27.45,
+     38.02
+    ],
+    [
+     27.9,
+     38.06
+    ],
+    [
+     28.4,
+     38.08
+    ]
+   ]
+  },
+  {
+   "id": "mentese",
+   "name": "Menteşe Dağları",
+   "info": "Muğla çevresinde, Ege Bölgesi'nin güneyinde uzanır.",
+   "line": [
+    [
+     28.0,
+     37.25
+    ],
+    [
+     28.4,
+     37.12
+    ],
+    [
+     28.85,
+     37.0
+    ]
+   ]
+  },
+  {
+   "id": "sultan",
+   "name": "Sultan Dağları",
+   "info": "Afyonkarahisar ile Konya arasında, Göller Yöresi'nin kuzeydoğusunda uzanır.",
+   "line": [
+    [
+     30.95,
+     38.65
+    ],
+    [
+     31.25,
+     38.45
+    ],
+    [
+     31.6,
+     38.2
+    ]
+   ]
+  },
+  {
+   "id": "bey",
+   "name": "Bey Dağları",
+   "info": "Batı Toroslar'da, Antalya'nın batısında yükselir.",
+   "line": [
+    [
+     29.95,
+     36.45
+    ],
+    [
+     30.15,
+     36.65
+    ],
+    [
+     30.3,
+     36.9
+    ],
+    [
+     30.35,
+     37.1
+    ]
+   ]
+  },
+  {
+   "id": "geyik",
+   "name": "Geyik Dağları",
+   "info": "Orta Toroslar'ın batı kesiminde, Antalya ile Konya arasında uzanır.",
+   "line": [
+    [
+     31.7,
+     36.95
+    ],
+    [
+     32.1,
+     36.9
+    ],
+    [
+     32.5,
+     36.88
+    ],
+    [
+     32.9,
+     36.95
+    ]
+   ]
+  },
+  {
+   "id": "bolkar",
+   "name": "Bolkar Dağları",
+   "info": "Orta Toroslar'da, Niğde ile Mersin arasında uzanır.",
+   "line": [
+    [
+     33.9,
+     37.3
+    ],
+    [
+     34.3,
+     37.35
+    ],
+    [
+     34.7,
+     37.4
+    ],
+    [
+     35.0,
+     37.45
+    ]
+   ]
+  },
+  {
+   "id": "aladaglar",
+   "name": "Aladağlar",
+   "info": "Orta Toroslar'da; en yüksek noktası Demirkazık Tepesi (3.756 m).",
+   "line": [
+    [
+     35.05,
+     37.62
+    ],
+    [
+     35.15,
+     37.8
+    ],
+    [
+     35.3,
+     37.98
+    ]
+   ]
+  },
+  {
+   "id": "nur",
+   "name": "Nur (Amanos) Dağları",
+   "info": "Hatay'da, İskenderun Körfezi'ne paralel uzanır.",
+   "line": [
+    [
+     36.05,
+     36.3
+    ],
+    [
+     36.2,
+     36.6
+    ],
+    [
+     36.35,
+     36.95
+    ],
+    [
+     36.55,
+     37.25
+    ]
+   ]
+  },
+  {
+   "id": "guneydogu-toroslar",
+   "name": "Güneydoğu Toroslar",
+   "info": "Güneydoğu Anadolu'yu kuzeyden bir yay gibi çevreleyen sıradağlar.",
+   "line": [
+    [
+     37.3,
+     37.95
+    ],
+    [
+     38.2,
+     38.2
+    ],
+    [
+     39.2,
+     38.35
+    ],
+    [
+     40.2,
+     38.45
+    ],
+    [
+     41.2,
+     38.3
+    ],
+    [
+     42.2,
+     37.95
+    ],
+    [
+     43.2,
+     37.55
+    ],
+    [
+     43.9,
+     37.35
+    ]
+   ]
+  }
+ ],
+ "volcanoes": [
+  {
+   "id": "agri",
+   "name": "Ağrı Dağı",
+   "info": "Türkiye'nin en yüksek dağı (5.137 m); sönmüş bir volkandır.",
+   "point": [
+    44.3,
+    39.7
+   ]
+  },
+  {
+   "id": "suphan",
+   "name": "Süphan Dağı",
+   "info": "Van Gölü'nün kuzeyinde yükselen volkanik dağ (4.058 m).",
+   "point": [
+    42.83,
+    38.93
+   ]
+  },
+  {
+   "id": "nemrut",
+   "name": "Nemrut Dağı",
+   "info": "Van Gölü'nün batısında; kraterinde göl vardır. Lavları Van Gölü'nün önünü kapatarak set gölü oluşturmuştur.",
+   "point": [
+    42.23,
+    38.65
+   ]
+  },
+  {
+   "id": "tendurek",
+   "name": "Tendürek Dağı",
+   "info": "Ağrı ile Van arasında, geniş tabanlı (kalkan tipi) volkan.",
+   "point": [
+    43.87,
+    39.37
+   ]
+  },
+  {
+   "id": "erciyes",
+   "name": "Erciyes Dağı",
+   "info": "Kayseri'de; İç Anadolu'nun en yüksek dağı (3.917 m).",
+   "point": [
+    35.45,
+    38.53
+   ]
+  },
+  {
+   "id": "hasan",
+   "name": "Hasan Dağı",
+   "info": "Aksaray ile Niğde arasında; Kapadokya'daki tüf örtülerini oluşturan volkanlardandır.",
+   "point": [
+    34.17,
+    38.13
+   ]
+  },
+  {
+   "id": "melendiz",
+   "name": "Melendiz Dağı",
+   "info": "Niğde'de, Kapadokya volkanik alanında yer alır.",
+   "point": [
+    34.6,
+    38.03
+   ]
+  },
+  {
+   "id": "karacadag",
+   "name": "Karacadağ",
+   "info": "Diyarbakır ile Şanlıurfa arasında, geniş bazalt örtüleri bırakmış kalkan tipi volkan.",
+   "point": [
+    39.83,
+    37.67
+   ]
+  },
+  {
+   "id": "kula",
+   "name": "Kula Volkanları",
+   "info": "Manisa'da; Türkiye'nin en genç volkanik konilerindendir (Kula Jeoparkı).",
+   "point": [
+    28.65,
+    38.58
+   ]
+  },
+  {
+   "id": "karadag",
+   "name": "Karadağ",
+   "info": "Karaman'da, Konya Ovası'nın güneydoğusunda yükselen sönmüş volkan.",
+   "point": [
+    33.15,
+    37.4
+   ]
+  }
+ ],
+ "plains": [
+  {
+   "id": "cukurova",
+   "name": "Çukurova",
+   "info": "Seyhan ve Ceyhan nehirlerinin alüvyonlarıyla oluşmuş delta ovası; pamuk ve turunçgil.",
+   "polygon": [
+    [
+     34.9,
+     36.8
+    ],
+    [
+     35.2,
+     37.0
+    ],
+    [
+     35.6,
+     37.12
+    ],
+    [
+     36.05,
+     37.08
+    ],
+    [
+     36.1,
+     36.85
+    ],
+    [
+     35.8,
+     36.62
+    ],
+    [
+     35.4,
+     36.6
+    ],
+    [
+     35.05,
+     36.68
+    ]
+   ]
+  },
+  {
+   "id": "konya",
+   "name": "Konya Ovası",
+   "info": "Türkiye'nin en geniş ovası; kapalı havzadadır ve tahıl ambarı olarak bilinir.",
+   "polygon": [
+    [
+     32.3,
+     37.95
+    ],
+    [
+     32.85,
+     38.08
+    ],
+    [
+     33.45,
+     37.95
+    ],
+    [
+     33.75,
+     37.6
+    ],
+    [
+     33.55,
+     37.32
+    ],
+    [
+     33.0,
+     37.3
+    ],
+    [
+     32.5,
+     37.48
+    ],
+    [
+     32.25,
+     37.7
+    ]
+   ]
+  },
+  {
+   "id": "bafra",
+   "name": "Bafra Ovası",
+   "info": "Kızılırmak'ın Karadeniz'e döküldüğü yerde oluşturduğu delta ovası.",
+   "polygon": [
+    [
+     35.68,
+     41.5
+    ],
+    [
+     35.85,
+     41.72
+    ],
+    [
+     36.08,
+     41.68
+    ],
+    [
+     36.18,
+     41.55
+    ],
+    [
+     35.98,
+     41.42
+    ],
+    [
+     35.78,
+     41.42
+    ]
+   ]
+  },
+  {
+   "id": "carsamba",
+   "name": "Çarşamba Ovası",
+   "info": "Yeşilırmak'ın Karadeniz'e döküldüğü yerde oluşturduğu delta ovası.",
+   "polygon": [
+    [
+     36.45,
+     41.22
+    ],
+    [
+     36.6,
+     41.38
+    ],
+    [
+     36.88,
+     41.35
+    ],
+    [
+     37.0,
+     41.22
+    ],
+    [
+     36.8,
+     41.12
+    ],
+    [
+     36.55,
+     41.12
+    ]
+   ]
+  },
+  {
+   "id": "buyuk-menderes",
+   "name": "Büyük Menderes Ovası",
+   "info": "Graben (çöküntü) ovası; incir, pamuk ve zeytin tarımı yaygındır.",
+   "polygon": [
+    [
+     27.3,
+     37.5
+    ],
+    [
+     27.8,
+     37.78
+    ],
+    [
+     28.4,
+     37.9
+    ],
+    [
+     29.0,
+     37.92
+    ],
+    [
+     29.05,
+     37.8
+    ],
+    [
+     28.4,
+     37.78
+    ],
+    [
+     27.85,
+     37.62
+    ],
+    [
+     27.35,
+     37.4
+    ]
+   ]
+  },
+  {
+   "id": "gediz",
+   "name": "Gediz Ovası",
+   "info": "Graben ovası; Manisa çevresinde üzüm (sultaniye) tarımıyla bilinir.",
+   "polygon": [
+    [
+     27.2,
+     38.6
+    ],
+    [
+     27.7,
+     38.55
+    ],
+    [
+     28.2,
+     38.5
+    ],
+    [
+     28.55,
+     38.45
+    ],
+    [
+     28.5,
+     38.33
+    ],
+    [
+     28.0,
+     38.42
+    ],
+    [
+     27.5,
+     38.48
+    ],
+    [
+     27.15,
+     38.52
+    ]
+   ]
+  },
+  {
+   "id": "ergene",
+   "name": "Ergene Ovası",
+   "info": "Trakya'da; ayçiçeği ve buğday tarımının yoğun olduğu ova.",
+   "polygon": [
+    [
+     26.85,
+     41.35
+    ],
+    [
+     27.3,
+     41.48
+    ],
+    [
+     27.85,
+     41.38
+    ],
+    [
+     27.9,
+     41.2
+    ],
+    [
+     27.4,
+     41.08
+    ],
+    [
+     26.95,
+     41.15
+    ]
+   ]
+  },
+  {
+   "id": "harran",
+   "name": "Harran Ovası",
+   "info": "Şanlıurfa'da; GAP ile sulanmaya başlanmış, pamuk üretiminde öne çıkan ova.",
+   "polygon": [
+    [
+     38.85,
+     36.95
+    ],
+    [
+     39.15,
+     37.12
+    ],
+    [
+     39.38,
+     37.0
+    ],
+    [
+     39.35,
+     36.75
+    ],
+    [
+     39.05,
+     36.65
+    ],
+    [
+     38.85,
+     36.72
+    ]
+   ]
+  },
+  {
+   "id": "amik",
+   "name": "Amik Ovası",
+   "info": "Hatay'da, Asi Nehri çevresindeki verimli ova; pamuk ve buğday.",
+   "polygon": [
+    [
+     36.22,
+     36.38
+    ],
+    [
+     36.45,
+     36.5
+    ],
+    [
+     36.62,
+     36.35
+    ],
+    [
+     36.55,
+     36.15
+    ],
+    [
+     36.3,
+     36.15
+    ]
+   ]
+  },
+  {
+   "id": "mus",
+   "name": "Muş Ovası",
+   "info": "Doğu Anadolu'da tektonik ova; tahıl ve şeker pancarı yetiştirilir.",
+   "polygon": [
+    [
+     41.2,
+     38.78
+    ],
+    [
+     41.55,
+     38.88
+    ],
+    [
+     41.92,
+     38.8
+    ],
+    [
+     41.85,
+     38.66
+    ],
+    [
+     41.45,
+     38.64
+    ],
+    [
+     41.2,
+     38.68
+    ]
+   ]
+  },
+  {
+   "id": "pasinler",
+   "name": "Erzurum-Pasinler Ovası",
+   "info": "Yaklaşık 1.800 m yükseltideki tektonik ova; hayvancılık önemlidir.",
+   "polygon": [
+    [
+     41.0,
+     39.95
+    ],
+    [
+     41.45,
+     40.02
+    ],
+    [
+     41.95,
+     39.98
+    ],
+    [
+     42.0,
+     39.88
+    ],
+    [
+     41.5,
+     39.84
+    ],
+    [
+     41.05,
+     39.86
+    ]
+   ]
+  },
+  {
+   "id": "igdir",
+   "name": "Iğdır Ovası",
+   "info": "Aras vadisinde, mikroklima özelliği gösteren ova; pamuk ve kayısı.",
+   "polygon": [
+    [
+     43.75,
+     39.95
+    ],
+    [
+     44.15,
+     40.05
+    ],
+    [
+     44.6,
+     39.98
+    ],
+    [
+     44.5,
+     39.85
+    ],
+    [
+     44.1,
+     39.82
+    ],
+    [
+     43.8,
+     39.86
+    ]
+   ]
+  },
+  {
+   "id": "bursa",
+   "name": "Bursa Ovası",
+   "info": "Marmara'da verimli tektonik ova; şeftali ve sebze tarımı.",
+   "polygon": [
+    [
+     28.85,
+     40.24
+    ],
+    [
+     29.15,
+     40.28
+    ],
+    [
+     29.4,
+     40.22
+    ],
+    [
+     29.35,
+     40.13
+    ],
+    [
+     29.05,
+     40.14
+    ],
+    [
+     28.85,
+     40.17
+    ]
+   ]
+  },
+  {
+   "id": "adapazari",
+   "name": "Adapazarı Ovası",
+   "info": "Sakarya Nehri'nin oluşturduğu ova; mısır ve sebze tarımı.",
+   "polygon": [
+    [
+     30.2,
+     40.85
+    ],
+    [
+     30.45,
+     40.95
+    ],
+    [
+     30.65,
+     40.85
+    ],
+    [
+     30.6,
+     40.68
+    ],
+    [
+     30.35,
+     40.68
+    ],
+    [
+     30.2,
+     40.75
+    ]
+   ]
+  }
+ ],
+ "plateaus": [
+  {
+   "id": "teke",
+   "name": "Teke Platosu",
+   "info": "Batı Toroslar'da, Antalya–Burdur–Muğla arasında yer alan karstik plato.",
+   "polygon": [
+    [
+     29.3,
+     36.95
+    ],
+    [
+     29.75,
+     37.25
+    ],
+    [
+     30.2,
+     37.15
+    ],
+    [
+     30.25,
+     36.85
+    ],
+    [
+     29.95,
+     36.55
+    ],
+    [
+     29.45,
+     36.6
+    ]
+   ]
+  },
+  {
+   "id": "taseli",
+   "name": "Taşeli Platosu",
+   "info": "Orta Toroslar'da, Mersin–Karaman arasında yer alan karstik plato.",
+   "polygon": [
+    [
+     32.6,
+     36.62
+    ],
+    [
+     33.1,
+     36.88
+    ],
+    [
+     33.7,
+     36.85
+    ],
+    [
+     33.95,
+     36.62
+    ],
+    [
+     33.55,
+     36.35
+    ],
+    [
+     32.95,
+     36.32
+    ]
+   ]
+  },
+  {
+   "id": "obruk",
+   "name": "Obruk Platosu",
+   "info": "Konya ile Aksaray arasında; obruk adı verilen karstik çöküntülerle bilinir.",
+   "polygon": [
+    [
+     32.95,
+     38.4
+    ],
+    [
+     33.45,
+     38.48
+    ],
+    [
+     33.95,
+     38.3
+    ],
+    [
+     33.85,
+     38.08
+    ],
+    [
+     33.35,
+     38.02
+    ],
+    [
+     32.95,
+     38.15
+    ]
+   ]
+  },
+  {
+   "id": "cihanbeyli",
+   "name": "Cihanbeyli Platosu",
+   "info": "Konya'nın kuzeyinde, Tuz Gölü'nün batısında; tahıl tarımı ve hayvancılık.",
+   "polygon": [
+    [
+     32.45,
+     38.98
+    ],
+    [
+     32.95,
+     39.02
+    ],
+    [
+     33.2,
+     38.82
+    ],
+    [
+     33.1,
+     38.55
+    ],
+    [
+     32.65,
+     38.5
+    ],
+    [
+     32.4,
+     38.72
+    ]
+   ]
+  },
+  {
+   "id": "haymana",
+   "name": "Haymana Platosu",
+   "info": "Ankara'nın güneyinde; tahıl tarımı ve küçükbaş hayvancılık.",
+   "polygon": [
+    [
+     32.2,
+     39.68
+    ],
+    [
+     32.75,
+     39.72
+    ],
+    [
+     32.95,
+     39.5
+    ],
+    [
+     32.8,
+     39.3
+    ],
+    [
+     32.35,
+     39.3
+    ],
+    [
+     32.15,
+     39.48
+    ]
+   ]
+  },
+  {
+   "id": "bozok",
+   "name": "Bozok Platosu",
+   "info": "Yozgat çevresinde; tahıl tarımı ve hayvancılık.",
+   "polygon": [
+    [
+     34.6,
+     39.98
+    ],
+    [
+     35.3,
+     40.08
+    ],
+    [
+     35.95,
+     39.85
+    ],
+    [
+     35.9,
+     39.5
+    ],
+    [
+     35.2,
+     39.38
+    ],
+    [
+     34.65,
+     39.55
+    ]
+   ]
+  },
+  {
+   "id": "uzunyayla",
+   "name": "Uzunyayla Platosu",
+   "info": "Kayseri ile Sivas arasında; at yetiştiriciliğiyle bilinir.",
+   "polygon": [
+    [
+     35.95,
+     38.98
+    ],
+    [
+     36.45,
+     39.08
+    ],
+    [
+     36.85,
+     38.9
+    ],
+    [
+     36.75,
+     38.62
+    ],
+    [
+     36.25,
+     38.58
+    ],
+    [
+     35.95,
+     38.75
+    ]
+   ]
+  },
+  {
+   "id": "erzurum-kars",
+   "name": "Erzurum-Kars Platosu",
+   "info": "Volkanik plato; büyükbaş hayvancılığın en yaygın olduğu yerlerdendir.",
+   "polygon": [
+    [
+     41.8,
+     40.65
+    ],
+    [
+     42.5,
+     40.95
+    ],
+    [
+     43.3,
+     40.95
+    ],
+    [
+     43.65,
+     40.6
+    ],
+    [
+     43.3,
+     40.2
+    ],
+    [
+     42.4,
+     40.12
+    ],
+    [
+     41.9,
+     40.3
+    ]
+   ]
+  },
+  {
+   "id": "gaziantep",
+   "name": "Gaziantep Platosu",
+   "info": "Güneydoğu'da; Antep fıstığı ve zeytin tarımı yaygındır.",
+   "polygon": [
+    [
+     36.95,
+     37.25
+    ],
+    [
+     37.45,
+     37.35
+    ],
+    [
+     37.95,
+     37.25
+    ],
+    [
+     38.0,
+     36.95
+    ],
+    [
+     37.5,
+     36.82
+    ],
+    [
+     37.0,
+     36.95
+    ]
+   ]
+  },
+  {
+   "id": "yazilikaya",
+   "name": "Yazılıkaya Platosu",
+   "info": "Eskişehir ile Afyonkarahisar arasında; tüf örtüleri ve Frig Vadisi.",
+   "polygon": [
+    [
+     30.35,
+     39.35
+    ],
+    [
+     30.75,
+     39.4
+    ],
+    [
+     31.0,
+     39.22
+    ],
+    [
+     30.9,
+     39.0
+    ],
+    [
+     30.5,
+     38.98
+    ],
+    [
+     30.3,
+     39.15
+    ]
+   ]
+  }
+ ],
+ "lakes": {
+  "_aciklama": "source=ne: Natural Earth şekli (ne_name ile eşleşir; ne_center adsız göller için yaklaşık merkez). source=ellipse: [boylam, enlem] merkez, rx/ry km, açı derece. type boşsa göl tipi sorusunda sorulmaz.",
+  "items": [
+   {
+    "id": "van",
+    "name": "Van Gölü",
+    "type": "Volkanik",
+    "source": "ne",
+    "ne_file": "lakes",
+    "ne_name": "Lake Van",
+    "info": "Türkiye'nin en büyük gölü; Nemrut Dağı'nın lavlarının önünü kapatmasıyla oluşmuş volkanik set gölü. Sodalı (alkali) sudur."
+   },
+   {
+    "id": "tuz",
+    "name": "Tuz Gölü",
+    "type": "Tektonik",
+    "source": "ne",
+    "ne_file": "lakes",
+    "ne_name": "Lake Tuz",
+    "info": "Tektonik kökenli, Türkiye'nin ikinci büyük gölü; çok tuzlu ve sığdır, tuz üretimi yapılır."
+   },
+   {
+    "id": "beysehir",
+    "name": "Beyşehir Gölü",
+    "type": "",
+    "source": "ne",
+    "ne_file": "lakes",
+    "ne_name": "Beyşehir",
+    "info": "Göller Yöresi'nde, Türkiye'nin en büyük tatlı su gölü; tektonik ve karstik süreçlerle oluşmuştur."
+   },
+   {
+    "id": "egirdir",
+    "name": "Eğirdir Gölü",
+    "type": "",
+    "source": "ne",
+    "ne_file": "lakes",
+    "ne_name": "Eğirdir",
+    "info": "Göller Yöresi'nde, Isparta'da büyük tatlı su gölü; tektonik-karstik kökenlidir."
+   },
+   {
+    "id": "keban",
+    "name": "Keban Baraj Gölü",
+    "type": "Baraj (yapay)",
+    "source": "ne",
+    "ne_file": "lakes",
+    "ne_name": "Keban Baraji",
+    "info": "Fırat üzerindeki Keban Barajı'nın oluşturduğu yapay göl (Elazığ)."
+   },
+   {
+    "id": "ataturk",
+    "name": "Atatürk Baraj Gölü",
+    "type": "Baraj (yapay)",
+    "source": "ne",
+    "ne_file": "lakes",
+    "ne_name": "Ataturk Barajt",
+    "info": "Fırat üzerindeki Atatürk Barajı'nın oluşturduğu, Türkiye'nin en büyük yapay gölü."
+   },
+   {
+    "id": "iznik",
+    "name": "İznik Gölü",
+    "type": "Tektonik",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "İznik Gölü",
+    "info": "Marmara Bölgesi'nin en büyük gölü; tektonik kökenlidir (Bursa)."
+   },
+   {
+    "id": "sapanca",
+    "name": "Sapanca Gölü",
+    "type": "Tektonik",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Sapanca Gölü",
+    "info": "Kuzey Anadolu Fay Hattı üzerinde oluşmuş tektonik göl (Sakarya); içme suyu kaynağıdır."
+   },
+   {
+    "id": "uluabat",
+    "name": "Uluabat Gölü",
+    "type": "Tektonik",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Ulubat Gölü",
+    "info": "Bursa'da tektonik göl; sulak alan ve kuş yaşamıyla önemlidir."
+   },
+   {
+    "id": "manyas",
+    "name": "Manyas (Kuş) Gölü",
+    "type": "Tektonik",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Kuş Gölü",
+    "info": "Balıkesir'de tektonik göl; kıyısında Kuşcenneti Milli Parkı bulunur."
+   },
+   {
+    "id": "burdur",
+    "name": "Burdur Gölü",
+    "type": "Tektonik",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Burdur Gölü",
+    "info": "Göller Yöresi'nde tektonik kökenli, tuzlu-sodalı göl."
+   },
+   {
+    "id": "acigol",
+    "name": "Acıgöl",
+    "type": "Tektonik",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_center": [
+     29.88,
+     37.85
+    ],
+    "info": "Denizli–Afyonkarahisar sınırında tektonik göl; sodyum sülfat üretimi yapılır."
+   },
+   {
+    "id": "aksehir",
+    "name": "Akşehir Gölü",
+    "type": "Tektonik",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Akşehir Gölü",
+    "info": "Konya'da, Sultan Dağları eteğinde tektonik göl."
+   },
+   {
+    "id": "hazar",
+    "name": "Hazar Gölü",
+    "type": "Tektonik",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Hazar Dagi",
+    "info": "Elazığ'da, Doğu Anadolu Fay Hattı üzerinde tektonik göl; Dicle bu gölün yakınından doğar."
+   },
+   {
+    "id": "salda",
+    "name": "Salda Gölü",
+    "type": "Karstik",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Salda Gölü",
+    "info": "Burdur'da, beyaz kıyıları ve turkuaz suyuyla bilinen karstik göl."
+   },
+   {
+    "id": "cildir",
+    "name": "Çıldır Gölü",
+    "type": "Volkanik",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Çıldır",
+    "info": "Ardahan–Kars arasında, lav akıntılarının önünü kapatmasıyla oluşmuş volkanik set gölü; kışın donar."
+   },
+   {
+    "id": "nazik",
+    "name": "Nazik Gölü",
+    "type": "Volkanik",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_center": [
+     42.3,
+     38.88
+    ],
+    "info": "Bitlis'te, Van Gölü'nün kuzeybatısında volkanik set gölü."
+   },
+   {
+    "id": "ercek",
+    "name": "Erçek Gölü",
+    "type": "",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Erçek",
+    "info": "Van'ın doğusunda sodalı bir göldür; flamingolarıyla bilinir."
+   },
+   {
+    "id": "bafa",
+    "name": "Bafa Gölü",
+    "type": "Alüvyal set",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Bafa Gölü",
+    "info": "Büyük Menderes'in taşıdığı alüvyonların eski körfezin önünü kapatmasıyla oluşmuş alüvyal set gölü."
+   },
+   {
+    "id": "marmara-golu",
+    "name": "Marmara Gölü",
+    "type": "Alüvyal set",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Marmara Gölü",
+    "info": "Manisa'da, Gediz Nehri'nin alüvyonlarıyla oluşmuş alüvyal set gölü."
+   },
+   {
+    "id": "terkos",
+    "name": "Terkos (Durusu) Gölü",
+    "type": "Kıyı set",
+    "source": "ne",
+    "ne_file": "europe",
+    "ne_name": "Durusu Golu",
+    "info": "İstanbul'da, Karadeniz kıyısında kıyı set gölü (lagün); içme suyu kaynağı."
+   },
+   {
+    "id": "kucukcekmece",
+    "name": "Küçükçekmece Gölü",
+    "type": "Kıyı set",
+    "source": "ellipse",
+    "center": [
+     28.76,
+     41.01
+    ],
+    "rx": 3.0,
+    "ry": 1.5,
+    "angle": 80,
+    "info": "İstanbul'da, Marmara kıyısında kıyı set gölü (lagün)."
+   },
+   {
+    "id": "buyukcekmece",
+    "name": "Büyükçekmece Gölü",
+    "type": "Kıyı set",
+    "source": "ellipse",
+    "center": [
+     28.57,
+     41.05
+    ],
+    "rx": 3.0,
+    "ry": 1.8,
+    "angle": 70,
+    "info": "İstanbul'da, Marmara kıyısında kıyı set gölü; günümüzde baraj gölüne dönüştürülmüştür."
+   },
+   {
+    "id": "akyatan",
+    "name": "Akyatan Gölü",
+    "type": "Kıyı set",
+    "source": "ellipse",
+    "center": [
+     35.27,
+     36.62
+    ],
+    "rx": 4.0,
+    "ry": 1.3,
+    "angle": 30,
+    "info": "Adana'da, Akdeniz kıyısında kıyı set gölü (lagün); önemli bir sulak alandır."
+   },
+   {
+    "id": "tortum",
+    "name": "Tortum Gölü",
+    "type": "Heyelan set",
+    "source": "ellipse",
+    "center": [
+     41.66,
+     40.66
+    ],
+    "rx": 4.0,
+    "ry": 1.0,
+    "angle": 90,
+    "info": "Erzurum'da, heyelanla vadinin önünün kapanmasıyla oluşmuş heyelan set gölü; çıkışında Tortum Şelalesi vardır."
+   },
+   {
+    "id": "sera",
+    "name": "Sera Gölü",
+    "type": "Heyelan set",
+    "source": "ellipse",
+    "center": [
+     39.63,
+     40.96
+    ],
+    "rx": 1.5,
+    "ry": 1.0,
+    "angle": 0,
+    "info": "Trabzon'da heyelan set gölü."
+   },
+   {
+    "id": "abant",
+    "name": "Abant Gölü",
+    "type": "Heyelan set",
+    "source": "ellipse",
+    "center": [
+     31.28,
+     40.61
+    ],
+    "rx": 1.6,
+    "ry": 0.9,
+    "angle": 20,
+    "info": "Bolu'da, ormanlarla çevrili heyelan set gölü."
+   },
+   {
+    "id": "mogan",
+    "name": "Mogan Gölü",
+    "type": "Alüvyal set",
+    "source": "ellipse",
+    "center": [
+     32.79,
+     39.77
+    ],
+    "rx": 3.0,
+    "ry": 1.0,
+    "angle": 70,
+    "info": "Ankara Gölbaşı'nda alüvyal set gölü."
+   },
+   {
+    "id": "meke",
+    "name": "Meke Gölü",
+    "type": "Volkanik",
+    "source": "ellipse",
+    "center": [
+     33.64,
+     37.69
+    ],
+    "rx": 1.4,
+    "ry": 1.4,
+    "angle": 0,
+    "info": "Konya Karapınar'da, volkanik patlamayla oluşmuş krater (maar) gölü; 'Dünyanın Nazar Boncuğu' olarak bilinir."
+   },
+   {
+    "id": "avlan",
+    "name": "Avlan Gölü",
+    "type": "Karstik",
+    "source": "ellipse",
+    "center": [
+     29.96,
+     36.7
+    ],
+    "rx": 2.0,
+    "ry": 1.3,
+    "angle": 30,
+    "info": "Antalya Elmalı'da karstik göl."
+   },
+   {
+    "id": "eber",
+    "name": "Eber Gölü",
+    "type": "Tektonik",
+    "source": "ellipse",
+    "center": [
+     31.17,
+     38.63
+    ],
+    "rx": 6.0,
+    "ry": 4.0,
+    "angle": 20,
+    "info": "Afyonkarahisar'da, Akşehir Gölü'nün kuzeybatısında tektonik göl."
+   }
   ]
+ },
+ "dams": [
+  {
+   "id": "baraj-ataturk",
+   "name": "Atatürk Barajı",
+   "river": "firat",
+   "point": [
+    38.32,
+    37.48
+   ],
+   "info": "Fırat üzerinde, Türkiye'nin en büyük barajı; GAP'ın merkezidir. Şanlıurfa tünelleriyle Harran Ovası'nı sular."
+  },
+  {
+   "id": "baraj-keban",
+   "name": "Keban Barajı",
+   "river": "firat",
+   "point": [
+    38.75,
+    38.8
+   ],
+   "info": "Fırat üzerinde, Elazığ'da; 1974'te tamamlanan ilk büyük barajlarımızdandır."
+  },
+  {
+   "id": "baraj-karakaya",
+   "name": "Karakaya Barajı",
+   "river": "firat",
+   "point": [
+    39.13,
+    38.23
+   ],
+   "info": "Fırat üzerinde, Malatya–Diyarbakır sınırında büyük hidroelektrik santrali."
+  },
+  {
+   "id": "baraj-birecik",
+   "name": "Birecik Barajı",
+   "river": "firat",
+   "point": [
+    37.98,
+    37.03
+   ],
+   "info": "Fırat üzerinde, Şanlıurfa'da."
+  },
+  {
+   "id": "baraj-ilisu",
+   "name": "Ilısu Barajı",
+   "river": "dicle",
+   "point": [
+    41.85,
+    37.53
+   ],
+   "info": "Dicle üzerinde, Mardin–Şırnak sınırında; yapımında Hasankeyf sular altında kalmıştır."
+  },
+  {
+   "id": "baraj-hirfanli",
+   "name": "Hirfanlı Barajı",
+   "river": "kizilirmak",
+   "point": [
+    33.52,
+    39.27
+   ],
+   "info": "Kızılırmak üzerinde, Kırşehir'de."
+  },
+  {
+   "id": "baraj-altinkaya",
+   "name": "Altınkaya Barajı",
+   "river": "kizilirmak",
+   "point": [
+    35.62,
+    41.3
+   ],
+   "info": "Kızılırmak üzerinde, Samsun Bafra yakınında."
+  },
+  {
+   "id": "baraj-sariyar",
+   "name": "Sarıyar Barajı",
+   "river": "sakarya",
+   "point": [
+    31.43,
+    40.04
+   ],
+   "info": "Sakarya üzerinde, Ankara Nallıhan'da; 1956'da tamamlanan ilk büyük hidroelektrik barajlarımızdandır."
+  },
+  {
+   "id": "baraj-seyhan",
+   "name": "Seyhan Barajı",
+   "river": "seyhan",
+   "point": [
+    35.33,
+    37.03
+   ],
+   "info": "Seyhan Nehri üzerinde, Adana'da; Çukurova'nın sulanmasında önemlidir."
+  },
+  {
+   "id": "baraj-aslantas",
+   "name": "Aslantaş Barajı",
+   "river": "ceyhan",
+   "point": [
+    36.28,
+    37.27
+   ],
+   "info": "Ceyhan Nehri üzerinde, Osmaniye'de."
+  },
+  {
+   "id": "baraj-deriner",
+   "name": "Deriner Barajı",
+   "river": "coruh",
+   "point": [
+    41.66,
+    41.17
+   ],
+   "info": "Çoruh üzerinde, Artvin'de; en yüksek gövdeli barajlarımızdandır."
+  },
+  {
+   "id": "baraj-yusufeli",
+   "name": "Yusufeli Barajı",
+   "river": "coruh",
+   "point": [
+    41.53,
+    40.8
+   ],
+   "info": "Çoruh üzerinde, Artvin'de; Türkiye'nin en yüksek gövdeli barajıdır."
+  }
+ ],
+ "coast": [
+  {
+   "id": "istanbul-bogazi",
+   "name": "İstanbul Boğazı",
+   "subtype": "strait",
+   "point": [
+    29.07,
+    41.12
+   ],
+   "info": "Karadeniz'i Marmara Denizi'ne bağlar; Asya ile Avrupa'yı ayırır."
+  },
+  {
+   "id": "canakkale-bogazi",
+   "name": "Çanakkale Boğazı",
+   "subtype": "strait",
+   "point": [
+    26.4,
+    40.2
+   ],
+   "info": "Marmara Denizi'ni Ege Denizi'ne bağlar."
+  },
+  {
+   "id": "saros",
+   "name": "Saros Körfezi",
+   "subtype": "gulf",
+   "point": [
+    26.45,
+    40.55
+   ],
+   "info": "Gelibolu Yarımadası'nın kuzeybatısında, Ege'de."
+  },
+  {
+   "id": "izmit",
+   "name": "İzmit Körfezi",
+   "subtype": "gulf",
+   "point": [
+    29.55,
+    40.73
+   ],
+   "info": "Marmara'nın doğusunda; tektonik kökenli, sanayinin yoğun olduğu körfez."
+  },
+  {
+   "id": "gemlik",
+   "name": "Gemlik Körfezi",
+   "subtype": "gulf",
+   "point": [
+    28.95,
+    40.42
+   ],
+   "info": "Marmara'nın güneydoğusunda, Bursa kıyısında."
+  },
+  {
+   "id": "edremit",
+   "name": "Edremit Körfezi",
+   "subtype": "gulf",
+   "point": [
+    26.75,
+    39.5
+   ],
+   "info": "Kaz Dağı'nın güneyinde, Ege'de; zeytinlikleriyle bilinir."
+  },
+  {
+   "id": "candarli",
+   "name": "Çandarlı Körfezi",
+   "subtype": "gulf",
+   "point": [
+    26.9,
+    38.9
+   ],
+   "info": "İzmir'in kuzeyinde, Ege'de."
+  },
+  {
+   "id": "izmir-korfezi",
+   "name": "İzmir Körfezi",
+   "subtype": "gulf",
+   "point": [
+    26.95,
+    38.5
+   ],
+   "info": "Ege'nin en büyük körfezlerinden; Gediz Nehri yakınına dökülür."
+  },
+  {
+   "id": "kusadasi",
+   "name": "Kuşadası Körfezi",
+   "subtype": "gulf",
+   "point": [
+    27.15,
+    37.85
+   ],
+   "info": "Aydın kıyısında, Ege'de."
+  },
+  {
+   "id": "gokova",
+   "name": "Gökova Körfezi",
+   "subtype": "gulf",
+   "point": [
+    28.0,
+    36.97
+   ],
+   "info": "Muğla'da, Bodrum ile Datça yarımadaları arasında."
+  },
+  {
+   "id": "antalya-korfezi",
+   "name": "Antalya Körfezi",
+   "subtype": "gulf",
+   "point": [
+    30.95,
+    36.65
+   ],
+   "info": "Akdeniz'in en büyük körfezlerinden; kıyısında Antalya yer alır."
+  },
+  {
+   "id": "iskenderun",
+   "name": "İskenderun Körfezi",
+   "subtype": "gulf",
+   "point": [
+    36.0,
+    36.7
+   ],
+   "info": "Akdeniz'in doğusunda, Hatay–Adana kıyısında; liman ve sanayi bölgesi."
+  },
+  {
+   "id": "gelibolu",
+   "name": "Gelibolu Yarımadası",
+   "subtype": "peninsula",
+   "point": [
+    26.45,
+    40.35
+   ],
+   "info": "Trakya'nın güneybatısında; Çanakkale Boğazı ile Saros Körfezi arasında."
+  },
+  {
+   "id": "kapidag",
+   "name": "Kapıdağ Yarımadası",
+   "subtype": "peninsula",
+   "point": [
+    27.85,
+    40.45
+   ],
+   "info": "Marmara'da; eskiden ada iken kıyıya bağlanmış (tombolo) yarımada."
+  },
+  {
+   "id": "biga",
+   "name": "Biga Yarımadası",
+   "subtype": "peninsula",
+   "point": [
+    26.95,
+    40.05
+   ],
+   "info": "Marmara ile Ege arasında, Çanakkale ilinin Anadolu yakasında."
+  },
+  {
+   "id": "kocaeli-yarimadasi",
+   "name": "Kocaeli Yarımadası",
+   "subtype": "peninsula",
+   "point": [
+    29.75,
+    41.05
+   ],
+   "info": "İstanbul Boğazı'nın doğusunda, Karadeniz ile İzmit Körfezi arasında."
+  },
+  {
+   "id": "karaburun",
+   "name": "Karaburun Yarımadası",
+   "subtype": "peninsula",
+   "point": [
+    26.52,
+    38.6
+   ],
+   "info": "İzmir'in batısında, Ege'de."
+  },
+  {
+   "id": "bodrum",
+   "name": "Bodrum Yarımadası",
+   "subtype": "peninsula",
+   "point": [
+    27.4,
+    37.05
+   ],
+   "info": "Muğla'da, Gökova Körfezi'nin kuzeyinde."
+  },
+  {
+   "id": "datca",
+   "name": "Datça (Reşadiye) Yarımadası",
+   "subtype": "peninsula",
+   "point": [
+    27.65,
+    36.73
+   ],
+   "info": "Muğla'da, Gökova Körfezi'nin güneyinde uzanan dar yarımada."
+  },
+  {
+   "id": "sinop",
+   "name": "Sinop Yarımadası",
+   "subtype": "peninsula",
+   "point": [
+    35.12,
+    42.02
+   ],
+   "info": "Karadeniz'de; eskiden ada iken kıyıya bağlanmış (tombolo) yarımada."
+  },
+  {
+   "id": "gokceada",
+   "name": "Gökçeada",
+   "subtype": "island",
+   "point": [
+    25.85,
+    40.18
+   ],
+   "info": "Türkiye'nin en büyük adası (Çanakkale)."
+  },
+  {
+   "id": "bozcaada",
+   "name": "Bozcaada",
+   "subtype": "island",
+   "point": [
+    26.03,
+    39.83
+   ],
+   "info": "Çanakkale'de, Ege'de; bağcılıkla bilinir."
+  },
+  {
+   "id": "marmara-adasi",
+   "name": "Marmara Adası",
+   "subtype": "island",
+   "point": [
+    27.6,
+    40.62
+   ],
+   "info": "Marmara Denizi'nin en büyük adası; mermeriyle ünlüdür (Balıkesir)."
+  },
+  {
+   "id": "inceburun",
+   "name": "İnceburun",
+   "subtype": "cape",
+   "point": [
+    34.93,
+    42.1
+   ],
+   "info": "Sinop'ta, Türkiye'nin en kuzey ucu."
+  },
+  {
+   "id": "bababurnu",
+   "name": "Baba Burnu",
+   "subtype": "cape",
+   "point": [
+    26.07,
+    39.48
+   ],
+   "info": "Çanakkale'de, Anadolu'nun (Asya kıtasının) en batı ucu."
+  },
+  {
+   "id": "anamur",
+   "name": "Anamur Burnu",
+   "subtype": "cape",
+   "point": [
+    32.8,
+    36.02
+   ],
+   "info": "Mersin'de, Türkiye'nin en güney ucu."
+  }
+ ],
+ "heritage": [
+  {
+   "id": "u-goreme",
+   "name": "Göreme ve Kapadokya",
+   "subtype": "unesco",
+   "point": [
+    34.83,
+    38.64
+   ],
+   "info": "Nevşehir; peri bacaları ve kaya oyma kiliseleri. UNESCO Dünya Mirası (1985)."
+  },
+  {
+   "id": "u-divrigi",
+   "name": "Divriği Ulu Camii ve Darüşşifası",
+   "subtype": "unesco",
+   "point": [
+    38.12,
+    39.37
+   ],
+   "info": "Sivas; taş işçiliğiyle ünlü Mengücekli eseri. UNESCO Dünya Mirası (1985)."
+  },
+  {
+   "id": "u-istanbul",
+   "name": "İstanbul Tarihi Alanları",
+   "subtype": "unesco",
+   "point": [
+    28.98,
+    41.01
+   ],
+   "info": "Ayasofya, Topkapı Sarayı, Sultanahmet ve surlar. UNESCO Dünya Mirası (1985)."
+  },
+  {
+   "id": "u-hattusa",
+   "name": "Hattuşa",
+   "subtype": "unesco",
+   "point": [
+    34.62,
+    40.02
+   ],
+   "info": "Çorum Boğazkale; Hitit başkenti. UNESCO Dünya Mirası (1986)."
+  },
+  {
+   "id": "u-nemrut",
+   "name": "Nemrut Dağı (Kommagene)",
+   "subtype": "unesco",
+   "point": [
+    38.74,
+    37.98
+   ],
+   "info": "Adıyaman; Kommagene Kralı Antiochos'un dev heykelleri. UNESCO Dünya Mirası (1987)."
+  },
+  {
+   "id": "u-xanthos",
+   "name": "Xanthos–Letoon",
+   "subtype": "unesco",
+   "point": [
+    29.32,
+    36.36
+   ],
+   "info": "Antalya–Muğla sınırı; Likya uygarlığının merkezleri. UNESCO Dünya Mirası (1988)."
+  },
+  {
+   "id": "u-pamukkale",
+   "name": "Hierapolis–Pamukkale",
+   "subtype": "unesco",
+   "point": [
+    29.12,
+    37.92
+   ],
+   "info": "Denizli; traverten basamakları ve antik kent. UNESCO Dünya Mirası (1988)."
+  },
+  {
+   "id": "u-safranbolu",
+   "name": "Safranbolu",
+   "subtype": "unesco",
+   "point": [
+    32.69,
+    41.25
+   ],
+   "info": "Karabük; geleneksel Osmanlı konakları. UNESCO Dünya Mirası (1994)."
+  },
+  {
+   "id": "u-truva",
+   "name": "Truva Antik Kenti",
+   "subtype": "unesco",
+   "point": [
+    26.24,
+    39.96
+   ],
+   "info": "Çanakkale; efsanevi Truva. UNESCO Dünya Mirası (1998)."
+  },
+  {
+   "id": "u-selimiye",
+   "name": "Selimiye Camii",
+   "subtype": "unesco",
+   "point": [
+    26.56,
+    41.68
+   ],
+   "info": "Edirne; Mimar Sinan'ın 'ustalık eseri'. UNESCO Dünya Mirası (2011)."
+  },
+  {
+   "id": "u-catalhoyuk",
+   "name": "Çatalhöyük",
+   "subtype": "unesco",
+   "point": [
+    32.83,
+    37.67
+   ],
+   "info": "Konya; dünyanın en eski yerleşim yerlerinden (Neolitik). UNESCO Dünya Mirası (2012)."
+  },
+  {
+   "id": "u-bursa",
+   "name": "Bursa ve Cumalıkızık",
+   "subtype": "unesco",
+   "point": [
+    29.06,
+    40.19
+   ],
+   "info": "Osmanlı İmparatorluğu'nun doğuşu. UNESCO Dünya Mirası (2014)."
+  },
+  {
+   "id": "u-bergama",
+   "name": "Bergama",
+   "subtype": "unesco",
+   "point": [
+    27.18,
+    39.12
+   ],
+   "info": "İzmir; antik Pergamon ve çok katmanlı kültürel peyzaj. UNESCO Dünya Mirası (2014)."
+  },
+  {
+   "id": "u-diyarbakir",
+   "name": "Diyarbakır Kalesi ve Hevsel Bahçeleri",
+   "subtype": "unesco",
+   "point": [
+    40.24,
+    37.91
+   ],
+   "info": "Diyarbakır surları ve Dicle kıyısındaki bahçeler. UNESCO Dünya Mirası (2015)."
+  },
+  {
+   "id": "u-efes",
+   "name": "Efes",
+   "subtype": "unesco",
+   "point": [
+    27.34,
+    37.94
+   ],
+   "info": "İzmir Selçuk; antik Efes kenti. UNESCO Dünya Mirası (2015)."
+  },
+  {
+   "id": "u-ani",
+   "name": "Ani Arkeolojik Alanı",
+   "subtype": "unesco",
+   "point": [
+    43.57,
+    40.51
+   ],
+   "info": "Kars; Ortaçağ kenti Ani. UNESCO Dünya Mirası (2016)."
+  },
+  {
+   "id": "u-afrodisias",
+   "name": "Afrodisias",
+   "subtype": "unesco",
+   "point": [
+    28.72,
+    37.71
+   ],
+   "info": "Aydın; antik heykeltıraşlık merkezi. UNESCO Dünya Mirası (2017)."
+  },
+  {
+   "id": "u-gobeklitepe",
+   "name": "Göbeklitepe",
+   "subtype": "unesco",
+   "point": [
+    38.92,
+    37.22
+   ],
+   "info": "Şanlıurfa; bilinen en eski anıtsal tapınak alanı. UNESCO Dünya Mirası (2018)."
+  },
+  {
+   "id": "u-arslantepe",
+   "name": "Arslantepe Höyüğü",
+   "subtype": "unesco",
+   "point": [
+    38.36,
+    38.38
+   ],
+   "info": "Malatya; erken devlet yapılanmasının izleri. UNESCO Dünya Mirası (2021)."
+  },
+  {
+   "id": "u-gordion",
+   "name": "Gordion",
+   "subtype": "unesco",
+   "point": [
+    31.99,
+    39.65
+   ],
+   "info": "Ankara Polatlı; Frig başkenti. UNESCO Dünya Mirası (2023)."
+  },
+  {
+   "id": "p-yozgat",
+   "name": "Yozgat Çamlığı Milli Parkı",
+   "subtype": "park",
+   "point": [
+    34.8,
+    39.8
+   ],
+   "info": "Türkiye'nin ilk milli parkı (1958)."
+  },
+  {
+   "id": "p-kackar",
+   "name": "Kaçkar Dağları Milli Parkı",
+   "subtype": "park",
+   "point": [
+    41.15,
+    40.85
+   ],
+   "info": "Rize; buzul gölleri, yaylalar ve alpin çayırlar."
+  },
+  {
+   "id": "p-koprulu",
+   "name": "Köprülü Kanyon Milli Parkı",
+   "subtype": "park",
+   "point": [
+    31.2,
+    37.2
+   ],
+   "info": "Antalya; Köprüçay kanyonu ve rafting."
+  },
+  {
+   "id": "p-munzur",
+   "name": "Munzur Vadisi Milli Parkı",
+   "subtype": "park",
+   "point": [
+    39.55,
+    39.25
+   ],
+   "info": "Tunceli; Türkiye'nin en geniş milli parklarından."
+  },
+  {
+   "id": "p-uludag",
+   "name": "Uludağ Milli Parkı",
+   "subtype": "park",
+   "point": [
+    29.15,
+    40.07
+   ],
+   "info": "Bursa; kış turizmi ve zengin orman örtüsü."
+  },
+  {
+   "id": "p-olimpos",
+   "name": "Olimpos–Beydağları Milli Parkı",
+   "subtype": "park",
+   "point": [
+    30.45,
+    36.55
+   ],
+   "info": "Antalya; dağ ile denizin buluştuğu kıyı milli parkı."
+  },
+  {
+   "id": "p-kuscenneti",
+   "name": "Kuşcenneti Milli Parkı",
+   "subtype": "park",
+   "point": [
+    27.97,
+    40.2
+   ],
+   "info": "Balıkesir; Manyas Gölü kıyısında kuş göç yolu."
+  },
+  {
+   "id": "p-yedigoller",
+   "name": "Yedigöller Milli Parkı",
+   "subtype": "park",
+   "point": [
+    31.75,
+    40.94
+   ],
+   "info": "Bolu; heyelan set gölleri ve ormanlarıyla bilinir."
+  },
+  {
+   "id": "p-ilgaz",
+   "name": "Ilgaz Dağı Milli Parkı",
+   "subtype": "park",
+   "point": [
+    33.75,
+    41.05
+   ],
+   "info": "Kastamonu–Çankırı; karaçam ve göknar ormanları."
+  },
+  {
+   "id": "p-gelibolu",
+   "name": "Gelibolu Yarımadası Tarihi Alanı",
+   "subtype": "park",
+   "point": [
+    26.3,
+    40.25
+   ],
+   "info": "Çanakkale; Çanakkale Savaşları'nın geçtiği tarihi alan."
+  },
+  {
+   "id": "p-dilek",
+   "name": "Dilek Yarımadası–Büyük Menderes Deltası Milli Parkı",
+   "subtype": "park",
+   "point": [
+    27.15,
+    37.68
+   ],
+   "info": "Aydın; delta ekosistemi ve Akdeniz foku."
+  },
+  {
+   "id": "p-soguksu",
+   "name": "Soğuksu Milli Parkı",
+   "subtype": "park",
+   "point": [
+    32.63,
+    40.48
+   ],
+   "info": "Ankara Kızılcahamam; kızılçam ve karaçam ormanları."
+  }
+ ],
+ "faults": [
+  {
+   "id": "kaf",
+   "name": "Kuzey Anadolu Fay Hattı",
+   "info": "Saros Körfezi'nden Karlıova'ya uzanan, dünyanın en aktif doğrultu atımlı faylarından; 1999 Marmara (Gölcük) depremi bu hat üzerindedir.",
+   "line": [
+    [
+     26.6,
+     40.6
+    ],
+    [
+     27.5,
+     40.8
+    ],
+    [
+     28.5,
+     40.85
+    ],
+    [
+     29.5,
+     40.72
+    ],
+    [
+     30.3,
+     40.72
+    ],
+    [
+     31.2,
+     40.78
+    ],
+    [
+     32.3,
+     40.9
+    ],
+    [
+     33.5,
+     41.0
+    ],
+    [
+     34.5,
+     40.9
+    ],
+    [
+     35.5,
+     40.75
+    ],
+    [
+     36.5,
+     40.55
+    ],
+    [
+     37.5,
+     40.2
+    ],
+    [
+     38.5,
+     39.9
+    ],
+    [
+     39.5,
+     39.72
+    ],
+    [
+     40.5,
+     39.45
+    ],
+    [
+     41.0,
+     39.3
+    ]
+   ]
+  },
+  {
+   "id": "daf",
+   "name": "Doğu Anadolu Fay Hattı",
+   "info": "Karlıova'dan Hatay'a uzanır; 6 Şubat 2023 Kahramanmaraş merkezli depremler bu fay zonunda meydana gelmiştir.",
+   "line": [
+    [
+     41.0,
+     39.3
+    ],
+    [
+     40.5,
+     38.95
+    ],
+    [
+     39.9,
+     38.7
+    ],
+    [
+     39.4,
+     38.48
+    ],
+    [
+     38.7,
+     38.2
+    ],
+    [
+     38.0,
+     37.85
+    ],
+    [
+     37.3,
+     37.55
+    ],
+    [
+     36.85,
+     37.3
+    ],
+    [
+     36.5,
+     36.9
+    ],
+    [
+     36.2,
+     36.4
+    ]
+   ]
+  },
+  {
+   "id": "gediz-graben",
+   "name": "Gediz Grabeni Fayları",
+   "info": "Ege'de Bozdağlar'ın kuzeyindeki çöküntü (graben); Batı Anadolu'nun deprem üreten fay sistemlerindendir.",
+   "line": [
+    [
+     27.3,
+     38.52
+    ],
+    [
+     27.8,
+     38.47
+    ],
+    [
+     28.3,
+     38.43
+    ],
+    [
+     28.7,
+     38.4
+    ]
+   ]
+  },
+  {
+   "id": "menderes-graben",
+   "name": "Büyük Menderes Grabeni Fayları",
+   "info": "Aydın Dağları'nın güneyinde Büyük Menderes vadisi boyunca uzanan graben fayları.",
+   "line": [
+    [
+     27.35,
+     37.78
+    ],
+    [
+     27.9,
+     37.85
+    ],
+    [
+     28.5,
+     37.9
+    ],
+    [
+     29.0,
+     37.92
+    ]
+   ]
+  },
+  {
+   "id": "tuzgolu-fay",
+   "name": "Tuz Gölü Fayı",
+   "info": "İç Anadolu'da Tuz Gölü'nün doğusundan Aksaray'a uzanan fay.",
+   "line": [
+    [
+     33.2,
+     39.45
+    ],
+    [
+     33.55,
+     39.0
+    ],
+    [
+     33.85,
+     38.6
+    ],
+    [
+     34.2,
+     38.15
+    ]
+   ]
+  },
+  {
+   "id": "ecemis-fay",
+   "name": "Ecemiş Fayı",
+   "info": "Orta Toroslar'da, Aladağlar'ın batısından güneye uzanan doğrultu atımlı fay.",
+   "line": [
+    [
+     35.2,
+     38.25
+    ],
+    [
+     35.1,
+     37.9
+    ],
+    [
+     35.0,
+     37.55
+    ],
+    [
+     34.9,
+     37.25
+    ]
+   ]
+  }
+ ]
 }

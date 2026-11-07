@@ -15,6 +15,13 @@ namespace KPSSGeography.Data
         public const string Volcano = "volcano";
         public const string Plain = "plain";
         public const string Plateau = "plateau";
+        public const string Lake = "lake";
+        public const string Dam = "dam";
+        public const string Gulf = "gulf";
+        public const string Peninsula = "peninsula";
+        public const string Unesco = "unesco";
+        public const string Park = "park";
+        public const string Fault = "fault";
 
         public string id;
         public string name;
@@ -22,6 +29,8 @@ namespace KPSSGeography.Data
         public string category;
         /// <summary>line | polygon | point</summary>
         public string kind;
+        /// <summary>Alt tür: göl tipi, kıyı şekli türü (strait/gulf/peninsula/island/cape), unesco/park vb.</summary>
+        public string subtype;
         /// <summary>KPSS bilgi notu (cevaptan sonra gösterilir).</summary>
         public string info;
         public float[] label;
@@ -73,6 +82,13 @@ namespace KPSSGeography.Data
             GeoFeature.Volcano => "VOLKANİK DAĞI",
             GeoFeature.Plain => "OVAYI",
             GeoFeature.Plateau => "PLATOYU",
+            GeoFeature.Lake => "GÖLÜ",
+            GeoFeature.Dam => "BARAJI",
+            GeoFeature.Gulf => "BOĞAZI / KÖRFEZİ",
+            GeoFeature.Peninsula => "KIYI ŞEKLİNİ",
+            GeoFeature.Unesco => "MİRAS ALANINI",
+            GeoFeature.Park => "MİLLİ PARKI",
+            GeoFeature.Fault => "FAY HATTINI",
             _ => "YER ŞEKLİNİ"
         };
     }

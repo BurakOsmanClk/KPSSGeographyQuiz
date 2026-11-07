@@ -54,6 +54,18 @@ namespace KPSSGeography.Map
             return any ? Rect.MinMaxRect(minX, minY, maxX, maxY) : Bounds;
         }
 
+        /// <summary>Doğru/yanlış boyamalarını temizler (soluklaştırma korunur).</summary>
+        public void ClearStates()
+        {
+            foreach (var p in provinces) p.SetState(ProvinceState.Idle);
+        }
+
+        /// <summary>Tüm illeri nötr renge çevirir (bölge renkleri ipucu vermesin).</summary>
+        public void SetNeutral(bool value)
+        {
+            foreach (var p in provinces) p.SetNeutral(value);
+        }
+
         public void ClearFocus()
         {
             foreach (var p in provinces) p.SetDimmed(false);

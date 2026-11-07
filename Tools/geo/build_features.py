@@ -10,6 +10,7 @@ Kullanım:
 Projeksiyon build_provinces.py ile aynıdır (iller ve yer şekilleri birebir örtüşür).
 """
 import json
+import math
 import os
 
 import mapbox_earcut as earcut
@@ -22,6 +23,7 @@ from build_provinces import load_provinces, get_projection
 HERE = os.path.dirname(os.path.abspath(__file__))
 RIVERS_SRC = os.path.join(HERE, "ne_10m_rivers_turkey.geojson")
 LAKES_SRC = os.path.join(HERE, "ne_10m_lakes_turkey.geojson")
+LAKES_EU_SRC = os.path.join(HERE, "ne_10m_lakes_europe_turkey.geojson")
 MANUAL_SRC = os.path.join(HERE, "features_manual.json")
 DST = os.path.join(HERE, "..", "..", "Assets", "_Project", "Resources", "Data", "turkey_features.json")
 
@@ -167,6 +169,107 @@ def main():
                 "label": [r4(c) for c in proj(lp.x, lp.y)],
                 "lines": [], "vertices": verts, "triangles": tris, "outline": outline,
             })
+
+    # ---------- Göller (soru olarak) ----------
+    ne_lakes = {"lakes": json.load(open(LAKES_SRC, encoding="utf-8"))["features"],
+                "europe": json.load(open(LAKES_EU_SRC, encoding="utf-8"))["features"]}
+
+    def find_ne_lake(item):
+        pool = ne_lakes[item["ne_file"]]
+        if "ne_name" in item:
+            for f in pool:
+                if f["properties"]["name"] == item["ne_name"]:
+                    return shape(f["geometry"])
+        if "ne_center" in item:
+            pt = Point(*item["ne_center"])
+            best = min(pool, key=lambda f: shape(f["geometry"]).distance(pt))
+            return shape(best["geometry"])
+        return None
+
+    def ellipse(center, rx_km, ry_km, angle_deg, n=28):
+        lon0, lat0 = center
+        ky = 1 / 111.0
+        kx = 1 / (111.0 * math.cos(math.radians(lat0)))
+        a = math.radians(angle_deg)
+        pts = []
+        for i in range(n):
+            t = 2 * math.pi * i / n
+            x, y = rx_km * math.cos(t), ry_km * math.sin(t)
+            xr, yr = x * math.cos(a) - y * math.sin(a), x * math.sin(a) + y * math.cos(a)
+            pts.append((lon0 + xr * kx, lat0 + yr * ky))
+        return Polygon(pts)
+
+    for item in manual["lakes"]["items"]:
+        if item["source"] == "ne":
+            g = find_ne_lake(item)
+            if g is None:
+                print("UYARI: göl bulunamadı:", item["name"])
+                continue
+            g = g.simplify(0.003)
+        else:
+            g = ellipse(item["center"], max(item["rx"], 1.2), max(item["ry"], 1.0), item.get("angle", 0))
+        polys = list(g.geoms) if isinstance(g, MultiPolygon) else [g]
+        verts, tris, outline = triangulate(polys)
+        largest = max(polys, key=lambda q: q.area)
+        lp = polylabel(largest, tolerance=0.002)
+        features.append({
+            "id": "gol-" + item["id"], "name": item["name"], "category": "lake", "kind": "polygon",
+            "subtype": item.get("type", ""), "info": item["info"],
+            "label": [r4(c) for c in proj(lp.x, lp.y)],
+            "lines": [], "vertices": verts, "triangles": tris, "outline": outline,
+        })
+
+    # ---------- Barajlar (akarsu üzerine oturtulur) ----------
+    river_lines = {}
+    for f in features:
+        if f["category"] == "river":
+            river_lines[f["id"]] = f["lines"]
+
+    def snap_to_river(river_id, px, py):
+        best, bd = (px, py), float("inf")
+        for l in river_lines.get(river_id, []):
+            pts = l["points"]
+            for i in range(0, len(pts) - 2, 2):
+                ax, ay, bx, by = pts[i], pts[i + 1], pts[i + 2], pts[i + 3]
+                dx, dy = bx - ax, by - ay
+                L = dx * dx + dy * dy
+                t = 0 if L == 0 else max(0, min(1, ((px - ax) * dx + (py - ay) * dy) / L))
+                qx, qy = ax + dx * t, ay + dy * t
+                d = (qx - px) ** 2 + (qy - py) ** 2
+                if d < bd:
+                    bd, best = d, (qx, qy)
+        return best if bd < 0.6 ** 2 else (px, py)
+
+    for dam in manual["dams"]:
+        x, y = proj(*dam["point"])
+        x, y = snap_to_river(dam["river"], x, y)
+        features.append({
+            "id": dam["id"], "name": dam["name"], "category": "dam", "kind": "point", "subtype": dam["river"],
+            "info": dam["info"], "label": [r4(x), r4(y)], "lines": [], "vertices": [], "triangles": [], "outline": [],
+        })
+
+    # ---------- Kıyı şekilleri ve miras alanları (nokta) ----------
+    coast_cat = {"strait": "gulf", "gulf": "gulf", "peninsula": "peninsula", "island": "peninsula", "cape": "peninsula"}
+    for key, catmap in (("coast", coast_cat), ("heritage", {"unesco": "unesco", "park": "park"})):
+        for c in manual[key]:
+            x, y = proj(*c["point"])
+            features.append({
+                "id": c["id"], "name": c["name"], "category": catmap[c["subtype"]], "kind": "point",
+                "subtype": c["subtype"], "info": c["info"], "label": [r4(x), r4(y)],
+                "lines": [], "vertices": [], "triangles": [], "outline": [],
+            })
+
+    # ---------- Fay hatları ----------
+    for fl in manual["faults"]:
+        pts = chaikin([tuple(p) for p in fl["line"]], closed=False)
+        features.append({
+            "id": fl["id"], "name": fl["name"], "category": "fault", "kind": "line", "subtype": "",
+            "info": fl["info"], "label": line_label([LineString(pts)]),
+            "lines": [{"points": flat(pts)}], "vertices": [], "triangles": [], "outline": [],
+        })
+
+    for f in features:
+        f.setdefault("subtype", "")
 
     # ---------- Göller (dekor) ----------
     lakes = []

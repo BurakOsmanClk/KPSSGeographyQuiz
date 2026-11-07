@@ -4,6 +4,8 @@
 > **Etiketler:** **P0** = önce bunlar · **P1** = v1.0 için gerekli · **P2** = sonraki sürüm. **A** = Burak (oyun ve içerik) · **B** = Ortak (uygulama kabuğu ve platform) · **AB** = birlikte.
 > **Genel kurallar:** Her madde ayrı branch'te ve ayrı PR olarak yapılır. Unity işinden önce ilgili `unity:*` skill'i yüklenir. `.meta` dosyası üretilmez. Sahne/prefab YAML'ı elle düzenlenmez.
 
+> ✅ 23–34 tamamlandı (ilk sürüm). İçerik doğrulaması için 53. madde önemle önerilir.
+
 ## Önerilen ilk 12 (sırasıyla)
 `1 → 9 → 11 → 10 → 2 → 6 → 47 → 48 → 42 → 35 → 23 → 53`
 
@@ -211,7 +213,7 @@ Efektler ayarlardan kapatılabilsin.
 
 ## 4. Yeni içerik ve oyun modları
 
-### 23. [P0][A] Tarım Ürünleri bölümleri
+### 23. ✅ [P0][A] Tarım Ürünleri bölümleri
 ```
 "Yakında" görünen Tarım Ürünleri bölümünü aç:
 - Content altında TopicSet altyapısını kur: id, title, plates[], info, source.
@@ -223,7 +225,7 @@ Efektler ayarlardan kapatılabilsin.
 - Bana tablo halinde özet ver: ürün, iller, kaynak, güven derecesi.
 ```
 
-### 24. [P0][A] Madenler ve Enerji bölümleri
+### 24. ✅ [P0][A] Madenler ve Enerji bölümleri
 ```
 Madde 23'teki altyapıyla "Madenler ve Enerji" bölümünü aç:
 - Madenler: bor, krom, bakır, demir, linyit, taşkömürü, boksit, mermer.
@@ -231,7 +233,7 @@ Madde 23'teki altyapıyla "Madenler ve Enerji" bölümünü aç:
 Barajlar için nokta türü yer şekli kullan. Kaynaklar: MTA, ETKB, TKİ, MEB. Emin olmadığın verileri ekleme.
 ```
 
-### 25. [P1][A] Göller bölümü
+### 25. ✅ [P1][A] Göller bölümü
 ```
 Natural Earth'ten ek göller al (Burdur, Acıgöl, Salda, Hazar, Çıldır, Erçek, Manyas, İznik, Sapanca, Bafa vb.).
 Natural Earth'te olmayanları features_manual.json'a elle ekle.
@@ -239,14 +241,14 @@ Yeni kategori "lake" ve "Göller" bölümü oluştur. Bilgi notunda göl tipini 
 Göller zeminde zaten çiziliyor; bu bölümde tıklanabilir olsunlar.
 ```
 
-### 26. [P1][A] Kıyı şekilleri bölümü
+### 26. ✅ [P1][A] Kıyı şekilleri bölümü
 ```
 Boğazlar (İstanbul, Çanakkale), körfezler (İzmit, Gemlik, Edremit, İzmir, Kuşadası, Gökova, Antalya, İskenderun),
 yarımadalar (Gelibolu, Kapıdağ, Biga, Datça, Bodrum, Sinop/İnceburun) ve adalar (Gökçeada, Bozcaada, Marmara Adası)
 için yeni kategori "coast" oluştur. Nokta ya da alan olarak çiz. Bilgi notları KPSS'ye uygun olsun.
 ```
 
-### 27. [P1][A] Plaka kodu modu
+### 27. ✅ [P1][A] Plaka kodu modu
 ```
 Yeni mod "plate":
 - İki soru tipi olsun: (a) "34 hangi il?" (haritada bul), (b) "Konya'nın plaka kodu?" (4 seçenekli butonlar).
@@ -255,14 +257,14 @@ Yeni mod "plate":
 2 bölüm ekle: "Plakalar 1–40" ve "Plakalar 41–81".
 ```
 
-### 28. [P1][A] Komşu iller modu
+### 28. ✅ [P1][A] Komşu iller modu
 ```
 build_provinces.py'da il komşuluklarını hesapla (sınır paylaşan poligonlar) ve JSON'a "neighbors" alanı ekle.
 Yeni mod: "Ankara'ya komşu bir il seç". Kümedeki her il doğru sayılsın. Yanlışta tüm komşular vurgulansın.
 Zor versiyonu: "Hem Konya'ya hem Antalya'ya komşu olan il?"
 ```
 
-### 29. [P1][A] İklim ve bitki örtüsü haritaları
+### 29. ✅ [P1][A] İklim ve bitki örtüsü haritaları
 ```
 İklim tipleri (Karadeniz, Akdeniz, karasal, Marmara geçiş) ve bitki örtüsü (orman, maki, bozkır, alpin çayır) için
 şematik alanlar çiz (features_manual.json, "climate" ve "vegetation" kategorileri). KPSS ders kitabı haritalarına uygun olsun.
@@ -270,7 +272,7 @@ Soru: "Akdeniz iklimi alanını seç" ya da "Bu ilde hangi iklim görülür?" (s
 Kontrol PNG'si üret.
 ```
 
-### 30. [P2][A] Nüfus ve şehirleşme
+### 30. ✅ [P2][A] Nüfus ve şehirleşme
 ```
 TÜİK verisine dayalı nüfus bölümü: en kalabalık 10 il, en az nüfuslu 10 il, nüfus yoğunluğu en yüksek iller,
 en çok göç veren ve alan iller.
@@ -278,28 +280,28 @@ en çok göç veren ve alan iller.
 Veri yılını ve kaynağı bilgi notuna yaz.
 ```
 
-### 31. [P2][A] Milli parklar ve UNESCO alanları
+### 31. ✅ [P2][A] Milli parklar ve UNESCO alanları
 ```
 UNESCO Dünya Mirası listesindeki Türkiye alanları (Göreme, Pamukkale, Truva, Efes, Nemrut Dağı, Safranbolu, Göbeklitepe vb.)
 ve öne çıkan milli parklar (Kaçkar, Köprülü Kanyon, Munzur, Uludağ, Olimpos-Beydağları vb.) için "heritage" kategorisi.
 Nokta olarak çiz, bilgi notunda il ve özelliğini yaz. Kaynak: UNESCO, Tarım ve Orman Bakanlığı.
 ```
 
-### 32. [P2][A] Fay hatları ve deprem bölgeleri
+### 32. ✅ [P2][A] Fay hatları ve deprem bölgeleri
 ```
 Kuzey Anadolu Fayı, Doğu Anadolu Fayı ve Batı Anadolu (Ege) graben sistemlerini çizgi olarak çiz (features_manual.json, "fault").
 Kırmızı kesikli çizgi stili kullan. Bilgi notu KPSS'ye uygun olsun (yapı, etkilediği bölgeler).
 Soru: "Kuzey Anadolu Fay Hattını seç".
 ```
 
-### 33. [P1][A] Bölgenin illerini bulma
+### 33. ✅ [P1][A] Bölgenin illerini bulma
 ```
 Bölge modunun ikinci tipi: "Ege Bölgesi'nin bütün illerini bul". Tek turda bölgedeki tüm iller bulunacak.
 Her doğru il boyanır, yanlış tıklama can götürür, süre tur için toplamdır. 7 bölge için 7 kısa bölüm ekle.
 Bölüm kartında ilerleme gösterilsin (ör. 5/8 il).
 ```
 
-### 34. [P2][A] Çoktan seçmeli KPSS soru bankası
+### 34. ✅ [P2][A] Çoktan seçmeli KPSS soru bankası
 ```
 Resources/Data/questions.json formatını tanımla: id, topic, text, options[5], answer, explanation, mapHighlight (opsiyonel plaka/özellik id).
 Yeni mod "mcq": A–E şıklı, süreli, harita destekli. Soru ilgili il ya da yer şeklini vurgulayabilsin.
