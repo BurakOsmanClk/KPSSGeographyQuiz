@@ -5,8 +5,8 @@ using UnityEngine;
 namespace KPSSGeography.Map
 {
     /// <summary>
-    /// Fiziki harita katmanı: göller ve akarsular her zaman (dekor olarak) görünür;
-    /// dağ, volkan, ova ve platolar yalnızca ilgili bölümde gösterilir ve tıklanabilir olur.
+    /// Fiziki harita katmanı. Göller zemin haritasının parçasıdır ve her zaman görünür.
+    /// Akarsu, dağ, volkan, ova ve plato her biri yalnızca kendi bölümünde, tek başına gösterilir.
     /// </summary>
     public class FeatureLayer : MonoBehaviour
     {
@@ -30,28 +30,28 @@ namespace KPSSGeography.Map
             ShowDefault();
         }
 
-        /// <summary>Kategori bu bölüme dahil mi? ("mixed" hepsini kapsar)</summary>
+        /// <summary>Kategori bu bölüme dahil mi? ("mixed" hepsini kapsar; şu an hiçbir bölüm kullanmıyor)</summary>
         public static bool Matches(string levelCategory, string featureCategory) =>
             levelCategory == Mixed || levelCategory == featureCategory;
 
-        /// <summary>Menüler ve il bölümleri: sadece akarsular dekor olarak görünür.</summary>
+        /// <summary>Menüler ve il bölümleri: yer şekli gösterilmez (sadece göller).</summary>
         public void ShowDefault()
         {
             foreach (var f in features)
             {
                 f.ResetVisual();
-                f.gameObject.SetActive(f.Category == GeoFeature.River);
+                f.gameObject.SetActive(false);
             }
         }
 
-        /// <summary>Yer şekli bölümü: o kategorideki öğeleri gösterir ve tıklanabilir yapar.</summary>
+        /// <summary>Yer şekli bölümü: yalnızca o kategorideki öğeleri gösterir ve tıklanabilir yapar.</summary>
         public void ShowCategory(string category)
         {
             foreach (var f in features)
             {
                 f.ResetVisual();
                 bool match = Matches(category, f.Category);
-                f.gameObject.SetActive(match || f.Category == GeoFeature.River);
+                f.gameObject.SetActive(match);
                 f.Interactive = match;
             }
         }

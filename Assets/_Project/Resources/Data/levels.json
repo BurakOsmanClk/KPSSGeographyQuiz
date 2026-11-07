@@ -13,7 +13,6 @@
     { "id": "volkanlar",    "title": "Volkanik Dağlar",     "description": "Ağrı, Erciyes, Nemrut... Volkanik dağları haritada bul.", "mode": "feature", "category": "volcano",  "regions": [], "questionCount": 8,  "timePerQuestion": 12, "maxMistakes": 3 },
     { "id": "ovalar",       "title": "Ovalar",              "description": "Delta, graben ve tektonik ovalar: Çukurova'dan Iğdır'a.", "mode": "feature", "category": "plain",    "regions": [], "questionCount": 10, "timePerQuestion": 12, "maxMistakes": 3 },
     { "id": "platolar",     "title": "Platolar",            "description": "Teke'den Erzurum-Kars'a Türkiye'nin platoları.",       "mode": "feature", "category": "plateau",  "regions": [], "questionCount": 8,  "timePerQuestion": 12, "maxMistakes": 3 },
-    { "id": "yer-sekilleri","title": "Yer Şekilleri Karma", "description": "Akarsu, dağ, volkan, ova ve plato: hepsi bir arada.",  "mode": "feature", "category": "mixed",    "regions": [], "questionCount": 15, "timePerQuestion": 10, "maxMistakes": 3 },
     { "id": "tarim",        "title": "Tarım Ürünleri",      "description": "Fındık, çay, pamuk... Hangi ürün nerede yetişir?",     "mode": "soon",   "regions": [],                                          "questionCount": 0,  "timePerQuestion": 0,  "maxMistakes": 3 },
     { "id": "madenler",     "title": "Madenler ve Enerji",  "description": "Bor, krom, barajlar ve santraller haritada.",          "mode": "soon",   "regions": [],                                          "questionCount": 0,  "timePerQuestion": 0,  "maxMistakes": 3 }
   ]

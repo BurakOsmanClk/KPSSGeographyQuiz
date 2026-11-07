@@ -14,7 +14,7 @@ Unity 6 ile geliştirilen, KPSS Coğrafya konularını oyunlaştırarak çalış
 ## Prototipi çalıştırma
 Unity'de herhangi bir sahnedeyken **Play** tuşuna bas. Giriş ekranı açılır → **OYNA** → bölüm seç.
 
-- **16 bölüm:** İli Bul (bölge bölge, sonra Tüm Türkiye), Bölge Modu, Yer Şekilleri (akarsular, dağlar, volkanlar, ovalar, platolar, karma) ve 2 "Yakında".
+- **15 bölüm:** İli Bul (bölge bölge, sonra Tüm Türkiye), Bölge Modu, Yer Şekilleri (Akarsular, Dağlar, Volkanik Dağlar, Ovalar, Platolar; her biri kendi haritasında tek başına) ve 2 "Yakında".
 - **İli Bul:** yazan ili haritada tıkla. **Bölge Modu:** parlayan ilin bölgesini alttaki butonlardan seç. **Yer Şekli:** adı yazan akarsu/dağ/volkan/ova/platoyu haritada bul; cevaptan sonra KPSS bilgi notu çıkar.
 - Canın bitince reklam izleyip +1 canla devam edebilirsin (şimdilik test reklamı).
 - Her soruda süre akar. Doğru cevap süreyi yeniler, yanlış ya da süre bitimi 1 can götürür. 3 canın biterse elenirsin.
