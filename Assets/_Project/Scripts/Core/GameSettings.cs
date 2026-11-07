@@ -10,7 +10,29 @@ namespace KPSSGeography.Core
         const string BigTextKey = "KPSS_BigText";
         const string EffectsKey = "KPSS_Effects";
 
+        const string ExamKey = "KPSS_ExamMode";
+
         public static event Action Changed;
+
+        /// <summary>Sınav modu açılıp kapanınca yayınlanır (harita görünümü animasyonu için).</summary>
+        public static event Action ExamChanged;
+
+        /// <summary>
+        /// Sınav modu: harita soluk, gri ve etiketsiz KPSS haritasına döner; ipucu (üzerine gelince vurgulama,
+        /// renkli boyama, anlık bilgi notu) yoktur, süre kısalır, puan ve yıldızlar ayrı kaydedilir.
+        /// </summary>
+        public static bool ExamMode
+        {
+            get => PlayerPrefs.GetInt(ExamKey, 0) == 1;
+            set
+            {
+                if (ExamMode == value) return;
+                PlayerPrefs.SetInt(ExamKey, value ? 1 : 0);
+                PlayerPrefs.Save();
+                ExamChanged?.Invoke();
+                Changed?.Invoke();
+            }
+        }
 
         /// <summary>Doğru/yanlış için yeşil-kırmızı yerine mavi-turuncu (Okabe–Ito) palet.</summary>
         public static bool Colorblind

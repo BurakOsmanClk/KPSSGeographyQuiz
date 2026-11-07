@@ -27,6 +27,12 @@ namespace KPSSGeography.Quiz
         [Tooltip("Yer şekli sorularında yanlış cevaptan sonra bilgi notunu okumak için ek süre.")]
         public float featureFeedbackBonus = 1.2f;
 
+        [Header("Sınav modu")]
+        [Tooltip("Sınav modunda soru süresi bu oranla çarpılır (0,8 = %20 daha kısa).")]
+        public float examTimeScale = 0.8f;
+        [Tooltip("Sınav modunda kazanılan puan bu oranla çarpılır.")]
+        public float examScoreMultiplier = 1.5f;
+
         [Header("Reklam")]
         public bool adsEnabled = true;
         [Tooltip("Elenince ödüllü reklamla +1 can ile devam teklifi (bölüm başına 1 kez).")]

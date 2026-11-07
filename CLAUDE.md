@@ -38,13 +38,19 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - `UI/MapLabelLayer.cs`: deniz/boğaz/ülke adları her zaman; il adları yakınlaşınca ve sadece cevabı ele vermeyen modlarda (yer şekli [miras hariç], konu, KPSS sorusu) ve "Haritayı incele" görünümünde.
 - `Core/GameSettings.cs`: renk körü dostu palet (Okabe–Ito: doğru mavi, yanlış turuncu; `Theme.ApplyColorblind`, `MapPalette.ApplyColorblind`), büyük yazı (`UI/TextScaler.cs`, %15), efektler (`Map/MapEffects.cs`: bölge sınırı çizimi, ışıltı; HUD seri kenar parlaması).
 
+## Sınav modu
+- Açma/kapama: bölüm seçim ekranı sağ altı (`LevelSelectScreen`), `GameSettings.ExamMode` (PlayerPrefs). Giriş ekranında harita her zaman renklidir; bölüm seçimi ve oyunda sınav ayarı geçerlidir (`AppFlow` → `ExamModeController.SetLook`).
+- Görünüm: `Core/ExamLook.Blend` (0..1) tek ortak değerdir. `ProvinceView`, `FeatureView`, `FeatureLayer` (göl/ülke), `TurkeyMap` (deniz, gölge, kamera rengi), `ReliefLayer` ve `MapLabelLayer` bunu her karede okuyup renklerini soluk griye karıştırır. Renkler `MapPalette` "Sınav modu" başlığında. Yeni bir harita katmanı eklenirse `ExamLook.Blend`'i okumalı.
+- Sinematik geçiş: `UI/ExamModeController.cs` (sinema şeritleri, buhar parçacıkları, sis, başlık kartı, `MapCameraController.ZoomPunch`, `Sfx.Vapor`). Menüler arası geçişte yalnızca yumuşak renk geçişi.
+- Kurallar (`CityQuizGame.IsExam`): süre × `QuizConfig.examTimeScale` (0,8), puan × `examScoreMultiplier` (1,5), kalıcı boyama / hover / ışıltı / anlık bilgi notu / kontrol ipucu yok, ilerleme anahtarı `ProgressStore.ExamKey(id)` (`id@exam`; toplam yıldıza katılmaz). Bilgi notları "Haritayı incele"de okunur.
+
 ## Reklamlar
 - Oyun kodu yalnızca `Ads/IAdService.cs` arayüzünü bilir. Şu an `Ads/MockAdService.cs` (ekranda test reklamı) bağlı.
 - Strateji: **Dengeli** (kullanıcı seçimi). Yerleşimler: ödüllü = elenince "+1 can ile devam" (bölüm başına 1 kez); geçiş = sonuç ekranından ayrılırken, oturumda 2 bölümden sonra ve en az 180 sn arayla (`Ads/AdPolicy.cs`, ayarlar `QuizConfig`).
 - Gerçek reklamlar: `unity:levelplay-unity-integration` skill'inin adımları izlenecek. **Ads Mediation (`com.unity.services.levelplay`) paketi `Packages/packages-lock.json`'da görünmeden LevelPlay kodu yazılmaz.** Sonra `IAdService`'i uygulayan bir LevelPlay servisi yazılıp `GameBootstrap`'ta mock yerine bağlanır.
 
 ## Sürüm
-- Şu anki sürüm: **0.3.0 (Prototip)**. Kaynak: Unity Player Settings > Version (`bundleVersion`); oyunda `Core/AppInfo.cs` ile giriş ekranında ve Ayarlar'da gösterilir. Her sürümde `docs/CHANGELOG.md` güncellenir. Motor: Unity 6000.6.0f1.
+- Şu anki sürüm: **0.4.0 (Prototip)**. Kaynak: Unity Player Settings > Version (`bundleVersion`); oyunda `Core/AppInfo.cs` ile giriş ekranında ve Ayarlar'da gösterilir. Her sürümde `docs/CHANGELOG.md` güncellenir. Motor: Unity 6000.6.0f1.
 
 ## Prototip
 - Herhangi bir sahnede Play → `GameBootstrap` otomatik oluşur (ya da **KPSS > Prototip Sahnesini Oluştur**). Her şey çalışma anında kurulur.

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using KPSSGeography.Core;
 using KPSSGeography.Data;
 using UnityEngine;
 
@@ -16,8 +17,18 @@ namespace KPSSGeography.Map
         float[] projection;
         public Material SharedMaterial { get; private set; }
 
-        public void Build(ProvinceDatabase db, MapPalette palette)
+        MapPalette palette;
+        Camera bgCamera;
+        Mesh seaMesh;
+        Color[] seaColors = new Color[8];
+        Mesh shadowMesh;
+        Color[] shadowColors;
+        float lastBlend = -1f;
+
+        public void Build(ProvinceDatabase db, MapPalette mapPalette)
         {
+            palette = mapPalette;
+            bgCamera = Camera.main;
             Bounds = db.Bounds;
             projection = db.projection;
             SharedMaterial = CreateMaterial();
@@ -129,6 +140,8 @@ namespace KPSSGeography.Map
             mesh.SetVertices(verts);
             mesh.SetTriangles(tris, 0);
             mesh.colors = colors;
+            shadowMesh = mesh;
+            shadowColors = colors;
 
             var go = new GameObject("Shadow");
             go.transform.SetParent(transform, false);
@@ -137,6 +150,29 @@ namespace KPSSGeography.Map
             var r = go.AddComponent<MeshRenderer>();
             r.sharedMaterial = SharedMaterial;
             r.sortingOrder = -10;
+        }
+
+        /// <summary>Sınav görünümü değişince deniz, gölge ve kamera arka planını soluk griye karıştırır.</summary>
+        void Update()
+        {
+            float blend = ExamLook.Blend;
+            if (Mathf.Approximately(blend, lastBlend) || palette == null) return;
+            lastBlend = blend;
+
+            if (seaMesh != null)
+            {
+                Color bottom = Color.Lerp(palette.seaBottom, palette.examSea, blend);
+                Color top = Color.Lerp(palette.seaTop, palette.examSeaTop, blend);
+                for (int i = 0; i < 8; i++) seaColors[i] = i < 4 ? bottom : top;
+                seaMesh.colors = seaColors;
+            }
+            if (shadowMesh != null)
+            {
+                Color sc = Color.Lerp(palette.shadow, palette.examShadow, blend);
+                for (int i = 0; i < shadowColors.Length; i++) shadowColors[i] = sc;
+                shadowMesh.colors = shadowColors;
+            }
+            if (bgCamera != null) bgCamera.backgroundColor = Color.Lerp(palette.seaBottom, palette.examSea, blend);
         }
 
         /// <summary>Haritanın arkasına dikey gradyanlı büyük bir deniz düzlemi çizer.</summary>
@@ -164,6 +200,8 @@ namespace KPSSGeography.Map
                 tris[t + 3] = i + 2; tris[t + 4] = i + 3; tris[t + 5] = i + 1;
             }
             var mesh = new Mesh { name = "Sea", vertices = verts, colors = colors, triangles = tris };
+            mesh.MarkDynamic();
+            seaMesh = mesh;
 
             var go = new GameObject("Sea");
             go.transform.SetParent(transform, false);

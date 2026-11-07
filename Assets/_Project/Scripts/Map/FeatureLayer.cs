@@ -1,4 +1,6 @@
+using System.Linq;
 using System.Collections.Generic;
+using KPSSGeography.Core;
 using KPSSGeography.Data;
 using UnityEngine;
 
@@ -12,13 +14,27 @@ namespace KPSSGeography.Map
     {
         public const string Mixed = "mixed";
 
+        /// <summary>Göl ve komşu ülke gibi dekor alanlar: sınav görünümünde soluk griye karışır.</summary>
+        class Decor
+        {
+            public Mesh mesh;
+            public Color[] baseColors;
+            public Color[] colors;
+            public int fillCount;
+            public Color examFill;
+            public Color examEdge;
+        }
+
+        readonly List<Decor> decor = new List<Decor>();
+        float lastBlend = -1f;
+
         readonly List<FeatureView> features = new List<FeatureView>();
         public IReadOnlyList<FeatureView> Features => features;
 
         public void Build(GeoFeatureDatabase db, Material material, MapPalette palette)
         {
             if (db.countries != null)
-                foreach (var c in db.countries) BuildArea("Country: " + c.name, c, material, palette.country, palette.countryEdge, -20, 0.015f);
+                foreach (var c in db.countries) BuildArea("Country: " + c.name, c, material, palette.country, palette.countryEdge, -20, 0.015f, palette.examCountry, palette.examCountryEdge);
             foreach (var lake in db.lakes) BuildLake(lake, material, palette);
 
             foreach (var data in db.features)
@@ -97,7 +113,8 @@ namespace KPSSGeography.Map
             return best;
         }
 
-        void BuildArea(string goName, LakeData area, Material material, Color fill, Color edge, int order, float edgeWidth)
+        void BuildArea(string goName, LakeData area, Material material, Color fill, Color edge, int order, float edgeWidth,
+            Color examFill, Color examEdge)
         {
             var b = new LineMeshBuilder();
             b.AddTriangles(area.vertices, area.triangles, fill);
@@ -105,10 +122,35 @@ namespace KPSSGeography.Map
                 b.AddPolyline(LineMeshBuilder.ToPoints(r.points), edgeWidth, edge, true);
             var go = new GameObject(goName);
             go.transform.SetParent(transform, false);
-            go.AddComponent<MeshFilter>().sharedMesh = b.ToMesh(goName);
+            var mesh = b.ToMesh(goName);
+            mesh.MarkDynamic();
+            go.AddComponent<MeshFilter>().sharedMesh = mesh;
             var mr = go.AddComponent<MeshRenderer>();
             mr.sharedMaterial = material;
             mr.sortingOrder = order;
+            decor.Add(new Decor
+            {
+                mesh = mesh, baseColors = b.Colors.ToArray(), colors = b.Colors.ToArray(),
+                fillCount = area.vertices.Length / 2, examFill = examFill, examEdge = examEdge
+            });
+        }
+
+        void Update()
+        {
+            float blend = ExamLook.Blend;
+            if (Mathf.Approximately(blend, lastBlend)) return;
+            lastBlend = blend;
+            foreach (var d in decor)
+            {
+                for (int i = 0; i < d.colors.Length; i++)
+                {
+                    Color target = i < d.fillCount ? d.examFill : d.examEdge;
+                    Color c = Color.Lerp(d.baseColors[i], target, blend);
+                    c.a = d.baseColors[i].a;
+                    d.colors[i] = c;
+                }
+                d.mesh.colors = d.colors;
+            }
         }
 
         void BuildLake(LakeData lake, Material material, MapPalette palette)
@@ -120,10 +162,17 @@ namespace KPSSGeography.Map
 
             var go = new GameObject("Lake: " + lake.name);
             go.transform.SetParent(transform, false);
-            go.AddComponent<MeshFilter>().sharedMesh = b.ToMesh(lake.name);
+            var lakeMesh = b.ToMesh(lake.name);
+            lakeMesh.MarkDynamic();
+            go.AddComponent<MeshFilter>().sharedMesh = lakeMesh;
             var r2 = go.AddComponent<MeshRenderer>();
             r2.sharedMaterial = material;
             r2.sortingOrder = 4;
+            decor.Add(new Decor
+            {
+                mesh = lakeMesh, baseColors = b.Colors.ToArray(), colors = b.Colors.ToArray(),
+                fillCount = lake.vertices.Length / 2, examFill = palette.examLake, examEdge = palette.examLakeEdge
+            });
         }
     }
 }

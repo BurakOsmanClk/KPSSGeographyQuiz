@@ -59,6 +59,7 @@ namespace KPSSGeography.UI
         RectTransform nameTag;
         Image nameTagImage;
         Text nameTagText;
+        RectTransform examBadge;
         Image nameTagIcon;
 
         // Haritayı incele
@@ -203,6 +204,11 @@ namespace KPSSGeography.UI
                 .rectTransform.Place(new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(24, -14), new Vector2(200, 26));
             scoreText = UIFactory.Label("Score", scorePanel.transform, "0", 52, Theme.Amber, TextAnchor.MiddleLeft, FontStyle.Bold);
             scoreText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(24, -42), new Vector2(230, 60));
+
+            var badge = UIFactory.Panel("ExamBadge", hud, Theme.Hex(0xE5E7EB));
+            examBadge = badge.rectTransform.Place(new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(24, -214), new Vector2(214, 46));
+            UIFactory.Label("Text", badge.transform, "SINAV MODU", 22, Theme.Ink, TextAnchor.MiddleCenter, FontStyle.Bold).rectTransform.Stretch();
+            examBadge.gameObject.SetActive(false);
 
             streakText = UIFactory.Label("Streak", hud, "", 30, Theme.Amber, TextAnchor.MiddleLeft, FontStyle.Bold, true);
             streakText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(0f, 0.5f), new Vector2(34, -166), new Vector2(460, 40));
@@ -682,7 +688,8 @@ namespace KPSSGeography.UI
             progressText.text = $"SORU 0 / {game.TotalQuestions}";
             SetTimerVisual(1f, game.TimeLimit);
             RebuildHearts(game.MaxMistakes);
-            hintText.gameObject.SetActive(!game.UsesChoices);
+            hintText.gameObject.SetActive(!game.UsesChoices && !game.IsExam);
+            examBadge.gameObject.SetActive(game.IsExam);
             choiceBarVisible = false;
             choiceBar.gameObject.SetActive(false);
 
@@ -720,7 +727,7 @@ namespace KPSSGeography.UI
             bool choice = q.Type == AnswerType.Choice;
             if (choice) SetupChoices(q);
             ShowChoiceBar(choice);
-            hintText.gameObject.SetActive(!choice);
+            hintText.gameObject.SetActive(!choice && !game.IsExam);
         }
 
         void OnAnswer(AnswerResult r)
@@ -757,7 +764,8 @@ namespace KPSSGeography.UI
                 return;
             }
 
-            if (!string.IsNullOrEmpty(r.Info)) ShowInfo(r.Info, r.IsCorrect ? 2.0f : 3.2f);
+            // Sınavda bilgi notu cevaptan hemen sonra verilmez; "Haritayı incele" ekranında okunur
+            if (!game.IsExam && !string.IsNullOrEmpty(r.Info)) ShowInfo(r.Info, r.IsCorrect ? 2.0f : 3.2f);
             IMapTarget tag = r.IsCorrect && r.Clicked != null ? r.Clicked : q.TagTarget;
 
             if (r.IsCorrect)
@@ -805,7 +813,7 @@ namespace KPSSGeography.UI
             continueWaiting = false;
             Animate("hud", Tween.Run(0.25f, t => hudGroup.alpha = 1f - t));
 
-            endLevel.text = $"{res.Level.ModeLabel}  •  {res.Level.title.ToUpper(TR)}";
+            endLevel.text = $"{res.Level.ModeLabel}  •  {res.Level.title.ToUpper(TR)}{(game.IsExam ? "  •  SINAV" : "")}";
             endTitle.text = res.Completed ? (res.Stars == 3 ? "MÜKEMMEL!" : "TEBRİKLER!") : "ELENDİN!";
             endTitle.color = res.Completed ? Theme.Text : Theme.Error;
             endScore.text = res.Score.ToString();

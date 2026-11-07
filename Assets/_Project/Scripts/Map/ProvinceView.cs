@@ -1,3 +1,4 @@
+using KPSSGeography.Core;
 using KPSSGeography.Data;
 using UnityEngine;
 
@@ -34,6 +35,9 @@ namespace KPSSGeography.Map
         Color[] fillColors;
         MeshRenderer fillRenderer;
         MeshRenderer borderRenderer;
+        Mesh borderMesh;
+        Color[] borderColors;
+        float lastBlend = -1f;
 
         Color baseColor;
         Color correctColor;
@@ -108,10 +112,10 @@ namespace KPSSGeography.Map
             }
             WorldRect = Rect.MinMaxRect(minX, minY, maxX, maxY);
 
-            var borderColors = new Color[lineVerts.Count];
+            borderColors = new Color[lineVerts.Count];
             for (int i = 0; i < borderColors.Length; i++) borderColors[i] = palette.border;
 
-            var borderMesh = new Mesh { name = data.name + "_Border" };
+            borderMesh = new Mesh { name = data.name + "_Border" };
             borderMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
             borderMesh.SetVertices(lineVerts);
             borderMesh.SetColors(borderColors);
@@ -213,7 +217,18 @@ namespace KPSSGeography.Map
             };
             if (dimmed && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, 0.82f);
             else if (neutral && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, 0.78f);
-            if (hovered) target = Color.Lerp(target, palette.hover, 0.5f);
+            float exam = ExamLook.Blend;
+            if (exam > 0f && State == ProvinceState.Idle)
+                target = Color.Lerp(target, dimmed ? palette.examDim : palette.examLand, exam);
+            if (hovered) target = Color.Lerp(target, palette.hover, 0.5f * (1f - exam)); // sınavda ipucu yok
+
+            if (!Mathf.Approximately(exam, lastBlend))
+            {
+                lastBlend = exam;
+                Color bc = Color.Lerp(palette.border, palette.examBorder, exam);
+                for (int i = 0; i < borderColors.Length; i++) borderColors[i] = bc;
+                borderMesh.colors = borderColors;
+            }
 
             smoothedColor = Color.Lerp(smoothedColor, target, 1f - Mathf.Exp(-20f * dt));
             if (Mathf.Abs(smoothedColor.r - target.r) + Mathf.Abs(smoothedColor.g - target.g) +
@@ -265,6 +280,7 @@ namespace KPSSGeography.Map
         void OnDestroy()
         {
             if (fillMesh) Destroy(fillMesh);
+            if (borderMesh) Destroy(borderMesh);
         }
     }
 }
