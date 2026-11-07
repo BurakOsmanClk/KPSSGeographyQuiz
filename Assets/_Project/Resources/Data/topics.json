@@ -1,258 +1,313 @@
 {
  "topics": [
   {
-   "id": "findik",
+   "id": "bugday",
    "set": "tarim1",
-   "title": "Fındık",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "title": "Buğday",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
    "plates": [
-    52,
-    28,
-    55,
-    54,
-    81,
-    61
-   ],
-   "info": "Fındık Karadeniz kıyısında yetişir; üretimde Ordu ilk sıradadır.",
-   "source": "TÜİK"
-  },
-  {
-   "id": "cay",
-   "set": "tarim1",
-   "title": "Çay",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
-   "plates": [
-    53,
-    61,
-    8,
-    28
-   ],
-   "info": "Çay, bol ve her mevsim yağış isteyen Doğu Karadeniz kıyısında yetişir; Rize ilk sıradadır.",
-   "source": "TÜİK"
-  },
-  {
-   "id": "pamuk",
-   "set": "tarim1",
-   "title": "Pamuk",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
-   "plates": [
+    42,
+    6,
     63,
-    9,
-    31,
-    21,
+    21
+   ],
+   "info": "Buğday üretiminde Konya ilk sıradadır; İç Anadolu ve Güneydoğu'nun tahıl alanları öne çıkar.",
+   "source": "TÜİK / KPSS"
+  },
+  {
+   "id": "arpa",
+   "set": "tarim1",
+   "title": "Arpa",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    42,
+    6
+   ],
+   "info": "Arpa, kurağa dayanıklı bir tahıldır; İç Anadolu'da Konya ve Ankara ilk sıralardadır.",
+   "source": "TÜİK / KPSS"
+  },
+  {
+   "id": "misir",
+   "set": "tarim1",
+   "title": "Mısır",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    42,
+    63,
     1
    ],
-   "info": "Pamuk sıcak ve sulanabilen ovalarda yetişir; GAP ile Şanlıurfa (Harran) ilk sıraya yükselmiştir.",
-   "source": "TÜİK"
+   "info": "2023'te mısır üretiminde Konya, Şanlıurfa ve Adana ilk sıralarda yer aldı.",
+   "source": "TÜİK verisi (basın, 2023)"
   },
   {
-   "id": "zeytin",
+   "id": "celtik",
    "set": "tarim1",
-   "title": "Zeytin",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "title": "Çeltik (Pirinç)",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
    "plates": [
-    9,
-    35,
-    48,
-    45,
-    10,
-    31,
-    16
+    22,
+    55,
+    10
    ],
-   "info": "Zeytin Akdeniz iklimine özgüdür; Ege kıyıları en önemli üretim alanıdır.",
-   "source": "TÜİK"
-  },
-  {
-   "id": "tutun",
-   "set": "tarim1",
-   "title": "Tütün",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
-   "plates": [
-    45,
-    35,
-    2,
-    20,
-    55
-   ],
-   "info": "Tütün Ege (Manisa, İzmir), Güneydoğu (Adıyaman) ve Karadeniz'de (Samsun-Bafra) yetiştirilir.",
-   "source": "TÜİK / MEB"
+   "info": "Çeltik bol su ister; Edirne (Meriç–Ergene) ilk sıradadır, Samsun (Bafra–Çarşamba) ve Balıkesir izler.",
+   "source": "TÜİK / KPSS"
   },
   {
    "id": "seker-pancari",
    "set": "tarim1",
    "title": "Şeker Pancarı",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
    "plates": [
     42,
     26,
     3,
-    38,
-    68
+    38
    ],
-   "info": "Şeker pancarı sulanabilen iç bölge ovalarında yetişir; Konya ilk sıradadır. Taşıma maliyeti yüksek olduğundan fabrikalar üretim alanına yakın kurulur.",
-   "source": "TÜİK"
-  },
-  {
-   "id": "bugday",
-   "set": "tarim1",
-   "title": "Buğday",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
-   "plates": [
-    42,
-    6,
-    63,
-    21,
-    59
-   ],
-   "info": "Buğday en geniş alanda ekilen tahıldır; İç Anadolu (Konya, Ankara) ve Güneydoğu öne çıkar.",
-   "source": "TÜİK"
+   "info": "Şeker pancarı üretiminin yaklaşık üçte biri Konya'dadır; fabrikalar üretim alanlarına yakın kurulur.",
+   "source": "TÜİK / KPSS"
   },
   {
    "id": "aycicegi",
    "set": "tarim1",
    "title": "Ayçiçeği",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
    "plates": [
     59,
     22,
-    39,
-    42
+    42,
+    39
    ],
-   "info": "Ayçiçeği üretiminde Trakya (Ergene Ovası) öne çıkar.",
-   "source": "TÜİK"
+   "info": "Ayçiçeği üretiminde Trakya (Tekirdağ, Edirne, Kırklareli) ve Konya öne çıkar.",
+   "source": "TÜİK / KPSS"
   },
   {
-   "id": "muz",
-   "set": "tarim2",
-   "title": "Muz",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "id": "pamuk",
+   "set": "tarim1",
+   "title": "Pamuk",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
    "plates": [
-    33,
-    7
-   ],
-   "info": "Muz, mikroklima özelliği gösteren Anamur (Mersin) ve Alanya–Gazipaşa (Antalya) kıyılarında yetişir.",
-   "source": "MEB"
-  },
-  {
-   "id": "kayisi",
-   "set": "tarim2",
-   "title": "Kayısı",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
-   "plates": [
-    44,
-    23,
-    76
-   ],
-   "info": "Kuru kayısı üretiminde Malatya dünyada öne çıkar.",
-   "source": "TÜİK"
-  },
-  {
-   "id": "incir",
-   "set": "tarim2",
-   "title": "İncir",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
-   "plates": [
+    63,
     9,
-    35,
-    16
+    21
    ],
-   "info": "İncir üretiminde Büyük ve Küçük Menderes ovaları (Aydın) ilk sıradadır.",
-   "source": "TÜİK"
+   "info": "Pamuk üretiminin yaklaşık %40'ı Şanlıurfa'dadır (GAP–Harran); Aydın ve Diyarbakır izler.",
+   "source": "Tarım ve Orman Bakanlığı TEPGE (2023)"
   },
   {
-   "id": "uzum",
-   "set": "tarim2",
-   "title": "Üzüm",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "id": "tutun",
+   "set": "tarim1",
+   "title": "Tütün",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
    "plates": [
     45,
-    20,
-    35
+    2,
+    35,
+    20
    ],
-   "info": "Çekirdeksiz (sultaniye) üzümde Manisa ve Gediz Ovası öne çıkar.",
-   "source": "TÜİK"
+   "info": "Tütün üretiminde Ege (Manisa, İzmir, Denizli) ve Güneydoğu'da Adıyaman öne çıkar.",
+   "source": "TÜİK / KPSS"
   },
   {
-   "id": "antep-fistigi",
-   "set": "tarim2",
-   "title": "Antep Fıstığı",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "id": "patates",
+   "set": "tarim1",
+   "title": "Patates",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
    "plates": [
-    27,
+    51,
+    50,
+    42
+   ],
+   "info": "Patates üretiminde Niğde–Nevşehir yöresi ve Konya öne çıkar.",
+   "source": "MEB / KPSS"
+  },
+  {
+   "id": "nohut",
+   "set": "tarim1",
+   "title": "Nohut",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    6,
+    66,
+    40
+   ],
+   "info": "Nohut üretiminde Ankara, Yozgat ve Kırşehir ilk sıralardadır.",
+   "source": "Tarım ve Orman Bakanlığı TEPGE (2022)"
+  },
+  {
+   "id": "kirmizi-mercimek",
+   "set": "tarim1",
+   "title": "Kırmızı Mercimek",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
     63,
-    56,
-    2
+    21,
+    47
    ],
-   "info": "Antep fıstığı Güneydoğu Anadolu'nun kurak, sıcak yamaçlarında yetişir.",
-   "source": "TÜİK"
-  },
-  {
-   "id": "turuncgil",
-   "set": "tarim2",
-   "title": "Turunçgiller",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
-   "plates": [
-    33,
-    1,
-    7,
-    31
-   ],
-   "info": "Portakal, limon ve mandalina kışları ılık geçen Akdeniz kıyılarında yetişir.",
-   "source": "TÜİK"
+   "info": "Kırmızı mercimek Güneydoğu'da yetişir; Diyarbakır, Şanlıurfa ve Mardin üretimin büyük kısmını karşılar.",
+   "source": "Tarım ve Orman Bakanlığı (2018)"
   },
   {
    "id": "hashas",
-   "set": "tarim2",
+   "set": "tarim1",
    "title": "Haşhaş",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
    "plates": [
     3,
     64,
     20,
     15
    ],
-   "info": "Haşhaş, devlet izniyle (TMO denetiminde) belirli illerde ekilir; Afyonkarahisar öne çıkar.",
-   "source": "TMO / MEB"
+   "info": "Haşhaş yalnızca devlet izniyle (TMO denetiminde) belirli illerde ekilir; Afyonkarahisar ilk sıradadır.",
+   "source": "TMO / KPSS"
   },
   {
-   "id": "gul",
+   "id": "findik",
    "set": "tarim2",
-   "title": "Yağ Gülü",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "title": "Fındık",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
    "plates": [
-    32,
-    15
+    52,
+    28,
+    55,
+    54
    ],
-   "info": "Gül yağı üretiminde Isparta dünyada öne çıkar.",
-   "source": "MEB"
+   "info": "Fındık üretiminde Ordu ilk sıradadır; Giresun, Samsun ve Sakarya izler.",
+   "source": "TÜİK / KPSS"
+  },
+  {
+   "id": "cay",
+   "set": "tarim2",
+   "title": "Çay",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    53,
+    61
+   ],
+   "info": "Çay üretiminin büyük kısmı Rize'dedir; Trabzon ikinci sıradadır.",
+   "source": "TÜİK / KPSS"
+  },
+  {
+   "id": "zeytin",
+   "set": "tarim2",
+   "title": "Zeytin",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    9,
+    35,
+    48,
+    45
+   ],
+   "info": "Zeytin Akdeniz iklimine özgüdür; üretimde Aydın ilk sıradadır, Ege illeri öne çıkar.",
+   "source": "TÜİK / KPSS"
+  },
+  {
+   "id": "uzum",
+   "set": "tarim2",
+   "title": "Üzüm",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    45,
+    20
+   ],
+   "info": "Üzüm üretiminde Manisa (sultaniye) ilk sıradadır; Denizli izler.",
+   "source": "TÜİK / KPSS"
+  },
+  {
+   "id": "incir",
+   "set": "tarim2",
+   "title": "İncir",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    9,
+    35
+   ],
+   "info": "İncir üretiminin %55,9'u Aydın'da, %22'si İzmir'dedir.",
+   "source": "Tarım ve Orman Bakanlığı TEPGE (2025)"
+  },
+  {
+   "id": "kayisi",
+   "set": "tarim2",
+   "title": "Kayısı",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    44
+   ],
+   "info": "Kayısı üretiminin merkezi Malatya'dır; Türkiye kuru kayısıda dünya lideridir.",
+   "source": "TEPGE / KPSS"
   },
   {
    "id": "elma",
    "set": "tarim2",
    "title": "Elma",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
    "plates": [
     32,
     70,
-    51,
-    7
+    51
    ],
-   "info": "Elma üretiminde Isparta ve Karaman ilk sıralardadır.",
-   "source": "TÜİK"
+   "info": "Elma üretiminde Isparta ilk sıradadır; Karaman ve Niğde izler.",
+   "source": "TÜİK / KPSS"
   },
   {
-   "id": "celtik",
+   "id": "antep-fistigi",
    "set": "tarim2",
-   "title": "Çeltik (Pirinç)",
-   "question": "ÜRETİMİNDE ÖNE ÇIKAN BİR İL SEÇ",
+   "title": "Antep Fıstığı",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
    "plates": [
-    22,
-    55,
-    10,
-    19
+    27,
+    63
    ],
-   "info": "Çeltik bol su ister; Meriç–Ergene (Edirne) ve Bafra–Çarşamba (Samsun) ovaları öne çıkar.",
-   "source": "TÜİK"
+   "info": "Antep fıstığı üretiminde Gaziantep ve Şanlıurfa ilk iki sıradadır; en geniş alan Şanlıurfa'dadır.",
+   "source": "TEPGE / akademik çalışma"
+  },
+  {
+   "id": "muz",
+   "set": "tarim2",
+   "title": "Muz",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    33,
+    7
+   ],
+   "info": "Muz, mikroklima özelliği gösteren Anamur (Mersin) ve Alanya–Gazipaşa (Antalya) kıyılarında yetişir.",
+   "source": "MEB / KPSS"
+  },
+  {
+   "id": "turuncgil",
+   "set": "tarim2",
+   "title": "Turunçgiller",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    33,
+    1,
+    7,
+    31
+   ],
+   "info": "Portakal, mandalina ve limon kışları ılık geçen Akdeniz kıyılarında yetişir.",
+   "source": "TÜİK / KPSS"
+  },
+  {
+   "id": "limon",
+   "set": "tarim2",
+   "title": "Limon",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    33
+   ],
+   "info": "Limon üretiminde Mersin (özellikle Erdemli) ilk sıradadır.",
+   "source": "TBMM kayıtları / KPSS"
+  },
+  {
+   "id": "gul",
+   "set": "tarim2",
+   "title": "Yağ Gülü",
+   "question": "EN FAZLA ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    32,
+    15
+   ],
+   "info": "Gül yağı üretiminde Isparta dünyada öne çıkar; Burdur izler.",
+   "source": "MEB / KPSS"
   },
   {
    "id": "sigir",
