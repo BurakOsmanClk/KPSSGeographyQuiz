@@ -30,13 +30,22 @@ COUNTRIES_SRC = os.path.join(HERE, "ne_10m_neighbors_turkey.geojson")
 # Dağ alanı genişlikleri (km); verilmeyenler varsayılan
 MOUNTAIN_WIDTH_KM = {"guneydogu-toroslar": 42, "dogu-karadeniz": 30, "kure": 24, "bolkar": 26, "geyik": 24, "bey": 22,
                      "aladaglar": 20, "nur": 18, "uludag": 14, "kazdagi": 14, "madra": 13, "bozdaglar": 15, "aydin": 15,
-                     "mentese": 18, "munzur": 22, "palandoken": 16, "allahuekber": 18, "sultan": 16, "yildiz": 20}
+                     "mentese": 18, "munzur": 22, "palandoken": 16, "allahuekber": 18, "sultan": 16, "yildiz": 20,
+                     "cilo": 16, "sat": 12, "spil": 10, "yunt": 12, "murat-dagi": 12, "ganos": 10, "dedegol": 12,
+                     "bingol": 18, "zigana": 16, "samanli": 14, "sundiken": 12}
 DEFAULT_MOUNTAIN_KM = 20
 
 # Akarsu yatağından türetilen ovalar: (akarsu id(leri), [boylam_min, enlem_min, boylam_max, enlem_max], genişlik km)
 PLAINS_FROM_RIVERS = {
-    "buyuk-menderes": (["buyuk-menderes"], [27.2, 37.4, 29.2, 38.0], 9),
-    "gediz": (["gediz"], [27.0, 38.4, 28.6, 38.75], 8),
+    "buyuk-menderes": (["buyuk-menderes"], [27.58, 37.4, 29.2, 38.0], 9),
+    "gediz": (["gediz"], [27.15, 38.4, 28.6, 38.75], 8),
+    "kucuk-menderes": (["kucuk-menderes"], [27.25, 37.95, 28.3, 38.3], 9),
+    "soke": (["buyuk-menderes"], [27.2, 37.42, 27.58, 37.65], 14),
+    "menemen": (["gediz"], [26.8, 38.5, 27.15, 38.75], 12),
+    "silifke": (["goksu"], [33.8, 36.2, 34.15, 36.5], 12),
+    "meric": (["meric"], [25.95, 40.6, 26.45, 41.1], 9),
+    "eskisehir": (["porsuk"], [30.3, 39.7, 31.0, 39.88], 10),
+    "erbaa": (["kelkit"], [36.45, 40.55, 37.1, 40.8], 7),
     "ergene": (["ergene"], [26.5, 41.0, 27.95, 41.5], 8),
     "adapazari": (["sakarya"], [30.25, 40.6, 30.75, 41.0], 10),
     "bafra": (["kizilirmak"], [35.55, 41.35, 36.25, 41.8], 15),
@@ -83,6 +92,20 @@ LAKE_NAMES = {
     "Lake Van": "Van Gölü", "Lake Tuz": "Tuz Gölü", "Beyşehir": "Beyşehir Gölü", "Eğirdir": "Eğirdir Gölü",
     "Keban Baraji": "Keban Baraj Gölü", "Ataturk Barajt": "Atatürk Baraj Gölü",
 }
+
+
+def ellipse(center, rx_km, ry_km, angle_deg, n=28):
+    lon0, lat0 = center
+    ky = 1 / 111.0
+    kx = 1 / (111.0 * math.cos(math.radians(lat0)))
+    a = math.radians(angle_deg)
+    pts = []
+    for i in range(n):
+        t = 2 * math.pi * i / n
+        x, y = rx_km * math.cos(t), ry_km * math.sin(t)
+        xr, yr = x * math.cos(a) - y * math.sin(a), x * math.sin(a) + y * math.cos(a)
+        pts.append((lon0 + xr * kx, lat0 + yr * ky))
+    return Polygon(pts)
 
 
 def r4(v):
@@ -224,6 +247,7 @@ def main():
         iverts, itris, _ = triangulate_xy(polys_of(inner))
         features.append({
             "id": m["id"], "name": m["name"], "category": "mountain", "kind": "polygon", "info": m["info"],
+            "subtype": m.get("type", ""),
             "label": line_label([ls]),
             "lines": [{"points": flat(pts)}],
             "vertices": overts, "triangles": otris, "outline": ooutline,
@@ -254,9 +278,13 @@ def main():
                 if pieces:
                     u = unary_union(pieces)
                     geom_xy = u.buffer(0.06).buffer(-0.05)  # birleştir ve yumuşat
+            if geom_xy is None and "ellipse" in a:
+                e = a["ellipse"]
+                # Küçük ovalar ekranda seçilebilsin diye 1.5 kat büyütülür (konum ve yön korunur)
+                geom_xy = to_xy(ellipse(e["center"], e["rx"] * 1.5, e["ry"] * 1.5, e.get("angle", 0)))
             if geom_xy is None:
-                pts = chaikin([tuple(p) for p in a["polygon"]], closed=True)
-                geom_xy = to_xy(Polygon(pts).buffer(0))
+                rings = a["polygons"] if "polygons" in a else [a["polygon"]]
+                geom_xy = unary_union([to_xy(Polygon(chaikin([tuple(p) for p in r], closed=True)).buffer(0)) for r in rings])
             geom_xy = geom_xy.simplify(0.008).intersection(land_xy)
             polys = polys_of(geom_xy)
             if not polys:
@@ -267,6 +295,7 @@ def main():
             lp = polylabel(largest, tolerance=0.01)
             features.append({
                 "id": a["id"], "name": a["name"], "category": cat, "kind": "polygon", "info": a["info"],
+                "subtype": a.get("type", ""),
                 "label": [r4(lp.x), r4(lp.y)],
                 "lines": [], "vertices": verts, "triangles": tris, "outline": outline,
             })
@@ -287,18 +316,6 @@ def main():
             return shape(best["geometry"])
         return None
 
-    def ellipse(center, rx_km, ry_km, angle_deg, n=28):
-        lon0, lat0 = center
-        ky = 1 / 111.0
-        kx = 1 / (111.0 * math.cos(math.radians(lat0)))
-        a = math.radians(angle_deg)
-        pts = []
-        for i in range(n):
-            t = 2 * math.pi * i / n
-            x, y = rx_km * math.cos(t), ry_km * math.sin(t)
-            xr, yr = x * math.cos(a) - y * math.sin(a), x * math.sin(a) + y * math.cos(a)
-            pts.append((lon0 + xr * kx, lat0 + yr * ky))
-        return Polygon(pts)
 
     for item in manual["lakes"]["items"]:
         if item["source"] == "ne":

@@ -161,6 +161,43 @@ ATTRIBUTES = [
         ],
     },
     {
+        "id": "plaintype",
+        "prompt": "BU OVA OLUŞUMUNA GÖRE HANGİ TÜRDENDİR?",
+        "choices": ["Delta", "Tektonik", "Karstik (polye)", "Göl tabanı"],
+        "colors": ["#7FB7E3", "#81B29A", "#C3A6E0", "#F2CC8F"],
+        "infos": [
+            "Delta ovası: akarsuların denize döküldüğü yerde biriktirdiği alüvyonlarla oluşur (Çukurova, Bafra, Çarşamba, Silifke, Söke, Menemen).",
+            "Tektonik ova: fay hatları boyunca çöken alanlarda oluşur; Ege'deki graben ovaları ve Doğu Anadolu'daki çöküntü ovaları bu türdendir.",
+            "Karstik ova (polye): kalkerli arazide erime sonucu oluşan geniş çukurlardır (Elmalı, Muğla, Tefenni, Acıpayam, Kestel, Korkuteli).",
+            "Göl tabanı ovası: eski bir gölün çekilmesi ya da dolmasıyla oluşur; Konya Ovası en bilinen örnektir.",
+        ],
+        "groups": [],
+    },
+    {
+        "id": "plateautype",
+        "prompt": "BU PLATO OLUŞUMUNA GÖRE HANGİ TÜRDENDİR?",
+        "choices": ["Aşınım", "Tabaka", "Karstik", "Lav örtülü"],
+        "colors": ["#B8B8D1", "#F2CC8F", "#81B29A", "#E07A5F"],
+        "infos": [
+            "Aşınım platosu: uzun süreli aşınmayla alçalıp düzleşmiş eski dağlık alanlardır (Çatalca–Kocaeli).",
+            "Tabaka (örtü) platosu: yatay tortul tabakaların akarsularla yarılmasıyla oluşur (Bozok, Uzunyayla, Yazılıkaya, Gaziantep, Şanlıurfa).",
+            "Karstik plato: kalkerli arazide oluşmuş, yüzeyde suyun az olduğu platolardır (Teke, Taşeli).",
+            "Lav örtülü plato: geniş lav akıntılarının örttüğü düzlüklerdir (Erzurum–Kars, Ardahan).",
+        ],
+        "groups": [],
+    },
+    {
+        "id": "mountaintype",
+        "prompt": "BU DAĞ OLUŞUMUNA GÖRE HANGİ TÜRDENDİR?",
+        "choices": ["Kıvrım", "Kırık (horst)"],
+        "colors": ["#C9A26B", "#81B29A"],
+        "infos": [
+            "Kıvrım dağı: tortul tabakaların yan basınçla kıvrılmasıyla oluşur; Kuzey Anadolu Dağları ve Toroslar bu türdendir.",
+            "Kırık dağı (horst): sert kütlelerin faylarla kırılıp yükselmesiyle oluşur; Ege'deki Kaz Dağı, Madra, Yunt, Bozdağlar, Aydın Dağları, Menteşe ve Uludağ bu türdendir.",
+        ],
+        "groups": [],
+    },
+    {
         "id": "laketype",
         "prompt": "BU GÖL OLUŞUMUNA GÖRE HANGİ TÜRDENDİR?",
         "choices": ["Tektonik", "Volkanik", "Karstik", "Heyelan set", "Alüvyal set", "Kıyı set", "Baraj (yapay)"],
