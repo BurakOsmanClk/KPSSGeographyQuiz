@@ -40,5 +40,5 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - Herhangi bir sahnede Play → `GameBootstrap` otomatik oluşur (ya da **KPSS > Prototip Sahnesini Oluştur**). Her şey çalışma anında kurulur.
 - Akış (`Core/AppFlow.cs`): Giriş ekranı → Bölüm karuseli → Oyun → Sonuç (Tekrar / Sonraki / Bölümler).
 - Bölümler `Resources/Data/levels.json` içinde (`mode`: `find` = İli Bul, `region` = Bölge Modu, `feature` = Yer Şekli (`category`: river | mountain | volcano | plain | plateau), `soon` = Yakında; `regions` boşsa tüm Türkiye).
-- İlerleme (yıldız, rekor, kilitler) `Meta/ProgressStore.cs` → PlayerPrefs. Yıldız: tamamlarsa 3 − hata (en az 1). Bir bölüm, önceki oynanabilir bölümden ≥1 yıldızla açılır.
+- İlerleme (yıldız, rekor, kilitler) `Meta/ProgressStore.cs` → PlayerPrefs. Yıldız: tamamlarsa 3 − hata (en az 1). Bir bölüm, önceki oynanabilir bölümden ≥1 yıldızla açılır. **Şu an geliştirme için tüm bölümler açık** (`GameBootstrap.UnlockAllLevelsForTesting = true`); yayından önce false yapılacak.
 - Harita renkleri bölgelere göre (`Map/MapPalette.cs`); doğru bilinen il bölge renginin doygun haline boyanır.

@@ -20,6 +20,12 @@ namespace KPSSGeography.Core
     [DisallowMultipleComponent]
     public class GameBootstrap : MonoBehaviour
     {
+        /// <summary>
+        /// Geliştirme süresince tüm bölümler açık. Kilit sistemini geri getirmek için false yap
+        /// (ya da Inspector'da QuizConfig > Unlock All Levels kutusunu kullan).
+        /// </summary>
+        const bool UnlockAllLevelsForTesting = true;
+
         [SerializeField] QuizConfig quizConfig = new QuizConfig();
         [SerializeField] MapPalette palette = new MapPalette();
 
@@ -47,7 +53,7 @@ namespace KPSSGeography.Core
                 return;
             }
             var catalog = LevelCatalog.Load();
-            var progress = new ProgressStore(catalog) { UnlockAll = quizConfig.unlockAllLevels };
+            var progress = new ProgressStore(catalog) { UnlockAll = UnlockAllLevelsForTesting || quizConfig.unlockAllLevels };
 
             Camera cam = SetupCamera();
             EnsureEventSystem();
