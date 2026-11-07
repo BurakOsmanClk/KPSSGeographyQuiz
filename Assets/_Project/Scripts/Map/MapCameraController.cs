@@ -37,6 +37,10 @@ namespace KPSSGeography.Map
         float shakeDuration;
         float shakeAmplitude;
 
+        /// <summary>Tüm haritanın ekrana sığdığı ortografik boyut (etiketlerin yakınlaşma ölçüsü).</summary>
+        public float FullMapSize => cam == null ? 1f
+            : Mathf.Max(mapBounds.height / (2f * 0.8f), mapBounds.width / (2f * cam.aspect * 0.94f));
+
         /// <summary>Kullanıcı girişi (zoom/pan) açık mı? Duraklatma gibi durumlarda kapatılır.</summary>
         public bool InputEnabled { get; set; } = true;
 

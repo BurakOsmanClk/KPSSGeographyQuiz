@@ -62,6 +62,14 @@ namespace KPSSGeography.Core
             var map = new GameObject("TurkeyMap").AddComponent<TurkeyMap>();
             map.Build(db, palette);
 
+            // Gölgeli kabartma (gerçek yükseklik verisinden)
+            var relief = new GameObject("Relief").AddComponent<ReliefLayer>();
+            relief.Build(map.Bounds, map.SharedMaterial.shader);
+
+            // Efektler (bölge sınırı çizimi, ışıltı)
+            var effects = new GameObject("MapEffects").AddComponent<MapEffects>();
+            effects.Initialize(map.SharedMaterial);
+
             // Fiziki harita (göller, akarsular, dağlar, volkanlar, ovalar, platolar)
             var features = new GameObject("PhysicalFeatures").AddComponent<FeatureLayer>();
             features.Build(GeoFeatureDatabase.Load(), map.SharedMaterial, palette);
@@ -77,7 +85,7 @@ namespace KPSSGeography.Core
             // Oyun
             var game = new GameObject("CityQuizGame").AddComponent<CityQuizGame>();
             var builder = new QuestionBuilder(map, features, TopicDatabase.Load(), McqDatabase.Load(), palette);
-            game.Initialize(quizConfig, map, features, sfx, camController, progress, builder);
+            game.Initialize(quizConfig, map, features, sfx, camController, progress, builder, relief, effects);
 
             var pointer = map.gameObject.AddComponent<MapPointer>();
             pointer.Initialize(map, cam);
@@ -91,7 +99,12 @@ namespace KPSSGeography.Core
 
             // Arayüz
             var canvas = CreateCanvas(out RectTransform uiRoot);
+            // Harita yazıları (deniz/ülke adları, il adları, inceleme etiketleri)
+            var labels = new GameObject("MapLabelsController").AddComponent<MapLabelLayer>();
+            labels.Initialize(cam, () => camController.FullMapSize, map);
+
             var hud = new GameObject("QuizHudController").AddComponent<QuizHud>();
+            hud.Labels = labels;
             hud.Initialize(uiRoot, uiRoot, game, palette, cam, sfx);
             var levels = new GameObject("LevelSelectController").AddComponent<LevelSelectScreen>();
             levels.Initialize(uiRoot, canvas, catalog, progress, sfx);
@@ -102,6 +115,17 @@ namespace KPSSGeography.Core
             var mockAds = new GameObject("MockAdsController").AddComponent<MockAdService>();
             mockAds.Initialize(uiRoot, sfx);
             var adPolicy = new AdPolicy(mockAds, quizConfig);
+
+            // Erişilebilirlik ayarları: renk körü paleti ve büyük yazı
+            void ApplySettings()
+            {
+                Theme.ApplyColorblind(GameSettings.Colorblind);
+                palette.ApplyColorblind(GameSettings.Colorblind);
+                TextScaler.Apply(uiRoot);
+            }
+            ApplySettings();
+            GameSettings.Changed += ApplySettings;
+            settingsHandler = ApplySettings;
 
             var flow = gameObject.AddComponent<AppFlow>();
             flow.Initialize(game, hud, title, levels, catalog, progress, adPolicy);
@@ -151,9 +175,12 @@ namespace KPSSGeography.Core
             new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
         }
 
+        System.Action settingsHandler;
+
         void OnDestroy()
         {
             Time.timeScale = 1f;
+            if (settingsHandler != null) GameSettings.Changed -= settingsHandler;
         }
     }
 }

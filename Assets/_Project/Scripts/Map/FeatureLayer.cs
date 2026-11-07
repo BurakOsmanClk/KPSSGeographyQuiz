@@ -17,6 +17,8 @@ namespace KPSSGeography.Map
 
         public void Build(GeoFeatureDatabase db, Material material, MapPalette palette)
         {
+            if (db.countries != null)
+                foreach (var c in db.countries) BuildArea("Country: " + c.name, c, material, palette.country, palette.countryEdge, -20, 0.015f);
             foreach (var lake in db.lakes) BuildLake(lake, material, palette);
 
             foreach (var data in db.features)
@@ -93,6 +95,20 @@ namespace KPSSGeography.Map
                 if (score < bestScore) { bestScore = score; best = f; }
             }
             return best;
+        }
+
+        void BuildArea(string goName, LakeData area, Material material, Color fill, Color edge, int order, float edgeWidth)
+        {
+            var b = new LineMeshBuilder();
+            b.AddTriangles(area.vertices, area.triangles, fill);
+            foreach (var r in area.outline)
+                b.AddPolyline(LineMeshBuilder.ToPoints(r.points), edgeWidth, edge, true);
+            var go = new GameObject(goName);
+            go.transform.SetParent(transform, false);
+            go.AddComponent<MeshFilter>().sharedMesh = b.ToMesh(goName);
+            var mr = go.AddComponent<MeshRenderer>();
+            mr.sharedMaterial = material;
+            mr.sortingOrder = order;
         }
 
         void BuildLake(LakeData lake, Material material, MapPalette palette)

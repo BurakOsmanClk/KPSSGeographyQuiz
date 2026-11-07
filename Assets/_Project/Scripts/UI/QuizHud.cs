@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using KPSSGeography.Core;
 using KPSSGeography.Data;
 using KPSSGeography.Map;
@@ -58,6 +59,20 @@ namespace KPSSGeography.UI
         RectTransform nameTag;
         Image nameTagImage;
         Text nameTagText;
+        Image nameTagIcon;
+
+        // Haritayı incele
+        public MapLabelLayer Labels;
+        RectTransform reviewBar;
+        RectTransform reviewInfo;
+        Text reviewInfoTitle;
+        Text reviewInfoBody;
+        Button reviewButton;
+        bool reviewing;
+
+        // Seri kenar parlaması
+        Image glowTop;
+        Image glowBottom;
         CanvasGroup nameTagGroup;
         IMapTarget nameTagTarget;
 
@@ -116,6 +131,8 @@ namespace KPSSGeography.UI
             BuildPauseScreen();
             BuildContinueScreen();
             BuildEndScreen();
+            BuildReview();
+            BuildEdgeGlow();
 
             game.GameStarted += OnGameStarted;
             game.CountdownTick += OnCountdown;
@@ -140,6 +157,8 @@ namespace KPSSGeography.UI
 
         public override void Hide()
         {
+            ExitReview(false);
+            Labels?.SetProvinceLabels(false);
             base.Hide();
             HideNameTag(true);
         }
@@ -354,7 +373,9 @@ namespace KPSSGeography.UI
             nameTagImage = UIFactory.Panel("NameTag", Root, Theme.NavyPanel);
             nameTag = nameTagImage.rectTransform.Place(Vector2.zero, new Vector2(0.5f, 0f), Vector2.zero, new Vector2(200, 52));
             nameTagText = UIFactory.Label("Text", nameTag, "", 30, Theme.Text, TextAnchor.MiddleCenter, FontStyle.Bold);
-            nameTagText.rectTransform.Stretch();
+            nameTagText.rectTransform.Stretch(40, 0, 0, 0);
+            nameTagIcon = UIFactory.Icon("Icon", nameTag, ShapeSprites.Check, Color.white);
+            nameTagIcon.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), new Vector2(14, 0), new Vector2(30, 30));
             nameTagGroup = nameTag.gameObject.AddComponent<CanvasGroup>();
             nameTagGroup.blocksRaycasts = false;
             nameTagGroup.alpha = 0f;
@@ -436,7 +457,7 @@ namespace KPSSGeography.UI
             endGroup = dim.gameObject.AddComponent<CanvasGroup>();
 
             var card = UIFactory.Card("Card", endScreen, Theme.NavyPanel, true);
-            endCard = card.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(820, 760));
+            endCard = card.rectTransform.Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(820, 840));
 
             endLevel = UIFactory.Label("Level", endCard, "", 24, Theme.Sky, TextAnchor.MiddleCenter, FontStyle.Bold);
             endLevel.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -30), new Vector2(760, 30));
@@ -482,7 +503,112 @@ namespace KPSSGeography.UI
                 NextRequested?.Invoke();
             }, Theme.Ink, 30);
 
+            reviewButton = UIFactory.Button("Review", endCard, "HARİTAYI İNCELE", Theme.NavyCard, new Vector2(340, 60), () =>
+            {
+                sfx.Play(Sfx.Click);
+                EnterReview();
+            }, Theme.Sky, 24);
+            reviewButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0, 200), new Vector2(340, 60));
+
             endScreen.gameObject.SetActive(false);
+        }
+
+        void BuildReview()
+        {
+            var bar = UIFactory.Card("ReviewBar", Root, Theme.NavyPanel, true);
+            reviewBar = bar.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -22), new Vector2(980, 110));
+            UIFactory.Label("Title", reviewBar, "HARİTAYI İNCELE", 34, Theme.Text, TextAnchor.MiddleLeft, FontStyle.Bold)
+                .rectTransform.Place(new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(30, -18), new Vector2(600, 42));
+            UIFactory.Label("Hint", reviewBar, "Etiketlere dokun • Tekerlekle yakınlaş • Sağ tıkla kaydır", 20, Theme.TextMuted, TextAnchor.MiddleLeft)
+                .rectTransform.Place(new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(30, -64), new Vector2(640, 30));
+            UIFactory.Button("Back", reviewBar, "SONUÇLARA DÖN", Theme.Amber, new Vector2(270, 70), () =>
+                {
+                    sfx.Play(Sfx.Click);
+                    ExitReview(true);
+                }, Theme.Ink, 24)
+                .GetComponent<RectTransform>().Place(new Vector2(1f, 0.5f), new Vector2(1f, 0.5f), new Vector2(-20, 0), new Vector2(270, 70));
+            reviewBar.gameObject.SetActive(false);
+
+            var info = UIFactory.Card("ReviewInfo", Root, Theme.NavyPanel, true);
+            reviewInfo = info.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0, 30), new Vector2(1100, 150));
+            reviewInfoTitle = UIFactory.Label("Title", reviewInfo, "", 32, Theme.Amber, TextAnchor.MiddleLeft, FontStyle.Bold);
+            reviewInfoTitle.rectTransform.Place(new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(30, -14), new Vector2(1040, 40));
+            reviewInfoBody = UIFactory.Label("Body", reviewInfo, "", 24, Theme.Text, TextAnchor.UpperLeft);
+            reviewInfoBody.horizontalOverflow = HorizontalWrapMode.Wrap;
+            reviewInfoBody.rectTransform.Place(new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(30, -60), new Vector2(1040, 80));
+            reviewInfo.gameObject.SetActive(false);
+        }
+
+        void EnterReview()
+        {
+            if (reviewing || Labels == null) return;
+            reviewing = true;
+            endScreen.gameObject.SetActive(false);
+            reviewBar.gameObject.SetActive(true);
+            reviewBar.SetAsLastSibling();
+            reviewInfo.gameObject.SetActive(false);
+            var items = new List<(IMapTarget, string, bool, Action)>();
+            foreach (var h in game.History)
+            {
+                var item = h;
+                items.Add((h.Target, h.Label, h.Correct, () => ShowReviewInfo(item)));
+            }
+            Labels.ShowReview(items);
+            Labels.SetProvinceLabels(true);
+            PopIn("reviewbar", reviewBar, 0.9f, 0.3f);
+        }
+
+        void ShowReviewInfo(ReviewItem item)
+        {
+            sfx.Play(Sfx.Click);
+            reviewInfo.gameObject.SetActive(true);
+            reviewInfo.SetAsLastSibling();
+            reviewInfoTitle.text = (item.Correct ? "DOĞRU  •  " : "YANLIŞ  •  ") + item.Label;
+            reviewInfoTitle.color = item.Correct ? Theme.Success : Theme.Error;
+            reviewInfoBody.text = string.IsNullOrEmpty(item.Info) ? "Bu soru için ek bilgi notu yok." : item.Info;
+            PopIn("reviewinfo", reviewInfo, 0.92f, 0.25f);
+        }
+
+        void ExitReview(bool backToResults)
+        {
+            if (!reviewing) return;
+            reviewing = false;
+            Labels?.ClearReview();
+            reviewBar.gameObject.SetActive(false);
+            reviewInfo.gameObject.SetActive(false);
+            if (game.Level != null) Labels?.SetProvinceLabels(ProvinceNamesAllowed());
+            if (backToResults)
+            {
+                endScreen.gameObject.SetActive(true);
+                PopIn("endcard", endCard, 0.92f, 0.3f);
+            }
+        }
+
+        void BuildEdgeGlow()
+        {
+            glowBottom = UIFactory.Icon("GlowBottom", Root, ShapeSprites.GradientUp, new Color(1f, 0.72f, 0.1f, 0f));
+            glowBottom.preserveAspect = false;
+            var b = glowBottom.rectTransform;
+            b.anchorMin = Vector2.zero; b.anchorMax = new Vector2(1f, 0f); b.pivot = new Vector2(0.5f, 0.5f);
+            b.sizeDelta = new Vector2(0f, 180f); b.anchoredPosition = new Vector2(0f, 90f);
+
+            glowTop = UIFactory.Icon("GlowTop", Root, ShapeSprites.GradientUp, new Color(1f, 0.72f, 0.1f, 0f));
+            glowTop.preserveAspect = false;
+            var t = glowTop.rectTransform;
+            t.anchorMin = new Vector2(0f, 1f); t.anchorMax = Vector2.one; t.pivot = new Vector2(0.5f, 0.5f);
+            t.sizeDelta = new Vector2(0f, 180f); t.anchoredPosition = new Vector2(0f, -90f);
+            t.localRotation = Quaternion.Euler(0f, 0f, 180f);
+        }
+
+        void PulseEdgeGlow()
+        {
+            if (!GameSettings.Effects) return;
+            Animate("glow", Tween.Run(0.9f, x =>
+            {
+                float a = Mathf.Sin(x * Mathf.PI) * 0.55f;
+                glowTop.color = new Color(1f, 0.72f, 0.1f, a);
+                glowBottom.color = new Color(1f, 0.72f, 0.1f, a);
+            }));
         }
 
         void LayoutEndButtons(bool showNext, bool retryPrimary)
@@ -518,8 +644,27 @@ namespace KPSSGeography.UI
 
         // ================== Oyun olayları ==================
 
+        /// <summary>İl adları cevabı ele vermiyorsa (yer şekli, konu haritası, KPSS sorusu) yakınlaşınca gösterilir.</summary>
+        bool ProvinceNamesAllowed()
+        {
+            var level = game.Level;
+            switch (game.Mode)
+            {
+                case QuizMode.Feature:
+                    return level.category != "unesco" && level.category != "park";
+                case QuizMode.FeatureChoice:
+                case QuizMode.Topic:
+                case QuizMode.Mcq:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         void OnGameStarted()
         {
+            ExitReview(false);
+            Labels?.SetProvinceLabels(ProvinceNamesAllowed());
             Show();
             endScreen.gameObject.SetActive(false);
             pauseScreen.gameObject.SetActive(false);
@@ -629,6 +774,7 @@ namespace KPSSGeography.UI
                     SpawnFloatingText($"+{r.Points}", tag, Theme.Amber);
                     ShowNameTag(tag, Theme.Success);
                 }
+                if (r.Streak >= 5 && r.Streak % 5 == 0) PulseEdgeGlow();
                 if (r.Streak >= 2)
                 {
                     streakText.text = $"SERİ x{r.Streak}   (puan ×{r.Multiplier:0.0})";
@@ -670,6 +816,7 @@ namespace KPSSGeography.UI
             bool nextAvailable = NextAvailable?.Invoke(res.Level) ?? false;
             LayoutEndButtons(nextAvailable, !res.Completed);
 
+            reviewButton.gameObject.SetActive(game.History.Count > 0 && Labels != null);
             endScreen.gameObject.SetActive(true);
             endScreen.SetAsLastSibling();
             Animate("endfade", Tween.Run(0.25f, t => endGroup.alpha = t));
@@ -871,7 +1018,8 @@ namespace KPSSGeography.UI
         {
             nameTagTarget = target;
             nameTagText.text = target.DisplayName;
-            nameTag.sizeDelta = new Vector2(nameTagText.preferredWidth + 44f, 54f);
+            nameTagIcon.sprite = accent == Theme.Success ? ShapeSprites.Check : ShapeSprites.Cross;
+            nameTag.sizeDelta = new Vector2(nameTagText.preferredWidth + 84f, 54f);
             nameTagImage.color = Color.Lerp(Theme.NavyPanel, accent, 0.55f);
             nameTag.SetAsLastSibling();
             Animate("nametag", Tween.Run(0.25f, t =>

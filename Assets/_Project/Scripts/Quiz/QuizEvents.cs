@@ -73,6 +73,23 @@ namespace KPSSGeography.Quiz
         }
     }
 
+    /// <summary>"Haritayı incele" için turda sorulan bir yer ve sonucu.</summary>
+    public readonly struct ReviewItem
+    {
+        public readonly IMapTarget Target;
+        public readonly string Label;
+        public readonly string Info;
+        public readonly bool Correct;
+
+        public ReviewItem(IMapTarget target, string label, string info, bool correct)
+        {
+            Target = target;
+            Label = label;
+            Info = info;
+            Correct = correct;
+        }
+    }
+
     public readonly struct GameResult
     {
         public readonly LevelDefinition Level;

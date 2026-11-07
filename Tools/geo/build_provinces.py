@@ -80,6 +80,9 @@ def get_projection(geoms=None):
 def main():
     feats, geoms = load_provinces()
     proj, (minx, miny, maxx, maxy) = get_projection(geoms)
+    lon0, lat0 = (minx + maxx) / 2, (miny + maxy) / 2
+    kx = math.cos(math.radians(lat0))
+    scale = TARGET_WIDTH / ((maxx - minx) * kx)
 
     def ring_xy(coords):
         pts = [proj(x, y) for x, y in coords]
@@ -136,6 +139,21 @@ def main():
             "rings": rings,
         })
 
+    # Bölge dış hatları (bölüm başında "sınır çizilme" animasyonu için)
+    from shapely.ops import unary_union
+    region_outlines = []
+    for region in REGIONS:
+        u = unary_union([g for f, g in zip(feats, geoms)
+                         if REGION_OF[int(f["properties"]["iso_3166_2"].split("-")[1])] == region]).simplify(0.01)
+        parts = list(u.geoms) if isinstance(u, MultiPolygon) else [u]
+        rings = []
+        for part in sorted(parts, key=lambda q: -q.area):
+            if part.area < 0.02:
+                continue
+            pts = [proj(x, y) for x, y in list(part.exterior.coords)[:-1]]
+            rings.append({"points": [round(c, 4) for p in pts for c in p]})
+        region_outlines.append({"region": region, "rings": rings})
+
     out.sort(key=lambda p: p["plate"])
     assert [p["plate"] for p in out] == list(range(1, 82))
     bx0, by0 = proj(minx, miny)
@@ -144,6 +162,9 @@ def main():
         "source": "Natural Earth 10m admin-1 (public domain)",
         "bounds": [round(bx0, 4), round(by0, 4), round(bx1, 4), round(by1, 4)],
         "provinces": out,
+        "regionOutlines": region_outlines,
+        # Unity'de boylam/enlemden harita koordinatına çevirmek için: x = (lon - p[0]) * p[2], y = (lat - p[1]) * p[3]
+        "projection": [round(lon0, 6), round(lat0, 6), round(kx * scale, 6), round(scale, 6)],
     }
     os.makedirs(os.path.dirname(DST), exist_ok=True)
     with open(DST, "w", encoding="utf-8") as fp:

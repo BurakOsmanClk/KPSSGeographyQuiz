@@ -28,6 +28,13 @@ namespace KPSSGeography.Data
     }
 
     [Serializable]
+    public class RegionOutline
+    {
+        public string region;
+        public ProvinceRing[] rings;
+    }
+
+    [Serializable]
     public class ProvinceDatabase
     {
         public const string ResourcePath = "Data/turkey_provinces";
@@ -35,6 +42,9 @@ namespace KPSSGeography.Data
         public string source;
         public float[] bounds;
         public ProvinceData[] provinces;
+        public RegionOutline[] regionOutlines;
+        /// <summary>[lon0, lat0, xScale, yScale]: x = (lon − lon0)·xScale, y = (lat − lat0)·yScale.</summary>
+        public float[] projection;
 
         public Rect Bounds => Rect.MinMaxRect(bounds[0], bounds[1], bounds[2], bounds[3]);
 
