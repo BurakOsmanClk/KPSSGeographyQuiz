@@ -1,0 +1,210 @@
+{
+ "tabs": [
+  {
+   "id": "iklim",
+   "title": "İKLİM"
+  },
+  {
+   "id": "yer",
+   "title": "YER ŞEKİLLERİ"
+  },
+  {
+   "id": "sular",
+   "title": "SULAR VE KIYILAR"
+  },
+  {
+   "id": "ekonomi",
+   "title": "EKONOMİ"
+  },
+  {
+   "id": "beseri",
+   "title": "BEŞERİ"
+  }
+ ],
+ "lessons": [
+  {
+   "id": "iklim-tipleri",
+   "tab": "iklim",
+   "title": "İklim Tipleri",
+   "kind": "attribute",
+   "reference": "climate",
+   "notes": "Türkiye orta kuşakta yer alır; denize kıyısı, yükseltisi ve dağların uzanışı nedeniyle kısa mesafede farklı iklimler görülür.\n<b>Karadeniz:</b> her mevsim yağışlı (en çok sonbahar), yazlar serin. Bitki örtüsü orman.\n<b>Akdeniz:</b> yazlar sıcak ve kurak, kışlar ılık ve yağışlı. Bitki örtüsü maki.\n<b>Karasal:</b> yazlar sıcak ve kurak, kışlar soğuk ve karlı; en çok ilkbaharda yağar. Bitki örtüsü bozkır.\n<b>Marmara:</b> üç iklim arasında geçiş özelliği gösterir.\n\n<color=#8ECAE6>Haritada bir ile dokun.</color>"
+  },
+  {
+   "id": "bitki-ortusu",
+   "tab": "iklim",
+   "title": "Bitki Örtüsü",
+   "kind": "attribute",
+   "reference": "vegetation",
+   "notes": "Doğal bitki örtüsü iklimin aynasıdır.\n<b>Orman:</b> Karadeniz'de kayın, gürgen, ladin; Akdeniz dağlarında kızılçam, sedir, karaçam.\n<b>Maki:</b> yaz kuraklığına dayanıklı, her dem yeşil çalılar. Tahrip edilince yerini <b>garig</b> alır.\n<b>Bozkır (step):</b> ilkbahar yağışlarıyla yeşerip yazın kuruyan otlar.\n<b>Dağ çayırı:</b> Doğu Anadolu'da yaz yağışlarıyla gürleşir; büyükbaş hayvancılığı besler.\n<b>Psödomaki:</b> Karadeniz kıyısında maki ile orman bitkilerinin karıştığı topluluk.\n\n<color=#8ECAE6>Haritada bir ile dokun.</color>"
+  },
+  {
+   "id": "sicaklik-yagis",
+   "tab": "iklim",
+   "title": "Sıcaklık ve Yağış",
+   "kind": "topicset",
+   "reference": "iklim2",
+   "notes": "Sıcaklık güneyden kuzeye ve batıdan doğuya (yükselti arttıkça) azalır.\n<b>Yağış türleri:</b> orografik (Karadeniz kıyıları), konveksiyonel (İç Anadolu'da ilkbahar sağanakları), cephesel (Akdeniz ve Marmara'da kış yağışları).\n<b>Yerel rüzgârlar:</b> poyraz (KD, soğuk), lodos (GB, ılık), karayel (KB), keşişleme (GD), samyeli (GD, sıcak ve kuru), fön (yamaç aşağı, sıcak).\n<b>Topraklar:</b> terra rossa (Akdeniz), laterit (Doğu Karadeniz), çernozyom (Erzurum–Kars), alüvyal (ova ve deltalar).\n\n<color=#8ECAE6>Sağdan bir başlık seç: ilgili iller boyanır. Bir ile dokunursan o ilin öne çıktığı başlıklar listelenir.</color>"
+  },
+  {
+   "id": "daglar",
+   "tab": "yer",
+   "title": "Dağlar",
+   "kind": "feature",
+   "reference": "mountain",
+   "notes": "<b>Kıvrım dağları:</b> Kuzey Anadolu Dağları ve Toroslar kıyıya paralel uzanır; Alp–Himalaya kuşağının parçasıdır. Kıyılar boyuna kıyı olur.\n<b>Kırık dağlar (horst):</b> Ege'de grabenler arasında yükselir: Kaz, Madra, Yunt, Bozdağlar, Aydın Dağları. Kıyıya dik uzandıkları için Ege'de enine kıyı oluşur.\nDağların uzanışı yağışı, ulaşımı ve nüfus dağılışını belirler.\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  },
+  {
+   "id": "volkanlar",
+   "tab": "yer",
+   "title": "Volkanik Dağlar",
+   "kind": "feature",
+   "reference": "volcano",
+   "notes": "Volkanik dağlar fay hatları boyunca oluşmuştur.\n<b>Doğu Anadolu:</b> Ağrı (5.137 m, Türkiye'nin en yüksek dağı), Süphan, Nemrut, Tendürek.\n<b>İç Anadolu:</b> Erciyes, Hasan, Melendiz, Karadağ.\n<b>Güneydoğu:</b> Karacadağ.  <b>Ege:</b> Kula (en genç volkanlar).\nVolkanik tüfler Kapadokya'da peribacalarını oluşturur; Nemrut'un lavları Van Gölü'nün önünü kapatmıştır.\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  },
+  {
+   "id": "ovalar",
+   "tab": "yer",
+   "title": "Ovalar",
+   "kind": "feature",
+   "reference": "plain",
+   "notes": "<b>Delta ovaları:</b> akarsuyun denize döktüğü alüvyonlarla (Çukurova, Bafra, Çarşamba, Silifke, Söke, Menemen).\n<b>Tektonik ovalar:</b> çöken alanlarda; Ege grabenleri (Gediz, Büyük ve Küçük Menderes, Bakırçay) ve Doğu Anadolu çöküntüleri (Muş, Erzurum, Iğdır).\n<b>Karstik ovalar (polye):</b> Akdeniz'in kalkerli arazisinde (Elmalı, Muğla, Tefenni, Acıpayam).\n<b>Göl tabanı ovası:</b> Konya Ovası.\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  },
+  {
+   "id": "platolar",
+   "tab": "yer",
+   "title": "Platolar",
+   "kind": "feature",
+   "reference": "plateau",
+   "notes": "Plato: akarsularla derince yarılmış, çevresine göre yüksek düzlük.\n<b>Tabaka platoları:</b> yatay tortul tabakalar (Bozok, Uzunyayla, Gaziantep, Şanlıurfa, Yazılıkaya).\n<b>Lav platoları:</b> lav örtüsüyle oluşur (Erzurum–Kars, Ardahan).\n<b>Karstik platolar:</b> kalkerli arazide (Teke, Taşeli).\n<b>Aşınım platosu:</b> Çatalca–Kocaeli.\nPlatolarda tahıl tarımı ve küçükbaş hayvancılık yaygındır.\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  },
+  {
+   "id": "faylar",
+   "tab": "yer",
+   "title": "Fay Hatları",
+   "kind": "feature",
+   "reference": "fault",
+   "notes": "Türkiye Alp–Himalaya deprem kuşağındadır.\n<b>Kuzey Anadolu Fayı:</b> Saros'tan Marmara, İzmit, Düzce, Bolu, Erzincan'a uzanır (1939 Erzincan, 1999 Gölcük depremleri).\n<b>Doğu Anadolu Fayı:</b> Hatay–Kahramanmaraş–Malatya–Bingöl (2023 depremleri).\n<b>Batı Anadolu:</b> Gediz ve Büyük Menderes graben fayları.\nDeprem riskinin görece az olduğu yerler: Konya–Karaman çevresi, Ergene Havzası.\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  },
+  {
+   "id": "dis-kuvvetler",
+   "tab": "yer",
+   "title": "Dış Kuvvetler",
+   "kind": "topicset",
+   "reference": "dis",
+   "notes": "Dış kuvvetler yer şekillerini aşındırır ve biriktirir.\n<b>Akarsu:</b> vadi, menderes, delta, peribacası.  <b>Karst:</b> lapya, dolin, uvala, polye, mağara, traverten, obruk.\n<b>Rüzgâr:</b> şahit taşı, kumul.  <b>Buzul:</b> sirk gölü, moren, buzul vadisi.\n<b>Dalga ve akıntı:</b> falez, kıyı oku, lagün, tombolo.\n<b>Kıyı tipleri:</b> boyuna (Karadeniz, Akdeniz), enine (Ege), ria (İstanbul Boğazı, Haliç), dalmaçya (Antalya batısı).\n\n<color=#8ECAE6>Sağdan bir başlık seç: ilgili iller boyanır. Bir ile dokunursan o ilin öne çıktığı başlıklar listelenir.</color>"
+  },
+  {
+   "id": "akarsular",
+   "tab": "sular",
+   "title": "Akarsular",
+   "kind": "feature",
+   "reference": "river",
+   "notes": "Türkiye'nin akarsuları genellikle düzensiz rejimlidir; eğim fazla olduğu için ulaşıma elverişsiz ama hidroelektrik potansiyeli yüksektir.\n<b>Kızılırmak:</b> tamamı Türkiye'de olan en uzun akarsu.\n<b>Sınır aşan akarsular:</b> Fırat, Dicle, Aras, Kura, Çoruh, Asi, Meriç.\n<b>Ege akarsuları</b> (Gediz, Büyük ve Küçük Menderes) graben ovalarında menderes çizer.\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  },
+  {
+   "id": "goller",
+   "tab": "sular",
+   "title": "Göller",
+   "kind": "feature",
+   "reference": "lake",
+   "notes": "<b>Tektonik:</b> Tuz, İznik, Sapanca, Uluabat, Manyas, Burdur, Acıgöl, Akşehir, Hazar.\n<b>Volkanik:</b> Van (volkanik set; en büyük, sodalı), Çıldır, Nazik, Meke (maar).\n<b>Karstik:</b> Salda, Avlan.  <b>Heyelan set:</b> Tortum, Sera, Abant.\n<b>Alüvyal set:</b> Bafa, Marmara, Mogan.  <b>Kıyı set (lagün):</b> Terkos, Küçükçekmece, Büyükçekmece, Akyatan.\n<b>Yapay:</b> Atatürk ve Keban baraj gölleri.\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  },
+  {
+   "id": "barajlar",
+   "tab": "sular",
+   "title": "Barajlar",
+   "kind": "feature",
+   "reference": "dam",
+   "notes": "Barajlar enerji üretimi, sulama, içme suyu ve taşkın kontrolü sağlar.\n<b>Fırat:</b> Keban, Karakaya, Atatürk (en büyük; GAP'ın kalbi), Birecik.  <b>Dicle:</b> Ilısu.\n<b>Kızılırmak:</b> Hirfanlı, Altınkaya.  <b>Sakarya:</b> Sarıyar.  <b>Seyhan:</b> Seyhan.  <b>Ceyhan:</b> Aslantaş.\n<b>Çoruh:</b> Deriner (en yüksek gövdeli), Yusufeli.\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  },
+  {
+   "id": "bogaz-korfez",
+   "tab": "sular",
+   "title": "Boğaz ve Körfezler",
+   "kind": "feature",
+   "reference": "gulf",
+   "notes": "İstanbul ve Çanakkale boğazları <b>ria</b> tipi kıyıdır: akarsu vadilerinin deniz suları altında kalmasıyla oluşmuştur.\nEge'de dağlar kıyıya dik uzandığı için körfez ve koy çoktur (Edremit, Çandarlı, İzmir, Kuşadası, Gökova).\nİzmit ve Gemlik körfezleri tektonik çöküntülerdir; İskenderun Körfezi Akdeniz'in en büyük girintisidir.\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  },
+  {
+   "id": "yarimada",
+   "tab": "sular",
+   "title": "Yarımada, Ada, Burun",
+   "kind": "feature",
+   "reference": "peninsula",
+   "notes": "<b>Yarımadalar:</b> Gelibolu, Kapıdağ, Biga, Kocaeli, Karaburun, Bodrum, Datça, Sinop.\n<b>Adalar:</b> Gökçeada (en büyük), Bozcaada, Marmara Adası.\n<b>Burunlar:</b> İnceburun (en kuzey), Baba Burnu (en batı), Anamur Burnu (en güney).\nKapıdağ ve Sinop yarımadaları <b>tombolo</b> ile karaya bağlanmıştır.\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  },
+  {
+   "id": "tarim-1",
+   "tab": "ekonomi",
+   "title": "Tarla Ürünleri",
+   "kind": "topicset",
+   "reference": "tarim1",
+   "notes": "Tarım ürünlerinin dağılışını iklim, toprak ve yer şekilleri belirler. Tahıllar kurak ve karasal İç Anadolu ile Güneydoğu'da; sanayi bitkileri sulanan ovalarda yoğunlaşır.\n\n<color=#8ECAE6>Sağdan bir başlık seç: ilgili iller boyanır. Bir ile dokunursan o ilin öne çıktığı başlıklar listelenir.</color>"
+  },
+  {
+   "id": "tarim-2",
+   "tab": "ekonomi",
+   "title": "Meyve ve Bahçe",
+   "kind": "topicset",
+   "reference": "tarim2",
+   "notes": "Meyve ve bahçe ürünleri iklim isteklerine göre dağılır: turunçgiller ve muz ılık kışlı Akdeniz kıyılarında, fındık ve çay nemli Karadeniz'de, kayısı ve elma karasal iklimin yüksek alanlarında yetişir.\n\n<color=#8ECAE6>Sağdan bir başlık seç: ilgili iller boyanır. Bir ile dokunursan o ilin öne çıktığı başlıklar listelenir.</color>"
+  },
+  {
+   "id": "hayvancilik",
+   "tab": "ekonomi",
+   "title": "Hayvancılık",
+   "kind": "topicset",
+   "reference": "hayvan",
+   "notes": "Büyükbaş hayvancılık çayırların geniş olduğu Doğu Anadolu ve nemli Karadeniz'de, küçükbaş hayvancılık bozkırın yaygın olduğu İç Anadolu ve Güneydoğu'da öne çıkar.\n\n<color=#8ECAE6>Sağdan bir başlık seç: ilgili iller boyanır. Bir ile dokunursan o ilin öne çıktığı başlıklar listelenir.</color>"
+  },
+  {
+   "id": "aricilik",
+   "tab": "ekonomi",
+   "title": "Arıcılık ve İpek Böceği",
+   "kind": "topicset",
+   "reference": "ari",
+   "notes": "Arıcılık bitki çeşitliliğinin fazla olduğu Ordu, Muğla gibi illerde gelişmiştir; ipek böcekçiliği dut ağacına bağlıdır.\n\n<color=#8ECAE6>Sağdan bir başlık seç: ilgili iller boyanır. Bir ile dokunursan o ilin öne çıktığı başlıklar listelenir.</color>"
+  },
+  {
+   "id": "madenler",
+   "tab": "ekonomi",
+   "title": "Madenler",
+   "kind": "topicset",
+   "reference": "maden",
+   "notes": "Türkiye bor rezervinde dünyada ilk sıradadır. Taşkömürü yalnızca Zonguldak havzasında, demir Divriği (Sivas) ve Hekimhan (Malatya) çevresinde çıkarılır.\n\n<color=#8ECAE6>Sağdan bir başlık seç: ilgili iller boyanır. Bir ile dokunursan o ilin öne çıktığı başlıklar listelenir.</color>"
+  },
+  {
+   "id": "enerji",
+   "tab": "ekonomi",
+   "title": "Enerji Kaynakları",
+   "kind": "topicset",
+   "reference": "enerji",
+   "notes": "Petrol Güneydoğu'da (Batman, Adıyaman), jeotermal enerji Ege'deki fay hatları boyunca (Denizli, Aydın), rüzgâr enerjisi Ege ve Marmara kıyılarında, güneş enerjisi Konya–Karaman'da öne çıkar. Hidroelektriğin en büyük payı Fırat ve Dicle barajlarındadır.\n\n<color=#8ECAE6>Sağdan bir başlık seç: ilgili iller boyanır. Bir ile dokunursan o ilin öne çıktığı başlıklar listelenir.</color>"
+  },
+  {
+   "id": "nufus",
+   "tab": "beseri",
+   "title": "Nüfus ve Şehirleşme",
+   "kind": "topicset",
+   "reference": "nufus",
+   "notes": "Nüfus kıyılarda, sanayi ve ticaretin geliştiği Marmara'da yoğundur. Doğurganlık Güneydoğu'da yüksek, göç veren Karadeniz illerinde yaşlı nüfus oranı fazladır.\n\n<color=#8ECAE6>Sağdan bir başlık seç: ilgili iller boyanır. Bir ile dokunursan o ilin öne çıktığı başlıklar listelenir.</color>"
+  },
+  {
+   "id": "unesco",
+   "tab": "beseri",
+   "title": "UNESCO Mirasları",
+   "kind": "feature",
+   "reference": "unesco",
+   "notes": "UNESCO Dünya Mirası Listesi'ndeki alanlar; Göreme–Kapadokya ile Hierapolis–Pamukkale hem doğal hem kültürel (karma) mirastır. Göbeklitepe bilinen en eski tapınak alanıdır.\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  },
+  {
+   "id": "milli-parklar",
+   "tab": "beseri",
+   "title": "Milli Parklar",
+   "kind": "feature",
+   "reference": "park",
+   "notes": "Milli parklar doğal, tarihi ve kültürel değerleri korumak için ayrılmış alanlardır. Türkiye'nin ilk milli parkı Yozgat Çamlığı'dır (1958).\n\n<color=#8ECAE6>Haritada bir öğeye dokun: adı, türü ve bilgi notu görünür.</color>"
+  }
+ ]
+}

@@ -18,6 +18,8 @@ namespace KPSSGeography.UI
 
         public event Action BackRequested;
         public event Action<LevelDefinition> PlayRequested;
+        /// <summary>Ortadaki (seçili) kart değişti.</summary>
+        public event Action<LevelDefinition> SelectionChanged;
 
         LevelCatalog catalog;
         ProgressStore progress;
@@ -181,8 +183,11 @@ namespace KPSSGeography.UI
             var label = examButton.GetComponentInChildren<Text>();
             label.color = on ? Theme.Ink : Theme.Text;
             label.text = on ? "SINAV MODU: AÇIK" : "SINAV MODU: KAPALI";
-            examHint.text = on
-                ? "Renksiz harita  •  İpucu yok  •  Süre %20 kısa  •  Puan ×1,5"
+            var sel = Selected;
+            bool applies = sel == null || sel.SupportsExam;
+            examHint.text = !applies
+                ? "Bu bölümde sınav modu yok (yalnızca ile tıklanan bölümlerde)"
+                : on ? "Renksiz harita  •  İpucu yok  •  Süre %20 kısa  •  Puan ×1,5"
                 : "Gerçek KPSS sınav deneyimi için aç";
         }
 
@@ -274,7 +279,7 @@ namespace KPSSGeography.UI
                 var l = c.Level;
                 var state = !l.IsPlayable ? LevelCardState.ComingSoon
                     : progress.IsUnlocked(l) ? LevelCardState.Unlocked : LevelCardState.Locked;
-                bool exam = GameSettings.ExamMode;
+                bool exam = l.ExamActive;
                 c.Refresh(state, progress.GetStars(l.id, exam), progress.GetBest(l.id, exam), exam);
             }
             starTotal.text = $"{progress.TotalStars} / {progress.MaxStars}";
@@ -423,7 +428,7 @@ namespace KPSSGeography.UI
             playButton.interactable = can;
             UIFactory.SetButtonLabel(playButton, card.State switch
             {
-                LevelCardState.Unlocked => GameSettings.ExamMode
+                LevelCardState.Unlocked => card.Level.ExamActive
                     ? (progress.GetStars(card.Level.id, true) > 0 ? "SINAVI TEKRARLA" : "SINAVA BAŞLA")
                     : (progress.GetStars(card.Level.id) > 0 ? "TEKRAR OYNA" : "OYNA"),
                 LevelCardState.Locked => "KİLİTLİ",
@@ -433,6 +438,8 @@ namespace KPSSGeography.UI
 
             prevButton.interactable = idx > 0;
             nextButton.interactable = idx < cards.Count - 1;
+            UpdateExamUI();
+            SelectionChanged?.Invoke(card.Level);
         }
     }
 }

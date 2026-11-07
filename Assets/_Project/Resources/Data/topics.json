@@ -749,6 +749,152 @@
    ],
    "info": "Göç veren Karadeniz illerinde yaşlı nüfus oranı yüksektir; Sinop ilk sıradadır.",
    "source": "TÜİK"
+  },
+  {
+   "id": "yagis-cok",
+   "set": "iklim2",
+   "title": "Yıllık Yağış En Fazla",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    53,
+    8,
+    61,
+    28
+   ],
+   "info": "Nemli kuzey rüzgârları Doğu Karadeniz Dağları'na çarpıp yükselir (orografik yağış). Rize yılda 2.000 mm'yi aşan yağışla ilk sıradadır; yağış her mevsime dağılmıştır.",
+   "source": "MGM / KPSS"
+  },
+  {
+   "id": "yagis-az",
+   "set": "iklim2",
+   "title": "Yıllık Yağış En Az",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    76,
+    42,
+    68,
+    70
+   ],
+   "info": "Denizden uzak, çevresi dağlarla kapalı çukur alanlar az yağış alır. Iğdır ile Tuz Gölü–Konya havzası Türkiye'nin en kurak yerleridir (yaklaşık 250–350 mm).",
+   "source": "MGM / KPSS"
+  },
+  {
+   "id": "kis-ilik",
+   "set": "iklim2",
+   "title": "Kışları En Ilık",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    7,
+    33,
+    31,
+    1
+   ],
+   "info": "Enlemin düşük olması ve Toros Dağları'nın soğuk kuzey rüzgârlarını engellemesi nedeniyle kışlar en ılık Akdeniz kıyılarında geçer; Alanya–Anamur arasında muz yetişir.",
+   "source": "MGM / KPSS"
+  },
+  {
+   "id": "kis-soguk",
+   "set": "iklim2",
+   "title": "Kışları En Soğuk",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    25,
+    36,
+    75,
+    4
+   ],
+   "info": "Yükseltinin fazla ve denizden uzak olması nedeniyle Erzurum–Kars yöresinde kışlar çok sert geçer; en düşük sıcaklıklar burada ölçülür, kar örtüsü yerde en uzun süre kalır.",
+   "source": "MGM / KPSS"
+  },
+  {
+   "id": "yaz-sicak",
+   "set": "iklim2",
+   "title": "Yazları En Sıcak",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    63,
+    21,
+    72,
+    73,
+    56
+   ],
+   "info": "Güneydoğu Anadolu'ya güneyden sıcak ve kuru hava gelir; denizden uzaklık ve alçak çanak yapısı nedeniyle Türkiye'nin en yüksek yaz sıcaklıkları burada (Cizre, Silopi, Diyarbakır) ölçülür.",
+   "source": "MGM / KPSS"
+  },
+  {
+   "id": "peri-bacasi",
+   "set": "dis",
+   "title": "Peri Bacaları",
+   "question": "GÖRÜLDÜĞÜ BİR İL SEÇ",
+   "plates": [
+    50,
+    38,
+    68
+   ],
+   "info": "Volkanik tüflerin akarsu ve sel suları tarafından aşındırılmasıyla oluşur; üstteki sert kayaç başlık gibi kalır. Kapadokya (Göreme, Ürgüp) en bilinen örnektir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "traverten",
+   "set": "dis",
+   "title": "Traverten",
+   "question": "GÖRÜLDÜĞÜ BİR İL SEÇ",
+   "plates": [
+    20
+   ],
+   "info": "Kalsiyum bikarbonatlı sıcak suların yüzeye çıkıp çökeltmesiyle oluşan basamaklı karstik birikim şekli; en ünlü örnek Pamukkale'dir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "obruk",
+   "set": "dis",
+   "title": "Obruk",
+   "question": "GÖRÜLDÜĞÜ BİR İL SEÇ",
+   "plates": [
+    42,
+    68
+   ],
+   "info": "Kalker ve jipsli arazide yer altındaki boşlukların tavanının çökmesiyle oluşan derin, dik kenarlı çukurlar; Konya Karapınar ve çevresinde yaygındır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "magara",
+   "set": "dis",
+   "title": "Karstik Mağaralar",
+   "question": "BULUNDUĞU BİR İL SEÇ",
+   "plates": [
+    7,
+    33,
+    67,
+    32
+   ],
+   "info": "Kalkerin yer altı sularıyla erimesiyle oluşur; içinde sarkıt, dikit ve sütunlar bulunur (Damlataş, Karain, Cennet–Cehennem, Gökgöl, Zindan).",
+   "source": "KPSS"
+  },
+  {
+   "id": "kumul",
+   "set": "dis",
+   "title": "Kumul (Rüzgâr Birikimi)",
+   "question": "GÖRÜLDÜĞÜ BİR İL SEÇ",
+   "plates": [
+    42
+   ],
+   "info": "Kurak ve bitki örtüsü zayıf alanlarda rüzgârın taşıdığı kumların birikmesiyle oluşur; Karapınar'da kumulları durdurmak için ağaçlandırma yapılmıştır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "buzul",
+   "set": "dis",
+   "title": "Buzul Şekilleri (Sirk Gölü)",
+   "question": "GÖRÜLDÜĞÜ BİR İL SEÇ",
+   "plates": [
+    53,
+    30,
+    4,
+    51
+   ],
+   "info": "Yüksek dağlarda buzulların aşındırdığı çanaklarda sirk gölleri oluşur; Kaçkar, Cilo–Sat, Ağrı ve Aladağlar'da görülür. Ağrı Dağı'nda güncel buzul vardır.",
+   "source": "KPSS"
   }
  ],
  "attributes": [

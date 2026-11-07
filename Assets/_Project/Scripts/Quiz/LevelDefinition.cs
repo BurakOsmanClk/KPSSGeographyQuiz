@@ -70,6 +70,16 @@ namespace KPSSGeography.Quiz
         };
 
         public bool IsPlayable => Mode != QuizMode.ComingSoon;
+
+        /// <summary>
+        /// Sınav modu yalnızca cevabın haritada doğrudan bir ile tıklanarak verildiği bölümlerde geçerlidir
+        /// (ili bul, plaka, komşu, konu, hepsini bul). Buton/şıklı ve yer şekli bölümlerinde sınav modu yoktur.
+        /// </summary>
+        public bool SupportsExam => Mode == QuizMode.FindProvince || Mode == QuizMode.Plate || Mode == QuizMode.Neighbor ||
+                                    Mode == QuizMode.Topic || Mode == QuizMode.RegionAll;
+
+        /// <summary>Sınav modu açık ve bu bölümde geçerli mi?</summary>
+        public bool ExamActive => SupportsExam && Core.GameSettings.ExamMode;
         public bool HasRegionFilter => regions != null && regions.Length > 0;
 
         public string ModeLabel => Mode switch

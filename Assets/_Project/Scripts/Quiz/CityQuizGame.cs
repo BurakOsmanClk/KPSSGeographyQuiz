@@ -124,7 +124,7 @@ namespace KPSSGeography.Quiz
             StopFlow();
             SetPaused(false);
             Level = level;
-            IsExam = GameSettings.ExamMode;
+            IsExam = level.ExamActive;
             flow = StartCoroutine(StartRoutine());
         }
 

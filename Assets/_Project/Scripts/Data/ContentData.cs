@@ -99,4 +99,53 @@ namespace KPSSGeography.Data
             return JsonUtility.FromJson<McqDatabase>(asset.text);
         }
     }
+
+    /// <summary>"Öğren" ekranındaki bir ders: harita görünümü + ders notu.</summary>
+    [Serializable]
+    public class Lesson
+    {
+        public string id;
+        public string tab;
+        public string title;
+        /// <summary>attribute (illeri özelliğe göre boya) | feature (yer şekli kategorisi) | topicset (konu seti)</summary>
+        public string kind;
+        /// <summary>attribute id, yer şekli kategorisi ya da konu seti.</summary>
+        public string reference;
+        public string notes;
+    }
+
+    [Serializable]
+    public class LessonTab
+    {
+        public string id;
+        public string title;
+    }
+
+    [Serializable]
+    public class LessonDatabase
+    {
+        public const string ResourcePath = "Data/lessons";
+
+        public LessonTab[] tabs;
+        public Lesson[] lessons;
+
+        public List<Lesson> InTab(string tab)
+        {
+            var list = new List<Lesson>();
+            foreach (var l in lessons)
+                if (l.tab == tab) list.Add(l);
+            return list;
+        }
+
+        public static LessonDatabase Load()
+        {
+            var asset = Resources.Load<TextAsset>(ResourcePath);
+            if (asset == null)
+            {
+                Debug.LogWarning($"[KPSS] Ders verisi bulunamadı: Resources/{ResourcePath}.json");
+                return new LessonDatabase { tabs = Array.Empty<LessonTab>(), lessons = Array.Empty<Lesson>() };
+            }
+            return JsonUtility.FromJson<LessonDatabase>(asset.text);
+        }
+    }
 }

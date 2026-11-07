@@ -14,6 +14,7 @@ namespace KPSSGeography.UI
     {
 
         public event Action PlayRequested;
+        public event Action LearnRequested;
         public event Action ProgressReset;
 
         ProgressStore progress;
@@ -88,7 +89,7 @@ namespace KPSSGeography.UI
             play.gameObject.AddComponent<PulseScale>();
 
             // --- İkincil eylemler ---
-            secondary = UIFactory.Rect("Secondary", Root).Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -250), new Vector2(660, 84));
+            secondary = UIFactory.Rect("Secondary", Root).Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -250), new Vector2(1000, 84));
             secondaryGroup = secondary.gameObject.AddComponent<CanvasGroup>();
             UIFactory.Button("HowTo", secondary, "NASIL OYNANIR", Theme.NavyPanel, new Vector2(320, 84), () =>
                 {
@@ -96,6 +97,12 @@ namespace KPSSGeography.UI
                     howTo.Show();
                 }, null, 28)
                 .GetComponent<RectTransform>().Place(new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), Vector2.zero, new Vector2(320, 84));
+            UIFactory.Button("Learn", secondary, "ÖĞREN", Theme.Teal, new Vector2(320, 84), () =>
+                {
+                    sfx.Play(Sfx.Click);
+                    LearnRequested?.Invoke();
+                }, null, 30)
+                .GetComponent<RectTransform>().Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(320, 84));
             UIFactory.Button("Settings", secondary, "AYARLAR", Theme.NavyPanel, new Vector2(320, 84), () =>
                 {
                     sfx.Play(Sfx.Click);

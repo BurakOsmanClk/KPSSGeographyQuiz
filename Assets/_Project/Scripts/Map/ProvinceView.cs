@@ -44,6 +44,8 @@ namespace KPSSGeography.Map
         bool dimmed;
         bool neutral;
         bool uniformDim;
+        bool hasOverride;
+        Color overrideColor;
         bool focused;
         float focusTime;
 
@@ -157,6 +159,7 @@ namespace KPSSGeography.Map
             dimmed = false;
             neutral = false;
             uniformDim = false;
+            hasOverride = false;
             if (borderRenderer) borderRenderer.enabled = true;
             focused = false;
             flashTime = 0f;
@@ -178,6 +181,13 @@ namespace KPSSGeography.Map
         public void SetBordersVisible(bool visible)
         {
             if (borderRenderer) borderRenderer.enabled = visible;
+        }
+
+        /// <summary>Öğrenme haritaları: ilin rengini verilen renge sabitler (null = normal renk).</summary>
+        public void SetOverride(Color? color)
+        {
+            hasOverride = color.HasValue;
+            if (hasOverride) overrideColor = color.Value;
         }
 
         /// <summary>Soluk (odak dışı) iller bölge tonu taşımadan tek düz renk olsun (il kimliği sezdirilmesin).</summary>
@@ -227,7 +237,8 @@ namespace KPSSGeography.Map
                 ProvinceState.Missed => palette.missed,
                 _ => baseColor
             };
-            if (dimmed && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, uniformDim ? 1f : 0.82f);
+            if (hasOverride && State == ProvinceState.Idle) target = overrideColor;
+            else if (dimmed && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, uniformDim ? 1f : 0.82f);
             else if (neutral && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, 0.78f);
             float exam = ExamLook.Blend;
             if (exam > 0f && State == ProvinceState.Idle)

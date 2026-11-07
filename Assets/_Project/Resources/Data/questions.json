@@ -479,6 +479,486 @@
    "answer": 1,
    "explanation": "Göreme ve Kapadokya (Nevşehir) 1985'te UNESCO Dünya Mirası Listesi'ne girmiştir.",
    "highlight": "feature:u-goreme"
+  },
+  {
+   "id": "iklim1",
+   "set": "iklim",
+   "text": "Doğu Karadeniz kıyılarının çok yağış almasının temel nedeni hangi yağış türüdür?",
+   "options": [
+    "Konveksiyonel",
+    "Orografik",
+    "Cephesel",
+    "Muson",
+    "Fön"
+   ],
+   "answer": 1,
+   "explanation": "Denizden gelen nemli hava kıyıya paralel dağlara çarpıp yükselir, soğur ve yağış bırakır: orografik (yamaç) yağışı. Rize en çok yağış alan ildir.",
+   "highlight": "plate:53"
+  },
+  {
+   "id": "iklim2",
+   "set": "iklim",
+   "text": "İç Anadolu'da ilkbahar ve yaz başında görülen sağanak ('kırkikindi') yağışları hangi türdendir?",
+   "options": [
+    "Orografik",
+    "Cephesel",
+    "Konveksiyonel",
+    "Muson",
+    "Yamaç"
+   ],
+   "answer": 2,
+   "explanation": "Gündüz ısınan yerden yükselen sıcak, nemli hava soğuyarak sağanak bırakır: konveksiyonel (yükselim) yağışı. İç Anadolu ve Doğu Anadolu'da ilkbahar–yaz başında görülür.",
+   "highlight": "plate:42"
+  },
+  {
+   "id": "iklim3",
+   "set": "iklim",
+   "text": "Akdeniz ve Marmara'da kış yağışlarının büyük bölümü hangi yağış türüdür?",
+   "options": [
+    "Cephesel",
+    "Konveksiyonel",
+    "Orografik",
+    "Muson",
+    "Çiy"
+   ],
+   "answer": 0,
+   "explanation": "Kışın sıcak ve soğuk hava kütlelerinin karşılaşmasıyla cephesel (frontal) yağışlar oluşur; Akdeniz ikliminde yağışın çoğu kışın düşer.",
+   "highlight": ""
+  },
+  {
+   "id": "iklim4",
+   "set": "iklim",
+   "text": "Kuzeydoğudan esen, kışın soğukluk ve kar, yazın serinlik getiren yerel rüzgâr hangisidir?",
+   "options": [
+    "Lodos",
+    "Poyraz",
+    "Keşişleme",
+    "Kıble",
+    "Samyeli"
+   ],
+   "answer": 1,
+   "explanation": "Poyraz kuzeydoğudan eser; Karadeniz ve Marmara'da kışın soğuk ve kar yağışlı hava getirir.",
+   "highlight": ""
+  },
+  {
+   "id": "iklim5",
+   "set": "iklim",
+   "text": "Güneybatıdan esen, sıcak ve nemli; Marmara'da deniz ulaşımını aksatan, kar erimelerine yol açan rüzgâr hangisidir?",
+   "options": [
+    "Poyraz",
+    "Karayel",
+    "Lodos",
+    "Yıldız",
+    "Bora"
+   ],
+   "answer": 2,
+   "explanation": "Lodos güneybatıdan esen ılık ve nemli rüzgârdır; İstanbul Boğazı'nda vapur seferlerini aksatabilir.",
+   "highlight": ""
+  },
+  {
+   "id": "iklim6",
+   "set": "iklim",
+   "text": "Dağ yamacından aşağı inerken ısınıp kuruyan; çığ ve ani kar erimelerine yol açan rüzgâr hangisidir?",
+   "options": [
+    "Meltem",
+    "Fön",
+    "Bora",
+    "Etezyen",
+    "Samyeli"
+   ],
+   "answer": 1,
+   "explanation": "Fön rüzgârı yamaç aşağı inerken her 100 m'de yaklaşık 1°C ısınır; Doğu Karadeniz ve Bursa'da kışın ani sıcaklık artışları yaşatır.",
+   "highlight": ""
+  },
+  {
+   "id": "iklim7",
+   "set": "iklim",
+   "text": "Güneydoğu Anadolu'ya Suriye çöllerinden gelen sıcak ve kuru rüzgâr hangisidir?",
+   "options": [
+    "Samyeli",
+    "Poyraz",
+    "Karayel",
+    "Yıldız",
+    "Lodos"
+   ],
+   "answer": 0,
+   "explanation": "Samyeli güneydoğudan, çöl alanlarından gelir; sıcak ve kurudur, ürünlere zarar verebilir.",
+   "highlight": ""
+  },
+  {
+   "id": "iklim8",
+   "set": "iklim",
+   "text": "Türkiye'de aynı enlemde batıdan doğuya gidildikçe sıcaklığın azalmasının temel nedeni nedir?",
+   "options": [
+    "Enlem",
+    "Yükselti",
+    "Bitki örtüsü",
+    "Akarsu ağı",
+    "Toprak türü"
+   ],
+   "answer": 1,
+   "explanation": "Türkiye'de yükselti batıdan doğuya artar; yükseldikçe sıcaklık düşer. Bu nedenle Erzurum–Kars yöresi en soğuk alanlardır.",
+   "highlight": ""
+  },
+  {
+   "id": "iklim9",
+   "set": "iklim",
+   "text": "Karadeniz kıyıları ile İç Anadolu arasındaki belirgin iklim farkının temel nedeni hangisidir?",
+   "options": [
+    "Dağların kıyıya paralel uzanması",
+    "Enlem farkı",
+    "Akarsuların yönü",
+    "Göllerin dağılışı",
+    "Toprak çeşitliliği"
+   ],
+   "answer": 0,
+   "explanation": "Kıyıya paralel dağlar denizel etkilerin içeriye sokulmasını engeller; kıyı yağışlı ve ılıman, iç kesim kurak ve karasal olur.",
+   "highlight": ""
+  },
+  {
+   "id": "iklim10",
+   "set": "iklim",
+   "text": "Bozkır hangi iklim tipinin doğal bitki örtüsüdür?",
+   "options": [
+    "Karadeniz",
+    "Akdeniz",
+    "Karasal",
+    "Marmara",
+    "Muson"
+   ],
+   "answer": 2,
+   "explanation": "Karasal iklimde ilkbaharda yeşerip yaz kuraklığında sararan otlar (bozkır/step) yaygındır.",
+   "highlight": ""
+  },
+  {
+   "id": "iklim11",
+   "set": "iklim",
+   "text": "Makinin tahrip edildiği yerlerde onun yerini alan, daha cılız ve seyrek bitki topluluğu hangisidir?",
+   "options": [
+    "Psödomaki",
+    "Garig",
+    "Çayır",
+    "Tundra",
+    "Savan"
+   ],
+   "answer": 1,
+   "explanation": "Garig, maki tahribi sonucunda oluşan kısa boylu, seyrek çalılıklardır (kekik, adaçayı, lavanta).",
+   "highlight": ""
+  },
+  {
+   "id": "iklim12",
+   "set": "iklim",
+   "text": "Karadeniz kıyılarında ormanın tahrip edildiği yerlerde görülen, maki benzeri bitki topluluğu hangisidir?",
+   "options": [
+    "Garig",
+    "Bozkır",
+    "Psödomaki",
+    "Dağ çayırı",
+    "Kızılçam ormanı"
+   ],
+   "answer": 2,
+   "explanation": "Psödomaki (yalancı maki), Karadeniz kıyılarında maki ile orman bitkilerinin karışık bulunduğu topluluktur.",
+   "highlight": ""
+  },
+  {
+   "id": "iklim13",
+   "set": "iklim",
+   "text": "Akdeniz kıyılarında kalkerli arazi üzerinde oluşan kırmızı renkli toprak hangisidir?",
+   "options": [
+    "Laterit",
+    "Terra rossa",
+    "Çernozyom",
+    "Podzol",
+    "Alüvyal"
+   ],
+   "answer": 1,
+   "explanation": "Terra rossa (kırmızı Akdeniz toprağı), kalkerin çözülmesiyle demir oksitçe zengin kalan kırmızı topraktır.",
+   "highlight": ""
+  },
+  {
+   "id": "iklim14",
+   "set": "iklim",
+   "text": "Doğu Karadeniz'de bol yağışın yıkamasıyla oluşan, kırmızı-sarımsı renkli, çay tarımına uygun toprak hangisidir?",
+   "options": [
+    "Laterit",
+    "Terra rossa",
+    "Kahverengi bozkır",
+    "Çernozyom",
+    "Kestane"
+   ],
+   "answer": 0,
+   "explanation": "Laterit, sıcak ve çok yağışlı ortamda yıkanma sonucu oluşur; Rize ve Artvin'de çay bu topraklarda yetişir.",
+   "highlight": "plate:53"
+  },
+  {
+   "id": "iklim15",
+   "set": "iklim",
+   "text": "Erzurum–Kars yöresinde dağ çayırları altında oluşan, humusça zengin kara toprak hangisidir?",
+   "options": [
+    "Terra rossa",
+    "Laterit",
+    "Çernozyom",
+    "Alüvyal",
+    "Podzol"
+   ],
+   "answer": 2,
+   "explanation": "Çernozyom (kara toprak), çayır bitkilerinin çürümesiyle humusça zenginleşmiş verimli topraktır.",
+   "highlight": "plate:25"
+  },
+  {
+   "id": "iklim16",
+   "set": "iklim",
+   "text": "Türkiye'de her mevsim yağışlı olan tek iklim tipi hangisidir?",
+   "options": [
+    "Akdeniz",
+    "Karasal",
+    "Marmara",
+    "Karadeniz",
+    "Step"
+   ],
+   "answer": 3,
+   "explanation": "Karadeniz ikliminde yağış yılın her mevsimine dağılmıştır; en fazla yağış sonbaharda düşer.",
+   "highlight": ""
+  },
+  {
+   "id": "yer1",
+   "set": "yer",
+   "text": "Pamukkale travertenleri hangi dış kuvvetin oluşturduğu birikim şeklidir?",
+   "options": [
+    "Rüzgâr",
+    "Buzul",
+    "Karstik (kimyasal) aşınma–birikim",
+    "Dalga",
+    "Akarsu"
+   ],
+   "answer": 2,
+   "explanation": "Kalsiyum bikarbonatlı suların yüzeye çıkıp çökeltmesiyle oluşan traverten, karstik bir birikim şeklidir.",
+   "highlight": "feature:u-pamukkale"
+  },
+  {
+   "id": "yer2",
+   "set": "yer",
+   "text": "Kapadokya'daki peribacalarının oluşumunda en etkili dış kuvvet hangisidir?",
+   "options": [
+    "Buzullar",
+    "Akarsu ve sel suları",
+    "Dalgalar",
+    "Rüzgâr birikimi",
+    "Karstik erime"
+   ],
+   "answer": 1,
+   "explanation": "Volkanik tüflerin yağmur ve sel suları tarafından aşındırılmasıyla oluşmuştur; sert kayaç üstte şapka gibi kalır.",
+   "highlight": "feature:u-goreme"
+  },
+  {
+   "id": "yer3",
+   "set": "yer",
+   "text": "Dağların kıyıya paralel uzandığı, girinti çıkıntının az olduğu Karadeniz ve Akdeniz kıyıları hangi tiptedir?",
+   "options": [
+    "Enine kıyı",
+    "Boyuna kıyı",
+    "Ria kıyı",
+    "Dalmaçya kıyı",
+    "Limanlı kıyı"
+   ],
+   "answer": 1,
+   "explanation": "Boyuna kıyılarda dağlar kıyıya paraleldir; kıyı düz, doğal liman azdır, iç kesimle ulaşım zordur.",
+   "highlight": ""
+  },
+  {
+   "id": "yer4",
+   "set": "yer",
+   "text": "Dağların kıyıya dik uzandığı, girintili çıkıntılı Ege kıyıları hangi tiptedir?",
+   "options": [
+    "Boyuna kıyı",
+    "Enine kıyı",
+    "Dalmaçya kıyı",
+    "Fiyort kıyı",
+    "Haff kıyı"
+   ],
+   "answer": 1,
+   "explanation": "Enine kıyılarda dağlar kıyıya dik uzanır; körfez, yarımada ve doğal liman çoktur, denizel etkiler içerilere sokulur.",
+   "highlight": ""
+  },
+  {
+   "id": "yer5",
+   "set": "yer",
+   "text": "Akarsu vadilerinin deniz suları altında kalmasıyla oluşan İstanbul Boğazı ve Haliç hangi kıyı tipine örnektir?",
+   "options": [
+    "Ria",
+    "Dalmaçya",
+    "Boyuna",
+    "Fiyort",
+    "Limanlı"
+   ],
+   "answer": 0,
+   "explanation": "Ria kıyılar, akarsu vadilerinin deniz istilasına uğramasıyla oluşur; İstanbul ve Çanakkale boğazları ile Haliç örnektir.",
+   "highlight": "feature:istanbul-bogazi"
+  },
+  {
+   "id": "yer6",
+   "set": "yer",
+   "text": "Kıyıya paralel uzanan dağların sular altında kalmasıyla adaların kıyıya paralel dizildiği kıyı tipi hangisidir?",
+   "options": [
+    "Ria",
+    "Enine",
+    "Dalmaçya",
+    "Fiyort",
+    "Falezli"
+   ],
+   "answer": 2,
+   "explanation": "Dalmaçya tipi kıyıda adalar kıyıya paralel sıralanır; Türkiye'de Antalya'nın batısında (Kaş–Kemer) küçük örnekleri görülür.",
+   "highlight": ""
+  },
+  {
+   "id": "yer7",
+   "set": "yer",
+   "text": "Bir koyun önünün kıyı oklarıyla kapanması sonucu oluşan Küçükçekmece ve Büyükçekmece gölleri hangi türdendir?",
+   "options": [
+    "Lagün (kıyı set gölü)",
+    "Tektonik göl",
+    "Karstik göl",
+    "Buzul gölü",
+    "Volkanik göl"
+   ],
+   "answer": 0,
+   "explanation": "Lagünler, kıyı oklarının bir koyu denizden ayırmasıyla oluşur; Küçükçekmece, Büyükçekmece, Terkos ve Akyatan örnektir.",
+   "highlight": ""
+  },
+  {
+   "id": "yer8",
+   "set": "yer",
+   "text": "Bir adanın kıyı okuyla karaya bağlanmasıyla oluşan şekle ne ad verilir? (Örnek: Kapıdağ, Sinop)",
+   "options": [
+    "Lagün",
+    "Tombolo",
+    "Falez",
+    "Delta",
+    "Kıyı oku"
+   ],
+   "answer": 1,
+   "explanation": "Tombolo, adayı karaya bağlayan kum–çakıl setidir; Kapıdağ Yarımadası ve Sinop Boztepe tombolo ile karaya bağlanmıştır.",
+   "highlight": "feature:kapidag"
+  },
+  {
+   "id": "yer9",
+   "set": "yer",
+   "text": "Dalgaların aşındırmasıyla kıyıda oluşan dik yamaçlara ne ad verilir?",
+   "options": [
+    "Falez",
+    "Kıyı oku",
+    "Tombolo",
+    "Plaj",
+    "Lagün"
+   ],
+   "answer": 0,
+   "explanation": "Falez, dalgaların kıyıyı alttan oyması ve üstün çökmesiyle oluşan dik yarlardır.",
+   "highlight": ""
+  },
+  {
+   "id": "yer10",
+   "set": "yer",
+   "text": "Bir akarsuyun ağzında delta oluşması için aşağıdakilerden hangisi gerekli DEĞİLDİR?",
+   "options": [
+    "Akarsuyun bol alüvyon taşıması",
+    "Kıyının sığ olması",
+    "Gelgit genliğinin az olması",
+    "Kıyı akıntılarının zayıf olması",
+    "Akarsu rejiminin düzenli olması"
+   ],
+   "answer": 4,
+   "explanation": "Delta için bol alüvyon, sığ kıyı, zayıf akıntı ve az gelgit gerekir; rejimin düzenli olması şart değildir.",
+   "highlight": "feature:kizilirmak"
+  },
+  {
+   "id": "yer11",
+   "set": "yer",
+   "text": "Eğimin azaldığı yerlerde akarsuların çizdiği büklümlere adını veren akarsu hangisidir?",
+   "options": [
+    "Gediz",
+    "Büyük Menderes",
+    "Sakarya",
+    "Seyhan",
+    "Çoruh"
+   ],
+   "answer": 1,
+   "explanation": "Büklümlü akış şekli dünyada 'menderes' adını Büyük Menderes'ten almıştır.",
+   "highlight": "feature:buyuk-menderes"
+  },
+  {
+   "id": "yer12",
+   "set": "yer",
+   "text": "Kalkerli arazide akarsuların oluşturduğu derin ve dik yamaçlı vadilere (Köprülü, Ulubey) ne ad verilir?",
+   "options": [
+    "Çentik vadi",
+    "Kanyon vadi",
+    "Tabanlı vadi",
+    "Yatık yamaçlı vadi",
+    "Buzul vadisi"
+   ],
+   "answer": 1,
+   "explanation": "Kanyon, kalker gibi kolay aşınan tabakalarda derine aşındırmayla oluşan dik yamaçlı vadidir (Köprülü Kanyon, Ulubey Kanyonu).",
+   "highlight": ""
+  },
+  {
+   "id": "yer13",
+   "set": "yer",
+   "text": "Buzul aşındırmasıyla oluşan sirk gölleri Türkiye'de en çok nerede görülür?",
+   "options": [
+    "Konya Ovası",
+    "Kaçkar ve Cilo dağları",
+    "Ege grabenleri",
+    "Çukurova",
+    "Ergene Havzası"
+   ],
+   "answer": 1,
+   "explanation": "Sirk gölleri yüksek dağlarda görülür: Kaçkar, Cilo–Sat, Ağrı, Erciyes ve Aladağlar.",
+   "highlight": "feature:cilo"
+  },
+  {
+   "id": "yer14",
+   "set": "yer",
+   "text": "Ege'deki horst ve graben yapısı hangi iç kuvvet hareketiyle oluşmuştur?",
+   "options": [
+    "Kıvrılma",
+    "Kırılma",
+    "Volkanizma",
+    "Epirojenez",
+    "Karstlaşma"
+   ],
+   "answer": 1,
+   "explanation": "Sert yapılı arazinin kırılmasıyla yükselen bloklar horst (dağ), çöken bloklar graben (ova) olmuştur.",
+   "highlight": "feature:gediz-graben"
+  },
+  {
+   "id": "yer15",
+   "set": "yer",
+   "text": "Bolu, Düzce, Sakarya, İzmit ve Erzincan'dan geçen fay hattı hangisidir?",
+   "options": [
+    "Doğu Anadolu Fayı",
+    "Kuzey Anadolu Fayı",
+    "Tuz Gölü Fayı",
+    "Ecemiş Fayı",
+    "Gediz Fayı"
+   ],
+   "answer": 1,
+   "explanation": "Kuzey Anadolu Fay Hattı yaklaşık 1.500 km uzunluğundadır; 1939 Erzincan ve 1999 Gölcük depremleri bu hatta olmuştur.",
+   "highlight": "feature:kaf"
+  },
+  {
+   "id": "yer16",
+   "set": "yer",
+   "text": "Karadeniz ve Akdeniz kıyılarındaki basamaklı taraçalar (deniz sekileri) neyin kanıtıdır?",
+   "options": [
+    "Epirojenik yükselme",
+    "Kıvrılma",
+    "Buzul aşınması",
+    "Rüzgâr birikimi",
+    "Karstik erime"
+   ],
+   "answer": 0,
+   "explanation": "Taraçalar, karanın yavaş yavaş yükselmesi (epirojenez) sonucu eski kıyı düzlüklerinin yükseklerde kalmasıdır.",
+   "highlight": ""
   }
  ]
 }

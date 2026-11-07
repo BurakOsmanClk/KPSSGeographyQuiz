@@ -84,18 +84,28 @@ namespace KPSSGeography.Core
 
             // Oyun
             var game = new GameObject("CityQuizGame").AddComponent<CityQuizGame>();
-            var builder = new QuestionBuilder(map, features, TopicDatabase.Load(), McqDatabase.Load(), palette);
+            var topicDb = TopicDatabase.Load();
+            var builder = new QuestionBuilder(map, features, topicDb, McqDatabase.Load(), palette);
             game.Initialize(quizConfig, map, features, sfx, camController, progress, builder, relief, effects);
 
             var pointer = map.gameObject.AddComponent<MapPointer>();
             pointer.Initialize(map, cam);
-            pointer.CanInteract = () => game.AcceptsMapInput;
-            pointer.ProvinceClicked += game.SubmitProvince;
+            LearnScreen learn = null; // aşağıda kurulur; dokunuşlar "Öğren" ekranı açıkken ona gider
+            pointer.CanInteract = () => game.AcceptsMapInput || (learn != null && learn.AcceptsProvinceInput);
+            pointer.ProvinceClicked += p =>
+            {
+                if (learn != null && learn.AcceptsProvinceInput) learn.OnProvinceClicked(p);
+                else game.SubmitProvince(p);
+            };
 
             var featurePointer = features.gameObject.AddComponent<FeaturePointer>();
             featurePointer.Initialize(features, cam);
-            featurePointer.CanInteract = () => game.AcceptsFeatureInput;
-            featurePointer.FeatureClicked += game.SubmitFeature;
+            featurePointer.CanInteract = () => game.AcceptsFeatureInput || (learn != null && learn.AcceptsFeatureInput);
+            featurePointer.FeatureClicked += f =>
+            {
+                if (learn != null && learn.AcceptsFeatureInput) learn.OnFeatureClicked(f);
+                else game.SubmitFeature(f);
+            };
 
             // Arayüz
             var canvas = CreateCanvas(out RectTransform uiRoot);
@@ -110,6 +120,10 @@ namespace KPSSGeography.Core
             levels.Initialize(uiRoot, canvas, catalog, progress, sfx);
             var title = new GameObject("TitleController").AddComponent<TitleScreen>();
             title.Initialize(uiRoot, progress, sfx);
+            // Öğren: süresiz konu anlatımı (iklim, yer şekilleri, sular, ekonomi, beşeri)
+            learn = new GameObject("LearnController").AddComponent<LearnScreen>();
+            learn.Labels = labels;
+            learn.Initialize(uiRoot, map, features, relief, camController, sfx, topicDb, LessonDatabase.Load());
 
             // Reklamlar: Ads Mediation (LevelPlay) kurulana kadar test reklamı
             var mockAds = new GameObject("MockAdsController").AddComponent<MockAdService>();
@@ -132,7 +146,7 @@ namespace KPSSGeography.Core
             exam.Initialize(camController, sfx);
 
             var flow = gameObject.AddComponent<AppFlow>();
-            flow.Initialize(game, hud, title, levels, catalog, progress, adPolicy, exam);
+            flow.Initialize(game, hud, title, levels, learn, catalog, progress, adPolicy, exam);
 
             Debug.Log($"[KPSS] Hazır: {map.Provinces.Count} il, {features.Features.Count} yer şekli, {catalog.levels.Length} bölüm yüklendi.");
         }

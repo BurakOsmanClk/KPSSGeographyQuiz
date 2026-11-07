@@ -42,10 +42,16 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - `feature` / `featurechoice` bölümlerinde (dağ, volkan, ova, plato, fay, akarsu, göl, baraj, boğaz/körfez, yarımada) il içi sınırlar ve il adları gizlenir; harita yalnızca Türkiye'nin dış hattıyla boş silüet olur (kullanıcı tercihi). **UNESCO ve milli park bölümleri hariç** (iller kalır). Kod: `CityQuizGame.HidesProvinces` → `TurkeyMap.SetBordersHidden` (dış hat `nationalOutline`, `build_provinces.py` üretir), il adları `QuizHud.ProvinceNamesAllowed`.
 
 ## Sınav modu
-- Açma/kapama: bölüm seçim ekranı sağ altı (`LevelSelectScreen`), `GameSettings.ExamMode` (PlayerPrefs). Giriş ekranında harita her zaman renklidir; bölüm seçimi ve oyunda sınav ayarı geçerlidir (`AppFlow` → `ExamModeController.SetLook`).
+- **Yalnızca haritada doğrudan ile tıklanan bölümlerde geçerlidir** (kullanıcı tercihi): `find`, `plate`, `neighbor`, `topic`, `regionall` → `LevelDefinition.SupportsExam` / `ExamActive`. Bölge, özellik, tür seçme, yer şekli ve A–E bölümlerinde sınav modu tamamen yoktur (renkli harita, normal kurallar, "SINAV" etiketi yok).
+- Açma/kapama: bölüm seçim ekranı sağ altı (`LevelSelectScreen`), `GameSettings.ExamMode` (PlayerPrefs). Giriş ve Öğren ekranında harita her zaman renklidir; bölüm seçiminde harita ortadaki kartın `ExamActive` değerine göre renklenir (`SelectionChanged` → `ExamModeController.SetLook`).
 - Görünüm: `Core/ExamLook.Blend` (0..1) tek ortak değerdir. `ProvinceView`, `FeatureView`, `FeatureLayer` (göl/ülke), `TurkeyMap` (deniz, gölge, kamera rengi), `ReliefLayer` ve `MapLabelLayer` bunu her karede okuyup renklerini soluk griye karıştırır. Renkler `MapPalette` "Sınav modu" başlığında. Yeni bir harita katmanı eklenirse `ExamLook.Blend`'i okumalı.
-- Sinematik geçiş: `UI/ExamModeController.cs` (sinema şeritleri, buhar parçacıkları, sis, başlık kartı, `MapCameraController.ZoomPunch`, `Sfx.Vapor`). Menüler arası geçişte yalnızca yumuşak renk geçişi.
+- Geçiş: `UI/ExamModeController.cs`, sade ve kısa (1,7 sn): hafif buhar, renk solması, üstte küçük bilgi kartı, `Sfx.Vapor`. Sinema şeridi ve kamera hareketi kaldırıldı (kullanıcı "beklenti dışı" buldu). `Applies` false ise (seçili bölüm desteklemiyorsa) geçiş oynamaz.
 - Kurallar (`CityQuizGame.IsExam`): süre × `QuizConfig.examTimeScale` (0,8), puan × `examScoreMultiplier` (1,5), kalıcı boyama / hover / ışıltı / anlık bilgi notu / kontrol ipucu yok, ilerleme anahtarı `ProgressStore.ExamKey(id)` (`id@exam`; toplam yıldıza katılmaz). Bilgi notları "Haritayı incele"de okunur.
+
+## Öğren ekranı
+- Giriş ekranındaki **ÖĞREN** butonu → `UI/LearnScreen.cs`: süresiz, puansız konu anlatımı. Veri: `Resources/Data/lessons.json` (`tabs`, `lessons`: `kind` = `attribute` | `feature` | `topicset`, `reference`, `notes`).
+- `attribute`: iller özelliğe göre boyanır (`ProvinceView.SetOverride`), renk açıklamasına dokununca tek tür öne çıkar. `feature`: kategori gösterilir (il sınırları gizli, UNESCO/park hariç), öğeye dokununca ad + tür + bilgi notu. `topicset`: konu setinin başlıkları seçilir, ilgili iller boyanır; ile dokununca o ilin öne çıktığı başlıklar.
+- Harita dokunuşları `GameBootstrap`'ta Öğren ekranı açıkken ona yönlendirilir. Yeni ders = lessons.json'a bir kayıt.
 
 ## Reklamlar
 - Oyun kodu yalnızca `Ads/IAdService.cs` arayüzünü bilir. Şu an `Ads/MockAdService.cs` (ekranda test reklamı) bağlı.

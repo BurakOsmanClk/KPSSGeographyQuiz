@@ -4,6 +4,15 @@ Sürüm numarası Unity'de **Player Settings > Version** alanındadır (`Project
 giriş ekranının sağ altında ile **Ayarlar** penceresinde görünür (`Core/AppInfo.cs`).
 Biçim: `ANA.KÜÇÜK.YAMA` — yeni özellik = KÜÇÜK +1, hata düzeltmesi = YAMA +1, mağaza yayını = 1.0.0.
 
+## Yayınlanmamış (0.5.0 adayı)
+- **Öğren ekranı:** giriş ekranında ÖĞREN butonu. 5 sekme, 23 ders: iklim tipleri ve bitki örtüsü haritası, sıcaklık–yağış,
+  dağ/volkan/ova/plato/fay, dış kuvvetler, akarsu/göl/baraj/boğaz/yarımada, tarım/hayvancılık/maden/enerji, nüfus, UNESCO, milli park.
+  Her derste ders notu + haritada dokunarak bilgi kartı; süre ve puan yok.
+- **Sınav modu yalnızca il tıklanan bölümlerde:** ili bul, plaka, komşu, konu, hepsini bul. Diğer bölümlerde harita renkli
+  kalır, SINAV etiketi ve ayrı yıldız yoktur. Geçiş efekti sadeleştirildi (kısa, şeritsiz, kamera hareketsiz).
+- Yeni bölümler: **Sıcaklık ve Yağış** (en çok/az yağış, en ılık kış, en soğuk kış, en sıcak yaz), **Rüzgâr, Yağış ve Toprak**
+  (16 A–E sorusu), **Dış Kuvvet Şekilleri** (peri bacası, traverten, obruk, mağara, kumul, buzul), **Kıyılar ve Oluşumlar** (16 A–E sorusu).
+
 ## 0.4.0 — Prototip (şu anki sürüm)
 - **Sınav modu:** bölüm seçim ekranından açılıp kapanır. Açılınca renkli, isimli harita "buharlaşarak" soluk gri, boş KPSS
   haritasına dönüşür (sinema şeritleri, yükselen buhar, kamera yaklaşması, başlık kartı).

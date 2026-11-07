@@ -144,6 +144,32 @@ TOPICS = [
      "Doğurganlık hızı Güneydoğu ve Doğu Anadolu'da yüksektir; Şanlıurfa ilk sıradadır.", "TÜİK Doğum İstatistikleri"),
     ("nufus", "yasli", "Yaşlı Nüfus Oranı En Yüksek", "BİR İL SEÇ", ("Sinop", "Kastamonu", "Giresun"),
      "Göç veren Karadeniz illerinde yaşlı nüfus oranı yüksektir; Sinop ilk sıradadır.", "TÜİK"),
+
+    # ---- İklim: sıcaklık ve yağış (il bazlı uç değerler) ----
+    ("iklim2", "yagis-cok", "Yıllık Yağış En Fazla", "BİR İL SEÇ", ("Rize", "Artvin", "Trabzon", "Giresun"),
+     "Nemli kuzey rüzgârları Doğu Karadeniz Dağları'na çarpıp yükselir (orografik yağış). Rize yılda 2.000 mm'yi aşan yağışla ilk sıradadır; yağış her mevsime dağılmıştır.", "MGM / KPSS"),
+    ("iklim2", "yagis-az", "Yıllık Yağış En Az", "BİR İL SEÇ", ("Iğdır", "Konya", "Aksaray", "Karaman"),
+     "Denizden uzak, çevresi dağlarla kapalı çukur alanlar az yağış alır. Iğdır ile Tuz Gölü–Konya havzası Türkiye'nin en kurak yerleridir (yaklaşık 250–350 mm).", "MGM / KPSS"),
+    ("iklim2", "kis-ilik", "Kışları En Ilık", "BİR İL SEÇ", ("Antalya", "Mersin", "Hatay", "Adana"),
+     "Enlemin düşük olması ve Toros Dağları'nın soğuk kuzey rüzgârlarını engellemesi nedeniyle kışlar en ılık Akdeniz kıyılarında geçer; Alanya–Anamur arasında muz yetişir.", "MGM / KPSS"),
+    ("iklim2", "kis-soguk", "Kışları En Soğuk", "BİR İL SEÇ", ("Erzurum", "Kars", "Ardahan", "Ağrı"),
+     "Yükseltinin fazla ve denizden uzak olması nedeniyle Erzurum–Kars yöresinde kışlar çok sert geçer; en düşük sıcaklıklar burada ölçülür, kar örtüsü yerde en uzun süre kalır.", "MGM / KPSS"),
+    ("iklim2", "yaz-sicak", "Yazları En Sıcak", "BİR İL SEÇ", ("Şanlıurfa", "Diyarbakır", "Batman", "Şırnak", "Siirt"),
+     "Güneydoğu Anadolu'ya güneyden sıcak ve kuru hava gelir; denizden uzaklık ve alçak çanak yapısı nedeniyle Türkiye'nin en yüksek yaz sıcaklıkları burada (Cizre, Silopi, Diyarbakır) ölçülür.", "MGM / KPSS"),
+
+    # ---- Dış kuvvetlerin oluşturduğu yer şekilleri ----
+    ("dis", "peri-bacasi", "Peri Bacaları", "GÖRÜLDÜĞÜ BİR İL SEÇ", ("Nevşehir", "Kayseri", "Aksaray"),
+     "Volkanik tüflerin akarsu ve sel suları tarafından aşındırılmasıyla oluşur; üstteki sert kayaç başlık gibi kalır. Kapadokya (Göreme, Ürgüp) en bilinen örnektir.", "KPSS"),
+    ("dis", "traverten", "Traverten", "GÖRÜLDÜĞÜ BİR İL SEÇ", ("Denizli",),
+     "Kalsiyum bikarbonatlı sıcak suların yüzeye çıkıp çökeltmesiyle oluşan basamaklı karstik birikim şekli; en ünlü örnek Pamukkale'dir.", "KPSS"),
+    ("dis", "obruk", "Obruk", "GÖRÜLDÜĞÜ BİR İL SEÇ", ("Konya", "Aksaray"),
+     "Kalker ve jipsli arazide yer altındaki boşlukların tavanının çökmesiyle oluşan derin, dik kenarlı çukurlar; Konya Karapınar ve çevresinde yaygındır.", "KPSS"),
+    ("dis", "magara", "Karstik Mağaralar", "BULUNDUĞU BİR İL SEÇ", ("Antalya", "Mersin", "Zonguldak", "Isparta"),
+     "Kalkerin yer altı sularıyla erimesiyle oluşur; içinde sarkıt, dikit ve sütunlar bulunur (Damlataş, Karain, Cennet–Cehennem, Gökgöl, Zindan).", "KPSS"),
+    ("dis", "kumul", "Kumul (Rüzgâr Birikimi)", "GÖRÜLDÜĞÜ BİR İL SEÇ", ("Konya",),
+     "Kurak ve bitki örtüsü zayıf alanlarda rüzgârın taşıdığı kumların birikmesiyle oluşur; Karapınar'da kumulları durdurmak için ağaçlandırma yapılmıştır.", "KPSS"),
+    ("dis", "buzul", "Buzul Şekilleri (Sirk Gölü)", "GÖRÜLDÜĞÜ BİR İL SEÇ", ("Rize", "Hakkari", "Ağrı", "Niğde"),
+     "Yüksek dağlarda buzulların aşındırdığı çanaklarda sirk gölleri oluşur; Kaçkar, Cilo–Sat, Ağrı ve Aladağlar'da görülür. Ağrı Dağı'nda güncel buzul vardır.", "KPSS"),
 ]
 
 ATTRIBUTES = [
