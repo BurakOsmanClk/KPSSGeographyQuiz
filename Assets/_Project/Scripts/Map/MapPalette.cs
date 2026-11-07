@@ -1,21 +1,77 @@
 using System;
+using KPSSGeography.Data;
 using UnityEngine;
 
 namespace KPSSGeography.Map
 {
+    /// <summary>Coğrafi bölgelerin adları (levels.json ve il verisiyle aynı yazım).</summary>
+    public static class Regions
+    {
+        public const string Marmara = "Marmara";
+        public const string Ege = "Ege";
+        public const string Akdeniz = "Akdeniz";
+        public const string IcAnadolu = "İç Anadolu";
+        public const string Karadeniz = "Karadeniz";
+        public const string DoguAnadolu = "Doğu Anadolu";
+        public const string GuneydoguAnadolu = "Güneydoğu Anadolu";
+
+        /// <summary>Arayüzde gösterim sırası (batıdan doğuya).</summary>
+        public static readonly string[] All =
+            { Marmara, Ege, Akdeniz, IcAnadolu, Karadeniz, DoguAnadolu, GuneydoguAnadolu };
+    }
+
     /// <summary>Harita renkleri. GameBootstrap üzerinden Inspector'da değiştirilebilir.</summary>
     [Serializable]
     public class MapPalette
     {
-        public Color sea = new Color32(0x8E, 0xC1, 0xDD, 0xFF);
-        public Color land = new Color32(0xF3, 0xEE, 0xDF, 0xFF);
-        public Color border = new Color32(0x8C, 0x84, 0x70, 0xFF);
-        public Color hover = new Color32(0xFF, 0xE3, 0x94, 0xFF);
-        public Color correct = new Color32(0x86, 0xCC, 0x86, 0xFF);
-        public Color missed = new Color32(0xEC, 0x8F, 0x82, 0xFF);
-        public Color correctFlash = new Color32(0x3F, 0xB9, 0x52, 0xFF);
+        [Header("Deniz (gradyan)")]
+        public Color seaTop = new Color32(0xBF, 0xE6, 0xF5, 0xFF);
+        public Color seaBottom = new Color32(0x6C, 0xB4, 0xD8, 0xFF);
+
+        [Header("Bölgeler (pastel)")]
+        public Color marmara = new Color32(0xF6, 0xB8, 0xD1, 0xFF);
+        public Color ege = new Color32(0xFF, 0xD3, 0xA0, 0xFF);
+        public Color akdeniz = new Color32(0xFF, 0xA9, 0x9E, 0xFF);
+        public Color icAnadolu = new Color32(0xFC, 0xE9, 0x9E, 0xFF);
+        public Color karadeniz = new Color32(0xA8, 0xE2, 0x9E, 0xFF);
+        public Color doguAnadolu = new Color32(0xC8, 0xB6, 0xF2, 0xFF);
+        public Color guneydoguAnadolu = new Color32(0xF5, 0xBE, 0x6E, 0xFF);
+
+        [Header("Durumlar")]
+        public Color border = new Color(1f, 1f, 1f, 0.9f);
+        public Color hover = Color.white;
+        public Color missed = new Color32(0xE0, 0x6C, 0x75, 0xFF);
+        public Color dim = new Color32(0xD9, 0xD4, 0xC7, 0xFF);
+        public Color correctFlash = Color.white;
         public Color wrongFlash = new Color32(0xD9, 0x3B, 0x2F, 0xFF);
-        public Color reveal = new Color32(0xFF, 0xB8, 0x1F, 0xFF);
-        public Color shadow = new Color(0f, 0f, 0f, 0.22f);
+        public Color reveal = new Color32(0xFF, 0xB7, 0x03, 0xFF);
+        public Color shadow = new Color(0.02f, 0.12f, 0.22f, 0.25f);
+
+        public Color RegionColor(string region) => region switch
+        {
+            Regions.Marmara => marmara,
+            Regions.Ege => ege,
+            Regions.Akdeniz => akdeniz,
+            Regions.IcAnadolu => icAnadolu,
+            Regions.Karadeniz => karadeniz,
+            Regions.DoguAnadolu => doguAnadolu,
+            Regions.GuneydoguAnadolu => guneydoguAnadolu,
+            _ => dim
+        };
+
+        /// <summary>İlin temel rengi: bölge rengi + komşuların ayırt edilmesi için küçük ton farkı.</summary>
+        public Color ProvinceBase(ProvinceData data)
+        {
+            Color c = RegionColor(data.region);
+            float v = ((data.plate * 37) % 7) / 6f - 0.5f; // -0.5..0.5
+            return v >= 0f ? Color.Lerp(c, Color.white, v * 0.28f) : Color.Lerp(c, Color.black, -v * 0.1f);
+        }
+
+        /// <summary>Doğru bilinen il: bölge renginin doygun ve koyu hali ("haritayı boyama" hissi).</summary>
+        public static Color Saturated(Color c)
+        {
+            Color.RGBToHSV(c, out float h, out float s, out float v);
+            return Color.HSVToRGB(h, Mathf.Clamp01(s * 2.1f + 0.15f), v * 0.86f);
+        }
     }
 }

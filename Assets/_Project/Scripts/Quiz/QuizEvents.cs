@@ -21,12 +21,14 @@ namespace KPSSGeography.Quiz
     public readonly struct QuestionInfo
     {
         public readonly ProvinceView Target;
+        public readonly QuizMode Mode;
         public readonly int Index;
         public readonly int Total;
 
-        public QuestionInfo(ProvinceView target, int index, int total)
+        public QuestionInfo(ProvinceView target, QuizMode mode, int index, int total)
         {
             Target = target;
+            Mode = mode;
             Index = index;
             Total = total;
         }
@@ -35,20 +37,28 @@ namespace KPSSGeography.Quiz
     public readonly struct AnswerResult
     {
         public readonly AnswerOutcome Outcome;
+        public readonly QuizMode Mode;
         public readonly ProvinceView Target;
+        /// <summary>İli Bul modunda tıklanan il (süre dolduysa null).</summary>
         public readonly ProvinceView Clicked;
+        /// <summary>Bölge modunda seçilen bölge (süre dolduysa null).</summary>
+        public readonly string ChosenRegion;
         public readonly int Points;
         public readonly int Streak;
         public readonly float Multiplier;
         public readonly int Mistakes;
 
         public bool IsCorrect => Outcome == AnswerOutcome.Correct;
+        public string CorrectRegion => Target.Data.region;
 
-        public AnswerResult(AnswerOutcome outcome, ProvinceView target, ProvinceView clicked, int points, int streak, float multiplier, int mistakes)
+        public AnswerResult(AnswerOutcome outcome, QuizMode mode, ProvinceView target, ProvinceView clicked, string chosenRegion,
+            int points, int streak, float multiplier, int mistakes)
         {
             Outcome = outcome;
+            Mode = mode;
             Target = target;
             Clicked = clicked;
+            ChosenRegion = chosenRegion;
             Points = points;
             Streak = streak;
             Multiplier = multiplier;
@@ -58,7 +68,9 @@ namespace KPSSGeography.Quiz
 
     public readonly struct GameResult
     {
+        public readonly LevelDefinition Level;
         public readonly bool Completed;
+        public readonly int Stars;
         public readonly int Score;
         public readonly int BestScore;
         public readonly bool IsNewBest;
@@ -67,9 +79,12 @@ namespace KPSSGeography.Quiz
         public readonly int Total;
         public readonly int BestStreak;
 
-        public GameResult(bool completed, int score, int bestScore, bool isNewBest, int correct, int answered, int total, int bestStreak)
+        public GameResult(LevelDefinition level, bool completed, int stars, int score, int bestScore, bool isNewBest,
+            int correct, int answered, int total, int bestStreak)
         {
+            Level = level;
             Completed = completed;
+            Stars = stars;
             Score = score;
             BestScore = bestScore;
             IsNewBest = isNewBest;

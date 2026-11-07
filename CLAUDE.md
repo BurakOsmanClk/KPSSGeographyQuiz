@@ -20,7 +20,7 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - Proje dosyaları `Assets/_Project/` altında.
 - Namespace: `KPSSGeography` (alt namespace'ler: `.Core`, `.Content`, `.Map`, `.Gameplay`, `.Meta`, `.Services`, `.UI`, `.App`, editör kodu `.EditorTools`). Prototipteki `.Data` ve `.Quiz` M0'da `.Content` ve `.Gameplay` olarak taşınacak.
 - Input: projede yalnızca **Input System** aktif (`activeInputHandler: 1`); eski `UnityEngine.Input` API'si kullanılmaz.
-- UI hedefi: **UI Toolkit** (UXML/USS). Prototipteki kodla kurulan uGUI HUD geçicidir (M1'de kaldırılacak).
+- UI hedefi: **UI Toolkit** (UXML/USS). Şu anki arayüz (giriş ekranı, bölüm karuseli, HUD, sonuç ekranı) kodla kurulan uGUI'dir; renkler `UI/Theme.cs`, ikonlar `UI/ShapeSprites.cs` (SDF ile üretilir). UI Toolkit'e geçişte bu tasarım referans alınır.
 - Soru verileri koddan ayrı tutulur (JSON veya ScriptableObject).
 
 ## İl haritası verisi
@@ -28,4 +28,8 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - `python Tools/geo/build_provinces.py` ile önceden üçgenlenmiş `Assets/_Project/Resources/Data/turkey_provinces.json` üretilir (plaka kodu, Türkçe ad, coğrafi bölge, etiket noktası, mesh, sınır halkaları).
 
 ## Prototip
-- Menü **KPSS > Prototip Sahnesini Oluştur** → `Assets/_Project/Scenes/CityQuizPrototype.unity` (kamera + `GameBootstrap`). Geri kalan her şey çalışma anında kurulur.
+- Herhangi bir sahnede Play → `GameBootstrap` otomatik oluşur (ya da **KPSS > Prototip Sahnesini Oluştur**). Her şey çalışma anında kurulur.
+- Akış (`Core/AppFlow.cs`): Giriş ekranı → Bölüm karuseli → Oyun → Sonuç (Tekrar / Sonraki / Bölümler).
+- Bölümler `Resources/Data/levels.json` içinde (`mode`: `find` = İli Bul, `region` = Bölge Modu, `soon` = Yakında; `regions` boşsa tüm Türkiye).
+- İlerleme (yıldız, rekor, kilitler) `Meta/ProgressStore.cs` → PlayerPrefs. Yıldız: tamamlarsa 3 − hata (en az 1). Bir bölüm, önceki oynanabilir bölümden ≥1 yıldızla açılır.
+- Harita renkleri bölgelere göre (`Map/MapPalette.cs`); doğru bilinen il bölge renginin doygun haline boyanır.

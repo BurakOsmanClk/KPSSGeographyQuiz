@@ -11,13 +11,16 @@ Unity 6 ile geliştirilen, KPSS Coğrafya konularını oyunlaştırarak çalış
 2. Unity Hub → *Add → Add project from disk* → klonlanan klasörü seç.
 3. Unity 6 ile aç.
 
-## Prototipi çalıştırma: İli Bul
-1. Unity'de üst menüden **KPSS → Prototip Sahnesini Oluştur**.
-2. **Play** tuşuna bas.
+## Prototipi çalıştırma
+Unity'de herhangi bir sahnedeyken **Play** tuşuna bas. Giriş ekranı açılır → **OYNA** → bölüm seç.
 
-Kurallar: rastgele 20 il, her il için 10 sn. Doğru cevap süreyi yeniler, yanlış tıklama ya da süre bitimi 1 hata sayılır. 3 hatada elenirsin.
+- **10 bölüm:** 6'sı İli Bul (bölge bölge, sonra Tüm Türkiye), 2'si Bölge Modu, 2'si "Yakında".
+- **İli Bul:** yazan ili haritada tıkla. **Bölge Modu:** parlayan ilin bölgesini alttaki butonlardan seç.
+- Her soruda süre akar. Doğru cevap süreyi yeniler, yanlış ya da süre bitimi 1 can götürür. 3 canın biterse elenirsin.
+- Yıldızlar: hatasız 3, bir hatayla 2, iki hatayla 1. Bir sonraki bölüm, öncekinden en az 1 yıldız alınınca açılır.
+- Test için: **Ayarlar → Tüm bölümleri aç**.
 Kontroller: sol tık ile il seç, tekerlek ile yakınlaştır, sağ tık + sürükle ile kaydır, orta tık ile görünümü sıfırla.
-Kurallar ve renkler sahnedeki `Game` objesinin **GameBootstrap** bileşeninden değiştirilebilir.
+Puanlama, zamanlama ve harita renkleri **GameBootstrap** bileşeninden, bölümler `Assets/_Project/Resources/Data/levels.json` dosyasından değiştirilebilir.
 
 Harita verisi: Natural Earth (kamu malı).
 

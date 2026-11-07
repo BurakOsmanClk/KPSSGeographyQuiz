@@ -1,17 +1,19 @@
 using KPSSGeography.Data;
 using KPSSGeography.Map;
+using KPSSGeography.Meta;
 using KPSSGeography.Quiz;
 using KPSSGeography.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 namespace KPSSGeography.Core
 {
     /// <summary>
     /// Prototip sahnesinin tek giriş noktası. Sahnede boş bir GameObject'e eklenmesi yeterli:
-    /// harita, kamera kontrolü, giriş, ses, oyun akışı ve arayüz çalışma anında kurulur.
+    /// harita, kamera, giriş, ses, oyun akışı ve tüm arayüz çalışma anında kurulur.
     /// Kurallar ve renkler bu bileşenin Inspector'ından ayarlanabilir.
     /// </summary>
     [DisallowMultipleComponent]
@@ -22,7 +24,6 @@ namespace KPSSGeography.Core
 
         /// <summary>
         /// Sahnede GameBootstrap yoksa (ör. SampleScene'de Play'e basıldıysa) otomatik oluşturur.
-        /// Böylece prototip hangi sahnede olursa olsun Play ile başlar.
         /// </summary>
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void AutoCreate()
@@ -36,6 +37,7 @@ namespace KPSSGeography.Core
         {
             Debug.Log("[KPSS] Oyun başlatılıyor...");
             Application.targetFrameRate = 120;
+            Time.timeScale = 1f;
 
             var db = ProvinceDatabase.Load();
             if (db == null)
@@ -43,6 +45,8 @@ namespace KPSSGeography.Core
                 enabled = false;
                 return;
             }
+            var catalog = LevelCatalog.Load();
+            var progress = new ProgressStore(catalog) { UnlockAll = quizConfig.unlockAllLevels };
 
             Camera cam = SetupCamera();
             EnsureEventSystem();
@@ -51,7 +55,7 @@ namespace KPSSGeography.Core
             var map = new GameObject("TurkeyMap").AddComponent<TurkeyMap>();
             map.Build(db, palette);
 
-            // Kamera kontrolü
+            // Kamera
             var camController = cam.GetComponent<MapCameraController>();
             if (camController == null) camController = cam.gameObject.AddComponent<MapCameraController>();
             camController.Setup(map.Bounds);
@@ -59,21 +63,44 @@ namespace KPSSGeography.Core
             // Ses
             var sfx = new GameObject("Sfx").AddComponent<SfxPlayer>();
 
-            // Oyun akışı
+            // Oyun
             var game = new GameObject("CityQuizGame").AddComponent<CityQuizGame>();
-            game.Initialize(quizConfig, map, sfx, camController);
+            game.Initialize(quizConfig, map, sfx, camController, progress);
 
-            // Fare ile seçim
             var pointer = map.gameObject.AddComponent<MapPointer>();
             pointer.Initialize(map, cam);
-            pointer.CanInteract = () => game.AcceptsInput;
-            pointer.ProvinceClicked += game.SubmitAnswer;
+            pointer.CanInteract = () => game.AcceptsMapInput;
+            pointer.ProvinceClicked += game.SubmitProvince;
 
             // Arayüz
-            var hud = new GameObject("QuizHUD").AddComponent<QuizHud>();
-            hud.Initialize(game, quizConfig, cam, sfx);
+            var canvas = CreateCanvas(out RectTransform uiRoot);
+            var hud = new GameObject("QuizHudController").AddComponent<QuizHud>();
+            hud.Initialize(uiRoot, uiRoot, game, palette, cam, sfx);
+            var levels = new GameObject("LevelSelectController").AddComponent<LevelSelectScreen>();
+            levels.Initialize(uiRoot, canvas, catalog, progress, sfx);
+            var title = new GameObject("TitleController").AddComponent<TitleScreen>();
+            title.Initialize(uiRoot, progress, sfx);
 
-            Debug.Log($"[KPSS] Hazır: {map.Provinces.Count} il yüklendi, shader: {map.SharedMaterial.shader.name}");
+            var flow = gameObject.AddComponent<AppFlow>();
+            flow.Initialize(game, hud, title, levels, catalog, progress);
+
+            Debug.Log($"[KPSS] Hazır: {map.Provinces.Count} il, {catalog.levels.Length} bölüm yüklendi.");
+        }
+
+        static Canvas CreateCanvas(out RectTransform root)
+        {
+            var go = new GameObject("UI", typeof(RectTransform));
+            go.layer = 5;
+            var canvas = go.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 10;
+            var scaler = go.AddComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920, 1080);
+            scaler.matchWidthOrHeight = 0.5f;
+            go.AddComponent<GraphicRaycaster>();
+            root = (RectTransform)go.transform;
+            return canvas;
         }
 
         Camera SetupCamera()
@@ -83,14 +110,13 @@ namespace KPSSGeography.Core
             {
                 var go = new GameObject("Main Camera") { tag = "MainCamera" };
                 cam = go.AddComponent<Camera>();
-                go.AddComponent<AudioListener>();
             }
             cam.orthographic = true;
             cam.transform.rotation = Quaternion.identity;
             var urpData = cam.GetUniversalAdditionalCameraData();
             if (urpData != null) urpData.renderPostProcessing = false;
             cam.clearFlags = CameraClearFlags.SolidColor;
-            cam.backgroundColor = palette.sea;
+            cam.backgroundColor = palette.seaBottom;
             cam.nearClipPlane = 0.1f;
             cam.farClipPlane = 100f;
             if (Object.FindAnyObjectByType<AudioListener>() == null) cam.gameObject.AddComponent<AudioListener>();
@@ -101,6 +127,11 @@ namespace KPSSGeography.Core
         {
             if (Object.FindAnyObjectByType<EventSystem>() != null) return;
             new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
+        }
+
+        void OnDestroy()
+        {
+            Time.timeScale = 1f;
         }
     }
 }

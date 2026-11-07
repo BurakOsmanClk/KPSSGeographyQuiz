@@ -3,20 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using KPSSGeography.Core;
 using KPSSGeography.Map;
+using KPSSGeography.Meta;
 using UnityEngine;
 
 namespace KPSSGeography.Quiz
 {
     /// <summary>
-    /// "İli bul" oyun akışı:
-    /// Her turda 81 il içinden rastgele N farklı il sorulur. Her soru için süre akar.
-    /// Doğru cevapta puan + seri bonusu kazanılır ve süre yenilenir.
-    /// Yanlış tıklama ya da süre bitimi bir hata sayılır; doğru il gösterilir ve sıradaki soruya geçilir.
-    /// Hata sayısı sınıra ulaşınca oyuncu elenir.
+    /// Bölüm oyun akışı. İki mod desteklenir:
+    /// • İli Bul: hedef ili haritada tıkla.
+    /// • Bölge Modu: haritada parlayan ilin coğrafi bölgesini seç.
+    /// Her soru için süre akar. Doğru cevap puan + seri bonusu kazandırır ve sonraki soruda süre yenilenir.
+    /// Yanlış cevap ya da süre bitimi bir hata sayılır, doğru cevap gösterilir ve sıradaki soruya geçilir.
+    /// Hata sayısı sınıra ulaşınca oyuncu elenir. Yıldız: tamamlarsa 3 − hata (en az 1), elenirse 0.
     /// </summary>
     public class CityQuizGame : MonoBehaviour
     {
-        const string BestScoreKey = "KPSS_CityQuiz_BestScore";
+        /// <summary>Oyun alanının ekrandaki yeri (HUD'a yer bırakır).</summary>
+        static readonly Rect FindViewport = new Rect(0.03f, 0.06f, 0.94f, 0.72f);
+        static readonly Rect RegionViewport = new Rect(0.03f, 0.2f, 0.94f, 0.58f);
 
         public event Action GameStarted;
         public event Action<int> CountdownTick;
@@ -28,49 +32,89 @@ namespace KPSSGeography.Quiz
         TurkeyMap map;
         SfxPlayer sfx;
         MapCameraController cameraController;
+        ProgressStore progress;
 
         readonly List<ProvinceView> questions = new List<ProvinceView>();
         Coroutine flow;
 
+        public LevelDefinition Level { get; private set; }
+        public QuizMode Mode => Level != null ? Level.Mode : QuizMode.FindProvince;
         public QuizState State { get; private set; } = QuizState.Idle;
+        public bool IsPaused { get; private set; }
         public ProvinceView Current { get; private set; }
         public int QuestionIndex { get; private set; }
         public int TotalQuestions => questions.Count;
         public float TimeRemaining { get; private set; }
-        public float TimeLimit => config.timePerQuestion;
+        public float TimeLimit { get; private set; } = 10f;
         public float TimeRatio => TimeLimit > 0f ? Mathf.Clamp01(TimeRemaining / TimeLimit) : 0f;
         public int Score { get; private set; }
         public int Mistakes { get; private set; }
-        public int MaxMistakes => config.maxMistakes;
+        public int MaxMistakes { get; private set; } = 3;
         public int Streak { get; private set; }
         public int BestStreak { get; private set; }
         public int CorrectCount { get; private set; }
-        public int BestScore => PlayerPrefs.GetInt(BestScoreKey, 0);
-        public bool AcceptsInput => State == QuizState.Playing;
+
+        /// <summary>Haritada il seçimi kabul ediliyor mu? (sadece İli Bul modunda soru aktifken)</summary>
+        public bool AcceptsMapInput => State == QuizState.Playing && !IsPaused && Mode == QuizMode.FindProvince;
+        public bool AcceptsRegionInput => State == QuizState.Playing && !IsPaused && Mode == QuizMode.Region;
+        public bool IsRunning => State != QuizState.Idle && State != QuizState.Finished;
 
         public float StreakMultiplier(int streak) =>
             1f + Mathf.Clamp(streak - 1, 0, config.maxStreakSteps) * config.streakStep;
 
-        public void Initialize(QuizConfig quizConfig, TurkeyMap turkeyMap, SfxPlayer sfxPlayer, MapCameraController camController)
+        public void Initialize(QuizConfig quizConfig, TurkeyMap turkeyMap, SfxPlayer sfxPlayer,
+            MapCameraController camController, ProgressStore progressStore)
         {
             config = quizConfig;
             map = turkeyMap;
             sfx = sfxPlayer;
             cameraController = camController;
+            progress = progressStore;
         }
 
-        public void StartGame()
+        public void StartLevel(LevelDefinition level)
+        {
+            if (level == null || !level.IsPlayable) return;
+            StopFlow();
+            SetPaused(false);
+            Level = level;
+            flow = StartCoroutine(StartRoutine());
+        }
+
+        /// <summary>Oyunu yarıda bırakır ve haritayı menü görünümüne döndürür.</summary>
+        public void Abort()
+        {
+            StopFlow();
+            SetPaused(false);
+            if (Current != null) Current.SetFocused(false);
+            Current = null;
+            State = QuizState.Idle;
+            map.ResetAll();
+            cameraController.SetAttractMode();
+        }
+
+        public void SetPaused(bool paused)
+        {
+            IsPaused = paused;
+            Time.timeScale = paused ? 0f : 1f;
+            if (cameraController != null) cameraController.InputEnabled = !paused;
+        }
+
+        void StopFlow()
         {
             if (flow != null) StopCoroutine(flow);
-            flow = StartCoroutine(StartRoutine());
+            flow = null;
         }
 
         IEnumerator StartRoutine()
         {
             map.ResetAll();
-            cameraController.ResetView();
+            Rect focus = map.SetFocus(Level.HasRegionFilter ? p => Level.IncludesRegion(p.Data.region) : null);
+            cameraController.FocusOn(focus, Mode == QuizMode.Region ? RegionViewport : FindViewport);
             PickQuestions();
 
+            TimeLimit = Mathf.Max(1f, Level.timePerQuestion);
+            MaxMistakes = Mathf.Max(1, Level.maxMistakes);
             Score = 0;
             Mistakes = 0;
             Streak = 0;
@@ -83,6 +127,7 @@ namespace KPSSGeography.Quiz
             State = QuizState.Countdown;
             GameStarted?.Invoke();
 
+            yield return new WaitForSeconds(0.45f); // kameranın bölgeye yaklaşması için
             for (int n = 3; n >= 1; n--)
             {
                 CountdownTick?.Invoke(n);
@@ -99,14 +144,16 @@ namespace KPSSGeography.Quiz
         void PickQuestions()
         {
             questions.Clear();
-            var pool = new List<ProvinceView>(map.Provinces);
-            // Fisher–Yates karıştırma
+            var pool = new List<ProvinceView>();
+            foreach (var p in map.Provinces)
+                if (Level.IncludesRegion(p.Data.region)) pool.Add(p);
+
             for (int i = pool.Count - 1; i > 0; i--)
             {
                 int j = UnityEngine.Random.Range(0, i + 1);
                 (pool[i], pool[j]) = (pool[j], pool[i]);
             }
-            int count = Mathf.Min(config.questionCount, pool.Count);
+            int count = Mathf.Clamp(Level.questionCount, 1, pool.Count);
             for (int i = 0; i < count; i++) questions.Add(pool[i]);
         }
 
@@ -120,33 +167,41 @@ namespace KPSSGeography.Quiz
             }
 
             Current = questions[QuestionIndex];
+            if (Mode == QuizMode.Region) Current.SetFocused(true);
             TimeRemaining = TimeLimit;
             State = QuizState.Playing;
-            QuestionStarted?.Invoke(new QuestionInfo(Current, QuestionIndex, questions.Count));
+            QuestionStarted?.Invoke(new QuestionInfo(Current, Mode, QuestionIndex, questions.Count));
         }
 
         void Update()
         {
-            if (State != QuizState.Playing) return;
+            if (State != QuizState.Playing || IsPaused) return;
 
             TimeRemaining -= Time.deltaTime;
             if (TimeRemaining <= 0f)
             {
                 TimeRemaining = 0f;
-                ResolveWrong(null, true);
+                ResolveWrong(null, null, true);
             }
         }
 
-        /// <summary>Oyuncunun haritada tıkladığı il.</summary>
-        public void SubmitAnswer(ProvinceView clicked)
+        /// <summary>İli Bul: oyuncunun haritada tıkladığı il.</summary>
+        public void SubmitProvince(ProvinceView clicked)
         {
-            if (State != QuizState.Playing || clicked == null) return;
-
+            if (!AcceptsMapInput || clicked == null) return;
             if (clicked == Current) ResolveCorrect();
-            else ResolveWrong(clicked, false);
+            else ResolveWrong(clicked, null, false);
         }
 
-        void ResolveCorrect()
+        /// <summary>Bölge Modu: oyuncunun seçtiği bölge.</summary>
+        public void SubmitRegion(string region)
+        {
+            if (!AcceptsRegionInput || string.IsNullOrEmpty(region)) return;
+            if (region == Current.Data.region) ResolveCorrect(region);
+            else ResolveWrong(null, region, false);
+        }
+
+        void ResolveCorrect(string chosenRegion = null)
         {
             Streak++;
             BestStreak = Mathf.Max(BestStreak, Streak);
@@ -156,21 +211,24 @@ namespace KPSSGeography.Quiz
             int points = Mathf.RoundToInt((config.basePoints + config.maxTimeBonus * TimeRatio) * multiplier);
             Score += points;
 
+            Current.SetFocused(false);
             Current.SetState(ProvinceState.Correct);
             Current.PlayCorrect();
             sfx.Play(Sfx.Correct);
 
             State = QuizState.Feedback;
-            AnswerResolved?.Invoke(new AnswerResult(AnswerOutcome.Correct, Current, Current, points, Streak, multiplier, Mistakes));
+            AnswerResolved?.Invoke(new AnswerResult(AnswerOutcome.Correct, Mode, Current, Current, chosenRegion,
+                points, Streak, multiplier, Mistakes));
             flow = StartCoroutine(AfterFeedback(config.correctFeedback, false));
         }
 
-        void ResolveWrong(ProvinceView clicked, bool timedOut)
+        void ResolveWrong(ProvinceView clicked, string chosenRegion, bool timedOut)
         {
             Mistakes++;
             Streak = 0;
 
             if (clicked != null) clicked.PlayWrongClick();
+            Current.SetFocused(false);
             Current.SetState(ProvinceState.Missed);
             Current.PlayReveal(config.wrongFeedback);
             sfx.Play(Sfx.Wrong);
@@ -178,9 +236,9 @@ namespace KPSSGeography.Quiz
 
             State = QuizState.Feedback;
             var outcome = timedOut ? AnswerOutcome.TimedOut : AnswerOutcome.Wrong;
-            AnswerResolved?.Invoke(new AnswerResult(outcome, Current, clicked, 0, 0, 1f, Mistakes));
+            AnswerResolved?.Invoke(new AnswerResult(outcome, Mode, Current, clicked, chosenRegion, 0, 0, 1f, Mistakes));
 
-            bool eliminated = Mistakes >= config.maxMistakes;
+            bool eliminated = Mistakes >= MaxMistakes;
             flow = StartCoroutine(AfterFeedback(config.wrongFeedback, eliminated));
         }
 
@@ -196,19 +254,15 @@ namespace KPSSGeography.Quiz
             State = QuizState.Finished;
             Current = null;
 
-            int previousBest = BestScore;
-            bool newBest = Score > previousBest;
-            if (newBest)
-            {
-                PlayerPrefs.SetInt(BestScoreKey, Score);
-                PlayerPrefs.Save();
-            }
+            int stars = completed ? Mathf.Clamp(3 - Mistakes, 1, 3) : 0;
+            int previousBest = progress.GetBest(Level.id);
+            bool newBest = progress.Record(Level.id, stars, Score);
 
             sfx.Play(completed ? Sfx.Victory : Sfx.GameOver);
             yield return new WaitForSeconds(config.endDelay);
 
             int answered = Mathf.Min(QuestionIndex + (completed ? 0 : 1), questions.Count);
-            GameEnded?.Invoke(new GameResult(completed, Score, Mathf.Max(previousBest, Score), newBest,
+            GameEnded?.Invoke(new GameResult(Level, completed, stars, Score, Mathf.Max(previousBest, Score), newBest && previousBest > 0,
                 CorrectCount, answered, questions.Count, BestStreak));
         }
     }

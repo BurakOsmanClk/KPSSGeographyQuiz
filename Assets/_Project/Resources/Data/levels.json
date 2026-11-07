@@ -1,0 +1,14 @@
+{
+  "levels": [
+    { "id": "marmara",      "title": "Marmara",            "description": "Marmara Bölgesi'nin illerini haritada bul.",            "mode": "find",   "regions": ["Marmara"],                                 "questionCount": 10, "timePerQuestion": 12, "maxMistakes": 3 },
+    { "id": "regions-1",    "title": "Yedi Bölge",          "description": "Haritada parlayan il hangi coğrafi bölgede?",           "mode": "region", "regions": [],                                          "questionCount": 10, "timePerQuestion": 10, "maxMistakes": 3 },
+    { "id": "ege-akdeniz",  "title": "Ege ve Akdeniz",      "description": "Kıyı illerini tanı: Ege ve Akdeniz bölgeleri.",         "mode": "find",   "regions": ["Ege", "Akdeniz"],                          "questionCount": 12, "timePerQuestion": 10, "maxMistakes": 3 },
+    { "id": "karadeniz",    "title": "Karadeniz",           "description": "Kastamonu'dan Artvin'e Karadeniz'in illeri.",          "mode": "find",   "regions": ["Karadeniz"],                               "questionCount": 12, "timePerQuestion": 10, "maxMistakes": 3 },
+    { "id": "ic-anadolu",   "title": "İç Anadolu",          "description": "Bozkırın kalbindeki illeri bul.",                      "mode": "find",   "regions": ["İç Anadolu"],                              "questionCount": 10, "timePerQuestion": 10, "maxMistakes": 3 },
+    { "id": "dogu-gdogu",   "title": "Doğu ve Güneydoğu",   "description": "Doğu Anadolu ve Güneydoğu Anadolu'nun illeri.",        "mode": "find",   "regions": ["Doğu Anadolu", "Güneydoğu Anadolu"],       "questionCount": 15, "timePerQuestion": 10, "maxMistakes": 3 },
+    { "id": "turkiye",      "title": "Tüm Türkiye",         "description": "81 il arasından 20 soru. Gerçek sınav!",               "mode": "find",   "regions": [],                                          "questionCount": 20, "timePerQuestion": 10, "maxMistakes": 3 },
+    { "id": "regions-2",    "title": "Bölge Ustası",        "description": "Daha az süre, daha çok soru: bölgeleri ustalıkla bil.", "mode": "region", "regions": [],                                          "questionCount": 20, "timePerQuestion": 6,  "maxMistakes": 3 },
+    { "id": "tarim",        "title": "Tarım Ürünleri",      "description": "Fındık, çay, pamuk... Hangi ürün nerede yetişir?",     "mode": "soon",   "regions": [],                                          "questionCount": 0,  "timePerQuestion": 0,  "maxMistakes": 3 },
+    { "id": "madenler",     "title": "Madenler ve Enerji",  "description": "Bor, krom, barajlar ve santraller haritada.",          "mode": "soon",   "regions": [],                                          "questionCount": 0,  "timePerQuestion": 0,  "maxMistakes": 3 }
+  ]
+}
