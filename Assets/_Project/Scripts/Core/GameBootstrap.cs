@@ -5,6 +5,7 @@ using KPSSGeography.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.Rendering.Universal;
 
 namespace KPSSGeography.Core
 {
@@ -19,8 +20,21 @@ namespace KPSSGeography.Core
         [SerializeField] QuizConfig quizConfig = new QuizConfig();
         [SerializeField] MapPalette palette = new MapPalette();
 
+        /// <summary>
+        /// Sahnede GameBootstrap yoksa (ör. SampleScene'de Play'e basıldıysa) otomatik oluşturur.
+        /// Böylece prototip hangi sahnede olursa olsun Play ile başlar.
+        /// </summary>
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        static void AutoCreate()
+        {
+            if (Object.FindAnyObjectByType<GameBootstrap>() != null) return;
+            Debug.Log("[KPSS] Sahnede GameBootstrap bulunamadı, otomatik oluşturuluyor.");
+            new GameObject("Game (Auto)").AddComponent<GameBootstrap>();
+        }
+
         void Awake()
         {
+            Debug.Log("[KPSS] Oyun başlatılıyor...");
             Application.targetFrameRate = 120;
 
             var db = ProvinceDatabase.Load();
@@ -58,6 +72,8 @@ namespace KPSSGeography.Core
             // Arayüz
             var hud = new GameObject("QuizHUD").AddComponent<QuizHud>();
             hud.Initialize(game, quizConfig, cam, sfx);
+
+            Debug.Log($"[KPSS] Hazır: {map.Provinces.Count} il yüklendi, shader: {map.SharedMaterial.shader.name}");
         }
 
         Camera SetupCamera()
@@ -70,6 +86,9 @@ namespace KPSSGeography.Core
                 go.AddComponent<AudioListener>();
             }
             cam.orthographic = true;
+            cam.transform.rotation = Quaternion.identity;
+            var urpData = cam.GetUniversalAdditionalCameraData();
+            if (urpData != null) urpData.renderPostProcessing = false;
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = palette.sea;
             cam.nearClipPlane = 0.1f;
