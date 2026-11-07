@@ -17,9 +17,20 @@ namespace KPSSGeography.UI
         public static readonly Color Amber = Hex(0xFFB703);
         public static readonly Color Orange = Hex(0xFB8500);
         public static readonly Color Cream = Hex(0xFFF8EC);
-        public static readonly Color Success = Hex(0x3BB273);
+        static Color success = Hex(0x3BB273);
+        static Color error = Hex(0xE5484D);
+
+        /// <summary>Doğru cevap rengi (renk körü modunda mavi).</summary>
+        public static Color Success => success;
+        /// <summary>Yanlış cevap rengi (renk körü modunda turuncu).</summary>
+        public static Color Error => error;
+
+        public static void ApplyColorblind(bool on)
+        {
+            success = on ? Hex(0x0072B2) : Hex(0x3BB273);
+            error = on ? Hex(0xE69F00) : Hex(0xE5484D);
+        }
         public static readonly Color Leaf = Hex(0x43AA8B);
-        public static readonly Color Error = Hex(0xE5484D);
         public static readonly Color Locked = Hex(0x4A5D70);
         public static readonly Color Soon = Hex(0x2B3A4A);
 

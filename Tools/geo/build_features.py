@@ -15,7 +15,7 @@ import os
 
 import mapbox_earcut as earcut
 import numpy as np
-from shapely.geometry import shape, LineString, MultiLineString, Polygon, MultiPolygon, Point
+from shapely.geometry import shape, box, LineString, MultiLineString, Polygon, MultiPolygon, Point
 from shapely.ops import linemerge, unary_union, polylabel
 
 from build_provinces import load_provinces, get_projection
@@ -25,6 +25,32 @@ RIVERS_SRC = os.path.join(HERE, "ne_10m_rivers_turkey.geojson")
 LAKES_SRC = os.path.join(HERE, "ne_10m_lakes_turkey.geojson")
 LAKES_EU_SRC = os.path.join(HERE, "ne_10m_lakes_europe_turkey.geojson")
 MANUAL_SRC = os.path.join(HERE, "features_manual.json")
+COUNTRIES_SRC = os.path.join(HERE, "ne_10m_neighbors_turkey.geojson")
+
+# Dağ alanı genişlikleri (km); verilmeyenler varsayılan
+MOUNTAIN_WIDTH_KM = {"guneydogu-toroslar": 42, "dogu-karadeniz": 30, "kure": 24, "bolkar": 26, "geyik": 24, "bey": 22,
+                     "aladaglar": 20, "nur": 18, "uludag": 14, "kazdagi": 14, "madra": 13, "bozdaglar": 15, "aydin": 15,
+                     "mentese": 18, "munzur": 22, "palandoken": 16, "allahuekber": 18, "sultan": 16, "yildiz": 20}
+DEFAULT_MOUNTAIN_KM = 20
+
+# Akarsu yatağından türetilen ovalar: (akarsu id(leri), [boylam_min, enlem_min, boylam_max, enlem_max], genişlik km)
+PLAINS_FROM_RIVERS = {
+    "buyuk-menderes": (["buyuk-menderes"], [27.2, 37.4, 29.2, 38.0], 9),
+    "gediz": (["gediz"], [27.0, 38.4, 28.6, 38.75], 8),
+    "ergene": (["ergene"], [26.5, 41.0, 27.95, 41.5], 8),
+    "adapazari": (["sakarya"], [30.25, 40.6, 30.75, 41.0], 10),
+    "bafra": (["kizilirmak"], [35.55, 41.35, 36.25, 41.8], 15),
+    "carsamba": (["yesilirmak"], [36.4, 41.05, 37.0, 41.4], 15),
+    "cukurova": (["seyhan", "ceyhan"], [34.95, 36.6, 36.2, 37.15], 20),
+    "igdir": (["aras"], [43.6, 39.75, 44.7, 40.15], 11),
+    "mus": (["murat"], [41.15, 38.6, 41.95, 38.95], 10),
+    "pasinler": (["aras"], [41.35, 39.8, 42.15, 40.1], 9),
+}
+
+COUNTRY_TR = {"Greece": "Yunanistan", "Bulgaria": "Bulgaristan", "Georgia": "Gürcistan", "Armenia": "Ermenistan",
+              "Azerbaijan": "Azerbaycan", "Iran": "İran", "Iraq": "Irak", "Syria": "Suriye", "Cyprus": "Kıbrıs",
+              "Northern Cyprus": "Kıbrıs", "Russia": "Rusya", "Ukraine": "Ukrayna", "Romania": "Romanya",
+              "Lebanon": "Lübnan", "Israel": "İsrail", "Jordan": "Ürdün", "Palestine": "Filistin"}
 DST = os.path.join(HERE, "..", "..", "Assets", "_Project", "Resources", "Data", "turkey_features.json")
 
 # id, Türkçe ad, Natural Earth'teki adları, KPSS bilgi notu
@@ -45,7 +71,7 @@ RIVERS = [
     ("seyhan", "Seyhan", ["Seyhan"], "Ceyhan ile birlikte Çukurova'yı oluşturur; Akdeniz'e dökülür."),
     ("ceyhan", "Ceyhan", ["Ceyhan"], "Seyhan ile birlikte Çukurova'yı oluşturur; Aslantaş Barajı üzerindedir."),
     ("goksu", "Göksu", ["S. Göksu", "Goksu (northern branch)"], "Taşeli Platosu'ndan geçerek Silifke'de Akdeniz'e dökülür; ağzında delta oluşturmuştur."),
-    ("buyuk-menderes", "Büyük Menderes", ["Büyük Menderes"], "Menderes (büklüm) yaparak akar; Ege Denizi'ne dökülür, ağzında delta oluşturmuştur."),
+    ("buyuk-menderes", "Büyük Menderes", ["Büyük Menderes", "Byk Menderes"], "Menderes (büklüm) yaparak akar; Ege Denizi'ne dökülür, ağzında delta oluşturmuştur."),
     ("kucuk-menderes", "Küçük Menderes", ["Küçük Menderes"], "Bozdağlar ile Aydın Dağları arasındaki grabende akar, Selçuk yakınında Ege'ye dökülür."),
     ("gediz", "Gediz", ["Gediz"], "Manisa ovalarını sular, İzmir Körfezi'nin kuzeyinde Ege Denizi'ne dökülür."),
     ("susurluk", "Susurluk Çayı", ["Susurluk"], "Simav Çayı'nı alır; Marmara Denizi'ne dökülen en önemli akarsudur."),
@@ -85,6 +111,40 @@ def main():
     proj, _ = get_projection(geoms)
     turkey = unary_union(geoms)
     clip = turkey.buffer(0.12)
+    y_a, y_b = proj(0, 0)[1], proj(0, 1)[1]
+    units_per_km = (y_b - y_a) / 110.57
+
+    def to_xy(g):
+        from shapely.ops import transform
+        return transform(lambda x, y, z=None: proj(x, y), g)
+
+    land_xy = to_xy(turkey).buffer(0)
+    river_parts = {}
+
+    def triangulate_xy(polys):
+        verts, tris, outline = [], [], []
+        for poly in polys:
+            if poly.is_empty or poly.area <= 0:
+                continue
+            rings = [list(poly.exterior.coords)[:-1]] + [list(i.coords)[:-1] for i in poly.interiors]
+            rings = [r for r in rings if len(r) >= 3]
+            arr = np.array([p for r in rings for p in r], dtype=np.float64)
+            ends = np.cumsum([len(r) for r in rings]).astype(np.uint32)
+            idx = earcut.triangulate_float64(arr, ends)
+            base = len(verts) // 2
+            for x, y in arr:
+                verts += [r4(x), r4(y)]
+            tris += [int(i) + base for i in idx]
+            for r in rings:
+                outline.append({"points": [r4(c) for p in r for c in p]})
+        return verts, tris, outline
+
+    def polys_of(g):
+        if g.is_empty:
+            return []
+        if isinstance(g, Polygon):
+            return [g]
+        return [q for q in getattr(g, "geoms", []) if isinstance(q, Polygon)]
 
     def flat(coords):
         return [r4(c) for lon, lat in coords for c in proj(lon, lat)]
@@ -116,12 +176,25 @@ def main():
     river_data = json.load(open(RIVERS_SRC, encoding="utf-8"))["features"]
     for rid, name, aliases, info in RIVERS:
         cands = [f for f in river_data if f["properties"]["name"] in aliases]
-        europe = [f for f in cands if f["properties"]["source"] == "ne_10m_rivers_europe"]
-        chosen = europe or cands
-        if not chosen:
+        # İki Natural Earth kaynağından Türkiye içinde daha uzun olanı seç (çift çizgi olmasın)
+        by_src = {}
+        for f in cands:
+            by_src.setdefault(f["properties"]["source"], []).append(f)
+
+        def length_in(fs):
+            return unary_union([shape(f["geometry"]) for f in fs]).intersection(clip).length
+
+        if not by_src:
             print("UYARI: akarsu bulunamadı:", name)
             continue
-        u = unary_union([shape(f["geometry"]) for f in chosen])
+        # Uzun kaynak ana çizgi; diğer kaynaktan yalnızca ana çizgide olmayan (tamamlayıcı) parçalar eklenir
+        ordered = sorted(by_src.values(), key=length_in, reverse=True)
+        primary = unary_union([shape(f["geometry"]) for f in ordered[0]])
+        extra = []
+        for fs in ordered[1:]:
+            other = unary_union([shape(f["geometry"]) for f in fs]).difference(primary.buffer(0.04))
+            extra += [g for g in (getattr(other, "geoms", None) or [other]) if not g.is_empty and g.length > 0.05]
+        u = unary_union([primary] + extra)
         merged = linemerge(u) if isinstance(u, MultiLineString) else u
         clipped = merged.intersection(clip)
         parts = [clipped] if isinstance(clipped, LineString) else list(getattr(clipped, "geoms", []))
@@ -129,6 +202,7 @@ def main():
         if not parts:
             print("UYARI: akarsu Türkiye içinde değil:", name)
             continue
+        river_parts[rid] = parts
         features.append({
             "id": rid, "name": name, "category": "river", "kind": "line", "info": info,
             "label": line_label(parts),
@@ -142,11 +216,18 @@ def main():
     for m in manual["mountains"]:
         pts = chaikin([tuple(p) for p in m["line"]], closed=False)
         ls = LineString(pts)
+        ridge = to_xy(ls)
+        w = MOUNTAIN_WIDTH_KM.get(m["id"], DEFAULT_MOUNTAIN_KM) * 1.4 * units_per_km
+        outer = ridge.buffer(w / 2, quad_segs=6).simplify(0.01).intersection(land_xy)
+        inner = ridge.buffer(w * 0.22, quad_segs=6).simplify(0.01).intersection(land_xy)
+        overts, otris, ooutline = triangulate_xy(polys_of(outer))
+        iverts, itris, _ = triangulate_xy(polys_of(inner))
         features.append({
-            "id": m["id"], "name": m["name"], "category": "mountain", "kind": "line", "info": m["info"],
+            "id": m["id"], "name": m["name"], "category": "mountain", "kind": "polygon", "info": m["info"],
             "label": line_label([ls]),
             "lines": [{"points": flat(pts)}],
-            "vertices": [], "triangles": [], "outline": [],
+            "vertices": overts, "triangles": otris, "outline": ooutline,
+            "innerVertices": iverts, "innerTriangles": itris,
         })
 
     # ---------- Volkanlar ----------
@@ -160,13 +241,33 @@ def main():
     # ---------- Ovalar ve platolar ----------
     for key, cat in (("plains", "plain"), ("plateaus", "plateau")):
         for a in manual[key]:
-            pts = chaikin([tuple(p) for p in a["polygon"]], closed=True)
-            poly = Polygon(pts).buffer(0)
-            verts, tris, outline = triangulate([poly])
-            lp = polylabel(poly, tolerance=0.005)
+            geom_xy = None
+            if cat == "plain" and a["id"] in PLAINS_FROM_RIVERS:
+                rids, bb, km = PLAINS_FROM_RIVERS[a["id"]]
+                region = box(*bb)
+                pieces = []
+                for rid in rids:
+                    for part in river_parts.get(rid, []):
+                        seg = part.intersection(region)
+                        if not seg.is_empty:
+                            pieces.append(to_xy(seg).buffer(km * units_per_km / 2, quad_segs=8))
+                if pieces:
+                    u = unary_union(pieces)
+                    geom_xy = u.buffer(0.06).buffer(-0.05)  # birleştir ve yumuşat
+            if geom_xy is None:
+                pts = chaikin([tuple(p) for p in a["polygon"]], closed=True)
+                geom_xy = to_xy(Polygon(pts).buffer(0))
+            geom_xy = geom_xy.simplify(0.008).intersection(land_xy)
+            polys = polys_of(geom_xy)
+            if not polys:
+                print("UYARI: alan boş kaldı:", a["name"])
+                continue
+            verts, tris, outline = triangulate_xy(polys)
+            largest = max(polys, key=lambda q: q.area)
+            lp = polylabel(largest, tolerance=0.01)
             features.append({
                 "id": a["id"], "name": a["name"], "category": cat, "kind": "polygon", "info": a["info"],
-                "label": [r4(c) for c in proj(lp.x, lp.y)],
+                "label": [r4(lp.x), r4(lp.y)],
                 "lines": [], "vertices": verts, "triangles": tris, "outline": outline,
             })
 
@@ -280,8 +381,26 @@ def main():
         lakes.append({"name": LAKE_NAMES.get(f["properties"]["name"], f["properties"]["name"]),
                       "vertices": verts, "triangles": tris, "outline": outline})
 
+    # ---------- Komşu ülkeler (dekor) ----------
+    countries = []
+    for f in json.load(open(COUNTRIES_SRC, encoding="utf-8"))["features"]:
+        name = COUNTRY_TR.get(f["properties"]["name"])
+        if name is None:
+            continue
+        g = shape(f["geometry"]).buffer(0)
+        polys = list(g.geoms) if isinstance(g, MultiPolygon) else [g]
+        polys = [q for q in polys if q.area > 0.002]
+        if not polys:
+            continue
+        verts, tris, outline = triangulate(polys)
+        countries.append({"name": name, "vertices": verts, "triangles": tris, "outline": outline})
+
+    for f in features:
+        f.setdefault("innerVertices", [])
+        f.setdefault("innerTriangles", [])
+
     result = {"source": "Natural Earth (kamu malı) + elle çizim (Tools/geo/features_manual.json)",
-              "features": features, "lakes": lakes}
+              "features": features, "lakes": lakes, "countries": countries}
     with open(DST, "w", encoding="utf-8") as fp:
         json.dump(result, fp, ensure_ascii=False, separators=(",", ":"))
 
