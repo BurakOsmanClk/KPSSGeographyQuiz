@@ -22,6 +22,9 @@ namespace KPSSGeography.Map
         public ProvinceData Data { get; private set; }
         public string DisplayName => Data.name;
         public ProvinceState State { get; private set; }
+        public bool IsDimmed => dimmed;
+        public Color BaseColor => baseColor;
+        public Color CorrectColor => correctColor;
         public Rect WorldRect { get; private set; }
 
         MapPalette palette;
@@ -30,6 +33,12 @@ namespace KPSSGeography.Map
         Color[] fillColors;
         MeshRenderer fillRenderer;
         MeshRenderer borderRenderer;
+
+        Color baseColor;
+        Color correctColor;
+        bool dimmed;
+        bool focused;
+        float focusTime;
 
         Color smoothedColor;
         Color appliedColor;
@@ -47,6 +56,8 @@ namespace KPSSGeography.Map
         {
             Data = data;
             palette = mapPalette;
+            baseColor = palette.ProvinceBase(data);
+            correctColor = MapPalette.Saturated(palette.RegionColor(data.region));
             name = $"{data.plate:00} {data.name}";
 
             Vector2 pivot = data.LabelPoint;
@@ -136,16 +147,27 @@ namespace KPSSGeography.Map
         {
             State = ProvinceState.Idle;
             hovered = false;
+            dimmed = false;
+            focused = false;
             flashTime = 0f;
             popTime = -1f;
             transform.localScale = Vector3.one;
             SetRaised(false);
-            smoothedColor = palette.land;
-            Apply(palette.land, true);
+            smoothedColor = baseColor;
+            Apply(baseColor, true);
         }
 
         public void SetState(ProvinceState state) => State = state;
         public void SetHovered(bool value) => hovered = value;
+        public void SetDimmed(bool value) => dimmed = value;
+
+        /// <summary>Bölge modunda sorulan ili cevaplanana kadar nabız gibi vurgular.</summary>
+        public void SetFocused(bool value)
+        {
+            focused = value;
+            focusTime = 0f;
+            SetRaised(value || flashTime > 0f);
+        }
 
         public void PlayCorrect()
         {
@@ -179,11 +201,12 @@ namespace KPSSGeography.Map
 
             Color target = State switch
             {
-                ProvinceState.Correct => palette.correct,
+                ProvinceState.Correct => correctColor,
                 ProvinceState.Missed => palette.missed,
-                _ => palette.land
+                _ => baseColor
             };
-            if (hovered) target = Color.Lerp(target, palette.hover, 0.75f);
+            if (dimmed && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, 0.82f);
+            if (hovered) target = Color.Lerp(target, palette.hover, 0.5f);
 
             smoothedColor = Color.Lerp(smoothedColor, target, 1f - Mathf.Exp(-20f * dt));
             if (Mathf.Abs(smoothedColor.r - target.r) + Mathf.Abs(smoothedColor.g - target.g) +
@@ -191,13 +214,20 @@ namespace KPSSGeography.Map
                 smoothedColor = target;
             Color final = smoothedColor;
 
+            if (focused)
+            {
+                focusTime += dt;
+                float w = 0.5f + 0.5f * Mathf.Sin(focusTime * 6f);
+                final = Color.Lerp(smoothedColor, palette.reveal, 0.35f + 0.5f * w);
+            }
+
             if (flashTime > 0f)
             {
                 flashTime -= dt;
                 float t = 1f - Mathf.Clamp01(flashTime / flashDuration);
                 float w = 0.5f - 0.5f * Mathf.Cos(t * flashPulses * Mathf.PI * 2f);
                 final = Color.Lerp(smoothedColor, flashColor, w);
-                if (flashTime <= 0f && popTime < 0f) SetRaised(false);
+                if (flashTime <= 0f && popTime < 0f && !focused) SetRaised(false);
             }
 
             if (popTime >= 0f)
@@ -210,7 +240,7 @@ namespace KPSSGeography.Map
                 {
                     popTime = -1f;
                     transform.localScale = Vector3.one;
-                    if (flashTime <= 0f) SetRaised(false);
+                    if (flashTime <= 0f && !focused) SetRaised(false);
                 }
             }
 

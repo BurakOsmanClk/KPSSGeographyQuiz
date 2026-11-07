@@ -11,7 +11,9 @@ namespace KPSSGeography.Core
         Go,
         Victory,
         GameOver,
-        Click
+        Click,
+        Swipe,
+        Star
     }
 
     /// <summary>
@@ -22,7 +24,16 @@ namespace KPSSGeography.Core
     {
         const int SampleRate = 44100;
 
+        const string MuteKey = "KPSS_Muted";
+
         [Range(0f, 1f)] public float volume = 0.6f;
+
+        /// <summary>Ses kapalı mı? (PlayerPrefs'te saklanır)</summary>
+        public bool Muted
+        {
+            get => PlayerPrefs.GetInt(MuteKey, 0) == 1;
+            set { PlayerPrefs.SetInt(MuteKey, value ? 1 : 0); PlayerPrefs.Save(); }
+        }
 
         AudioSource source;
         readonly Dictionary<Sfx, AudioClip> clips = new Dictionary<Sfx, AudioClip>();
@@ -40,10 +51,13 @@ namespace KPSSGeography.Core
             clips[Sfx.Victory] = Notes("Victory", 0.45f, (523.3f, 0.12f), (659.3f, 0.12f), (784f, 0.12f), (1046.5f, 0.45f));
             clips[Sfx.GameOver] = Notes("GameOver", 0.45f, (392f, 0.2f), (329.6f, 0.2f), (261.6f, 0.5f));
             clips[Sfx.Click] = Notes("Click", 0.3f, (900f, 0.035f));
+            clips[Sfx.Swipe] = Notes("Swipe", 0.16f, (640f, 0.03f));
+            clips[Sfx.Star] = Notes("Star", 0.4f, (1318.5f, 0.06f), (1760f, 0.16f));
         }
 
         public void Play(Sfx sfx, float volumeScale = 1f)
         {
+            if (Muted) return;
             if (source != null && clips.TryGetValue(sfx, out var clip))
                 source.PlayOneShot(clip, volume * volumeScale);
         }

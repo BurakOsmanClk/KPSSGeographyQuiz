@@ -5,23 +5,25 @@ using UnityEngine.InputSystem;
 namespace KPSSGeography.Map
 {
     /// <summary>
-    /// Ortografik harita kamerası.
-    /// Tekerlek: imlecin olduğu noktaya yakınlaştır/uzaklaştır • Sağ tık sürükle: kaydır • Orta tık: görünümü sıfırla.
+    /// Ortografik harita kamerası. İki mod:
+    /// • Vitrin (menüler): harita yavaşça süzülür, giriş kapalıdır.
+    /// • Etkileşimli (oyun): seçili bölgeye odaklanır. Tekerlek imlecin olduğu yere yakınlaştırır,
+    ///   sağ tık + sürükle kaydırır, orta tık görünümü sıfırlar.
     /// </summary>
     [RequireComponent(typeof(Camera))]
     public class MapCameraController : MonoBehaviour
     {
-        [Tooltip("Haritanın ekranda kapladığı dikey alan (üstte HUD için boşluk bırakılır).")]
-        [SerializeField] float verticalFill = 0.76f;
-        [Tooltip("Haritanın dikey merkezinin ekrandaki konumu (0 alt, 1 üst).")]
-        [SerializeField] float verticalCenter = 0.44f;
-        [SerializeField] float horizontalFill = 0.96f;
         [SerializeField] float maxZoomIn = 6f;
         [SerializeField] float zoomStep = 1.25f;
-        [SerializeField] float smoothing = 14f;
+        [SerializeField] float interactiveSmoothing = 9f;
+        [SerializeField] float attractSmoothing = 2.5f;
 
         Camera cam;
-        Rect bounds;
+        Rect mapBounds;
+        Rect focusBounds;
+        Rect viewport = new Rect(0f, 0f, 1f, 1f);
+        bool attract = true;
+
         float fitSize;
         Vector2 fitPosition;
         float targetSize;
@@ -29,18 +31,48 @@ namespace KPSSGeography.Map
         Vector2 currentPos;
         float lastAspect;
         bool isDefaultView = true;
+        float attractTime;
 
         float shakeTime;
         float shakeDuration;
         float shakeAmplitude;
 
-        public void Setup(Rect mapBounds)
+        /// <summary>Kullanıcı girişi (zoom/pan) açık mı? Duraklatma gibi durumlarda kapatılır.</summary>
+        public bool InputEnabled { get; set; } = true;
+
+        public void Setup(Rect bounds)
         {
             cam = GetComponent<Camera>();
             cam.orthographic = true;
-            bounds = mapBounds;
+            mapBounds = bounds;
+            SetAttractMode();
+            currentPos = targetPos;
+            cam.orthographicSize = targetSize;
+            ApplyTransform(Vector2.zero);
+        }
+
+        /// <summary>Menü arka planı: haritanın tamamı ekranda, yavaşça süzülür.</summary>
+        public void SetAttractMode()
+        {
+            attract = true;
+            focusBounds = mapBounds;
+            viewport = new Rect(0.04f, 0.06f, 0.92f, 0.86f);
             ComputeFit();
-            SnapToDefault();
+            targetSize = fitSize;
+            targetPos = fitPosition;
+        }
+
+        /// <summary>
+        /// Oyun: verilen harita bölgesini ekranın <paramref name="screenViewport"/> (0–1 normalleştirilmiş)
+        /// alanına sığdırır. HUD için boşluk bırakmak üzere kullanılır.
+        /// </summary>
+        public void FocusOn(Rect worldRect, Rect screenViewport)
+        {
+            attract = false;
+            focusBounds = worldRect;
+            viewport = screenViewport;
+            ComputeFit();
+            ResetView();
         }
 
         public void ResetView()
@@ -57,21 +89,23 @@ namespace KPSSGeography.Map
             shakeTime = duration;
         }
 
-        void SnapToDefault()
-        {
-            ResetView();
-            currentPos = targetPos;
-            cam.orthographicSize = targetSize;
-            ApplyTransform(Vector2.zero);
-        }
-
         void ComputeFit()
         {
             lastAspect = cam.aspect;
-            float byHeight = bounds.height / (2f * verticalFill);
-            float byWidth = bounds.width / (2f * cam.aspect * horizontalFill);
+            var b = focusBounds;
+            // Küçük bölgelerde aşırı yakınlaşmayı engellemek için asgari boyut
+            float minW = mapBounds.width * 0.3f, minH = mapBounds.height * 0.3f;
+            if (b.width < minW) b = new Rect(b.center.x - minW / 2f, b.y, minW, b.height);
+            if (b.height < minH) b = new Rect(b.x, b.center.y - minH / 2f, b.width, minH);
+
+            float byHeight = b.height / (2f * viewport.height);
+            float byWidth = b.width / (2f * cam.aspect * viewport.width);
             fitSize = Mathf.Max(byHeight, byWidth);
-            fitPosition = new Vector2(bounds.center.x, bounds.center.y + (0.5f - verticalCenter) * 2f * fitSize);
+
+            Vector2 vc = viewport.center;
+            fitPosition = new Vector2(
+                b.center.x - (vc.x - 0.5f) * 2f * fitSize * cam.aspect,
+                b.center.y - (vc.y - 0.5f) * 2f * fitSize);
         }
 
         void Update()
@@ -81,10 +115,24 @@ namespace KPSSGeography.Map
             if (!Mathf.Approximately(cam.aspect, lastAspect))
             {
                 ComputeFit();
-                if (isDefaultView) ResetView();
+                if (attract || isDefaultView) { targetSize = fitSize; targetPos = fitPosition; }
             }
 
-            HandleInput();
+            float smoothing;
+            if (attract)
+            {
+                attractTime += Time.unscaledDeltaTime;
+                targetSize = fitSize * (0.92f + 0.05f * Mathf.Sin(attractTime * 0.11f));
+                targetPos = fitPosition + new Vector2(
+                    Mathf.Sin(attractTime * 0.07f) * mapBounds.width * 0.05f,
+                    Mathf.Sin(attractTime * 0.05f + 1f) * mapBounds.height * 0.04f);
+                smoothing = attractSmoothing;
+            }
+            else
+            {
+                if (InputEnabled) HandleInput();
+                smoothing = interactiveSmoothing;
+            }
 
             float k = 1f - Mathf.Exp(-smoothing * Time.unscaledDeltaTime);
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, k);
@@ -94,7 +142,7 @@ namespace KPSSGeography.Map
             if (shakeTime > 0f)
             {
                 shakeTime -= Time.unscaledDeltaTime;
-                float strength = shakeAmplitude * Mathf.Clamp01(shakeTime / shakeDuration) * (cam.orthographicSize / fitSize);
+                float strength = shakeAmplitude * Mathf.Clamp01(shakeTime / shakeDuration) * (cam.orthographicSize / 4f);
                 shake = Random.insideUnitCircle * strength;
             }
             ApplyTransform(shake);
@@ -108,7 +156,6 @@ namespace KPSSGeography.Map
             Vector2 screen = mouse.position.ReadValue();
             bool overUI = PointerUtil.IsOverUI();
 
-            // Yakınlaştırma (imleç altındaki nokta sabit kalır)
             float scroll = mouse.scroll.ReadValue().y;
             if (!overUI && Mathf.Abs(scroll) > 0.01f)
             {
@@ -118,11 +165,10 @@ namespace KPSSGeography.Map
                 Vector2 after = ScreenToWorld(screen, targetPos, newSize);
                 targetSize = newSize;
                 targetPos += before - after;
-                if (Mathf.Approximately(newSize, fitSize)) { targetPos = fitPosition; isDefaultView = true; }
+                if (Mathf.Approximately(newSize, fitSize)) ResetView();
                 else isDefaultView = false;
             }
 
-            // Kaydırma (sağ ya da orta tuş basılıyken sürükle)
             if (mouse.rightButton.isPressed)
             {
                 Vector2 delta = mouse.delta.ReadValue();
@@ -138,16 +184,12 @@ namespace KPSSGeography.Map
 
             if (mouse.middleButton.wasPressedThisFrame && !overUI) ResetView();
 
-            ClampTarget();
-        }
-
-        void ClampTarget()
-        {
-            if (isDefaultView) return;
-            float marginY = targetSize * 0.5f;
-            float marginX = targetSize * cam.aspect * 0.5f;
-            targetPos.x = Mathf.Clamp(targetPos.x, bounds.xMin - marginX * 0.2f, bounds.xMax + marginX * 0.2f);
-            targetPos.y = Mathf.Clamp(targetPos.y, bounds.yMin - marginY * 0.2f, bounds.yMax + marginY * 0.6f);
+            if (!isDefaultView)
+            {
+                float mx = targetSize * cam.aspect * 0.5f, my = targetSize * 0.5f;
+                targetPos.x = Mathf.Clamp(targetPos.x, focusBounds.xMin - mx, focusBounds.xMax + mx);
+                targetPos.y = Mathf.Clamp(targetPos.y, focusBounds.yMin - my, focusBounds.yMax + my);
+            }
         }
 
         Vector2 ScreenToWorld(Vector2 screen, Vector2 camPos, float size)

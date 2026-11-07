@@ -3,15 +3,13 @@ using UnityEngine;
 
 namespace KPSSGeography.Quiz
 {
-    /// <summary>Oyun kuralları. GameBootstrap üzerinden Inspector'da değiştirilebilir.</summary>
+    /// <summary>
+    /// Bölümlerden bağımsız genel oyun ayarları (puanlama, zamanlama).
+    /// Soru sayısı, süre ve hata hakkı her bölüm için levels.json'da tanımlanır.
+    /// </summary>
     [Serializable]
     public class QuizConfig
     {
-        [Header("Kurallar")]
-        [Min(1)] public int questionCount = 20;
-        [Min(1f)] public float timePerQuestion = 10f;
-        [Min(1)] public int maxMistakes = 3;
-
         [Header("Puanlama")]
         public int basePoints = 100;
         [Tooltip("Kalan süreye göre eklenen en yüksek bonus.")]
@@ -22,9 +20,13 @@ namespace KPSSGeography.Quiz
         public int maxStreakSteps = 5;
 
         [Header("Zamanlama (sn)")]
-        public float countdownStep = 0.7f;
+        public float countdownStep = 0.6f;
         public float correctFeedback = 0.7f;
         public float wrongFeedback = 1.8f;
-        public float endDelay = 0.6f;
+        public float endDelay = 0.7f;
+
+        [Header("Test")]
+        [Tooltip("Açıkken tüm bölümler kilitsiz görünür (geliştirme için).")]
+        public bool unlockAllLevels;
     }
 }

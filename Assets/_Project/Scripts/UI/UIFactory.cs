@@ -128,32 +128,82 @@ namespace KPSSGeography.UI
             return t;
         }
 
-        public static Button Button(string name, Transform parent, string label, Color color, Vector2 size, UnityAction onClick)
+        /// <summary>Yuvarlak köşeli, gölgeli, üzerine gelince büyüyen buton.</summary>
+        public static Button Button(string name, Transform parent, string label, Color color, Vector2 size, UnityAction onClick,
+            Color? textColor = null, int fontSize = 0)
         {
             var img = Panel(name, parent, Color.white, true);
             img.rectTransform.sizeDelta = size;
 
             var btn = img.gameObject.AddComponent<Button>();
             btn.targetGraphic = img;
-            var colors = btn.colors;
-            colors.normalColor = color;
-            colors.highlightedColor = Color.Lerp(color, Color.white, 0.18f);
-            colors.pressedColor = Color.Lerp(color, Color.black, 0.18f);
-            colors.selectedColor = color;
-            colors.fadeDuration = 0.08f;
-            btn.colors = colors;
-            btn.onClick.AddListener(onClick);
+            SetButtonColor(btn, color);
+            if (onClick != null) btn.onClick.AddListener(onClick);
 
             var shadow = img.gameObject.AddComponent<Shadow>();
-            shadow.effectColor = new Color(0f, 0f, 0f, 0.25f);
-            shadow.effectDistance = new Vector2(0f, -4f);
+            shadow.effectColor = new Color(0f, 0f, 0f, 0.28f);
+            shadow.effectDistance = new Vector2(0f, -5f);
 
-            var text = Label("Label", img.transform, label, Mathf.RoundToInt(size.y * 0.42f), Color.white,
-                TextAnchor.MiddleCenter, FontStyle.Bold);
+            int fs = fontSize > 0 ? fontSize : Mathf.RoundToInt(size.y * 0.4f);
+            var text = Label("Label", img.transform, label, fs, textColor ?? Color.white, TextAnchor.MiddleCenter, FontStyle.Bold);
             text.rectTransform.Stretch();
 
             img.gameObject.AddComponent<ButtonHoverScale>();
             return btn;
+        }
+
+        /// <summary>Daire biçiminde ikon butonu.</summary>
+        public static Button IconButton(string name, Transform parent, Sprite icon, Color color, float size, UnityAction onClick,
+            Color? iconColor = null)
+        {
+            var rt = Rect(name, parent);
+            rt.sizeDelta = new Vector2(size, size);
+            var img = rt.gameObject.AddComponent<Image>();
+            img.sprite = ShapeSprites.Circle;
+            img.raycastTarget = true;
+
+            var btn = rt.gameObject.AddComponent<Button>();
+            btn.targetGraphic = img;
+            SetButtonColor(btn, color);
+            if (onClick != null) btn.onClick.AddListener(onClick);
+
+            var shadow = rt.gameObject.AddComponent<Shadow>();
+            shadow.effectColor = new Color(0f, 0f, 0f, 0.28f);
+            shadow.effectDistance = new Vector2(0f, -4f);
+
+            var ic = Icon("Icon", rt, icon, iconColor ?? Color.white);
+            ic.rectTransform.Stretch(size * 0.26f, size * 0.26f, size * 0.26f, size * 0.26f);
+            rt.gameObject.AddComponent<ButtonHoverScale>();
+            return btn;
+        }
+
+        public static void SetButtonColor(Button btn, Color color)
+        {
+            var colors = btn.colors;
+            colors.normalColor = color;
+            colors.highlightedColor = Color.Lerp(color, Color.white, 0.15f);
+            colors.pressedColor = Color.Lerp(color, Color.black, 0.18f);
+            colors.selectedColor = color;
+            colors.disabledColor = new Color(0.36f, 0.42f, 0.5f, 0.75f);
+            colors.colorMultiplier = 1f;
+            colors.fadeDuration = 0.08f;
+            btn.colors = colors;
+        }
+
+        public static void SetButtonLabel(Button btn, string text)
+        {
+            var t = btn.GetComponentInChildren<Text>();
+            if (t != null) t.text = text;
+        }
+
+        /// <summary>Belirli bir boyutta, gölgeli kart paneli.</summary>
+        public static Image Card(string name, Transform parent, Color color, bool raycast = false)
+        {
+            var img = Panel(name, parent, color, raycast);
+            var sh = img.gameObject.AddComponent<Shadow>();
+            sh.effectColor = new Color(0f, 0f, 0f, 0.3f);
+            sh.effectDistance = new Vector2(0f, -8f);
+            return img;
         }
 
         // ---------- Prosedürel sprite'lar ----------
