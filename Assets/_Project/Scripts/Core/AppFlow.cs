@@ -20,11 +20,13 @@ namespace KPSSGeography.Core
         LevelCatalog catalog;
         ProgressStore progress;
         AdPolicy ads;
+        ExamModeController exam;
 
         public void Initialize(CityQuizGame quizGame, QuizHud quizHud, TitleScreen titleScreen, LevelSelectScreen levelSelect,
-            LevelCatalog levelCatalog, ProgressStore progressStore, AdPolicy adPolicy)
+            LevelCatalog levelCatalog, ProgressStore progressStore, AdPolicy adPolicy, ExamModeController examController)
         {
             ads = adPolicy;
+            exam = examController;
             game = quizGame;
             hud = quizHud;
             title = titleScreen;
@@ -67,6 +69,7 @@ namespace KPSSGeography.Core
         {
             LeaveGame();
             levels.Hide();
+            exam.SetLook(false, false); // giriş ekranında harita her zaman renkli
             title.Show();
         }
 
@@ -74,6 +77,7 @@ namespace KPSSGeography.Core
         {
             LeaveGame();
             title.Hide();
+            exam.SetLook(GameSettings.ExamMode, false);
             levels.Open(focus);
         }
 
@@ -82,6 +86,7 @@ namespace KPSSGeography.Core
             if (level == null) return;
             title.Hide();
             levels.Hide();
+            exam.SetLook(GameSettings.ExamMode, false);
             game.StartLevel(level);
         }
 

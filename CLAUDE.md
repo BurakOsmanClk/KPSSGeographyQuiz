@@ -29,6 +29,7 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 
 ## Fiziki harita verisi
 - `python Tools/geo/build_provinces.py` illere `neighbors` (komşu plakalar) da ekler. `python Tools/geo/build_features.py` → `Resources/Data/turkey_features.json` (göller: Natural Earth + elle elips, tip bilgisiyle; barajlar akarsu çizgisine oturtulur; kıyı, UNESCO, milli park noktaları ve fay hatları `features_manual.json`'da). Akarsular ve göller Natural Earth'ten (`Tools/geo/ne_10m_rivers_turkey.geojson`, `ne_10m_lakes_turkey.geojson`); dağlar (sırt çizgisi), volkanlar (nokta), ovalar ve platolar (alan) `Tools/geo/features_manual.json` içinde elle, [boylam, enlem] olarak tanımlı ve KPSS bilgi notları içerir. Yeni yer şekli eklemek için bu dosyaya ekleyip scripti çalıştır.
+- Fiziki içerik listesi ve sınıflandırması: `docs/content/FIZIKI_COGRAFYA.md` (45 ova, 13 plato, 41 dağ, 10 volkan). Ova/plato için `features_manual.json`'da `polygon`, `polygons` ya da `ellipse` (merkez, rx/ry km, açı); delta/graben ovaları `PLAINS_FROM_RIVERS` ile akarsu yatağından üretilir. Her öğede `type` = KPSS oluşum türü.
 - Unity'de `Map/FeatureLayer.cs` + `Map/FeatureView.cs` çizer. Göller her zaman görünür (zemin). Akarsu, dağ, volkan, ova ve plato **her biri yalnızca kendi bölümünde, tek başına** gösterilir; türleri karıştıran bölüm yapılmaz (kullanıcı tercihi).
 
 ## Görsel katmanlar ve erişilebilirlik
@@ -37,16 +38,28 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - `UI/MapLabelLayer.cs`: deniz/boğaz/ülke adları her zaman; il adları yakınlaşınca ve sadece cevabı ele vermeyen modlarda (yer şekli [miras hariç], konu, KPSS sorusu) ve "Haritayı incele" görünümünde.
 - `Core/GameSettings.cs`: renk körü dostu palet (Okabe–Ito: doğru mavi, yanlış turuncu; `Theme.ApplyColorblind`, `MapPalette.ApplyColorblind`), büyük yazı (`UI/TextScaler.cs`, %15), efektler (`Map/MapEffects.cs`: bölge sınırı çizimi, ışıltı; HUD seri kenar parlaması).
 
+## Yer şekli haritalarında şehir yok
+- `feature` / `featurechoice` bölümlerinde (dağ, volkan, ova, plato, fay, akarsu, göl, baraj, boğaz/körfez, yarımada) il içi sınırlar ve il adları gizlenir; harita yalnızca Türkiye'nin dış hattıyla boş silüet olur (kullanıcı tercihi). **UNESCO ve milli park bölümleri hariç** (iller kalır). Kod: `CityQuizGame.HidesProvinces` → `TurkeyMap.SetBordersHidden` (dış hat `nationalOutline`, `build_provinces.py` üretir), il adları `QuizHud.ProvinceNamesAllowed`.
+
+## Sınav modu
+- Açma/kapama: bölüm seçim ekranı sağ altı (`LevelSelectScreen`), `GameSettings.ExamMode` (PlayerPrefs). Giriş ekranında harita her zaman renklidir; bölüm seçimi ve oyunda sınav ayarı geçerlidir (`AppFlow` → `ExamModeController.SetLook`).
+- Görünüm: `Core/ExamLook.Blend` (0..1) tek ortak değerdir. `ProvinceView`, `FeatureView`, `FeatureLayer` (göl/ülke), `TurkeyMap` (deniz, gölge, kamera rengi), `ReliefLayer` ve `MapLabelLayer` bunu her karede okuyup renklerini soluk griye karıştırır. Renkler `MapPalette` "Sınav modu" başlığında. Yeni bir harita katmanı eklenirse `ExamLook.Blend`'i okumalı.
+- Sinematik geçiş: `UI/ExamModeController.cs` (sinema şeritleri, buhar parçacıkları, sis, başlık kartı, `MapCameraController.ZoomPunch`, `Sfx.Vapor`). Menüler arası geçişte yalnızca yumuşak renk geçişi.
+- Kurallar (`CityQuizGame.IsExam`): süre × `QuizConfig.examTimeScale` (0,8), puan × `examScoreMultiplier` (1,5), kalıcı boyama / hover / ışıltı / anlık bilgi notu / kontrol ipucu yok, ilerleme anahtarı `ProgressStore.ExamKey(id)` (`id@exam`; toplam yıldıza katılmaz). Bilgi notları "Haritayı incele"de okunur.
+
 ## Reklamlar
 - Oyun kodu yalnızca `Ads/IAdService.cs` arayüzünü bilir. Şu an `Ads/MockAdService.cs` (ekranda test reklamı) bağlı.
 - Strateji: **Dengeli** (kullanıcı seçimi). Yerleşimler: ödüllü = elenince "+1 can ile devam" (bölüm başına 1 kez); geçiş = sonuç ekranından ayrılırken, oturumda 2 bölümden sonra ve en az 180 sn arayla (`Ads/AdPolicy.cs`, ayarlar `QuizConfig`).
 - Gerçek reklamlar: `unity:levelplay-unity-integration` skill'inin adımları izlenecek. **Ads Mediation (`com.unity.services.levelplay`) paketi `Packages/packages-lock.json`'da görünmeden LevelPlay kodu yazılmaz.** Sonra `IAdService`'i uygulayan bir LevelPlay servisi yazılıp `GameBootstrap`'ta mock yerine bağlanır.
 
+## Sürüm
+- Şu anki sürüm: **0.4.0 (Prototip)**. Kaynak: Unity Player Settings > Version (`bundleVersion`); oyunda `Core/AppInfo.cs` ile giriş ekranında ve Ayarlar'da gösterilir. Her sürümde `docs/CHANGELOG.md` güncellenir. Motor: Unity 6000.6.0f1.
+
 ## Prototip
 - Herhangi bir sahnede Play → `GameBootstrap` otomatik oluşur (ya da **KPSS > Prototip Sahnesini Oluştur**). Her şey çalışma anında kurulur.
 - Akış (`Core/AppFlow.cs`): Giriş ekranı → Bölüm karuseli → Oyun → Sonuç (Tekrar / Sonraki / Bölümler).
 - Bölümler `Resources/Data/levels.json` içinde, `groups` ile sekmelere ayrılır (İller, Bölgeler, Yer Şekilleri, Sular ve Kıyılar, İklim, Ekonomi, Beşeri, KPSS Soruları). `mode` değerleri:
-  `find` (ili bul) · `region` (bölgesini seç) · `feature` + `category` (yer şekli bul: river, mountain, volcano, plain, plateau, lake, dam, gulf, peninsula, unesco, park, fault) · `topic` + `set` (konu setindeki illerden biri: tarım, maden, enerji, nüfus) · `plate` + `plateMin/Max` · `neighbor` · `attribute` + `attribute` (climate, vegetation) · `featurechoice` + `category` + `attribute` (göl tipi) · `regionall` (bölgenin bütün illeri; `timePerQuestion` = toplam süre) · `mcq` + `set` (A–E soru bankası) · `soon`.
+  `find` (ili bul) · `region` (bölgesini seç) · `feature` + `category` (yer şekli bul: river, mountain, volcano, plain, plateau, lake, dam, gulf, peninsula, unesco, park, fault) · `topic` + `set` (konu setindeki illerden biri: tarım, maden, enerji, nüfus) · `plate` + `plateMin/Max` · `neighbor` · `attribute` + `attribute` (climate, vegetation) · `featurechoice` + `category` + `attribute` (göl tipi `laketype`, ova türü `plaintype`, plato türü `plateautype`, dağ türü `mountaintype`; öğenin `subtype`'ı boşsa tür sorusunda sorulmaz) · `regionall` (bölgenin bütün illeri; `timePerQuestion` = toplam süre) · `mcq` + `set` (A–E soru bankası) · `soon`.
 - Tüm modlar tek soru modeliyle çalışır: `Quiz/Question.cs` (haritadan seçme / butonla seçme / hepsini bul) ve `Quiz/QuestionBuilder.cs` (bölümden soru üretir). Yeni mod = QuestionBuilder'a bir metot + levels.json.
 - Konu setleri ve özellikler: `python Tools/content/build_topics.py` → `Resources/Data/topics.json` (il adları plakaya otomatik çevrilir). Soru bankası: `Resources/Data/questions.json` (`highlight`: `feature:<id>` ya da `plate:<no>`).
 - Bölge, iklim/bitki örtüsü ve "hepsini bul" modlarında iller nötr renge çevrilir (`TurkeyMap.SetNeutral`): bölge renkleri cevabı ele vermemeli.

@@ -22,7 +22,8 @@
      28.2,
      41.45
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "koroglu",
@@ -45,7 +46,8 @@
      32.7,
      40.62
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "ilgaz",
@@ -64,7 +66,8 @@
      34.3,
      41.05
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "kure",
@@ -91,7 +94,8 @@
      35.0,
      41.55
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "canik",
@@ -114,7 +118,8 @@
      37.8,
      40.72
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "giresun",
@@ -133,7 +138,8 @@
      39.0,
      40.5
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "dogu-karadeniz",
@@ -141,8 +147,8 @@
    "info": "Doğu Karadeniz Dağları'nın en yüksek kesimi; Kaçkar Tepesi yaklaşık 3.937 m'dir.",
    "line": [
     [
-     39.3,
-     40.6
+     40.0,
+     40.68
     ],
     [
      40.0,
@@ -160,7 +166,8 @@
      41.6,
      41.15
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "allahuekber",
@@ -179,7 +186,8 @@
      42.7,
      40.6
     ]
-   ]
+   ],
+   "type": ""
   },
   {
    "id": "palandoken",
@@ -198,7 +206,8 @@
      41.7,
      39.78
     ]
-   ]
+   ],
+   "type": ""
   },
   {
    "id": "munzur",
@@ -221,7 +230,8 @@
      40.1,
      39.55
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "uludag",
@@ -240,7 +250,8 @@
      29.45,
      40.13
     ]
-   ]
+   ],
+   "type": "Kırık (horst)"
   },
   {
    "id": "kazdagi",
@@ -259,7 +270,8 @@
      27.15,
      39.75
     ]
-   ]
+   ],
+   "type": "Kırık (horst)"
   },
   {
    "id": "madra",
@@ -278,7 +290,8 @@
      27.45,
      39.35
     ]
-   ]
+   ],
+   "type": "Kırık (horst)"
   },
   {
    "id": "bozdaglar",
@@ -297,7 +310,8 @@
      28.4,
      38.38
     ]
-   ]
+   ],
+   "type": "Kırık (horst)"
   },
   {
    "id": "aydin",
@@ -316,7 +330,8 @@
      28.4,
      38.08
     ]
-   ]
+   ],
+   "type": "Kırık (horst)"
   },
   {
    "id": "mentese",
@@ -335,7 +350,8 @@
      28.85,
      37.0
     ]
-   ]
+   ],
+   "type": "Kırık (horst)"
   },
   {
    "id": "sultan",
@@ -354,7 +370,8 @@
      31.6,
      38.2
     ]
-   ]
+   ],
+   "type": ""
   },
   {
    "id": "bey",
@@ -377,7 +394,8 @@
      30.35,
      37.1
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "geyik",
@@ -400,7 +418,8 @@
      32.9,
      36.95
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "bolkar",
@@ -423,7 +442,8 @@
      35.0,
      37.45
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "aladaglar",
@@ -442,7 +462,8 @@
      35.3,
      37.98
     ]
-   ]
+   ],
+   "type": "Kıvrım"
   },
   {
    "id": "nur",
@@ -465,7 +486,8 @@
      36.55,
      37.25
     ]
-   ]
+   ],
+   "type": "Kırık (horst)"
   },
   {
    "id": "guneydogu-toroslar",
@@ -501,8 +523,369 @@
      37.55
     ],
     [
-     43.9,
-     37.35
+     43.4,
+     37.5
+    ]
+   ],
+   "type": "Kıvrım"
+  },
+  {
+   "id": "zigana",
+   "name": "Zigana Dağları",
+   "type": "Kıvrım",
+   "info": "Trabzon–Gümüşhane arasında; Zigana Geçidi ve tüneliyle bilinir.",
+   "line": [
+    [
+     38.95,
+     40.5
+    ],
+    [
+     39.35,
+     40.6
+    ],
+    [
+     39.75,
+     40.62
+    ]
+   ]
+  },
+  {
+   "id": "yalnizcam",
+   "name": "Yalnızçam Dağları",
+   "type": "Kıvrım",
+   "info": "Ardahan–Artvin arasında, Kuzey Anadolu Dağları'nın doğu ucu.",
+   "line": [
+    [
+     42.25,
+     40.95
+    ],
+    [
+     42.45,
+     41.15
+    ],
+    [
+     42.65,
+     41.35
+    ]
+   ]
+  },
+  {
+   "id": "mescit",
+   "name": "Mescit Dağları",
+   "type": "",
+   "info": "Erzurum'un kuzeyinde, Çoruh vadisinin güneyinde uzanır.",
+   "line": [
+    [
+     40.6,
+     40.25
+    ],
+    [
+     41.0,
+     40.3
+    ],
+    [
+     41.4,
+     40.32
+    ]
+   ]
+  },
+  {
+   "id": "kargapazari",
+   "name": "Kargapazarı Dağları",
+   "type": "",
+   "info": "Erzurum'un kuzeydoğusunda, Erzurum–Kars yöresinin yüksek dağlarından.",
+   "line": [
+    [
+     41.45,
+     40.15
+    ],
+    [
+     41.75,
+     40.22
+    ],
+    [
+     42.05,
+     40.25
+    ]
+   ]
+  },
+  {
+   "id": "mercan",
+   "name": "Mercan Dağları",
+   "type": "Kıvrım",
+   "info": "Erzincan–Tunceli arasında, Munzur Dağları'nın doğu uzantısı.",
+   "line": [
+    [
+     40.15,
+     39.55
+    ],
+    [
+     40.5,
+     39.55
+    ],
+    [
+     40.85,
+     39.5
+    ]
+   ]
+  },
+  {
+   "id": "bingol",
+   "name": "Bingöl Dağları",
+   "type": "",
+   "info": "Bingöl'ün kuzeydoğusunda volkanik kökenli dağ kütlesi; Aras Nehri buradan doğar.",
+   "line": [
+    [
+     40.95,
+     39.25
+    ],
+    [
+     41.25,
+     39.35
+    ],
+    [
+     41.5,
+     39.4
+    ]
+   ]
+  },
+  {
+   "id": "cilo",
+   "name": "Cilo Dağları",
+   "type": "Kıvrım",
+   "info": "Hakkari'de; Türkiye'nin ikinci yüksek noktası Uludoruk Tepesi (4.135 m) ve buzulları buradadır.",
+   "line": [
+    [
+     43.75,
+     37.55
+    ],
+    [
+     44.0,
+     37.5
+    ],
+    [
+     44.25,
+     37.45
+    ]
+   ]
+  },
+  {
+   "id": "sat",
+   "name": "Sat Dağları",
+   "type": "Kıvrım",
+   "info": "Hakkari Yüksekova'nın güneyinde; buzul gölleriyle bilinir.",
+   "line": [
+    [
+     43.85,
+     37.28
+    ],
+    [
+     44.1,
+     37.24
+    ],
+    [
+     44.3,
+     37.2
+    ]
+   ]
+  },
+  {
+   "id": "tahtali",
+   "name": "Tahtalı Dağları",
+   "type": "Kıvrım",
+   "info": "Orta Toroslar'ın kuzeydoğu uzantısı; Kayseri–Adana arasında.",
+   "line": [
+    [
+     35.8,
+     37.85
+    ],
+    [
+     36.05,
+     38.05
+    ],
+    [
+     36.3,
+     38.25
+    ]
+   ]
+  },
+  {
+   "id": "binboga",
+   "name": "Binboğa Dağları",
+   "type": "Kıvrım",
+   "info": "Kahramanmaraş Afşin–Elbistan yöresinde, Toroslar'ın kuzey uzantısı.",
+   "line": [
+    [
+     36.5,
+     38.1
+    ],
+    [
+     36.8,
+     38.2
+    ],
+    [
+     37.1,
+     38.3
+    ]
+   ]
+  },
+  {
+   "id": "dedegol",
+   "name": "Dedegöl Dağları",
+   "type": "Kıvrım",
+   "info": "Isparta'da, Eğirdir ve Beyşehir gölleri arasında; Batı Toroslar.",
+   "line": [
+    [
+     31.2,
+     37.65
+    ],
+    [
+     31.35,
+     37.75
+    ],
+    [
+     31.5,
+     37.85
+    ]
+   ]
+  },
+  {
+   "id": "spil",
+   "name": "Spil Dağı",
+   "type": "Kırık (horst)",
+   "info": "Manisa'nın güneyinde kırık (horst) dağı; Spil Dağı Milli Parkı ile bilinir.",
+   "line": [
+    [
+     27.32,
+     38.55
+    ],
+    [
+     27.45,
+     38.57
+    ],
+    [
+     27.58,
+     38.59
+    ]
+   ]
+  },
+  {
+   "id": "yunt",
+   "name": "Yunt Dağı",
+   "type": "Kırık (horst)",
+   "info": "Manisa–İzmir arasında, Bakırçay ile Gediz grabenleri arasında yükselen horst.",
+   "line": [
+    [
+     27.0,
+     38.85
+    ],
+    [
+     27.25,
+     38.9
+    ],
+    [
+     27.5,
+     38.95
+    ]
+   ]
+  },
+  {
+   "id": "murat-dagi",
+   "name": "Murat Dağı",
+   "type": "",
+   "info": "Kütahya–Uşak arasında; Gediz Nehri buradan doğar.",
+   "line": [
+    [
+     29.6,
+     38.85
+    ],
+    [
+     29.75,
+     38.95
+    ],
+    [
+     29.9,
+     39.05
+    ]
+   ]
+  },
+  {
+   "id": "samanli",
+   "name": "Samanlı Dağları",
+   "type": "Kıvrım",
+   "info": "İzmit Körfezi'nin güneyinde, Yalova–Kocaeli–Bursa arasında; Marmara'nın kıvrım dağlarından.",
+   "line": [
+    [
+     29.0,
+     40.6
+    ],
+    [
+     29.5,
+     40.6
+    ],
+    [
+     30.0,
+     40.62
+    ]
+   ]
+  },
+  {
+   "id": "ganos",
+   "name": "Ganos (Işıklar) Dağı",
+   "type": "",
+   "info": "Tekirdağ'da, Marmara kıyısında; Kuzey Anadolu Fay Hattı'nın batı kesimine yakındır.",
+   "line": [
+    [
+     27.0,
+     40.75
+    ],
+    [
+     27.2,
+     40.8
+    ],
+    [
+     27.4,
+     40.85
+    ]
+   ]
+  },
+  {
+   "id": "tecer",
+   "name": "Tecer Dağları",
+   "type": "",
+   "info": "Sivas'ın güneyinde, İç Anadolu ile Doğu Anadolu arasında uzanır.",
+   "line": [
+    [
+     37.4,
+     39.4
+    ],
+    [
+     37.7,
+     39.45
+    ],
+    [
+     38.0,
+     39.5
+    ]
+   ]
+  },
+  {
+   "id": "sundiken",
+   "name": "Sündiken Dağları",
+   "type": "",
+   "info": "Eskişehir'in kuzeyinde, Sakarya vadisi ile Eskişehir Ovası arasında.",
+   "line": [
+    [
+     30.6,
+     39.95
+    ],
+    [
+     31.0,
+     39.97
+    ],
+    [
+     31.4,
+     40.0
     ]
    ]
   }
@@ -637,7 +1020,8 @@
      35.05,
      36.68
     ]
-   ]
+   ],
+   "type": "Delta"
   },
   {
    "id": "konya",
@@ -696,7 +1080,8 @@
      32.3,
      37.7
     ]
-   ]
+   ],
+   "type": "Göl tabanı"
   },
   {
    "id": "bafra",
@@ -727,7 +1112,8 @@
      35.78,
      41.42
     ]
-   ]
+   ],
+   "type": "Delta"
   },
   {
    "id": "carsamba",
@@ -758,7 +1144,8 @@
      36.55,
      41.12
     ]
-   ]
+   ],
+   "type": "Delta"
   },
   {
    "id": "buyuk-menderes",
@@ -797,7 +1184,8 @@
      27.35,
      37.4
     ]
-   ]
+   ],
+   "type": "Tektonik"
   },
   {
    "id": "gediz",
@@ -836,7 +1224,8 @@
      27.15,
      38.52
     ]
-   ]
+   ],
+   "type": "Tektonik"
   },
   {
    "id": "ergene",
@@ -867,7 +1256,8 @@
      26.95,
      41.15
     ]
-   ]
+   ],
+   "type": ""
   },
   {
    "id": "harran",
@@ -898,7 +1288,8 @@
      38.85,
      36.72
     ]
-   ]
+   ],
+   "type": ""
   },
   {
    "id": "amik",
@@ -925,7 +1316,8 @@
      36.3,
      36.15
     ]
-   ]
+   ],
+   "type": "Tektonik"
   },
   {
    "id": "mus",
@@ -956,7 +1348,8 @@
      41.2,
      38.68
     ]
-   ]
+   ],
+   "type": "Tektonik"
   },
   {
    "id": "pasinler",
@@ -987,7 +1380,8 @@
      41.05,
      39.86
     ]
-   ]
+   ],
+   "type": "Tektonik"
   },
   {
    "id": "igdir",
@@ -1018,7 +1412,8 @@
      43.8,
      39.86
     ]
-   ]
+   ],
+   "type": "Tektonik"
   },
   {
    "id": "bursa",
@@ -1049,7 +1444,8 @@
      28.85,
      40.17
     ]
-   ]
+   ],
+   "type": "Tektonik"
   },
   {
    "id": "adapazari",
@@ -1080,7 +1476,410 @@
      30.2,
      40.75
     ]
-   ]
+   ],
+   "type": "Tektonik"
+  },
+  {
+   "id": "kucuk-menderes",
+   "name": "Küçük Menderes Ovası",
+   "type": "Tektonik",
+   "info": "Bozdağlar ile Aydın Dağları arasındaki graben ovası; incir, zeytin, üzüm."
+  },
+  {
+   "id": "bakircay",
+   "name": "Bakırçay Ovası",
+   "type": "Tektonik",
+   "info": "Bergama çevresinde, Bakırçay boyunca uzanan graben ovası; pamuk, zeytin, tütün.",
+   "ellipse": {
+    "center": [
+     27.25,
+     39.12
+    ],
+    "rx": 22,
+    "ry": 6,
+    "angle": 25
+   }
+  },
+  {
+   "id": "soke",
+   "name": "Söke Ovası",
+   "type": "Delta",
+   "info": "Büyük Menderes'in deltasında oluşmuş ova; pamuk tarımı."
+  },
+  {
+   "id": "menemen",
+   "name": "Menemen Ovası",
+   "type": "Delta",
+   "info": "Gediz Nehri'nin deltasında oluşmuş verimli ova (İzmir)."
+  },
+  {
+   "id": "silifke",
+   "name": "Silifke Ovası",
+   "type": "Delta",
+   "info": "Göksu Nehri'nin deltasında oluşmuş ova (Mersin); turunçgil ve sebze."
+  },
+  {
+   "id": "meric",
+   "name": "Meriç (Enez) Ovası",
+   "type": "Delta",
+   "info": "Meriç Nehri'nin deltasında (Edirne Enez); çeltik tarımı."
+  },
+  {
+   "id": "edremit",
+   "name": "Edremit Ovası",
+   "type": "Tektonik",
+   "info": "Kaz Dağı'nın güneyinde, Edremit Körfezi kıyısında tektonik ova; zeytin.",
+   "ellipse": {
+    "center": [
+     27.0,
+     39.58
+    ],
+    "rx": 12,
+    "ry": 4,
+    "angle": 10
+   }
+  },
+  {
+   "id": "mugla",
+   "name": "Muğla Ovası",
+   "type": "Karstik (polye)",
+   "info": "Kalkerin erimesiyle oluşmuş karstik ova (polye).",
+   "ellipse": {
+    "center": [
+     28.38,
+     37.22
+    ],
+    "rx": 5,
+    "ry": 3,
+    "angle": 0
+   }
+  },
+  {
+   "id": "acipayam",
+   "name": "Acıpayam Ovası",
+   "type": "Karstik (polye)",
+   "info": "Denizli'de karstik ova (polye).",
+   "ellipse": {
+    "center": [
+     29.35,
+     37.43
+    ],
+    "rx": 8,
+    "ry": 4,
+    "angle": 20
+   }
+  },
+  {
+   "id": "tefenni",
+   "name": "Tefenni Ovası",
+   "type": "Karstik (polye)",
+   "info": "Burdur'da karstik ova (polye).",
+   "ellipse": {
+    "center": [
+     29.78,
+     37.3
+    ],
+    "rx": 7,
+    "ry": 4,
+    "angle": 40
+   }
+  },
+  {
+   "id": "kestel",
+   "name": "Kestel Ovası",
+   "type": "Karstik (polye)",
+   "info": "Burdur Bucak yakınında karstik ova (polye).",
+   "ellipse": {
+    "center": [
+     30.48,
+     37.5
+    ],
+    "rx": 5,
+    "ry": 3,
+    "angle": 20
+   }
+  },
+  {
+   "id": "korkuteli",
+   "name": "Korkuteli Ovası",
+   "type": "Karstik (polye)",
+   "info": "Antalya'da karstik ova (polye).",
+   "ellipse": {
+    "center": [
+     30.2,
+     37.06
+    ],
+    "rx": 7,
+    "ry": 4,
+    "angle": 10
+   }
+  },
+  {
+   "id": "elmali",
+   "name": "Elmalı Ovası",
+   "type": "Karstik (polye)",
+   "info": "Antalya'da karstik ova (polye); elma tarımı. Avlan Gölü bu ovadadır.",
+   "ellipse": {
+    "center": [
+     29.93,
+     36.75
+    ],
+    "rx": 9,
+    "ry": 5,
+    "angle": 30
+   }
+  },
+  {
+   "id": "antalya-ovasi",
+   "name": "Antalya Ovası",
+   "type": "",
+   "info": "Traverten (kalker tortusu) üzerinde gelişmiş kıyı ovası; turunçgil ve seracılık.",
+   "ellipse": {
+    "center": [
+     30.85,
+     36.95
+    ],
+    "rx": 14,
+    "ry": 7,
+    "angle": 20
+   }
+  },
+  {
+   "id": "kahramanmaras",
+   "name": "Kahramanmaraş Ovası",
+   "type": "Tektonik",
+   "info": "Doğu Anadolu Fay Zonu üzerinde tektonik ova; pamuk ve kırmızı biber.",
+   "ellipse": {
+    "center": [
+     36.95,
+     37.5
+    ],
+    "rx": 10,
+    "ry": 5,
+    "angle": 30
+   }
+  },
+  {
+   "id": "eskisehir",
+   "name": "Eskişehir Ovası",
+   "type": "Tektonik",
+   "info": "Porsuk Çayı boyunca uzanan tektonik ova; şeker pancarı ve tahıl."
+  },
+  {
+   "id": "inegol",
+   "name": "İnegöl Ovası",
+   "type": "Tektonik",
+   "info": "Bursa'da tektonik ova.",
+   "ellipse": {
+    "center": [
+     29.52,
+     40.08
+    ],
+    "rx": 8,
+    "ry": 4,
+    "angle": 20
+   }
+  },
+  {
+   "id": "biga",
+   "name": "Biga Ovası",
+   "type": "",
+   "info": "Çanakkale'de, Biga Çayı boyunca; çeltik ve sebze tarımı.",
+   "ellipse": {
+    "center": [
+     27.25,
+     40.27
+    ],
+    "rx": 8,
+    "ry": 4,
+    "angle": 50
+   }
+  },
+  {
+   "id": "gonen",
+   "name": "Gönen Ovası",
+   "type": "",
+   "info": "Balıkesir'de, Gönen Çayı boyunca; çeltik tarımı.",
+   "ellipse": {
+    "center": [
+     27.65,
+     40.12
+    ],
+    "rx": 6,
+    "ry": 4,
+    "angle": 0
+   }
+  },
+  {
+   "id": "develi",
+   "name": "Develi Ovası",
+   "type": "",
+   "info": "Kayseri'de, Erciyes Dağı'nın güneyinde; şeker pancarı ve tahıl.",
+   "ellipse": {
+    "center": [
+     35.45,
+     38.38
+    ],
+    "rx": 9,
+    "ry": 4,
+    "angle": 0
+   }
+  },
+  {
+   "id": "malatya",
+   "name": "Malatya Ovası",
+   "type": "Tektonik",
+   "info": "Tektonik ova; kayısı üretiminin merkezi.",
+   "ellipse": {
+    "center": [
+     38.3,
+     38.38
+    ],
+    "rx": 13,
+    "ry": 6,
+    "angle": 0
+   }
+  },
+  {
+   "id": "uluova",
+   "name": "Uluova (Elazığ)",
+   "type": "Tektonik",
+   "info": "Elazığ'da tektonik ova; tahıl ve meyvecilik.",
+   "ellipse": {
+    "center": [
+     39.35,
+     38.62
+    ],
+    "rx": 12,
+    "ry": 5,
+    "angle": 0
+   }
+  },
+  {
+   "id": "erzincan",
+   "name": "Erzincan Ovası",
+   "type": "Tektonik",
+   "info": "Kuzey Anadolu Fay Hattı üzerinde tektonik ova.",
+   "ellipse": {
+    "center": [
+     39.55,
+     39.73
+    ],
+    "rx": 16,
+    "ry": 5,
+    "angle": 10
+   }
+  },
+  {
+   "id": "van-ovasi",
+   "name": "Van Ovası",
+   "type": "",
+   "info": "Van Gölü'nün doğu kıyısında; tahıl ve hayvancılık.",
+   "ellipse": {
+    "center": [
+     43.42,
+     38.52
+    ],
+    "rx": 9,
+    "ry": 5,
+    "angle": 0
+   }
+  },
+  {
+   "id": "dogubayazit",
+   "name": "Doğubayazıt Ovası",
+   "type": "",
+   "info": "Ağrı Dağı'nın güneybatısında; hayvancılık.",
+   "ellipse": {
+    "center": [
+     44.05,
+     39.55
+    ],
+    "rx": 10,
+    "ry": 4,
+    "angle": 0
+   }
+  },
+  {
+   "id": "kazova",
+   "name": "Kazova",
+   "type": "",
+   "info": "Tokat'ta, Yeşilırmak boyunca; şeker pancarı ve sebze.",
+   "ellipse": {
+    "center": [
+     36.35,
+     40.32
+    ],
+    "rx": 12,
+    "ry": 4,
+    "angle": 10
+   }
+  },
+  {
+   "id": "merzifon",
+   "name": "Merzifon–Suluova",
+   "type": "",
+   "info": "Amasya'da; tahıl ve şeker pancarı.",
+   "ellipse": {
+    "center": [
+     35.6,
+     40.85
+    ],
+    "rx": 14,
+    "ry": 5,
+    "angle": 0
+   }
+  },
+  {
+   "id": "erbaa",
+   "name": "Erbaa–Niksar Ovası",
+   "type": "Tektonik",
+   "info": "Kelkit Çayı vadisinde (Tokat), Kuzey Anadolu Fay Hattı üzerinde tektonik ova."
+  },
+  {
+   "id": "ceylanpinar",
+   "name": "Ceylanpınar Ovası",
+   "type": "",
+   "info": "Şanlıurfa'da; tahıl tarımı ve hayvancılık (TİGEM işletmesi).",
+   "ellipse": {
+    "center": [
+     40.0,
+     36.88
+    ],
+    "rx": 18,
+    "ry": 7,
+    "angle": 0
+   }
+  },
+  {
+   "id": "suruc",
+   "name": "Suruç Ovası",
+   "type": "",
+   "info": "Şanlıurfa'da; GAP ile sulanan ova.",
+   "ellipse": {
+    "center": [
+     38.42,
+     36.97
+    ],
+    "rx": 10,
+    "ry": 6,
+    "angle": 0
+   }
+  },
+  {
+   "id": "mardin-kiziltepe",
+   "name": "Mardin–Kızıltepe Ovası",
+   "type": "",
+   "info": "Mardin Eşiği'nin güneyinde; pamuk ve kırmızı mercimek.",
+   "ellipse": {
+    "center": [
+     40.6,
+     37.15
+    ],
+    "rx": 18,
+    "ry": 7,
+    "angle": 0
+   }
   }
  ],
  "plateaus": [
@@ -1113,7 +1912,8 @@
      29.45,
      36.6
     ]
-   ]
+   ],
+   "type": "Karstik"
   },
   {
    "id": "taseli",
@@ -1144,7 +1944,8 @@
      32.95,
      36.32
     ]
-   ]
+   ],
+   "type": "Karstik"
   },
   {
    "id": "obruk",
@@ -1175,7 +1976,8 @@
      32.95,
      38.15
     ]
-   ]
+   ],
+   "type": ""
   },
   {
    "id": "cihanbeyli",
@@ -1206,7 +2008,8 @@
      32.4,
      38.72
     ]
-   ]
+   ],
+   "type": ""
   },
   {
    "id": "haymana",
@@ -1237,7 +2040,8 @@
      32.15,
      39.48
     ]
-   ]
+   ],
+   "type": ""
   },
   {
    "id": "bozok",
@@ -1268,7 +2072,8 @@
      34.65,
      39.55
     ]
-   ]
+   ],
+   "type": "Tabaka"
   },
   {
    "id": "uzunyayla",
@@ -1299,12 +2104,13 @@
      35.95,
      38.75
     ]
-   ]
+   ],
+   "type": "Tabaka"
   },
   {
    "id": "erzurum-kars",
    "name": "Erzurum-Kars Platosu",
-   "info": "Volkanik plato; büyükbaş hayvancılığın en yaygın olduğu yerlerdendir.",
+   "info": "Lav örtülü plato; yaz yağışlarıyla gür çayırlar, büyükbaş hayvancılık.",
    "polygon": [
     [
      41.8,
@@ -1334,7 +2140,8 @@
      41.9,
      40.3
     ]
-   ]
+   ],
+   "type": "Lav örtülü"
   },
   {
    "id": "gaziantep",
@@ -1365,7 +2172,8 @@
      37.0,
      36.95
     ]
-   ]
+   ],
+   "type": "Tabaka"
   },
   {
    "id": "yazilikaya",
@@ -1395,6 +2203,127 @@
     [
      30.3,
      39.15
+    ]
+   ],
+   "type": "Tabaka"
+  },
+  {
+   "id": "catalca-kocaeli",
+   "name": "Çatalca–Kocaeli Platosu",
+   "type": "Aşınım",
+   "info": "İstanbul Boğazı'nın iki yakasındaki aşınım platoları; Marmara Bölgesi'nin platosu.",
+   "polygons": [
+    [
+     [
+      28.05,
+      41.05
+     ],
+     [
+      28.5,
+      41.0
+     ],
+     [
+      28.95,
+      41.08
+     ],
+     [
+      29.02,
+      41.25
+     ],
+     [
+      28.6,
+      41.4
+     ],
+     [
+      28.15,
+      41.35
+     ]
+    ],
+    [
+     [
+      29.15,
+      40.92
+     ],
+     [
+      29.6,
+      40.85
+     ],
+     [
+      30.15,
+      40.85
+     ],
+     [
+      30.2,
+      41.1
+     ],
+     [
+      29.6,
+      41.17
+     ],
+     [
+      29.2,
+      41.12
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "ardahan",
+   "name": "Ardahan Platosu",
+   "type": "Lav örtülü",
+   "info": "Lav örtülü plato; gür çayırlar ve büyükbaş hayvancılık.",
+   "polygon": [
+    [
+     42.45,
+     41.0
+    ],
+    [
+     42.9,
+     40.98
+    ],
+    [
+     43.2,
+     41.15
+    ],
+    [
+     43.05,
+     41.4
+    ],
+    [
+     42.6,
+     41.35
+    ]
+   ]
+  },
+  {
+   "id": "sanliurfa",
+   "name": "Şanlıurfa Platosu",
+   "type": "Tabaka",
+   "info": "Antep–Urfa platolarından; tahıl ve sulamayla pamuk tarımı.",
+   "polygon": [
+    [
+     38.2,
+     37.35
+    ],
+    [
+     38.8,
+     37.55
+    ],
+    [
+     39.4,
+     37.5
+    ],
+    [
+     39.6,
+     37.25
+    ],
+    [
+     39.0,
+     37.15
+    ],
+    [
+     38.4,
+     37.15
     ]
    ]
   }

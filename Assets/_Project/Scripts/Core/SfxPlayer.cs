@@ -13,7 +13,9 @@ namespace KPSSGeography.Core
         GameOver,
         Click,
         Swipe,
-        Star
+        Star,
+        /// <summary>Sınav moduna geçişteki buharlaşma "fısıltısı".</summary>
+        Vapor
     }
 
     /// <summary>
@@ -52,6 +54,7 @@ namespace KPSSGeography.Core
             clips[Sfx.GameOver] = Notes("GameOver", 0.45f, (392f, 0.2f), (329.6f, 0.2f), (261.6f, 0.5f));
             clips[Sfx.Click] = Notes("Click", 0.3f, (900f, 0.035f));
             clips[Sfx.Swipe] = Notes("Swipe", 0.16f, (640f, 0.03f));
+            clips[Sfx.Vapor] = Vapor("Vapor", 2.4f);
             clips[Sfx.Star] = Notes("Star", 0.4f, (1318.5f, 0.06f), (1760f, 0.16f));
         }
 
@@ -79,6 +82,25 @@ namespace KPSSGeography.Core
                     data[offset + i] = s * env * gain * 0.8f;
                 }
                 offset += len;
+            }
+            return Create(name, data);
+        }
+
+        /// <summary>Alçak geçiren filtreden geçmiş gürültü: yavaş yükselip sönen buhar fısıltısı.</summary>
+        static AudioClip Vapor(string name, float dur)
+        {
+            int len = Mathf.CeilToInt(dur * SampleRate);
+            var data = new float[len];
+            var rng = new System.Random(7);
+            float lp = 0f;
+            for (int i = 0; i < len; i++)
+            {
+                float t = (float)i / len;
+                float env = Mathf.Sin(Mathf.PI * Mathf.Pow(t, 0.7f));
+                float noise = (float)(rng.NextDouble() * 2.0 - 1.0);
+                float cutoff = Mathf.Lerp(0.03f, 0.22f, Mathf.Sin(t * Mathf.PI * 0.8f));
+                lp += (noise - lp) * cutoff;
+                data[i] = lp * env * 1.6f;
             }
             return Create(name, data);
         }

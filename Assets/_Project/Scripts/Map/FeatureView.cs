@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using KPSSGeography.Core;
 using KPSSGeography.Data;
 using UnityEngine;
 
@@ -47,6 +48,7 @@ namespace KPSSGeography.Map
         float flashDuration;
         int flashPulses;
         bool dirty = true;
+        float lastBlend;
 
         public void Initialize(GeoFeature data, Material material, MapPalette mapPalette)
         {
@@ -287,11 +289,18 @@ namespace KPSSGeography.Map
         {
             float dt = Time.deltaTime;
 
+            float blend = ExamLook.Blend;
+            if (!Mathf.Approximately(blend, lastBlend))
+            {
+                lastBlend = blend;
+                dirty = true;
+            }
+
             // Kalıcı durum rengi (doğru = yeşil, kaçırılan = kırmızı)
             Color stateTint = State == ProvinceState.Correct ? palette.featureCorrect
                 : State == ProvinceState.Missed ? palette.featureMissed : Color.white;
             float stateWeight = State == ProvinceState.Idle ? 0f : 0.7f;
-            float targetWeight = hovered ? Mathf.Max(stateWeight, 0.45f) : stateWeight;
+            float targetWeight = hovered ? Mathf.Max(stateWeight, 0.45f * (1f - blend)) : stateWeight;
             Color targetTint = hovered && State == ProvinceState.Idle ? Color.white : stateTint;
 
             float k = 1f - Mathf.Exp(-18f * dt);
@@ -324,7 +333,7 @@ namespace KPSSGeography.Map
             dirty = false;
             for (int i = 0; i < colors.Length; i++)
             {
-                Color c = baseColors[i];
+                Color c = ExamLook.Pale(baseColors[i], lastBlend);
                 Color t = Color.Lerp(c, tintColor, tintWeight);
                 t.a = c.a;
                 if (overlayWeight > 0f)

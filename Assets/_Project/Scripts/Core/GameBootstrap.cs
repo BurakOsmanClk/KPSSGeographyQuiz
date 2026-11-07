@@ -42,7 +42,7 @@ namespace KPSSGeography.Core
 
         void Awake()
         {
-            Debug.Log("[KPSS] Oyun başlatılıyor...");
+            Debug.Log($"[KPSS] Oyun başlatılıyor... {AppInfo.FullLabel}");
             Application.targetFrameRate = 120;
             Time.timeScale = 1f;
 
@@ -127,8 +127,12 @@ namespace KPSSGeography.Core
             GameSettings.Changed += ApplySettings;
             settingsHandler = ApplySettings;
 
+            // Sınav modu: renkli haritanın soluk gri KPSS haritasına "buharlaşarak" dönüşmesi
+            var exam = new GameObject("ExamModeController").AddComponent<ExamModeController>();
+            exam.Initialize(camController, sfx);
+
             var flow = gameObject.AddComponent<AppFlow>();
-            flow.Initialize(game, hud, title, levels, catalog, progress, adPolicy);
+            flow.Initialize(game, hud, title, levels, catalog, progress, adPolicy, exam);
 
             Debug.Log($"[KPSS] Hazır: {map.Provinces.Count} il, {features.Features.Count} yer şekli, {catalog.levels.Length} bölüm yüklendi.");
         }

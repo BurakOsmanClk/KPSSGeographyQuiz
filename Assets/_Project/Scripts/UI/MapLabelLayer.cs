@@ -32,6 +32,7 @@ namespace KPSSGeography.UI
             public Vector3 world;
             public float baseSize;
             public float minZoom;
+            public Color baseColor;
             public Vector2 size;
         }
 
@@ -43,6 +44,8 @@ namespace KPSSGeography.UI
         readonly List<Label> reviewLabels = new List<Label>();
         readonly List<Rect> placed = new List<Rect>();
         bool provincesOn;
+        bool reviewing;
+        float lastBlend = -1f;
         Vector3 lastCamPos;
         float lastCamSize;
         bool dirty = true;
@@ -117,6 +120,7 @@ namespace KPSSGeography.UI
         public void ShowReview(IEnumerable<(IMapTarget target, string text, bool correct, Action onClick)> items)
         {
             ClearReview();
+            reviewing = true;
             foreach (var (target, text, correct, onClick) in items)
             {
                 if (target == null) continue;
@@ -142,6 +146,7 @@ namespace KPSSGeography.UI
         {
             foreach (var l in reviewLabels) Destroy(l.rt.gameObject);
             reviewLabels.Clear();
+            reviewing = false;
             dirty = true;
         }
 
@@ -164,12 +169,18 @@ namespace KPSSGeography.UI
                 o.effectDistance = new Vector2(1.2f, -1.2f);
             }
             t.rectTransform.Place(Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(400, 60));
-            return new Label { kind = kind, rt = t.rectTransform, text = t, baseSize = size };
+            return new Label { kind = kind, rt = t.rectTransform, text = t, baseSize = size, baseColor = color };
         }
 
         void LateUpdate()
         {
             if (cam == null) return;
+            float blend = ExamLook.Blend;
+            if (!Mathf.Approximately(blend, lastBlend))
+            {
+                lastBlend = blend;
+                dirty = true;
+            }
             bool moved = (cam.transform.position - lastCamPos).sqrMagnitude > 1e-8f || !Mathf.Approximately(cam.orthographicSize, lastCamSize);
             if (!moved && !dirty) return;
             lastCamPos = cam.transform.position;
@@ -184,6 +195,11 @@ namespace KPSSGeography.UI
             {
                 l.text.fontSize = Mathf.RoundToInt(l.baseSize * ts * Mathf.Clamp(Mathf.Sqrt(zoom), 0.85f, 1.8f));
                 l.rt.anchoredPosition = ToCanvas(l.world, canvasSize);
+                // Sınav haritası boştur: deniz ve ülke adları buharlaşıp kaybolur
+                var bc = l.baseColor;
+                l.text.color = new Color(bc.r, bc.g, bc.b, bc.a * (1f - blend));
+                bool visible = blend < 0.99f;
+                if (l.rt.gameObject.activeSelf != visible) l.rt.gameObject.SetActive(visible);
             }
 
             placed.Clear();
@@ -197,7 +213,8 @@ namespace KPSSGeography.UI
             if (!provincesOn) return;
             foreach (var l in provinceLabels)
             {
-                bool show = zoom >= l.minZoom;
+                // Sınavda il adları gizlidir (inceleme görünümü hariç)
+                bool show = zoom >= l.minZoom && (blend < 0.35f || reviewing);
                 if (show)
                 {
                     l.text.fontSize = Mathf.RoundToInt(l.baseSize * ts * Mathf.Clamp(0.85f + (zoom - 1f) * 0.12f, 0.85f, 1.3f));

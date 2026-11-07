@@ -9,12 +9,38 @@ namespace KPSSGeography.UI
     /// </summary>
     public static class ShapeSprites
     {
-        static Sprite cross, star, lockIcon, chevronRight, chevronLeft, check, gear, pause, circle, gradient;
+        static Sprite softCircle, cross, star, lockIcon, chevronRight, chevronLeft, check, gear, pause, circle, gradient;
 
         public static Sprite Star => star != null ? star : star = Render("Star", 128, StarSdf);
         public static Sprite Lock => lockIcon != null ? lockIcon : lockIcon = Render("Lock", 128, LockSdf);
         public static Sprite ChevronRight => chevronRight != null ? chevronRight : chevronRight = Render("ChevronR", 96, p => ChevronSdf(p));
         public static Sprite ChevronLeft => chevronLeft != null ? chevronLeft : chevronLeft = Render("ChevronL", 96, p => ChevronSdf(new Vector2(-p.x, p.y)));
+        /// <summary>Kenarları yumuşakça sönen daire (buhar, sis, ışıltı efektleri).</summary>
+        public static Sprite SoftCircle
+        {
+            get
+            {
+                if (softCircle != null) return softCircle;
+                const int n = 128;
+                var tex = new Texture2D(n, n, TextureFormat.RGBA32, false)
+                {
+                    name = "UI_SoftCircle", wrapMode = TextureWrapMode.Clamp, filterMode = FilterMode.Bilinear
+                };
+                var px = new Color32[n * n];
+                for (int y = 0; y < n; y++)
+                for (int x = 0; x < n; x++)
+                {
+                    float d = new Vector2((x + 0.5f) / n * 2f - 1f, (y + 0.5f) / n * 2f - 1f).magnitude;
+                    float a = Mathf.Clamp01(1f - d);
+                    a = a * a * (3f - 2f * a);
+                    px[y * n + x] = new Color32(255, 255, 255, (byte)(a * 255));
+                }
+                tex.SetPixels32(px);
+                tex.Apply(false, true);
+                return softCircle = Sprite.Create(tex, new Rect(0, 0, n, n), new Vector2(0.5f, 0.5f), 100f);
+            }
+        }
+
         public static Sprite Cross => cross != null ? cross : cross = Render("Cross", 96, p =>
             Mathf.Min(SegmentSdf(p, new Vector2(-0.45f, -0.45f), new Vector2(0.45f, 0.45f)),
                       SegmentSdf(p, new Vector2(-0.45f, 0.45f), new Vector2(0.45f, -0.45f))) - 0.14f);

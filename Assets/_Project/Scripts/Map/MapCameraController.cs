@@ -33,6 +33,9 @@ namespace KPSSGeography.Map
         bool isDefaultView = true;
         float attractTime;
 
+        /// <summary>Sinematik geçişlerde kısa süreli "yaklaşma" (0 = yok, 0.06 = %6 yakın). Sadece menü/vitrin modunda etkilidir.</summary>
+        public float ZoomPunch { get; set; }
+
         float shakeTime;
         float shakeDuration;
         float shakeAmplitude;
@@ -126,7 +129,7 @@ namespace KPSSGeography.Map
             if (attract)
             {
                 attractTime += Time.unscaledDeltaTime;
-                targetSize = fitSize * (0.92f + 0.05f * Mathf.Sin(attractTime * 0.11f));
+                targetSize = fitSize * (0.92f + 0.05f * Mathf.Sin(attractTime * 0.11f)) * (1f - ZoomPunch);
                 targetPos = fitPosition + new Vector2(
                     Mathf.Sin(attractTime * 0.07f) * mapBounds.width * 0.05f,
                     Mathf.Sin(attractTime * 0.05f + 1f) * mapBounds.height * 0.04f);

@@ -39,6 +39,14 @@ namespace KPSSGeography.Meta
             Load();
         }
 
+        const string ExamSuffix = "@exam";
+
+        /// <summary>Sınav modundaki ilerlemenin kayıt anahtarı (normal modla karışmaz).</summary>
+        public static string ExamKey(string id) => id + ExamSuffix;
+
+        public int GetStars(string id, bool exam) => GetStars(exam ? ExamKey(id) : id);
+        public int GetBest(string id, bool exam) => GetBest(exam ? ExamKey(id) : id);
+
         public int GetStars(string id) => byId.TryGetValue(id, out var e) ? e.stars : 0;
         public int GetBest(string id) => byId.TryGetValue(id, out var e) ? e.best : 0;
 
@@ -59,7 +67,8 @@ namespace KPSSGeography.Meta
             get
             {
                 int sum = 0;
-                foreach (var e in byId.Values) sum += e.stars;
+                foreach (var e in byId.Values)
+                    if (!e.id.EndsWith(ExamSuffix)) sum += e.stars; // sınav yıldızları ayrı sayılır
                 return sum;
             }
         }

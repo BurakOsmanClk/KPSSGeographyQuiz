@@ -50,6 +50,23 @@ namespace KPSSGeography.Quiz
         bool continueUsed;
 
         public LevelDefinition Level { get; private set; }
+
+        /// <summary>
+        /// Bu tur sınav modunda mı? Sınav modunda: soru süresi kısa, ipuçları kapalı (vurgulama, kalıcı boyama, ışıltı,
+        /// anlık bilgi notu), puan çarpanlı ve yıldız/rekorlar ayrı kaydedilir.
+        /// </summary>
+        public bool IsExam { get; private set; }
+
+        /// <summary>
+        /// Yer şekli bölümlerinde (dağ, ova, plato, akarsu, göl, kıyı, fay...) il sınırları ve il adları gizlenir;
+        /// harita yalnızca Türkiye'nin dış hattıyla boş silüet olarak görünür. UNESCO ve milli park bölümlerinde iller kalır.
+        /// </summary>
+        public bool HidesProvinces => Level != null && (Mode == QuizMode.Feature || Mode == QuizMode.FeatureChoice) &&
+                                      Level.category != "unesco" && Level.category != "park";
+
+        float ScoreScale => IsExam ? config.examScoreMultiplier : 1f;
+        string ProgressId => IsExam ? ProgressStore.ExamKey(Level.id) : Level.id;
+        float QuestionTime => Mathf.Max(1f, Level.timePerQuestion * (IsExam ? config.examTimeScale : 1f));
         public QuizMode Mode => Level != null ? Level.Mode : QuizMode.FindProvince;
         public QuizState State { get; private set; } = QuizState.Idle;
         public bool IsPaused { get; private set; }
@@ -81,7 +98,7 @@ namespace KPSSGeography.Quiz
         public bool IsRunning => State != QuizState.Idle && State != QuizState.Finished;
 
         /// <summary>Doğru bilinen hedefler bölüm boyunca boyalı kalsın mı? ("haritayı doldurma" modları)</summary>
-        bool PersistentMarks => Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.Feature || Mode == QuizMode.RegionAll;
+        bool PersistentMarks => !IsExam && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.Feature || Mode == QuizMode.RegionAll);
 
         public float StreakMultiplier(int streak) =>
             1f + Mathf.Clamp(streak - 1, 0, config.maxStreakSteps) * config.streakStep;
@@ -107,6 +124,7 @@ namespace KPSSGeography.Quiz
             StopFlow();
             SetPaused(false);
             Level = level;
+            IsExam = GameSettings.ExamMode;
             flow = StartCoroutine(StartRoutine());
         }
 
@@ -146,7 +164,7 @@ namespace KPSSGeography.Quiz
             Rect focus = SetupMap();
             bool physical = Mode == QuizMode.Feature || Mode == QuizMode.FeatureChoice;
             relief?.SetStrength(physical ? 1f : 0.55f);
-            if (Level.HasRegionFilter && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.RegionAll))
+            if (!IsExam && Level.HasRegionFilter && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.RegionAll))
             {
                 var rings = new List<Vector2[]>();
                 foreach (var region in Level.regions) rings.AddRange(map.GetRegionRings(region));
@@ -158,7 +176,7 @@ namespace KPSSGeography.Quiz
             questions = builder.Build(Level);
             if (questions.Count == 0) Debug.LogWarning($"[KPSS] '{Level.id}' bölümü için soru üretilemedi.");
 
-            TimeLimit = Mathf.Max(1f, Level.timePerQuestion);
+            TimeLimit = QuestionTime;
             MaxMistakes = Mathf.Max(1, Level.maxMistakes);
             Score = 0;
             Mistakes = 0;
@@ -195,10 +213,12 @@ namespace KPSSGeography.Quiz
             {
                 case QuizMode.Feature:
                     map.SetFocus(_ => false);
+                    map.SetBordersHidden(HidesProvinces);
                     features.ShowCategory(Level.category);
                     return map.Bounds;
                 case QuizMode.FeatureChoice:
                     map.SetFocus(_ => false);
+                    map.SetBordersHidden(HidesProvinces);
                     features.ShowCategory(Level.category, false);
                     return map.Bounds;
                 case QuizMode.FindProvince:
@@ -251,7 +271,7 @@ namespace KPSSGeography.Quiz
             }
             Current.Focus?.SetFocused(true);
 
-            TimeLimit = Mode == QuizMode.RegionAll ? Mathf.Max(1f, Level.timePerQuestion) : Mathf.Max(1f, Level.timePerQuestion);
+            TimeLimit = QuestionTime;
             TimeRemaining = TimeLimit;
             State = QuizState.Playing;
             QuestionStarted?.Invoke(new QuestionInfo(Current, Mode, QuestionIndex, questions.Count));
@@ -283,7 +303,7 @@ namespace KPSSGeography.Quiz
 
         void Sparkle(IMapTarget target)
         {
-            if (target != null) effects?.Sparkle(target.LabelWorldPosition, new Color(1f, 0.85f, 0.3f));
+            if (target != null && !IsExam) effects?.Sparkle(target.LabelWorldPosition, new Color(1f, 0.85f, 0.3f));
         }
 
         // ================== Cevaplar ==================
@@ -327,7 +347,7 @@ namespace KPSSGeography.Quiz
                 Streak++;
                 BestStreak = Mathf.Max(BestStreak, Streak);
                 float multiplier = StreakMultiplier(Streak);
-                int points = Mathf.RoundToInt(config.basePoints * 0.6f * multiplier);
+                int points = Mathf.RoundToInt(config.basePoints * 0.6f * multiplier * ScoreScale);
                 Score += points;
                 clicked.SetState(ProvinceState.Correct);
                 clicked.PlayCorrect();
@@ -391,7 +411,7 @@ namespace KPSSGeography.Quiz
             CorrectCount++;
 
             float multiplier = StreakMultiplier(Streak);
-            int points = Mathf.RoundToInt((config.basePoints + config.maxTimeBonus * TimeRatio) * multiplier);
+            int points = Mathf.RoundToInt((config.basePoints + config.maxTimeBonus * TimeRatio) * multiplier * ScoreScale);
             Score += points;
 
             Current.Focus?.SetFocused(false);
@@ -497,8 +517,8 @@ namespace KPSSGeography.Quiz
             Current?.Focus?.SetFocused(false);
 
             int stars = completed ? Mathf.Clamp(3 - Mistakes, 1, 3) : 0;
-            int previousBest = progress.GetBest(Level.id);
-            bool newBest = progress.Record(Level.id, stars, Score);
+            int previousBest = progress.GetBest(ProgressId);
+            bool newBest = progress.Record(ProgressId, stars, Score);
 
             sfx.Play(completed ? Sfx.Victory : Sfx.GameOver);
             yield return new WaitForSeconds(config.endDelay);

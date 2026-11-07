@@ -1,3 +1,4 @@
+using KPSSGeography.Core;
 using KPSSGeography.Data;
 using UnityEngine;
 
@@ -34,11 +35,15 @@ namespace KPSSGeography.Map
         Color[] fillColors;
         MeshRenderer fillRenderer;
         MeshRenderer borderRenderer;
+        Mesh borderMesh;
+        Color[] borderColors;
+        float lastBlend = -1f;
 
         Color baseColor;
         Color correctColor;
         bool dimmed;
         bool neutral;
+        bool uniformDim;
         bool focused;
         float focusTime;
 
@@ -108,10 +113,10 @@ namespace KPSSGeography.Map
             }
             WorldRect = Rect.MinMaxRect(minX, minY, maxX, maxY);
 
-            var borderColors = new Color[lineVerts.Count];
+            borderColors = new Color[lineVerts.Count];
             for (int i = 0; i < borderColors.Length; i++) borderColors[i] = palette.border;
 
-            var borderMesh = new Mesh { name = data.name + "_Border" };
+            borderMesh = new Mesh { name = data.name + "_Border" };
             borderMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
             borderMesh.SetVertices(lineVerts);
             borderMesh.SetColors(borderColors);
@@ -151,6 +156,8 @@ namespace KPSSGeography.Map
             hovered = false;
             dimmed = false;
             neutral = false;
+            uniformDim = false;
+            if (borderRenderer) borderRenderer.enabled = true;
             focused = false;
             flashTime = 0f;
             popTime = -1f;
@@ -166,6 +173,15 @@ namespace KPSSGeography.Map
 
         /// <summary>Nötr görünüm: bölge rengi gizlenir (cevabı ele vermesin) ama il tıklanabilir kalır.</summary>
         public void SetNeutral(bool value) => neutral = value;
+
+        /// <summary>İl içi sınır çizgisini göster/gizle (yer şekli haritalarında il sınırları görünmez).</summary>
+        public void SetBordersVisible(bool visible)
+        {
+            if (borderRenderer) borderRenderer.enabled = visible;
+        }
+
+        /// <summary>Soluk (odak dışı) iller bölge tonu taşımadan tek düz renk olsun (il kimliği sezdirilmesin).</summary>
+        public void SetUniformDim(bool value) => uniformDim = value;
 
         /// <summary>Bölge modunda sorulan ili cevaplanana kadar nabız gibi vurgular.</summary>
         public void SetFocused(bool value)
@@ -211,9 +227,20 @@ namespace KPSSGeography.Map
                 ProvinceState.Missed => palette.missed,
                 _ => baseColor
             };
-            if (dimmed && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, 0.82f);
+            if (dimmed && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, uniformDim ? 1f : 0.82f);
             else if (neutral && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, 0.78f);
-            if (hovered) target = Color.Lerp(target, palette.hover, 0.5f);
+            float exam = ExamLook.Blend;
+            if (exam > 0f && State == ProvinceState.Idle)
+                target = Color.Lerp(target, dimmed && !uniformDim ? palette.examDim : palette.examLand, exam);
+            if (hovered) target = Color.Lerp(target, palette.hover, 0.5f * (1f - exam)); // sınavda ipucu yok
+
+            if (!Mathf.Approximately(exam, lastBlend))
+            {
+                lastBlend = exam;
+                Color bc = Color.Lerp(palette.border, palette.examBorder, exam);
+                for (int i = 0; i < borderColors.Length; i++) borderColors[i] = bc;
+                borderMesh.colors = borderColors;
+            }
 
             smoothedColor = Color.Lerp(smoothedColor, target, 1f - Mathf.Exp(-20f * dt));
             if (Mathf.Abs(smoothedColor.r - target.r) + Mathf.Abs(smoothedColor.g - target.g) +
@@ -265,6 +292,7 @@ namespace KPSSGeography.Map
         void OnDestroy()
         {
             if (fillMesh) Destroy(fillMesh);
+            if (borderMesh) Destroy(borderMesh);
         }
     }
 }

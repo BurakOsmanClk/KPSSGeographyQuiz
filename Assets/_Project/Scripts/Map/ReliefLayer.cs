@@ -1,3 +1,4 @@
+using KPSSGeography.Core;
 using UnityEngine;
 
 namespace KPSSGeography.Map
@@ -15,6 +16,7 @@ namespace KPSSGeography.Map
         Color[] colors = new Color[4];
         float strength = 0.8f;
         float target = 0.8f;
+        float lastBlend;
 
         public bool IsAvailable { get; private set; }
 
@@ -50,14 +52,19 @@ namespace KPSSGeography.Map
 
         void Update()
         {
-            if (mesh == null || Mathf.Approximately(strength, target)) return;
+            if (mesh == null) return;
+            float blend = ExamLook.Blend;
+            if (Mathf.Approximately(strength, target) && Mathf.Approximately(blend, lastBlend)) return;
             strength = Mathf.MoveTowards(strength, target, Time.unscaledDeltaTime * 1.5f);
+            lastBlend = blend;
             Apply();
         }
 
         void Apply()
         {
-            for (int i = 0; i < 4; i++) colors[i] = new Color(1f, 1f, 1f, strength);
+            // Sınav haritası "boş" olmalı: kabartma neredeyse tamamen kaybolur
+            float a = strength * (1f - 0.88f * ExamLook.Blend);
+            for (int i = 0; i < 4; i++) colors[i] = new Color(1f, 1f, 1f, a);
             mesh.colors = colors;
         }
     }

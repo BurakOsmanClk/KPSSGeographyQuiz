@@ -38,6 +38,8 @@ namespace KPSSGeography.UI
         Button nextButton;
         RectTransform header;
         CanvasGroup headerGroup;
+        Button examButton;
+        Text examHint;
         RectTransform footer;
         CanvasGroup footerGroup;
 
@@ -153,6 +155,35 @@ namespace KPSSGeography.UI
 
             playButton = UIFactory.Button("Play", footer, "OYNA", Theme.Amber, new Vector2(440, 110), OnPlayClicked, Theme.Ink, 50);
             playButton.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), Vector2.zero, new Vector2(440, 110));
+
+            // --- Sınav modu anahtarı (sağ alt) ---
+            examButton = UIFactory.Button("ExamToggle", Root, "", Theme.NavyPanel, new Vector2(400, 96), OnExamToggle, null, 26);
+            examButton.GetComponent<RectTransform>().Place(new Vector2(1f, 0f), new Vector2(1f, 0f), new Vector2(-48, 48), new Vector2(400, 96));
+            examHint = UIFactory.Label("ExamHint", Root, "", 20, Theme.TextMuted, TextAnchor.MiddleRight);
+            examHint.rectTransform.Place(new Vector2(1f, 0f), new Vector2(1f, 0f), new Vector2(-52, 152), new Vector2(640, 28));
+            UpdateExamUI();
+        }
+
+        void OnExamToggle()
+        {
+            sfx.Play(Sfx.Click);
+            GameSettings.ExamMode = !GameSettings.ExamMode; // harita görünümü ExamModeController tarafından sinematik olarak değişir
+            UpdateExamUI();
+            RefreshCards();
+            selected = -1;
+            UpdateSelection();
+        }
+
+        void UpdateExamUI()
+        {
+            bool on = GameSettings.ExamMode;
+            UIFactory.SetButtonColor(examButton, on ? Theme.Hex(0xE5E7EB) : Theme.NavyPanel);
+            var label = examButton.GetComponentInChildren<Text>();
+            label.color = on ? Theme.Ink : Theme.Text;
+            label.text = on ? "SINAV MODU: AÇIK" : "SINAV MODU: KAPALI";
+            examHint.text = on
+                ? "Renksiz harita  •  İpucu yok  •  Süre %20 kısa  •  Puan ×1,5"
+                : "Gerçek KPSS sınav deneyimi için aç";
         }
 
         // ================== Gösterim ==================
@@ -160,6 +191,7 @@ namespace KPSSGeography.UI
         /// <summary>Ekranı açar. <paramref name="focus"/> verilirse o bölüme, yoksa oynanacak sıradaki bölüme odaklanır.</summary>
         public void Open(LevelDefinition focus = null)
         {
+            UpdateExamUI();
             RefreshCards();
             var focusLevel = focus ?? (allCards.Count > 0 ? allCards[SuggestedIndex()].Level : null);
             string group = focusLevel != null ? focusLevel.group : (catalog.groups.Length > 0 ? catalog.groups[0].id : "");
@@ -242,7 +274,8 @@ namespace KPSSGeography.UI
                 var l = c.Level;
                 var state = !l.IsPlayable ? LevelCardState.ComingSoon
                     : progress.IsUnlocked(l) ? LevelCardState.Unlocked : LevelCardState.Locked;
-                c.Refresh(state, progress.GetStars(l.id), progress.GetBest(l.id));
+                bool exam = GameSettings.ExamMode;
+                c.Refresh(state, progress.GetStars(l.id, exam), progress.GetBest(l.id, exam), exam);
             }
             starTotal.text = $"{progress.TotalStars} / {progress.MaxStars}";
         }
@@ -390,7 +423,9 @@ namespace KPSSGeography.UI
             playButton.interactable = can;
             UIFactory.SetButtonLabel(playButton, card.State switch
             {
-                LevelCardState.Unlocked => progress.GetStars(card.Level.id) > 0 ? "TEKRAR OYNA" : "OYNA",
+                LevelCardState.Unlocked => GameSettings.ExamMode
+                    ? (progress.GetStars(card.Level.id, true) > 0 ? "SINAVI TEKRARLA" : "SINAVA BAŞLA")
+                    : (progress.GetStars(card.Level.id) > 0 ? "TEKRAR OYNA" : "OYNA"),
                 LevelCardState.Locked => "KİLİTLİ",
                 _ => "YAKINDA"
             });

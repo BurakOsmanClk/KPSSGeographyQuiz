@@ -65,6 +65,21 @@ namespace KPSSGeography.Map
         public Color featureCorrect = new Color32(0x2E, 0xB8, 0x5C, 0xFF);
         public Color featureMissed = new Color32(0xE5, 0x48, 0x4D, 0xFF);
 
+        [Header("Dış hat (il sınırları gizliyken)")]
+        public Color outline = new Color32(0x6F, 0x78, 0x84, 0xE6);
+
+        [Header("Sınav modu (soluk, boş KPSS haritası)")]
+        public Color examSea = new Color32(0xE6, 0xE9, 0xED, 0xFF);
+        public Color examSeaTop = new Color32(0xF3, 0xF4, 0xF6, 0xFF);
+        public Color examLand = new Color32(0xCF, 0xD3, 0xD8, 0xFF);
+        public Color examDim = new Color32(0xE9, 0xEB, 0xEE, 0xFF);
+        public Color examBorder = new Color32(0x69, 0x70, 0x7A, 0xFF);
+        public Color examShadow = new Color(0.1f, 0.12f, 0.15f, 0.1f);
+        public Color examCountry = new Color32(0xF7, 0xF8, 0xF9, 0xFF);
+        public Color examCountryEdge = new Color32(0xC3, 0xC8, 0xCF, 0xFF);
+        public Color examLake = new Color32(0xDC, 0xE3, 0xEA, 0xFF);
+        public Color examLakeEdge = new Color32(0x86, 0x90, 0x9B, 0xFF);
+
         [Header("Durumlar")]
         public Color border = new Color(1f, 1f, 1f, 0.9f);
         public Color hover = Color.white;

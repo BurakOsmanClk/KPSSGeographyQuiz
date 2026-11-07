@@ -111,7 +111,7 @@ namespace KPSSGeography.UI
         /// <summary>Sekme içindeki sıra numarası.</summary>
         public void SetNumber(int n) => number.text = n.ToString();
 
-        public void Refresh(LevelCardState state, int starCount, int bestScore)
+        public void Refresh(LevelCardState state, int starCount, int bestScore, bool exam = false)
         {
             State = state;
             bool soon = state == LevelCardState.ComingSoon;
@@ -133,7 +133,9 @@ namespace KPSSGeography.UI
                 stars[i].gameObject.SetActive(!soon);
                 stars[i].color = i < starCount ? Theme.StarOn : Theme.StarOff;
             }
-            best.text = !soon && bestScore > 0 ? $"En iyi: {bestScore}" : "";
+            best.text = !soon && bestScore > 0 ? $"{(exam ? "Sınav en iyi" : "En iyi")}: {bestScore}" : "";
+            modeLabel.text = Level.ModeLabel + (exam && !soon ? "  •  SINAV" : "");
+            modePill.rectTransform.sizeDelta = new Vector2(modeLabel.preferredWidth + 32f, 38f);
         }
 
         /// <summary>Karuseldeki konuma göre (0 = ortada) çerçeve parlaklığı.</summary>
