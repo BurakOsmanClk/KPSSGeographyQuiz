@@ -42,6 +42,9 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - Strateji: **Dengeli** (kullanıcı seçimi). Yerleşimler: ödüllü = elenince "+1 can ile devam" (bölüm başına 1 kez); geçiş = sonuç ekranından ayrılırken, oturumda 2 bölümden sonra ve en az 180 sn arayla (`Ads/AdPolicy.cs`, ayarlar `QuizConfig`).
 - Gerçek reklamlar: `unity:levelplay-unity-integration` skill'inin adımları izlenecek. **Ads Mediation (`com.unity.services.levelplay`) paketi `Packages/packages-lock.json`'da görünmeden LevelPlay kodu yazılmaz.** Sonra `IAdService`'i uygulayan bir LevelPlay servisi yazılıp `GameBootstrap`'ta mock yerine bağlanır.
 
+## Sürüm
+- Şu anki sürüm: **0.3.0 (Prototip)**. Kaynak: Unity Player Settings > Version (`bundleVersion`); oyunda `Core/AppInfo.cs` ile giriş ekranında ve Ayarlar'da gösterilir. Her sürümde `docs/CHANGELOG.md` güncellenir. Motor: Unity 6000.6.0f1.
+
 ## Prototip
 - Herhangi bir sahnede Play → `GameBootstrap` otomatik oluşur (ya da **KPSS > Prototip Sahnesini Oluştur**). Her şey çalışma anında kurulur.
 - Akış (`Core/AppFlow.cs`): Giriş ekranı → Bölüm karuseli → Oyun → Sonuç (Tekrar / Sonraki / Bölümler).

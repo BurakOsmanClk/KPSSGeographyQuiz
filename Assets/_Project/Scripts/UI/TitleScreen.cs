@@ -12,7 +12,6 @@ namespace KPSSGeography.UI
     /// </summary>
     public class TitleScreen : UIScreen
     {
-        public const string Version = "v0.2 • Prototip";
 
         public event Action PlayRequested;
         public event Action ProgressReset;
@@ -113,8 +112,8 @@ namespace KPSSGeography.UI
             starText = UIFactory.Label("Text", starPill.transform, "", 30, Theme.Text, TextAnchor.MiddleLeft, FontStyle.Bold);
             starText.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), new Vector2(78, 0), new Vector2(160, 46));
 
-            UIFactory.Label("Version", Root, Version, 22, Theme.TextFaint, TextAnchor.LowerRight)
-                .rectTransform.Place(new Vector2(1f, 0f), new Vector2(1f, 0f), new Vector2(-32, 32), new Vector2(400, 30));
+            UIFactory.Label("Version", Root, AppInfo.ShortLabel, 22, Theme.TextFaint, TextAnchor.LowerRight)
+                .rectTransform.Place(new Vector2(1f, 0f), new Vector2(1f, 0f), new Vector2(-32, 32), new Vector2(500, 30));
         }
 
         Modal BuildHowTo(Transform parent)
@@ -185,6 +184,10 @@ namespace KPSSGeography.UI
             colorblindButton = SettingButton(m.Content, "Colorblind", -322, () => GameSettings.Colorblind = !GameSettings.Colorblind);
             bigTextButton = SettingButton(m.Content, "BigText", -426, () => GameSettings.BigText = !GameSettings.BigText);
             effectsButton = SettingButton(m.Content, "Effects", -530, () => GameSettings.Effects = !GameSettings.Effects);
+
+            var about = UIFactory.Label("About", m.Content, AppInfo.FullLabel, 19, Theme.TextFaint, TextAnchor.MiddleCenter);
+            about.horizontalOverflow = HorizontalWrapMode.Wrap;
+            about.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0, 88), new Vector2(560, 26));
 
             UIFactory.Button("Close", m.Content, "KAPAT", Theme.Amber, new Vector2(320, 84), () =>
                 {

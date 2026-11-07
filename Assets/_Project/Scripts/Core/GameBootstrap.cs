@@ -42,7 +42,7 @@ namespace KPSSGeography.Core
 
         void Awake()
         {
-            Debug.Log("[KPSS] Oyun başlatılıyor...");
+            Debug.Log($"[KPSS] Oyun başlatılıyor... {AppInfo.FullLabel}");
             Application.targetFrameRate = 120;
             Time.timeScale = 1f;
 
