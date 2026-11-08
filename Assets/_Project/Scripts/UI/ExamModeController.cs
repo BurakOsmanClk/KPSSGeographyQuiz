@@ -216,7 +216,9 @@ namespace KPSSGeography.UI
             var scaler = go.AddComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1920, 1080);
-            scaler.matchWidthOrHeight = 0.5f;
+            // Expand: kullanılabilir alan her en-boy oranında en az 1920×1080 kalır; geniş/dar pencerelerde
+            // (Free Aspect, 20:9 telefon, tablet) ekranlar üst üste binmez, fazlalık kenarlarda boşluk olur.
+            scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
             root = (RectTransform)go.transform;
             transform.SetParent(root, false);
 

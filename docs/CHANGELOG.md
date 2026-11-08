@@ -5,6 +5,7 @@ giriş ekranının sağ altında ile **Ayarlar** penceresinde görünür (`Core/
 Biçim: `ANA.KÜÇÜK.YAMA` — yeni özellik = KÜÇÜK +1, hata düzeltmesi = YAMA +1, mağaza yayını = 1.0.0.
 
 ## Yayınlanmamış (0.5.0 adayı)
+- Düzeltme: Free Aspect / geniş ekranlarda bölüm sekmeleri ile kartların üst üste binmesi (arayüz ölçekleme modu Expand).
 - **Yeni KONUM sekmesi** (3 bölüm): **Uç Noktalar ve Güneş** (en doğu/batı/kuzey/güney il, güneşin ilk doğduğu/en son battığı il,
   gölge boyu, gündüz süresi), **Enlem ve Boylam** (paralel/meridyenin geçtiği ili bul; iller il sınırlarından hesaplanır),
   **Matematik ve Özel Konum** (16 A–E sorusu). Öğren'e KONUM sekmesi: Matematik Konum, Enlem ve Boylam (çizgi haritada çizilir), Özel Konum.
