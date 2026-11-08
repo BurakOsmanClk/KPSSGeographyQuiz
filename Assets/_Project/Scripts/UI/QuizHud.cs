@@ -665,6 +665,19 @@ namespace KPSSGeography.UI
             }
         }
 
+        /// <summary>
+        /// Yanlışta yer adı (✕ etiketi) gösterilsin mi? Soru yerin kendisini bilmekle ilgiliyse evet (ili bul, bölge,
+        /// bölgeyi tamamla, komşu il, plaka, yer şekli, ülke, kapı). Konu (tarım, maden...), iklim/bitki örtüsü ve
+        /// tür sorularında ("bu göl hangi tip?") yer adı bilgi vermez, gösterilmez.
+        /// </summary>
+        bool PlaceNamesMatter() => game.Mode switch
+        {
+            QuizMode.Topic => false,
+            QuizMode.Attribute => false,
+            QuizMode.FeatureChoice => false,
+            _ => true
+        };
+
         void OnGameStarted()
         {
             ExitReview(false);
@@ -794,8 +807,12 @@ namespace KPSSGeography.UI
             {
                 string answer = q.AnswerLabel;
                 string msg;
+                // Haritadan seçmeli soruda doğru yer gösterilmez. Yanlış tıklanan yerin adı yalnızca yer bilgisinin
+                // sorulduğu bölümlerde söylenir (iller, bölgeler, yer şekilleri); konu/iklim/tür sorularında gereksiz
+                bool placeQuestion = PlaceNamesMatter();
                 if (hideAnswer)
-                    msg = r.Outcome == AnswerOutcome.TimedOut ? "SÜRE DOLDU!" : "YANLIŞ!";
+                    msg = r.Outcome == AnswerOutcome.TimedOut ? "SÜRE DOLDU!"
+                        : r.Clicked != null && placeQuestion ? $"YANLIŞ! Burası {r.Clicked.DisplayName}" : "YANLIŞ!";
                 else if (r.Outcome == AnswerOutcome.TimedOut)
                     msg = q.RequireAll ? $"SÜRE DOLDU!  {r.Found} / {q.Correct.Count} il bulundu" : $"SÜRE DOLDU!  Doğru cevap: {answer}";
                 else if (r.Clicked != null)
@@ -803,7 +820,8 @@ namespace KPSSGeography.UI
                 else
                     msg = $"YANLIŞ!  Doğru cevap: {answer}";
                 ShowFeedback(msg, Theme.Error);
-                if (tag != null && !hideAnswer) ShowNameTag(tag, Theme.Error);
+                if (hideAnswer) { if (r.Clicked != null && placeQuestion) ShowNameTag(r.Clicked, Theme.Error); }
+                else if (tag != null && placeQuestion) ShowNameTag(tag, Theme.Error);
                 streakText.text = "";
                 if (!q.RequireAll) LoseHeart();
             }
