@@ -50,9 +50,10 @@ namespace KPSSGeography.Map
         }
 
         /// <summary>Verilen halkaları (bölge dış hattı) sırayla çizer, bekletir ve söndürür.</summary>
-        public void DrawOutline(List<Vector2[]> rings, Color color)
+        /// <param name="force">Efektler kapalıyken de çiz (sınır, oyunun bir parçasıysa).</param>
+        public void DrawOutline(List<Vector2[]> rings, Color color, bool force = false)
         {
-            if (!GameSettings.Effects || rings == null || rings.Count == 0) return;
+            if ((!GameSettings.Effects && !force) || rings == null || rings.Count == 0) return;
             var o = new Outline { rings = rings, color = color, lengths = new float[rings.Count] };
             for (int r = 0; r < rings.Count; r++)
             {

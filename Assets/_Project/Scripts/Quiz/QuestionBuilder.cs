@@ -224,14 +224,20 @@ namespace KPSSGeography.Quiz
             return list;
         }
 
+        /// <summary>
+        /// Bölgeyi tamamla: bölgenin bütün illeri karışık sırayla tek tek sorulur (sınırı çizili bölge içinde).
+        /// Bilinen il boyalı kalır; bölüm bitince bölge tamamen dolmuş olur.
+        /// </summary>
         List<Question> RegionAll(LevelDefinition level)
         {
             string region = level.HasRegionFilter ? level.regions[0] : Regions.Marmara;
-            var q = new Question { Prompt = $"{Up(region)} BÖLGESİNİN BÜTÜN İLLERİNİ BUL", Title = Up(region), Type = AnswerType.Map,
-                Layer = MapLayer.Provinces, RequireAll = true };
-            q.Correct.AddRange(map.Provinces.Where(p => p.Data.region == region));
-            q.AnswerLabel = region;
-            return new List<Question> { q };
+            return Shuffled(map.Provinces.Where(p => p.Data.region == region)).Select(p =>
+            {
+                var q = new Question { Prompt = $"{Up(region)}: BU İLİ HARİTADA BUL", Title = Up(p.DisplayName), Type = AnswerType.Map,
+                    Layer = MapLayer.Provinces, Reveal = p, AnswerLabel = p.DisplayName };
+                q.Correct.Add(p);
+                return q;
+            }).ToList();
         }
 
         List<Question> Mcq(LevelDefinition level)

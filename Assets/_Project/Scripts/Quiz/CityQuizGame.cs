@@ -175,11 +175,13 @@ namespace KPSSGeography.Quiz
             Rect focus = SetupMap();
             bool physical = Mode == QuizMode.Feature || Mode == QuizMode.FeatureChoice;
             relief?.SetStrength(physical ? 1f : 0.55f);
-            if (!IsExam && Level.HasRegionFilter && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.RegionAll))
+            // Bölgeyi tamamla: bölge sınırı her zaman çizilir (sınavda ve efektler kapalıyken de), çünkü soru o sınırın içinde
+            bool regionAll = Mode == QuizMode.RegionAll;
+            if ((!IsExam || regionAll) && Level.HasRegionFilter && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || regionAll))
             {
                 var rings = new List<Vector2[]>();
                 foreach (var region in Level.regions) rings.AddRange(map.GetRegionRings(region));
-                effects?.DrawOutline(rings, new Color(1f, 0.72f, 0.1f, 1f));
+                effects?.DrawOutline(rings, new Color(1f, 0.72f, 0.1f, 1f), regionAll);
             }
             Rect viewport = Mode == QuizMode.Mcq ? McqViewport : UsesChoices ? ChoiceViewport : FindViewport;
             cameraController.FocusOn(focus, viewport);
@@ -573,7 +575,7 @@ namespace KPSSGeography.Quiz
             sfx.Play(completed ? Sfx.Victory : Sfx.GameOver);
             yield return new WaitForSeconds(config.endDelay);
 
-            bool regionAll = Mode == QuizMode.RegionAll && Current != null;
+            bool regionAll = Current != null && Current.RequireAll; // "hepsini bul" tipi soru (şu an kullanılmıyor)
             if (regionAll)
                 foreach (var t in Current.Correct)
                     if (!found.Contains(t) && !history.Exists(h => ReferenceEquals(h.Target, t))) Record(t, Current, false);
