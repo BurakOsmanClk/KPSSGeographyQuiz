@@ -46,7 +46,7 @@ namespace KPSSGeography.Quiz
 
         List<Question> questions = new List<Question>();
         readonly HashSet<IMapTarget> found = new HashSet<IMapTarget>();
-        /// <summary>Bu turda sorusu geçmiş hedefler (doğru bilinen ya da yanlışta gösterilen il, akarsu, dağ...). Bölüm boyunca tekrar tıklanamaz.</summary>
+        /// <summary>Bu turda doğru bilinen hedefler (il, akarsu, dağ...). Bölüm boyunca tekrar tıklanamaz.</summary>
         readonly HashSet<IMapTarget> solved = new HashSet<IMapTarget>();
         Coroutine flow;
         bool continueUsed;
@@ -99,7 +99,7 @@ namespace KPSSGeography.Quiz
         public bool AcceptsChoiceInput => Answering && Current.Type == AnswerType.Choice;
         public bool IsRunning => State != QuizState.Idle && State != QuizState.Finished;
 
-        /// <summary>Hedefin sorusu bu turda geçti mi? (Üzerine gelince vurgulanmaz, tıklanınca yok sayılır.)</summary>
+        /// <summary>Hedef bu turda zaten doğru bilindi mi? (Üzerine gelince vurgulanmaz, tıklanınca yok sayılır.)</summary>
         public bool IsSolved(IMapTarget target) => target != null && solved.Contains(target);
 
         /// <summary>Doğru bilinen hedefler bölüm boyunca boyalı kalsın mı? ("haritayı doldurma" modları)</summary>
@@ -334,7 +334,7 @@ namespace KPSSGeography.Quiz
 
         void SubmitTarget(IMapTarget clicked)
         {
-            // Sorusu geçmiş yer (doğru bilinen ya da yanlışta gösterilen) tekrar tıklanamaz: ne puan ne hata, hiçbir şey olmaz.
+            // Doğru bilinen yer tekrar tıklanamaz: ne puan ne hata, hiçbir şey olmaz.
             // Tek istisna: aynı yer bu sorunun da cevabıysa (konu/komşu setleri çakışabilir), yoksa soru cevapsız kalırdı.
             if (solved.Contains(clicked) && !(Current.Accepts(clicked) && !found.Contains(clicked))) return;
 
@@ -448,14 +448,19 @@ namespace KPSSGeography.Quiz
             Mistakes++;
             Streak = 0;
 
-            float delay = config.wrongFeedback + FeedbackBonus;
+            bool hideAnswer = Current.HidesAnswerOnMiss;
+            float delay = config.wrongFeedback + (hideAnswer ? 0f : FeedbackBonus);
             clicked?.PlayWrongClick();
             Current.Focus?.SetFocused(false);
 
-            if (Current.Reveal != null)
+            if (hideAnswer)
+            {
+                // Haritadan seçmeli soruda doğru yer gösterilmez (ipucu olmasın); sadece "Haritayı incele"de görünür.
+                if (Current.Reveal != null) Record(Current.Reveal, Current, false);
+            }
+            else if (Current.Reveal != null)
             {
                 Current.Reveal.SetState(ProvinceState.Missed);
-                if (Current.Type == AnswerType.Map) solved.Add(Current.Reveal);
                 Current.Reveal.PlayReveal(delay);
                 Record(Current.Reveal, Current, false);
             }

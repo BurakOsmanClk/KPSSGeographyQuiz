@@ -9,7 +9,7 @@ namespace KPSSGeography.Core
     public static class AppInfo
     {
         /// <summary>Yayın aşaması: "Prototip" → "Beta" → "" (yayın).</summary>
-        public const string Stage = "Prototip • tekrar-tıklama-kilidi"; // GEÇİCİ: deneme_kutay testi, main'e almadan önce "Prototip" yap
+        public const string Stage = "Prototip • deneme 2"; // GEÇİCİ: deneme_kutay testi, main'e almadan önce "Prototip" yap
 
         public static string Version => Application.version;
 
