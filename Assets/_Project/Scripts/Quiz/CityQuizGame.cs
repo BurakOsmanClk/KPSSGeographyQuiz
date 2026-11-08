@@ -193,7 +193,7 @@ namespace KPSSGeography.Quiz
                 effects?.DrawOutline(rings, new Color(1f, 0.72f, 0.1f, 1f), regionAll);
             }
             questions = builder.Build(Level);
-            bool hasBody = questions.Exists(q => !string.IsNullOrEmpty(q.Body));
+            bool hasBody = questions.Exists(q => !string.IsNullOrEmpty(q.Body) || q.Chart != null);
             Rect viewport = hasBody ? BodyViewport : Mode == QuizMode.Mcq ? McqViewport : Mode == QuizMode.Numbered ? NumberedViewport
                 : UsesChoices ? ChoiceViewport : FindViewport;
             cameraController.FocusOn(focus, viewport);

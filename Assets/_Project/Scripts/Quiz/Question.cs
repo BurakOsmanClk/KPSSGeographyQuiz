@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using KPSSGeography.Data;
 using KPSSGeography.Map;
 using UnityEngine;
 
@@ -52,6 +53,8 @@ namespace KPSSGeography.Quiz
 
         /// <summary>KPSS tipi öncül metni (giriş + maddeler); soru kâğıdı gibi solda ayrı bir panelde gösterilir.</summary>
         public string Body;
+        /// <summary>İklim grafiği sorusu: soldaki panelde çizilecek il verisi (Body yerine).</summary>
+        public ClimateCity Chart;
 
         /// <summary>Numaralı harita sorusu: haritada sırasıyla I, II, III… diye işaretlenen yerler.</summary>
         public readonly List<IMapTarget> Markers = new List<IMapTarget>();

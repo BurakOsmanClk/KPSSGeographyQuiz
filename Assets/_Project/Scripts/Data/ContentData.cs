@@ -89,6 +89,39 @@ namespace KPSSGeography.Data
         public string body;
     }
 
+    /// <summary>Bir il merkezinin aylık ortalama sıcaklık (°C) ve yağış (mm) değerleri (iklim grafiği soruları).</summary>
+    [Serializable]
+    public class ClimateCity
+    {
+        public int plate;
+        public string name;
+        /// <summary>İklim tipi (çeldiriciler farklı tiplerden seçilir).</summary>
+        public string type;
+        public float[] temp;
+        public float[] rain;
+        public string note;
+    }
+
+    [Serializable]
+    public class ClimateDatabase
+    {
+        public const string ResourcePath = "Data/climate";
+
+        public string source;
+        public ClimateCity[] cities;
+
+        public static ClimateDatabase Load()
+        {
+            var asset = Resources.Load<TextAsset>(ResourcePath);
+            if (asset == null)
+            {
+                Debug.LogWarning($"[KPSS] İklim verisi bulunamadı: Resources/{ResourcePath}.json");
+                return new ClimateDatabase { cities = Array.Empty<ClimateCity>() };
+            }
+            return JsonUtility.FromJson<ClimateDatabase>(asset.text);
+        }
+    }
+
     [Serializable]
     public class McqDatabase
     {

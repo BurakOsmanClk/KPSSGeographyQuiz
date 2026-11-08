@@ -16,6 +16,8 @@ namespace KPSSGeography.Quiz
         readonly FeatureLayer features;
         readonly TopicDatabase topics;
         readonly McqDatabase mcq;
+        ClimateDatabase climate;
+        ClimateDatabase Climate => climate ??= ClimateDatabase.Load();
         readonly MapPalette palette;
 
         public QuestionBuilder(TurkeyMap turkeyMap, FeatureLayer featureLayer, TopicDatabase topicDb, McqDatabase mcqDb, MapPalette mapPalette)
@@ -330,6 +332,12 @@ namespace KPSSGeography.Quiz
                 AddMarkers(q, m);
                 if (q.Markers.Count > 0 || q.Shapes.Count > 0) pool.Add(q);
             }
+            if (System.Array.IndexOf(sets, "iklim-grafik") >= 0)
+                foreach (var c in Climate.cities)
+                {
+                    var q = ClimateChartQuestion(c);
+                    if (q != null) pool.Add(q);
+                }
             foreach (var t in topics.topics.Where(t => System.Array.IndexOf(sets, t.set) >= 0))
             {
                 var q = NumberedFromTopic(t);
@@ -371,6 +379,35 @@ namespace KPSSGeography.Quiz
                 Prompt = "HARİTADA NUMARALANDIRILAN İLLER", Title = NumberedSentence(t), LongTitle = true, Type = AnswerType.Choice,
                 Choices = Enumerable.Range(0, 5).Select(i => $"{Letters[i]})  {Roman[i]}").ToArray(), CorrectChoice = answer,
                 Info = $"{Roman[answer]}: {correct.DisplayName}. {t.info}", AnswerLabel = $"{Letters[answer]}) {Roman[answer]} – {correct.DisplayName}"
+            };
+            q.Markers.AddRange(markers);
+            q.Correct.Add(correct);
+            return q;
+        }
+
+        /// <summary>
+        /// İklim grafiği sorusu: solda ilin sıcaklık–yağış grafiği, haritada 5 il (biri doğru, diğerleri farklı iklim
+        /// tiplerinden, her tipten en fazla bir il) I–V diye numaralı.
+        /// </summary>
+        Question ClimateChartQuestion(ClimateCity city)
+        {
+            var correct = map.GetByPlate(city.plate);
+            if (correct == null) return null;
+            var others = Shuffled(Climate.cities.Where(c => c.type != city.type))
+                .GroupBy(c => c.type).Select(g => g.First())
+                .Select(c => map.GetByPlate(c.plate)).Where(p => p != null).Take(4).ToList();
+            if (others.Count < 4) return null;
+            var markers = Shuffled(others.Prepend(correct));
+            int answer = markers.IndexOf(correct);
+            float total = city.rain.Sum();
+            var q = new Question
+            {
+                Prompt = "GRAFİK YORUMLAMA",
+                Title = "Grafikte bir il merkezinin aylık ortalama sıcaklık ve yağış değerleri verilmiştir. Bu il merkezi, haritada numaralandırılanlardan hangisidir?",
+                LongTitle = true, Type = AnswerType.Choice, Chart = city,
+                Choices = Enumerable.Range(0, 5).Select(i => $"{Letters[i]})  {Roman[i]}").ToArray(), CorrectChoice = answer,
+                Info = $"{Roman[answer]}: {city.name}. {city.note} (Yıllık yağış yaklaşık {total:0} mm.)",
+                AnswerLabel = $"{Letters[answer]}) {Roman[answer]} – {city.name}"
             };
             q.Markers.AddRange(markers);
             q.Correct.Add(correct);
