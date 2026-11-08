@@ -55,6 +55,9 @@ namespace KPSSGeography.Quiz
 
         /// <summary>Numaralı harita sorusu: haritada sırasıyla I, II, III… diye işaretlenen yerler.</summary>
         public readonly List<IMapTarget> Markers = new List<IMapTarget>();
+        /// <summary>Numaralı harita: işaret yerine oklar/doğru parçaları (I, II… sırasıyla) ve doğru olanların sırası.</summary>
+        public readonly List<MapShape> Shapes = new List<MapShape>();
+        public readonly List<int> CorrectShapes = new List<int>();
 
         /// <summary>Doğru cevaptan sonra haritada boyanacak ek hedef (sınır komşusu sorusunda sorulan il).</summary>
         public IMapTarget MarkOnCorrect;

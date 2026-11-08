@@ -760,7 +760,18 @@ namespace KPSSGeography.UI
             HideNameTag(false);
             ShowBody(q.Body);
             // Numaralı harita: işaretli yerlere I, II, III… rozetleri
-            if (q.Markers.Count > 0)
+            if (q.Shapes.Count > 0)
+            {
+                var items = new List<(Vector3, string)>();
+                for (int i = 0; i < q.Shapes.Count && i < QuestionBuilder.Roman.Length; i++)
+                {
+                    var s = q.Shapes[i];
+                    string text = string.IsNullOrEmpty(s.caption) ? QuestionBuilder.Roman[i] : $"({QuestionBuilder.Roman[i]}) {s.caption}";
+                    items.Add(((Vector3)s.LabelPoint, text));
+                }
+                Labels?.ShowMarkers(items);
+            }
+            else if (q.Markers.Count > 0)
             {
                 var items = new List<(Vector3, string)>();
                 for (int i = 0; i < q.Markers.Count && i < QuestionBuilder.Roman.Length; i++)

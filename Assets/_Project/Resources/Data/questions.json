@@ -892,6 +892,137 @@
     2
    ],
    "body": "Bir madenle ilgili bilgiler:\n•  Dünya rezervlerinin büyük bölümü Türkiye'dedir\n•  Cam, seramik, deterjan ve roket yakıtı yapımında kullanılır\n•  Devlet eliyle işletilen stratejik bir madendir"
+  },
+  {
+   "id": "o1",
+   "set": "oklar",
+   "text": "Haritada oklarla bazı tarım ürünlerinin bölgeler arası ticaret yönleri gösterilmiştir. Numaralandırılan oklardan hangisinin gösterdiği ticaret beklenmez?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 3,
+   "explanation": "Çay yalnızca Doğu Karadeniz'de (Rize çevresi) yetişir; ticareti Rize'den diğer bölgelere doğru olur, İstanbul'dan Rize'ye olmaz. Fındık Karadeniz'den, pamuk Ege'den (tekstil merkezi Denizli'ye), turunçgil Akdeniz'den diğer bölgelere gider; tahıl üretimi az olan Karadeniz'e İç Anadolu'dan buğday gelir.",
+   "highlight": "",
+   "markers": [
+    "arrow:52>34|Fındık",
+    "arrow:9>20|Pamuk",
+    "arrow:33>6|Turunçgil",
+    "arrow:34>53|Çay",
+    "arrow:42>61|Buğday"
+   ],
+   "answerMarkers": [
+    3
+   ],
+   "body": "İç ticaretin canlı olmasının nedenlerinden biri, bölgeler arasındaki doğal koşul farklarıdır. Farklı ürünler yetiştiren bölgeler bu ürünleri birbirleriyle değiş tokuş eder."
+  },
+  {
+   "id": "o2",
+   "set": "oklar",
+   "text": "Türkiye'nin yer şekilleri ve yükselti özellikleri dikkate alındığında, numaralandırılan güzergâhların hangilerinde kara yolu ve demir yolu yapım maliyetinin daha fazla olması beklenir?",
+   "options": [
+    "I ve III",
+    "II ve IV",
+    "II ve V",
+    "III ve V",
+    "IV ve V"
+   ],
+   "answer": 1,
+   "explanation": "Doğu Karadeniz Dağları'nı (II, Trabzon–Gümüşhane) ve Toroslar'ı (IV, Antalya–Konya) aşan yollarda tünel, viyadük ve virajlar maliyeti artırır. Konya Ovası (I), Ergene Havzası (III) ve İç Anadolu platoları (V) daha düzdür.",
+   "highlight": "",
+   "markers": [
+    "line:32.5,37.9>34.0,38.4",
+    "line:39.75,41.0>39.45,39.95",
+    "line:26.6,41.7>27.5,41.0",
+    "line:30.7,36.95>31.9,37.8",
+    "line:30.5,39.8>32.0,39.9"
+   ],
+   "answerMarkers": [
+    1,
+    3
+   ],
+   "body": ""
+  },
+  {
+   "id": "o3",
+   "set": "oklar",
+   "text": "Numaralandırılan oklardan hangisi, akarsuyun akış yönünü doğru göstermektedir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 0,
+   "explanation": "Kızılırmak, Sivas'tan doğup Kayseri–Nevşehir yayını çizerek Bafra'da Karadeniz'e dökülür. Sakarya kuzeye (Karadeniz), Seyhan güneye (Akdeniz), Fırat güneydoğuya (Suriye), Gediz batıya (Ege) akar.",
+   "highlight": "",
+   "markers": [
+    "arrow:38>55|Kızılırmak",
+    "arrow:54>26|Sakarya",
+    "arrow:1>38|Seyhan",
+    "arrow:63>23|Fırat",
+    "arrow:35>43|Gediz"
+   ],
+   "answerMarkers": [
+    0
+   ],
+   "body": ""
+  },
+  {
+   "id": "o4",
+   "set": "oklar",
+   "text": "Numaralandırılan oklardan hangisi, Türkiye'de iç göçün genel yönüyle uyuşmaz?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 3,
+   "explanation": "İç göç genellikle doğudan batıya, kırdan kente ve sanayi, ticaret ve hizmetin geliştiği büyük şehirlere doğrudur. İstanbul'dan Ardahan'a göç bu genel yönün tersidir.",
+   "highlight": "",
+   "markers": [
+    "arrow:25>34",
+    "arrow:21>35",
+    "arrow:46>1",
+    "arrow:34>75",
+    "arrow:65>7"
+   ],
+   "answerMarkers": [
+    3
+   ],
+   "body": ""
+  },
+  {
+   "id": "o5",
+   "set": "oklar",
+   "text": "Marmara çevresinde esen yerel rüzgârlardan lodosun esiş yönü, numaralandırılan oklardan hangisiyle gösterilmiştir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 1,
+   "explanation": "Lodos güneybatıdan esen ılık ve nemli rüzgârdır. Poyraz kuzeydoğudan (I), karayel kuzeybatıdan (III), keşişleme güneydoğudan (IV), kıble güneyden (V) eser.",
+   "highlight": "",
+   "markers": [
+    "arrow:30.6,41.6>29.4,40.9",
+    "arrow:26.4,39.6>27.6,40.4",
+    "arrow:26.6,41.95>27.5,41.35",
+    "arrow:30.4,39.7>29.4,40.3",
+    "arrow:28.4,39.25>28.4,40.05"
+   ],
+   "answerMarkers": [
+    1
+   ],
+   "body": ""
   }
  ]
 }

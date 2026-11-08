@@ -324,6 +324,14 @@ namespace KPSSGeography.Quiz
         /// </summary>
         void ApplyMarkers()
         {
+            if (Current.Shapes.Count > 0)
+            {
+                // Ok ve güzergâh soruları: harita tam renkli, şekiller üstte
+                map.SetFocus(null);
+                effects?.SetShapes(Current.Shapes, null, ShapeColor, ShapeColor);
+                return;
+            }
+            effects?.ClearShapes();
             if (Current.Markers.Count == 0)
             {
                 map.SetFocus(null);
@@ -335,8 +343,15 @@ namespace KPSSGeography.Quiz
         }
 
         /// <summary>Numaralı harita: cevaptan sonra doğru numaralı yer(ler) yeşile boyanır.</summary>
+        static readonly Color ShapeColor = new Color32(0x1B, 0x2A, 0x3A, 0xFF);
+
         void RevealMarkers(bool correct, float delay)
         {
+            if (Current.Shapes.Count > 0)
+            {
+                effects?.SetShapes(Current.Shapes, Current.CorrectShapes, ShapeColor, ExamLook.Blend > 0.5f ? ShapeColor : new Color32(0x2E, 0xB8, 0x5C, 0xFF));
+                return;
+            }
             if (Current.Markers.Count == 0) return;
             foreach (var t in Current.Correct)
             {

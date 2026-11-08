@@ -216,10 +216,61 @@ namespace KPSSGeography.Quiz
             return null;
         }
 
-        /// <summary>Elle yazılmış soruda haritadaki numaralı yerleri ve doğru numaraları kurar.</summary>
+        /// <summary>Şekil ucu: "42" (il plakası, ilin merkezi) ya da "28.5,40.9" (boylam,enlem).</summary>
+        Vector2? ResolvePoint(string spec)
+        {
+            spec = spec.Trim();
+            if (spec.Contains(","))
+            {
+                var parts = spec.Split(',');
+                if (parts.Length == 2 && float.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture, out float lon) &&
+                    float.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out float lat))
+                    return (Vector2)map.LonLatToMap(lon, lat);
+                return null;
+            }
+            if (int.TryParse(spec, out int plate))
+            {
+                var p = map.GetByPlate(plate);
+                if (p != null) return (Vector2)p.transform.position;
+            }
+            return null;
+        }
+
+        /// <summary>"arrow:52>34|Fındık" ya da "line:42>6" biçimindeki şekli çözer.</summary>
+        MapShape ResolveShape(string spec)
+        {
+            bool arrow = spec.StartsWith("arrow:");
+            if (!arrow && !spec.StartsWith("line:")) return null;
+            string body = spec.Substring(arrow ? 6 : 5);
+            string caption = null;
+            int bar = body.IndexOf('|');
+            if (bar >= 0) { caption = body.Substring(bar + 1); body = body.Substring(0, bar); }
+            var ends = body.Split('>');
+            if (ends.Length != 2) return null;
+            var a = ResolvePoint(ends[0]);
+            var b = ResolvePoint(ends[1]);
+            if (a == null || b == null) return null;
+            return new MapShape { from = a.Value, to = b.Value, arrow = arrow, caption = caption };
+        }
+
+        /// <summary>
+        /// Elle yazılmış soruda haritadaki numaralı yerleri ve doğru numaraları kurar.
+        /// İşaret biçimleri: "plate:42", "feature:kizilirmak", "arrow:52>34|Fındık", "line:42>6" (uçlar plaka ya da "boylam,enlem").
+        /// </summary>
         void AddMarkers(Question q, McqQuestion m)
         {
             if (m.markers == null || m.markers.Length == 0) return;
+            if (m.markers[0].StartsWith("arrow:") || m.markers[0].StartsWith("line:"))
+            {
+                foreach (var spec in m.markers)
+                {
+                    var s = ResolveShape(spec);
+                    if (s == null) Debug.LogWarning($"[KPSS] '{m.id}' sorusunda çizilemeyen şekil: {spec}");
+                    else q.Shapes.Add(s);
+                }
+                if (m.answerMarkers != null) q.CorrectShapes.AddRange(m.answerMarkers);
+                return;
+            }
             foreach (var spec in m.markers)
             {
                 var t = ResolveTarget(spec);
@@ -252,7 +303,7 @@ namespace KPSSGeography.Quiz
                     Info = m.explanation, AnswerLabel = $"{Letters[m.answer]}) {m.options[m.answer]}"
                 };
                 AddMarkers(q, m);
-                if (q.Markers.Count > 0) pool.Add(q);
+                if (q.Markers.Count > 0 || q.Shapes.Count > 0) pool.Add(q);
             }
             foreach (var t in topics.topics.Where(t => System.Array.IndexOf(sets, t.set) >= 0))
             {
