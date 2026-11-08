@@ -403,6 +403,13 @@ def main():
     for gate in manual.get("borderGates", []):
         gates_by_country.setdefault(gate["country"], []).append(gate["name"])
 
+    # Hangi il hangi ülkeyle sınır komşusu? (ortak sınır en az 1 km)
+    province_plates = [int(f["properties"]["iso_3166_2"].split("-")[1]) for f in feats]
+
+    def border_plates(country_geom):
+        zone = country_geom.buffer(0.01)
+        return sorted(p for p, pg in zip(province_plates, geoms) if pg.boundary.intersection(zone).length * 111.0 > 1.0)
+
     for tr, shown, label, info in LAND_NEIGHBORS:
         g = country_geoms[tr]
         polys = [q for q in (list(g.geoms) if isinstance(g, MultiPolygon) else [g]) if q.area > 0.002]
@@ -411,7 +418,7 @@ def main():
         note = info + (f" Sınır kapıları: {', '.join(gate_names)}." if gate_names else "")
         features.append({
             "id": "ulke-" + tr.lower().replace("ı", "i").replace("ü", "u").replace("ö", "o").replace("ç", "c").replace("ş", "s").replace("ğ", "g").replace("i̇", "i"),
-            "name": shown, "category": "country", "kind": "polygon", "subtype": tr, "info": note,
+            "name": shown, "category": "country", "kind": "polygon", "subtype": tr, "info": note, "plates": border_plates(g),
             "label": [r4(c) for c in proj(*label)], "lines": [], "vertices": verts, "triangles": tris, "outline": outline,
         })
 

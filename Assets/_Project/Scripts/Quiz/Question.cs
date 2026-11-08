@@ -48,6 +48,9 @@ namespace KPSSGeography.Quiz
         /// <summary>KPSS sorusunda vurgulanacak yer şekli (sadece o gösterilir).</summary>
         public FeatureView ShowFeature;
 
+        /// <summary>Doğru cevaptan sonra haritada boyanacak ek hedef (sınır komşusu sorusunda sorulan il).</summary>
+        public IMapTarget MarkOnCorrect;
+
         public string Info;
         /// <summary>"Doğru cevap: ..." metni.</summary>
         public string AnswerLabel;
