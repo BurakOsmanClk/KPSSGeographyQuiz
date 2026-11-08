@@ -67,6 +67,7 @@ namespace KPSSGeography.Quiz
                 case QuizMode.FeatureChoice: return FeatureChoice(level);
                 case QuizMode.RegionAll: return RegionAll(level);
                 case QuizMode.Mcq: return Mcq(level);
+                case QuizMode.BorderCountry: return BorderCountry(level);
                 default: return new List<Question>();
             }
         }
@@ -197,6 +198,30 @@ namespace KPSSGeography.Quiz
                 Prompt = attr.prompt, Title = Up(f.DisplayName), Type = AnswerType.Choice, Choices = attr.choices, ChoiceColors = colors,
                 CorrectChoice = System.Array.IndexOf(attr.choices, f.Data.subtype), Focus = f, Info = f.Data.info, AnswerLabel = f.Data.subtype
             }).ToList();
+        }
+
+        /// <summary>Sınır ilinin adı verilir, oyuncu komşu olduğu ülkeyi haritada seçer (birden fazlaysa herhangi biri).</summary>
+        List<Question> BorderCountry(LevelDefinition level)
+        {
+            var countries = features.Features.Where(f => f.Category == GeoFeature.Country && f.Data.plates != null).ToList();
+            var plates = countries.SelectMany(c => c.Data.plates).Distinct();
+            var list = new List<Question>();
+            foreach (int plate in Take(plates, level.questionCount))
+            {
+                var p = map.GetByPlate(plate);
+                if (p == null) continue;
+                var near = countries.Where(c => System.Array.IndexOf(c.Data.plates, plate) >= 0).ToList();
+                string names = JoinNames(near.Select(c => c.DisplayName), 8);
+                var q = new Question
+                {
+                    Prompt = near.Count > 1 ? "BU İLİN SINIR KOMŞUSU OLAN BİR ÜLKEYİ SEÇ" : "BU İLİN SINIR KOMŞUSU OLAN ÜLKEYİ SEÇ",
+                    Title = Up(p.DisplayName), Type = AnswerType.Map, Layer = MapLayer.Features, MarkOnCorrect = p,
+                    AnswerLabel = names, Info = $"{p.DisplayName}: {names} ile sınır komşusudur."
+                };
+                q.Correct.AddRange(near);
+                list.Add(q);
+            }
+            return list;
         }
 
         List<Question> RegionAll(LevelDefinition level)

@@ -45,6 +45,8 @@ namespace KPSSGeography.Data
         /// <summary>Dağlar için koyu iç çekirdek alanı.</summary>
         public float[] innerVertices;
         public int[] innerTriangles;
+        /// <summary>Komşu ülkeler: bu ülkeyle sınırı olan illerin plakaları.</summary>
+        public int[] plates;
 
         public Vector2 LabelPoint => new Vector2(label[0], label[1]);
         public bool IsLine => kind == "line";

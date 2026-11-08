@@ -26,6 +26,8 @@ namespace KPSSGeography.Quiz
         RegionAll,
         /// <summary>A–E şıklı KPSS sorusu.</summary>
         Mcq,
+        /// <summary>Adı verilen sınır ilinin komşu olduğu ülkeyi haritada seç.</summary>
+        BorderCountry,
         /// <summary>Henüz hazır olmayan bölüm ("Yakında").</summary>
         ComingSoon
     }
@@ -66,6 +68,7 @@ namespace KPSSGeography.Quiz
             "featurechoice" => QuizMode.FeatureChoice,
             "regionall" => QuizMode.RegionAll,
             "mcq" => QuizMode.Mcq,
+            "bordercountry" => QuizMode.BorderCountry,
             _ => QuizMode.ComingSoon
         };
 
@@ -84,6 +87,7 @@ namespace KPSSGeography.Quiz
             QuizMode.FeatureChoice => "TÜRÜNÜ SEÇ",
             QuizMode.RegionAll => "HEPSİNİ BUL",
             QuizMode.Mcq => "KPSS SORUSU",
+            QuizMode.BorderCountry => "SINIR KOMŞUSU",
             _ => "YAKINDA"
         };
 

@@ -69,7 +69,7 @@ namespace KPSSGeography.Quiz
                                       Level.category != "country" && Level.category != "gate";
 
         /// <summary>Komşu ülke bölümünde haritadaki ülke adları gizlenir (cevabı ele vermesin).</summary>
-        public bool HidesCountryNames => Level != null && Level.category == "country";
+        public bool HidesCountryNames => Level != null && (Level.category == "country" || Mode == QuizMode.BorderCountry);
 
         float ScoreScale => IsExam ? config.examScoreMultiplier : 1f;
         string ProgressId => IsExam ? ProgressStore.ExamKey(Level.id) : Level.id;
@@ -228,12 +228,13 @@ namespace KPSSGeography.Quiz
                     map.SetFocus(_ => false);
                     map.SetBordersHidden(HidesProvinces);
                     features.ShowCategory(Level.category);
-                    if (Level.category != "country") return map.Bounds;
-                    // Komşu ülkeler: kamera uzaklaşır ki Türkiye'nin çevresindeki ülkeler de rahat görünüp tıklansın
-                    Rect b = map.Bounds;
-                    float padX = b.width * 0.14f, padTop = b.height * 0.18f, padBottom = b.height * 0.3f;
-                    return new Rect(b.x - padX, b.y - padBottom, b.width + padX * 2f, b.height + padTop + padBottom);
+                    return Level.category == "country" ? CountriesView() : map.Bounds;
                 }
+                case QuizMode.BorderCountry:
+                    // İller soluk, ülkeler tıklanabilir; bilinen il doygun rengiyle boyanır
+                    map.SetFocus(_ => false);
+                    features.ShowCategory("country");
+                    return CountriesView();
                 case QuizMode.FeatureChoice:
                     map.SetFocus(_ => false);
                     map.SetBordersHidden(HidesProvinces);
@@ -265,6 +266,14 @@ namespace KPSSGeography.Quiz
             }
         }
 
+        /// <summary>Komşu ülke soruları: kamera uzaklaşır ki Türkiye'nin çevresindeki ülkeler de rahat görünüp tıklansın.</summary>
+        Rect CountriesView()
+        {
+            Rect b = map.Bounds;
+            float padX = b.width * 0.14f, padTop = b.height * 0.18f, padBottom = b.height * 0.3f;
+            return new Rect(b.x - padX, b.y - padBottom, b.width + padX * 2f, b.height + padTop + padBottom);
+        }
+
         void NextQuestion()
         {
             QuestionIndex++;
@@ -276,7 +285,8 @@ namespace KPSSGeography.Quiz
 
             if (!PersistentMarks)
             {
-                map.ClearStates();
+                // Sınır komşusu: bilinen iller bölüm boyunca boyalı kalır (sınavda hariç), ülkeler her soruda temizlenir
+                if (Mode != QuizMode.BorderCountry || IsExam) map.ClearStates();
                 if (Mode != QuizMode.FeatureChoice) features.ClearStates();
             }
 
@@ -312,7 +322,8 @@ namespace KPSSGeography.Quiz
         void Record(IMapTarget target, Question q, bool correct)
         {
             if (target == null) return;
-            string label = q.Type == AnswerType.Choice && q.Focus == target && !string.IsNullOrEmpty(q.AnswerLabel)
+            bool withAnswer = (q.Type == AnswerType.Choice && q.Focus == target) || q.MarkOnCorrect == target;
+            string label = withAnswer && !string.IsNullOrEmpty(q.AnswerLabel)
                 ? $"{target.DisplayName}: {q.AnswerLabel}"
                 : target.DisplayName;
             history.RemoveAll(h => ReferenceEquals(h.Target, target));
@@ -438,14 +449,22 @@ namespace KPSSGeography.Quiz
             Score += points;
 
             Current.Focus?.SetFocused(false);
-            if (clicked != null) solved.Add(clicked);
+            // Sınır komşusu sorularında aynı ülke birçok ilin cevabıdır: ülke kilitlenmez
+            if (clicked != null && Mode != QuizMode.BorderCountry) solved.Add(clicked);
             IMapTarget mark = clicked ?? Current.Focus;
             if (mark != null)
             {
                 mark.SetState(ProvinceState.Correct);
                 mark.PlayCorrect();
                 Sparkle(mark);
-                Record(mark, Current, true);
+                if (Current.MarkOnCorrect == null) Record(mark, Current, true);
+            }
+            if (Current.MarkOnCorrect != null)
+            {
+                // Sorulan il haritada belirir: oyuncu ilin hangi ülkeyle nasıl sınırı olduğunu görür
+                Current.MarkOnCorrect.SetState(ProvinceState.Correct);
+                Current.MarkOnCorrect.PlayCorrect();
+                Record(Current.MarkOnCorrect, Current, true);
             }
             sfx.Play(Sfx.Correct);
 
@@ -468,6 +487,7 @@ namespace KPSSGeography.Quiz
             {
                 // Haritadan seçmeli soruda doğru yer gösterilmez (ipucu olmasın); sadece "Haritayı incele"de görünür.
                 if (Current.Reveal != null) Record(Current.Reveal, Current, false);
+                else if (Current.MarkOnCorrect != null) Record(Current.MarkOnCorrect, Current, false);
             }
             else if (Current.Reveal != null)
             {
