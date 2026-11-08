@@ -22,6 +22,8 @@ namespace KPSSGeography.Quiz
         static readonly Rect ChoiceViewport = new Rect(0.03f, 0.2f, 0.94f, 0.58f);
         static readonly Rect McqViewport = new Rect(0.03f, 0.3f, 0.94f, 0.44f);
         static readonly Rect NumberedViewport = new Rect(0.03f, 0.17f, 0.94f, 0.58f);
+        /// <summary>Öncüllü (maddeli) sorular: solda soru kâğıdı, harita sağda.</summary>
+        static readonly Rect BodyViewport = new Rect(0.36f, 0.17f, 0.62f, 0.58f);
 
         public event Action GameStarted;
         public event Action<int> CountdownTick;
@@ -185,11 +187,12 @@ namespace KPSSGeography.Quiz
                 foreach (var region in Level.regions) rings.AddRange(map.GetRegionRings(region));
                 effects?.DrawOutline(rings, new Color(1f, 0.72f, 0.1f, 1f), regionAll);
             }
-            Rect viewport = Mode == QuizMode.Mcq ? McqViewport : Mode == QuizMode.Numbered ? NumberedViewport
+            questions = builder.Build(Level);
+            bool hasBody = questions.Exists(q => !string.IsNullOrEmpty(q.Body));
+            Rect viewport = hasBody ? BodyViewport : Mode == QuizMode.Mcq ? McqViewport : Mode == QuizMode.Numbered ? NumberedViewport
                 : UsesChoices ? ChoiceViewport : FindViewport;
             cameraController.FocusOn(focus, viewport);
 
-            questions = builder.Build(Level);
             if (questions.Count == 0) Debug.LogWarning($"[KPSS] '{Level.id}' bölümü için soru üretilemedi.");
 
             TimeLimit = QuestionTime;

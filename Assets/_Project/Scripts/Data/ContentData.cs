@@ -85,6 +85,8 @@ namespace KPSSGeography.Data
         public string highlight;
         public string[] markers;
         public int[] answerMarkers;
+        /// <summary>Sorudan önce okunan metin: giriş cümlesi ve madde işaretli bilgiler (\n ile ayrılır). Boş olabilir.</summary>
+        public string body;
     }
 
     [Serializable]

@@ -246,7 +246,8 @@ namespace KPSSGeography.Quiz
             {
                 var q = new Question
                 {
-                    Prompt = "HARİTADA NUMARALANDIRILAN YERLER", Title = m.text, LongTitle = true, Type = AnswerType.Choice,
+                    Prompt = string.IsNullOrEmpty(m.body) ? "HARİTADA NUMARALANDIRILAN YERLER" : "KPSS SORUSU",
+                    Title = m.text, Body = m.body, LongTitle = true, Type = AnswerType.Choice,
                     Choices = m.options.Select((o, i) => $"{Letters[i]})  {o}").ToArray(), CorrectChoice = m.answer,
                     Info = m.explanation, AnswerLabel = $"{Letters[m.answer]}) {m.options[m.answer]}"
                 };

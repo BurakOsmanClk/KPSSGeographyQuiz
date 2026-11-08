@@ -684,6 +684,214 @@
    "answerMarkers": [
     1
    ]
+  },
+  {
+   "id": "b1",
+   "set": "oncullu",
+   "text": "Bu faktörlerin neden olduğu doğal afet, numaralandırılan illerin hangisinde daha sık yaşanır?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 2,
+   "explanation": "Çığ; kar yağışının fazla, yamaçların dik olduğu Hakkari, Van, Bitlis ve Erzurum gibi Doğu Anadolu illerinde sık görülür.",
+   "highlight": "",
+   "markers": [
+    "plate:35",
+    "plate:42",
+    "plate:30",
+    "plate:7",
+    "plate:22"
+   ],
+   "answerMarkers": [
+    2
+   ],
+   "body": "Bir doğal afetin oluşmasında etkili olan bazı faktörler şunlardır:\n•  Kar örtüsünün kalın ve uzun süreli olması\n•  Yamaç eğiminin fazla olması\n•  İlkbaharda sıcaklığın birden yükselmesi\n•  Yamaçlarda ormanın az olması"
+  },
+  {
+   "id": "b2",
+   "set": "oncullu",
+   "text": "Bu bilgiler numaralandırılan ovalardan hangisine aittir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 2,
+   "explanation": "Bafra Ovası, Kızılırmak'ın Karadeniz'e döküldüğü yerde oluşmuş bir delta ovasıdır. Konya göl tabanı; Muş, Erzincan ve Eskişehir tektonik ovalardır.",
+   "highlight": "",
+   "markers": [
+    "feature:konya",
+    "feature:mus",
+    "feature:bafra",
+    "feature:erzincan",
+    "feature:eskisehir"
+   ],
+   "answerMarkers": [
+    2
+   ],
+   "body": "Numaralandırılan ovalardan biriyle ilgili bilgiler:\n•  Akarsuyun taşıdığı alüvyonların denize döküldüğü yerde birikmesiyle oluşmuştur\n•  Kıyının sığ, gelgit etkisinin zayıf olması oluşumunu kolaylaştırmıştır\n•  Verimli toprakları nedeniyle yoğun tarım yapılır"
+  },
+  {
+   "id": "b3",
+   "set": "oncullu",
+   "text": "Bu akarsu, numaralandırılanlardan hangisidir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 3,
+   "explanation": "Çoruh, Erzurum'dan doğar; Gürcistan'da (Batum) Karadeniz'e dökülür. Hızlı akışı nedeniyle üzerinde çok sayıda baraj vardır.",
+   "highlight": "",
+   "markers": [
+    "feature:kizilirmak",
+    "feature:sakarya",
+    "feature:seyhan",
+    "feature:coruh",
+    "feature:gediz"
+   ],
+   "answerMarkers": [
+    3
+   ],
+   "body": "Bir akarsuyla ilgili bilgiler:\n•  Doğu Karadeniz'in en hızlı akan akarsularındandır\n•  Üzerinde Deriner ve Yusufeli barajları bulunur\n•  Sınırımızı geçerek Batum yakınında Karadeniz'e dökülür"
+  },
+  {
+   "id": "b4",
+   "set": "oncullu",
+   "text": "Bu dağ, numaralandırılanlardan hangisidir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 1,
+   "explanation": "Bozdağlar, Ege'de Gediz ve Küçük Menderes grabenleri arasında yükselen bir horsttur. Küre, Bolkar ve Munzur kıvrım dağlarıdır.",
+   "highlight": "",
+   "markers": [
+    "feature:kure",
+    "feature:bozdaglar",
+    "feature:bolkar",
+    "feature:palandoken",
+    "feature:munzur"
+   ],
+   "answerMarkers": [
+    1
+   ],
+   "body": "Bir dağla ilgili bilgiler:\n•  Kırılma sonucu yükselmiş bir horsttur\n•  Doğu–batı doğrultusunda uzanır\n•  Kuzeyinde Gediz, güneyinde Küçük Menderes grabenleri yer alır"
+  },
+  {
+   "id": "b5",
+   "set": "oncullu",
+   "text": "Bu plato, numaralandırılanlardan hangisidir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 2,
+   "explanation": "Erzurum-Kars Platosu lav örtülü bir platodur; çayırları sayesinde büyükbaş hayvancılık yaygındır. Taşeli karstik, Bozok ve Gaziantep tabaka, Çatalca-Kocaeli aşınım platosudur.",
+   "highlight": "",
+   "markers": [
+    "feature:taseli",
+    "feature:bozok",
+    "feature:erzurum-kars",
+    "feature:gaziantep",
+    "feature:catalca-kocaeli"
+   ],
+   "answerMarkers": [
+    2
+   ],
+   "body": "Bir platoyla ilgili bilgiler:\n•  Volkanik faaliyetlerle çıkan lavların geniş alanları örtmesiyle oluşmuştur\n•  Yaz yağışları sayesinde gür çayırlar yetişir\n•  Büyükbaş ve mera hayvancılığı yaygındır"
+  },
+  {
+   "id": "b6",
+   "set": "oncullu",
+   "text": "Bu özellikler numaralandırılan illerden hangisine aittir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 2,
+   "explanation": "Akdeniz iklimi: yazlar sıcak ve kurak, kışlar ılık ve yağışlı; doğal bitki örtüsü makidir. Muz, Antalya (Alanya, Gazipaşa) ve Mersin (Anamur) kıyılarında yetişir.",
+   "highlight": "",
+   "markers": [
+    "plate:25",
+    "plate:52",
+    "plate:7",
+    "plate:42",
+    "plate:36"
+   ],
+   "answerMarkers": [
+    2
+   ],
+   "body": "Bir ilin iklim ve bitki örtüsü özellikleri:\n•  Yazlar sıcak ve kurak, kışlar ılık ve yağışlıdır\n•  Doğal bitki örtüsü makidir\n•  Turunçgil ve muz yetiştirilir"
+  },
+  {
+   "id": "b7",
+   "set": "oncullu",
+   "text": "Buna göre numaralandırılan illerden hangisinin turizm özelliğine değinilmemiştir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 1,
+   "explanation": "Edirne (Selimiye), Çorum (Hattuşa), Nevşehir (Göreme) ve Şanlıurfa (Göbeklitepe) anlatılmıştır. Bursa'ya (Cumalıkızık, Uludağ) değinilmemiştir.",
+   "highlight": "",
+   "markers": [
+    "plate:22",
+    "plate:16",
+    "plate:19",
+    "plate:50",
+    "plate:63"
+   ],
+   "answerMarkers": [
+    1
+   ],
+   "body": "Numaralandırılan illerden dördünün turizm özellikleri:\n•  Peribacaları ve kaya oyma kiliseleriyle UNESCO Dünya Mirası Listesi'ndedir\n•  Mimar Sinan'ın ustalık eseri Selimiye Camii bu ildedir\n•  Bilinen en eski tapınak alanlarından Göbeklitepe bu ildedir\n•  Hititlerin başkenti Hattuşa bu ilin sınırları içindedir"
+  },
+  {
+   "id": "b8",
+   "set": "oncullu",
+   "text": "Bu madenin çıkarıldığı illerden biri, numaralandırılanlardan hangisidir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 2,
+   "explanation": "Bor; Balıkesir, Kütahya, Bursa ve Eskişehir'de çıkarılır. Zonguldak taşkömürü, Batman petrol, Elazığ krom, Muğla boksit ve mermerle bilinir.",
+   "highlight": "",
+   "markers": [
+    "plate:67",
+    "plate:72",
+    "plate:26",
+    "plate:23",
+    "plate:48"
+   ],
+   "answerMarkers": [
+    2
+   ],
+   "body": "Bir madenle ilgili bilgiler:\n•  Dünya rezervlerinin büyük bölümü Türkiye'dedir\n•  Cam, seramik, deterjan ve roket yakıtı yapımında kullanılır\n•  Devlet eliyle işletilen stratejik bir madendir"
   }
  ]
 }
