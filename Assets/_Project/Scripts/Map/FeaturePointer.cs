@@ -11,6 +11,9 @@ namespace KPSSGeography.Map
         public event Action<FeatureView> FeatureClicked;
         public Func<bool> CanInteract;
 
+        /// <summary>Üzerine gelince vurgulanmayacak hedefler (ör. bu turda zaten doğru bilinenler).</summary>
+        public Func<FeatureView, bool> HoverBlocked;
+
         FeatureLayer layer;
         Camera cam;
         FeatureView hovered;
@@ -37,10 +40,11 @@ namespace KPSSGeography.Map
                 hit = layer.FindAt(local, unitsPerPixel);
             }
 
-            if (hit != hovered)
+            FeatureView hoverTarget = hit != null && HoverBlocked != null && HoverBlocked(hit) ? null : hit;
+            if (hoverTarget != hovered)
             {
                 if (hovered != null) hovered.SetHovered(false);
-                hovered = hit;
+                hovered = hoverTarget;
                 if (hovered != null) hovered.SetHovered(true);
             }
 

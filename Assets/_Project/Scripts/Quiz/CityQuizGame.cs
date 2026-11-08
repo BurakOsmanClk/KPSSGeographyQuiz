@@ -46,6 +46,8 @@ namespace KPSSGeography.Quiz
 
         List<Question> questions = new List<Question>();
         readonly HashSet<IMapTarget> found = new HashSet<IMapTarget>();
+        /// <summary>Bu turda doğru bilinen hedefler (il, akarsu, dağ...). Bölüm boyunca tekrar tıklanamaz.</summary>
+        readonly HashSet<IMapTarget> solved = new HashSet<IMapTarget>();
         Coroutine flow;
         bool continueUsed;
 
@@ -97,6 +99,9 @@ namespace KPSSGeography.Quiz
         public bool AcceptsChoiceInput => Answering && Current.Type == AnswerType.Choice;
         public bool IsRunning => State != QuizState.Idle && State != QuizState.Finished;
 
+        /// <summary>Hedef bu turda zaten doğru bilindi mi? (Üzerine gelince vurgulanmaz, tıklanınca yok sayılır.)</summary>
+        public bool IsSolved(IMapTarget target) => target != null && solved.Contains(target);
+
         /// <summary>Doğru bilinen hedefler bölüm boyunca boyalı kalsın mı? ("haritayı doldurma" modları)</summary>
         bool PersistentMarks => !IsExam && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.Feature || Mode == QuizMode.RegionAll);
 
@@ -136,6 +141,7 @@ namespace KPSSGeography.Quiz
             Current?.Focus?.SetFocused(false);
             Current = null;
             State = QuizState.Idle;
+            solved.Clear();
             map.ResetAll();
             features.ShowDefault();
             cameraController.SetAttractMode();
@@ -188,6 +194,7 @@ namespace KPSSGeography.Quiz
             TimeRemaining = TimeLimit;
             continueUsed = false;
             found.Clear();
+            solved.Clear();
 
             State = QuizState.Countdown;
             GameStarted?.Invoke();
@@ -327,6 +334,10 @@ namespace KPSSGeography.Quiz
 
         void SubmitTarget(IMapTarget clicked)
         {
+            // Doğru bilinen yer tekrar tıklanamaz: ne puan ne hata, hiçbir şey olmaz.
+            // Tek istisna: aynı yer bu sorunun da cevabıysa (konu/komşu setleri çakışabilir), yoksa soru cevapsız kalırdı.
+            if (solved.Contains(clicked) && !(Current.Accepts(clicked) && !found.Contains(clicked))) return;
+
             if (Current.RequireAll)
             {
                 SubmitPartial(clicked);
@@ -344,6 +355,7 @@ namespace KPSSGeography.Quiz
             if (Current.Accepts(clicked))
             {
                 found.Add(clicked);
+                solved.Add(clicked);
                 Streak++;
                 BestStreak = Mathf.Max(BestStreak, Streak);
                 float multiplier = StreakMultiplier(Streak);
@@ -415,6 +427,7 @@ namespace KPSSGeography.Quiz
             Score += points;
 
             Current.Focus?.SetFocused(false);
+            if (clicked != null) solved.Add(clicked);
             IMapTarget mark = clicked ?? Current.Focus;
             if (mark != null)
             {

@@ -91,11 +91,13 @@ namespace KPSSGeography.Core
             pointer.Initialize(map, cam);
             pointer.CanInteract = () => game.AcceptsMapInput;
             pointer.ProvinceClicked += game.SubmitProvince;
+            pointer.HoverBlocked = game.IsSolved;
 
             var featurePointer = features.gameObject.AddComponent<FeaturePointer>();
             featurePointer.Initialize(features, cam);
             featurePointer.CanInteract = () => game.AcceptsFeatureInput;
             featurePointer.FeatureClicked += game.SubmitFeature;
+            featurePointer.HoverBlocked = game.IsSolved;
 
             // Arayüz
             var canvas = CreateCanvas(out RectTransform uiRoot);

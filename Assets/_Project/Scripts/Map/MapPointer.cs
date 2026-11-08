@@ -13,6 +13,9 @@ namespace KPSSGeography.Map
         /// <summary>Etkileşime izin verilip verilmediğini söyleyen koşul (ör. sadece soru aktifken).</summary>
         public Func<bool> CanInteract;
 
+        /// <summary>Üzerine gelince vurgulanmayacak hedefler (ör. bu turda zaten doğru bilinenler).</summary>
+        public Func<ProvinceView, bool> HoverBlocked;
+
         TurkeyMap map;
         Camera cam;
         ProvinceView hovered;
@@ -42,10 +45,11 @@ namespace KPSSGeography.Map
                 hit = map.FindAt(local);
             }
 
-            if (hit != hovered)
+            ProvinceView hoverTarget = hit != null && HoverBlocked != null && HoverBlocked(hit) ? null : hit;
+            if (hoverTarget != hovered)
             {
                 if (hovered != null) hovered.SetHovered(false);
-                hovered = hit;
+                hovered = hoverTarget;
                 if (hovered != null) hovered.SetHovered(true);
             }
 
