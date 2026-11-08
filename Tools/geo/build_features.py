@@ -438,6 +438,16 @@ def main():
             "info": gate["info"], "label": [r4(x), r4(y)], "lines": [], "vertices": [], "triangles": [], "outline": [],
         })
 
+    # ---------- Madenler: yataklar (site) ve fabrikalar (factory), nokta ----------
+    # subtype = "<maden>-<tür>" (ör. demir-site): eğitim ekranı alt başlıkları ve oyun bunu kullanır; mineral ayrıca yazılır
+    for m in manual.get("mines", []):
+        x, y = proj(*m["point"])
+        features.append({
+            "id": m["id"], "name": m["name"], "category": "mine", "kind": "point",
+            "subtype": f"{m['mineral']}-{m['kind']}", "mineral": m["mineral"],
+            "info": m["info"], "label": [r4(x), r4(y)], "lines": [], "vertices": [], "triangles": [], "outline": [],
+        })
+
     # ---------- Fay hatları ----------
     for fl in manual["faults"]:
         pts = chaikin([tuple(p) for p in fl["line"]], closed=False)

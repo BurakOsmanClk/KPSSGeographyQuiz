@@ -3929,5 +3929,92 @@
     37.0
    ]
   }
+ ],
+ "_aciklama_madenler": "Maden yatakları ve madeni işleyen fabrikalar (nokta, [boylam, enlem]). kind: site = madenin çıkarıldığı yer, factory = madeni işleyen tesis. mineral: maden kimliği (demir, bakır...). Yalnızca KPSS/MEB kaynaklarında öne çıkan yerler; konumu belirsiz olanlar eklenmez.",
+ "mines": [
+  {
+   "id": "demir-divrigi",
+   "name": "Divriği",
+   "mineral": "demir",
+   "kind": "site",
+   "province": "Sivas",
+   "point": [
+    38.11,
+    39.37
+   ],
+   "info": "Sivas. Türkiye'nin en önemli demir yatağı. Çıkarılan cevher demir yoluyla Karabük ve İskenderun demir-çelik fabrikalarına taşınır."
+  },
+  {
+   "id": "demir-hekimhan",
+   "name": "Hekimhan–Hasançelebi",
+   "mineral": "demir",
+   "kind": "site",
+   "province": "Malatya",
+   "point": [
+    37.88,
+    38.9
+   ],
+   "info": "Malatya. Divriği'den sonra gelen en önemli demir sahası; Hasançelebi'nin rezervi büyük ama tenörü düşük olduğundan cevher zenginleştirilerek kullanılır."
+  },
+  {
+   "id": "demir-avnik",
+   "name": "Avnik",
+   "mineral": "demir",
+   "kind": "site",
+   "province": "Bingöl",
+   "point": [
+    40.45,
+    38.8
+   ],
+   "info": "Bingöl (Genç). Doğu Anadolu'daki demir yataklarından."
+  },
+  {
+   "id": "demir-yahyali",
+   "name": "Yahyalı",
+   "mineral": "demir",
+   "kind": "site",
+   "province": "Kayseri",
+   "point": [
+    35.36,
+    38.1
+   ],
+   "info": "Kayseri. İç Anadolu'daki demir yataklarından; ilçe kurşun-çinko yataklarıyla da bilinir."
+  },
+  {
+   "id": "demir-karabuk",
+   "name": "Karabük Demir-Çelik",
+   "mineral": "demir",
+   "kind": "factory",
+   "province": "Karabük",
+   "point": [
+    32.62,
+    41.2
+   ],
+   "info": "KARDEMİR (1939). Türkiye'nin ilk entegre demir-çelik fabrikası. Zonguldak taşkömürüne yakınlık ve savaş yıllarında kıyıdan uzak, güvenli bir iç konum etkili oldu."
+  },
+  {
+   "id": "demir-eregli",
+   "name": "Ereğli Demir-Çelik",
+   "mineral": "demir",
+   "kind": "factory",
+   "province": "Zonguldak",
+   "point": [
+    31.42,
+    41.28
+   ],
+   "info": "ERDEMİR (1965), Zonguldak Ereğli. Taşkömürüne yakınlığı ve limanı sayesinde hem enerjiye hem deniz yoluna erişir; yassı çelik üretir."
+  },
+  {
+   "id": "demir-iskenderun",
+   "name": "İskenderun Demir-Çelik",
+   "mineral": "demir",
+   "kind": "factory",
+   "province": "Hatay",
+   "point": [
+    36.23,
+    36.77
+   ],
+   "info": "İSDEMİR (1975), Hatay. Limana kurulmuştur: Divriği ve Hekimhan cevheri demir yoluyla gelir, kömür büyük ölçüde deniz yoluyla getirilir."
+  }
  ]
 }

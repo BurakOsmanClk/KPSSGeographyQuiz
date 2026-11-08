@@ -4,6 +4,12 @@ Sürüm numarası Unity'de **Player Settings > Version** alanındadır (`Project
 giriş ekranının sağ altında ile **Ayarlar** penceresinde görünür (`Core/AppInfo.cs`).
 Biçim: `ANA.KÜÇÜK.YAMA` — yeni özellik = KÜÇÜK +1, hata düzeltmesi = YAMA +1, mağaza yayını = 1.0.0.
 
+
+## Yayınlanmamış
+- **MADENLER sekmesi:** Madenler, Ekonomi'den ayrı sekmeye taşındı.
+- **Demir: Yataklar ve Fabrikalar** bölümü: ders atlaslarındaki gibi demir yatakları (Divriği, Hekimhan–Hasançelebi, Avnik,
+  Yahyalı) ve demir-çelik fabrikaları (Karabük, Ereğli, İskenderun) haritada ikonlarla; "haritada bul" soruları ve bilgi notları.
+  EĞİTİM ekranına "Demir: Yataklar ve Fabrikalar" konusu eklendi.
 ## 0.4.0 — Prototip (şu anki sürüm)
 - **Sınav modu:** bölüm seçim ekranından açılıp kapanır. Açılınca renkli, isimli harita "buharlaşarak" soluk gri, boş KPSS
   haritasına dönüşür (sinema şeritleri, yükselen buhar, kamera yaklaşması, başlık kartı).

@@ -66,7 +66,12 @@ namespace KPSSGeography.Quiz
         /// </summary>
         public bool HidesProvinces => Level != null && (Mode == QuizMode.Feature || Mode == QuizMode.FeatureChoice) &&
                                       Level.category != "unesco" && Level.category != "park" &&
-                                      Level.category != "country" && Level.category != "gate";
+                                      Level.category != "country" && Level.category != "gate" && Level.category != Data.GeoFeature.Mine;
+
+        /// <summary>Maden bölümlerinde yalnızca o madenin yatak ve fabrikaları (Level.set = maden kimliği).</summary>
+        System.Func<FeatureView, bool> MineralFilter =>
+            Level != null && Level.category == Data.GeoFeature.Mine && !string.IsNullOrEmpty(Level.set)
+                ? f => f.Data.mineral == Level.set : (System.Func<FeatureView, bool>)null;
 
         /// <summary>Komşu ülke bölümünde haritadaki ülke adları gizlenir (cevabı ele vermesin).</summary>
         public bool HidesCountryNames => Level != null && (Level.category == "country" || Mode == QuizMode.BorderCountry);
@@ -227,7 +232,7 @@ namespace KPSSGeography.Quiz
                 {
                     map.SetFocus(_ => false);
                     map.SetBordersHidden(HidesProvinces);
-                    features.ShowCategory(Level.category);
+                    features.ShowCategory(Level.category, true, MineralFilter);
                     return Level.category == "country" ? CountriesView() : map.Bounds;
                 }
                 case QuizMode.BorderCountry:

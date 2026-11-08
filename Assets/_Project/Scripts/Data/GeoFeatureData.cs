@@ -26,6 +26,8 @@ namespace KPSSGeography.Data
         public const string Country = "country";
         /// <summary>Kara hudut kapısı (nokta). subtype = açıldığı ülke.</summary>
         public const string Gate = "gate";
+        /// <summary>Maden yatağı ya da madeni işleyen fabrika (nokta). subtype = "&lt;maden&gt;-site" | "&lt;maden&gt;-factory".</summary>
+        public const string Mine = "mine";
 
         public string id;
         public string name;
@@ -35,6 +37,9 @@ namespace KPSSGeography.Data
         public string kind;
         /// <summary>Alt tür: göl tipi, kıyı şekli türü (strait/gulf/peninsula/island/cape), unesco/park vb.</summary>
         public string subtype;
+        /// <summary>Maden öğelerinde maden kimliği (demir, bakır...).</summary>
+        public string mineral;
+        public bool IsFactory => subtype != null && subtype.EndsWith("-factory");
         /// <summary>KPSS bilgi notu (cevaptan sonra gösterilir).</summary>
         public string info;
         public float[] label;
@@ -102,7 +107,15 @@ namespace KPSSGeography.Data
             GeoFeature.Fault => "FAY HATTINI",
             GeoFeature.Country => "ÜLKEYİ",
             GeoFeature.Gate => "SINIR KAPISINI",
+            GeoFeature.Mine => "MADEN YERİNİ",
             _ => "YER ŞEKLİNİ"
+        };
+
+        /// <summary>Maden kimliğinin Türkçe adı (soru metinleri için).</summary>
+        public static string MineralName(string mineral) => mineral switch
+        {
+            "demir" => "Demir",
+            _ => string.IsNullOrEmpty(mineral) ? "Maden" : char.ToUpper(mineral[0]) + mineral.Substring(1)
         };
     }
 }

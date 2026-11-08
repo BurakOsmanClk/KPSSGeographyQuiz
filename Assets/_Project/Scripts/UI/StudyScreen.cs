@@ -96,6 +96,7 @@ namespace KPSSGeography.UI
             Add("UNESCO Mirasları", GeoFeature.Unesco);
             Add("Milli Parklar", GeoFeature.Park);
             Add("Komşu Ülkeler", GeoFeature.Country);
+            Add("Demir: Yataklar ve Fabrikalar", GeoFeature.Mine, "demir-site", "demir-factory");
             Add("Sınır Kapıları", GeoFeature.Gate, "Yunanistan", "Bulgaristan", "Gürcistan", "Ermenistan", "Nahçıvan", "İran", "Irak", "Suriye");
         }
 
@@ -111,6 +112,8 @@ namespace KPSSGeography.UI
         {
             "Kıvrım" => "Kıvrım Dağları",
             "Kırık (horst)" => "Kırık Dağlar (Horst)",
+            "demir-site" => "Demir Yatakları",
+            "demir-factory" => "Demir-Çelik Fabrikaları",
             "strait" => "Boğazlar",
             "gulf" => "Körfezler",
             "peninsula" => "Yarımadalar",
@@ -303,7 +306,8 @@ namespace KPSSGeography.UI
         void ApplyFeatures(Topic t)
         {
             string cat = t.category;
-            bool keepProvinces = cat == GeoFeature.Unesco || cat == GeoFeature.Park || cat == GeoFeature.Country || cat == GeoFeature.Gate;
+            bool keepProvinces = cat == GeoFeature.Unesco || cat == GeoFeature.Park || cat == GeoFeature.Country || cat == GeoFeature.Gate ||
+                                 cat == GeoFeature.Mine;
             // Oyundaki yer şekli haritalarıyla aynı görünüm: iller soluk, yer şekli bölümlerinde il sınırları gizli
             map.SetFocus(_ => false);
             map.SetBordersHidden(!keepProvinces);
@@ -389,6 +393,8 @@ namespace KPSSGeography.UI
             string type = string.IsNullOrEmpty(f.Data.subtype) || f.Category == GeoFeature.Dam || f.Category == GeoFeature.Country
                 ? "" : SubtypeTitle(f.Data.subtype);
             if (f.Category == GeoFeature.Gate) type = f.Data.subtype + " sınırı";
+            if (f.Category == GeoFeature.Mine)
+                type = f.Data.IsFactory ? "Demir-çelik fabrikası" : GeoFeatureDatabase.MineralName(f.Data.mineral) + " yatağı";
             ShowInfo(f.DisplayName + (type.Length > 0 ? $"  •  {type}" : ""),
                 string.IsNullOrEmpty(f.Data.info) ? "Bu yer için bilgi notu yok." : f.Data.info);
         }
