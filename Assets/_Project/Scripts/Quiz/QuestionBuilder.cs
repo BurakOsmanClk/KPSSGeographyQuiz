@@ -212,13 +212,20 @@ namespace KPSSGeography.Quiz
         List<Question> Mcq(LevelDefinition level)
         {
             string[] letters = { "A", "B", "C", "D", "E" };
-            return Take(mcq.questions.Where(m => m.set == level.set), level.questionCount).Select(m =>
+            // set "*" = bütün soru bankası (genel deneme)
+            var pool = level.set == "*" ? mcq.questions : mcq.questions.Where(m => m.set == level.set);
+            return Take(pool, level.questionCount).Select(m =>
             {
+                // Şıklar karıştırılır (cevap hep aynı harfte olmasın); sayısal sıralı şıklar (yıl, km...) sırasını korur
+                var order = Enumerable.Range(0, m.options.Length).ToList();
+                if (!m.options.All(o => o.Length > 0 && char.IsDigit(o[0]))) order = Shuffled(order);
+                var options = order.Select(i => m.options[i]).ToArray();
+                int answer = order.IndexOf(m.answer);
                 var q = new Question
                 {
                     Prompt = "KPSS SORUSU", Title = m.text, LongTitle = true, Type = AnswerType.Choice,
-                    Choices = m.options.Select((o, i) => $"{letters[i]})  {o}").ToArray(), CorrectChoice = m.answer,
-                    Info = m.explanation, AnswerLabel = $"{letters[m.answer]}) {m.options[m.answer]}"
+                    Choices = options.Select((o, i) => $"{letters[i]})  {o}").ToArray(), CorrectChoice = answer,
+                    Info = m.explanation, AnswerLabel = $"{letters[answer]}) {options[answer]}"
                 };
                 if (!string.IsNullOrEmpty(m.highlight))
                 {

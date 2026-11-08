@@ -5,6 +5,10 @@ giriş ekranının sağ altında ile **Ayarlar** penceresinde görünür (`Core/
 Biçim: `ANA.KÜÇÜK.YAMA` — yeni özellik = KÜÇÜK +1, hata düzeltmesi = YAMA +1, mağaza yayını = 1.0.0.
 
 ## Yayınlanmamış (0.5.0 adayı)
+- **A–E soru bankası 80 → 151 soru**, KPSS müfredat sırasıyla 9 konu bölümü + **Genel Deneme** (bütün konulardan 20 soru):
+  Konum (18), Yer Şekilleri (22), Sular ve Göller (17), İklim ve Bitki Örtüsü (19), Tarım ve Hayvancılık (16), Madenler ve Enerji (16),
+  Sanayi–Ulaşım–Ticaret–Turizm (16, yeni), Nüfus ve Yerleşme (15), Bölgesel Projeler ve Koruma (12). Hepsi KPSS SORULARI sekmesinde;
+  "KPSS Soruları I/II" kaldırıldı. Şıklar her seferinde karıştırılır.
 - Düzeltme: Free Aspect / geniş ekranlarda bölüm sekmeleri ile kartların üst üste binmesi (arayüz ölçekleme modu Expand).
 - **Yeni KONUM sekmesi** (3 bölüm): **Uç Noktalar ve Güneş** (en doğu/batı/kuzey/güney il, güneşin ilk doğduğu/en son battığı il,
   gölge boyu, gündüz süresi), **Enlem ve Boylam** (paralel/meridyenin geçtiği ili bul; iller il sınırlarından hesaplanır),

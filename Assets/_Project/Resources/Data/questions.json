@@ -2,7 +2,7 @@
  "questions": [
   {
    "id": "q1",
-   "set": "1",
+   "set": "sular",
    "text": "Tamamı Türkiye topraklarında doğup denize dökülen en uzun akarsu hangisidir?",
    "options": [
     "Fırat",
@@ -17,7 +17,7 @@
   },
   {
    "id": "q2",
-   "set": "1",
+   "set": "sular",
    "text": "Van Gölü oluşumu bakımından hangi göl türüne girer?",
    "options": [
     "Tektonik",
@@ -32,7 +32,7 @@
   },
   {
    "id": "q3",
-   "set": "1",
+   "set": "sular",
    "text": "Aşağıdaki göllerden hangisi heyelan set gölüdür?",
    "options": [
     "Tuz Gölü",
@@ -47,7 +47,7 @@
   },
   {
    "id": "q4",
-   "set": "1",
+   "set": "sular",
    "text": "Aşağıdaki göllerden hangisi alüvyal set gölüdür?",
    "options": [
     "Bafa Gölü",
@@ -62,7 +62,7 @@
   },
   {
    "id": "q5",
-   "set": "1",
+   "set": "sular",
    "text": "Aşağıdaki göllerden hangisi karstik kökenlidir?",
    "options": [
     "İznik Gölü",
@@ -77,7 +77,7 @@
   },
   {
    "id": "q6",
-   "set": "1",
+   "set": "yer",
    "text": "Türkiye'nin en yüksek dağı hangisidir?",
    "options": [
     "Erciyes Dağı",
@@ -92,7 +92,7 @@
   },
   {
    "id": "q7",
-   "set": "1",
+   "set": "sular",
    "text": "Çukurova'yı oluşturan akarsular hangileridir?",
    "options": [
     "Gediz – Bakırçay",
@@ -107,7 +107,7 @@
   },
   {
    "id": "q8",
-   "set": "1",
+   "set": "yer",
    "text": "Aşağıdaki ovalardan hangisi delta ovası değildir?",
    "options": [
     "Bafra Ovası",
@@ -122,7 +122,7 @@
   },
   {
    "id": "q9",
-   "set": "1",
+   "set": "yer",
    "text": "Aşağıdaki ovalardan hangisi Ege'deki graben ovalarından biri değildir?",
    "options": [
     "Gediz Ovası",
@@ -137,7 +137,7 @@
   },
   {
    "id": "q10",
-   "set": "1",
+   "set": "yer",
    "text": "Kapadokya'daki peri bacalarını oluşturan tüf örtüleri hangi dağların volkanik faaliyetleriyle oluşmuştur?",
    "options": [
     "Ağrı – Süphan – Tendürek",
@@ -152,7 +152,7 @@
   },
   {
    "id": "q11",
-   "set": "1",
+   "set": "konum",
    "text": "Türkiye'nin en kuzey ucu hangisidir?",
    "options": [
     "Anamur Burnu",
@@ -167,7 +167,7 @@
   },
   {
    "id": "q12",
-   "set": "1",
+   "set": "konum",
    "text": "Anadolu'nun (Asya kıtasının) en batı ucu hangisidir?",
    "options": [
     "Baba Burnu",
@@ -182,7 +182,7 @@
   },
   {
    "id": "q13",
-   "set": "1",
+   "set": "sular",
    "text": "Atatürk Barajı hangi akarsu üzerindedir?",
    "options": [
     "Dicle",
@@ -197,7 +197,7 @@
   },
   {
    "id": "q14",
-   "set": "1",
+   "set": "sular",
    "text": "Ilısu Barajı hangi akarsu üzerine kurulmuştur?",
    "options": [
     "Fırat",
@@ -212,7 +212,7 @@
   },
   {
    "id": "q15",
-   "set": "1",
+   "set": "yer",
    "text": "Aşağıdaki illerden hangisi Kuzey Anadolu Fay Hattı üzerinde değildir?",
    "options": [
     "Erzincan",
@@ -227,7 +227,7 @@
   },
   {
    "id": "q16",
-   "set": "1",
+   "set": "yer",
    "text": "6 Şubat 2023'te yaşanan büyük depremlerin merkez üssü olan il hangisidir?",
    "options": [
     "Kahramanmaraş",
@@ -242,7 +242,7 @@
   },
   {
    "id": "q17",
-   "set": "2",
+   "set": "iklim",
    "text": "Akdeniz iklimine özgü doğal bitki örtüsü hangisidir?",
    "options": [
     "Bozkır",
@@ -257,7 +257,7 @@
   },
   {
    "id": "q18",
-   "set": "2",
+   "set": "iklim",
    "text": "İç Anadolu'da yaygın olan doğal bitki örtüsü hangisidir?",
    "options": [
     "Orman",
@@ -272,7 +272,7 @@
   },
   {
    "id": "q19",
-   "set": "2",
+   "set": "iklim",
    "text": "Her mevsim yağışlı, yazları serin ve kışları ılık geçen iklim tipi hangisidir?",
    "options": [
     "Akdeniz iklimi",
@@ -287,7 +287,7 @@
   },
   {
    "id": "q20",
-   "set": "2",
+   "set": "tarim",
    "text": "Fındık üretiminde ilk sırada yer alan il hangisidir?",
    "options": [
     "Rize",
@@ -302,7 +302,7 @@
   },
   {
    "id": "q21",
-   "set": "2",
+   "set": "tarim",
    "text": "Türkiye'de çay üretiminin en fazla yapıldığı il hangisidir?",
    "options": [
     "Artvin",
@@ -317,7 +317,7 @@
   },
   {
    "id": "q22",
-   "set": "2",
+   "set": "tarim",
    "text": "Muz yetiştiriciliğinin yapıldığı yöre hangisidir?",
    "options": [
     "Rize – Hopa",
@@ -332,7 +332,7 @@
   },
   {
    "id": "q23",
-   "set": "2",
+   "set": "tarim",
    "text": "Doğu Anadolu'da mikroklima özelliği sayesinde pamuk yetiştirilebilen ova hangisidir?",
    "options": [
     "Muş Ovası",
@@ -347,7 +347,7 @@
   },
   {
    "id": "q24",
-   "set": "2",
+   "set": "maden",
    "text": "Aşağıdaki illerin hangisinde bor madeni çıkarılmaz?",
    "options": [
     "Eskişehir",
@@ -362,7 +362,7 @@
   },
   {
    "id": "q25",
-   "set": "2",
+   "set": "maden",
    "text": "Türkiye'de taşkömürünün çıkarıldığı havza hangisidir?",
    "options": [
     "Soma",
@@ -377,7 +377,7 @@
   },
   {
    "id": "q26",
-   "set": "2",
+   "set": "maden",
    "text": "Divriği (Sivas) hangi madenin çıkarılmasıyla bilinir?",
    "options": [
     "Bakır",
@@ -392,7 +392,7 @@
   },
   {
    "id": "q27",
-   "set": "2",
+   "set": "maden",
    "text": "Jeotermal enerji santrallerinin yoğunlaştığı yöre hangisidir?",
    "options": [
     "Doğu Karadeniz",
@@ -407,7 +407,7 @@
   },
   {
    "id": "q28",
-   "set": "2",
+   "set": "maden",
    "text": "Seyitömer ve Tunçbilek linyit sahaları hangi ildedir?",
    "options": [
     "Manisa",
@@ -422,7 +422,7 @@
   },
   {
    "id": "q29",
-   "set": "2",
+   "set": "bolge",
    "text": "Türkiye'nin ilk milli parkı hangisidir?",
    "options": [
     "Uludağ",
@@ -437,7 +437,7 @@
   },
   {
    "id": "q30",
-   "set": "2",
+   "set": "nufus",
    "text": "Nüfus yoğunluğunun en az olduğu il hangisidir?",
    "options": [
     "Tunceli",
@@ -452,7 +452,7 @@
   },
   {
    "id": "q31",
-   "set": "2",
+   "set": "bolge",
    "text": "Harran Ovası'nın sulanmasında kullanılan su hangi barajdan sağlanır?",
    "options": [
     "Keban",
@@ -467,7 +467,7 @@
   },
   {
    "id": "q32",
-   "set": "2",
+   "set": "bolge",
    "text": "Göreme ve Kapadokya hangi ilimizdedir ve hangi listede yer alır?",
    "options": [
     "Kayseri – Ramsar",
@@ -1198,6 +1198,1071 @@
    ],
    "answer": 2,
    "explanation": "Kıtalar arasında köprü olması, boğazlar, enerji yolları ve üç tarafının denizlerle çevrili olması özel konumdur; jeopolitik önemi artırır.",
+   "highlight": ""
+  },
+  {
+   "id": "sular21",
+   "set": "sular",
+   "text": "Aşağıdakilerden hangisi Türkiye akarsularının genel özelliklerinden biri DEĞİLDİR?",
+   "options": [
+    "Rejimleri düzensizdir",
+    "Yatak eğimleri fazladır",
+    "Hidroelektrik potansiyelleri yüksektir",
+    "Ulaşıma elverişlidirler",
+    "Akış hızları fazladır"
+   ],
+   "answer": 3,
+   "explanation": "Türkiye'de yükselti ve eğim fazla, akım düzensiz olduğundan akarsular ulaşıma elverişli değildir; buna karşılık hidroelektrik potansiyeli yüksektir.",
+   "highlight": ""
+  },
+  {
+   "id": "sular22",
+   "set": "sular",
+   "text": "Akarsu rejimlerinin en düzenli olduğu bölge hangisidir?",
+   "options": [
+    "Akdeniz",
+    "Karadeniz",
+    "İç Anadolu",
+    "Ege",
+    "Güneydoğu Anadolu"
+   ],
+   "answer": 1,
+   "explanation": "Karadeniz'de yağış her mevsime dağıldığı için akarsuların akımı yıl içinde fazla değişmez.",
+   "highlight": ""
+  },
+  {
+   "id": "sular23",
+   "set": "sular",
+   "text": "Aşağıdaki akarsulardan hangisi Karadeniz'e dökülmez?",
+   "options": [
+    "Sakarya",
+    "Kızılırmak",
+    "Yeşilırmak",
+    "Gediz",
+    "Filyos"
+   ],
+   "answer": 3,
+   "explanation": "Gediz, Manisa'dan geçerek İzmir Körfezi'nin kuzeyinde Ege Denizi'ne dökülür.",
+   "highlight": "feature:gediz"
+  },
+  {
+   "id": "sular24",
+   "set": "sular",
+   "text": "Aşağıdaki akarsulardan hangisi Akdeniz'e dökülür?",
+   "options": [
+    "Bakırçay",
+    "Gediz",
+    "Göksu",
+    "Susurluk",
+    "Çoruh"
+   ],
+   "answer": 2,
+   "explanation": "Göksu, Toroslardan doğup Silifke'de deltasını oluşturarak Akdeniz'e dökülür.",
+   "highlight": "feature:goksu"
+  },
+  {
+   "id": "sular25",
+   "set": "sular",
+   "text": "Basra Körfezi'ne ulaşan, Türkiye'den doğan sınır aşan akarsular hangileridir?",
+   "options": [
+    "Aras – Kura",
+    "Fırat – Dicle",
+    "Meriç – Ergene",
+    "Asi – Ceyhan",
+    "Çoruh – Aras"
+   ],
+   "answer": 1,
+   "explanation": "Fırat ve Dicle Türkiye'den doğar, Irak'ta birleşip Şattülarap adıyla Basra Körfezi'ne dökülür.",
+   "highlight": "feature:firat"
+  },
+  {
+   "id": "sular26",
+   "set": "sular",
+   "text": "Türkiye'nin yüzölçümü en büyük gölü hangisidir?",
+   "options": [
+    "Tuz Gölü",
+    "Beyşehir Gölü",
+    "Van Gölü",
+    "Eğirdir Gölü",
+    "Atatürk Baraj Gölü"
+   ],
+   "answer": 2,
+   "explanation": "Van Gölü Türkiye'nin en büyük gölüdür; suyu sodalı (tuzlu-acı) olduğundan içilmez ve tarımda kullanılmaz.",
+   "highlight": ""
+  },
+  {
+   "id": "sular27",
+   "set": "sular",
+   "text": "Tuz Gölü'nün suyunun çok tuzlu olmasının temel nedeni nedir?",
+   "options": [
+    "Denize bağlantısının olması",
+    "Kapalı havzada yer alması ve buharlaşmanın fazla olması",
+    "Çevresinde volkanların bulunması",
+    "Derin bir krater gölü olması",
+    "Karstik kaynaklarla beslenmesi"
+   ],
+   "answer": 1,
+   "explanation": "Denize akışı olmayan kapalı havzalarda sular buharlaşırken tuzlar gölde birikir; Tuz Gölü bu yüzden çok tuzludur.",
+   "highlight": ""
+  },
+  {
+   "id": "sular28",
+   "set": "sular",
+   "text": "Aşağıdaki akarsulardan hangisi Marmara Denizi'ne dökülür?",
+   "options": [
+    "Susurluk",
+    "Bakırçay",
+    "Yeşilırmak",
+    "Seyhan",
+    "Aras"
+   ],
+   "answer": 0,
+   "explanation": "Susurluk (Simav) Balıkesir ve Bursa'dan geçerek Marmara Denizi'ne dökülür.",
+   "highlight": "feature:susurluk"
+  },
+  {
+   "id": "sular29",
+   "set": "sular",
+   "text": "Kura ile birleşerek Hazar Denizi'ne ulaşan akarsu hangisidir?",
+   "options": [
+    "Çoruh",
+    "Fırat",
+    "Aras",
+    "Asi",
+    "Dicle"
+   ],
+   "answer": 2,
+   "explanation": "Aras, Erzurum'dan doğar; sınır boyunca akıp Kura ile birleşerek Hazar Denizi'ne ulaşır.",
+   "highlight": "feature:aras"
+  },
+  {
+   "id": "tarim21",
+   "set": "tarim",
+   "text": "Türkiye'de buğday üretiminde ilk sırada yer alan il hangisidir?",
+   "options": [
+    "Konya",
+    "Edirne",
+    "Adana",
+    "Samsun",
+    "Bursa"
+   ],
+   "answer": 0,
+   "explanation": "Konya, geniş düzlükleri ve tahıla uygun karasal iklimiyle buğday üretiminde ilk sıradadır.",
+   "highlight": "plate:42"
+  },
+  {
+   "id": "tarim22",
+   "set": "tarim",
+   "text": "Pamuk üretiminde son yıllarda ilk sırada yer alan il hangisidir?",
+   "options": [
+    "Aydın",
+    "Şanlıurfa",
+    "Adana",
+    "İzmir",
+    "Hatay"
+   ],
+   "answer": 1,
+   "explanation": "GAP sulamalarıyla Harran Ovası'nda pamuk üretimi artmış, Şanlıurfa ilk sıraya yerleşmiştir.",
+   "highlight": "plate:63"
+  },
+  {
+   "id": "tarim23",
+   "set": "tarim",
+   "text": "Ayçiçeği üretiminin en fazla yapıldığı bölge hangisidir?",
+   "options": [
+    "Marmara",
+    "Karadeniz",
+    "Ege",
+    "Doğu Anadolu",
+    "Güneydoğu Anadolu"
+   ],
+   "answer": 0,
+   "explanation": "Ayçiçeği üretiminin yarıdan fazlası Trakya'da (Tekirdağ, Edirne, Kırklareli) yapılır.",
+   "highlight": ""
+  },
+  {
+   "id": "tarim24",
+   "set": "tarim",
+   "text": "Zeytin üretiminin en fazla yapıldığı bölge hangisidir?",
+   "options": [
+    "Ege",
+    "İç Anadolu",
+    "Doğu Anadolu",
+    "Karadeniz",
+    "Güneydoğu Anadolu"
+   ],
+   "answer": 0,
+   "explanation": "Zeytin, kışları ılık Akdeniz iklimini sever; üretimin en büyük bölümü Ege'dedir (Aydın, İzmir, Manisa, Muğla).",
+   "highlight": ""
+  },
+  {
+   "id": "tarim25",
+   "set": "tarim",
+   "text": "Kayısı üretiminde ilk sırada yer alan il hangisidir?",
+   "options": [
+    "Malatya",
+    "Isparta",
+    "Amasya",
+    "Niğde",
+    "Mersin"
+   ],
+   "answer": 0,
+   "explanation": "Malatya, kuru kayısı üretiminde Türkiye'de ve dünyada ilk sıradadır.",
+   "highlight": "plate:44"
+  },
+  {
+   "id": "tarim26",
+   "set": "tarim",
+   "text": "Antep fıstığı üretiminin yoğunlaştığı bölge hangisidir?",
+   "options": [
+    "Ege",
+    "Güneydoğu Anadolu",
+    "Karadeniz",
+    "Marmara",
+    "Doğu Anadolu"
+   ],
+   "answer": 1,
+   "explanation": "Antep fıstığı yaz kuraklığına dayanıklıdır; Gaziantep, Şanlıurfa, Siirt ve Adıyaman'da yoğunlaşır.",
+   "highlight": ""
+  },
+  {
+   "id": "tarim27",
+   "set": "tarim",
+   "text": "Turunçgil üretiminin en fazla yapıldığı bölge hangisidir?",
+   "options": [
+    "Akdeniz",
+    "Karadeniz",
+    "İç Anadolu",
+    "Doğu Anadolu",
+    "Marmara"
+   ],
+   "answer": 0,
+   "explanation": "Turunçgiller don olayına dayanıksızdır; kışları ılık geçen Akdeniz kıyılarında (Adana, Mersin, Antalya, Hatay) yetişir.",
+   "highlight": ""
+  },
+  {
+   "id": "tarim28",
+   "set": "tarim",
+   "text": "Kırmızı mercimek üretiminde ilk sırada yer alan il hangisidir?",
+   "options": [
+    "Konya",
+    "Şanlıurfa",
+    "Edirne",
+    "Kastamonu",
+    "Balıkesir"
+   ],
+   "answer": 1,
+   "explanation": "Kırmızı mercimek Güneydoğu Anadolu'da, en çok Şanlıurfa'da ekilir.",
+   "highlight": "plate:63"
+  },
+  {
+   "id": "tarim29",
+   "set": "tarim",
+   "text": "Nadas uygulamasının en yaygın olduğu bölge hangisidir?",
+   "options": [
+    "Karadeniz",
+    "İç Anadolu",
+    "Marmara",
+    "Akdeniz",
+    "Ege"
+   ],
+   "answer": 1,
+   "explanation": "Yağışın az olduğu İç Anadolu'da toprağın nemini toplaması için tarla bir yıl boş bırakılır (nadas).",
+   "highlight": ""
+  },
+  {
+   "id": "tarim210",
+   "set": "tarim",
+   "text": "Büyükbaş hayvancılığın en yaygın olduğu bölge hangisidir?",
+   "options": [
+    "Doğu Anadolu",
+    "İç Anadolu",
+    "Ege",
+    "Akdeniz",
+    "Güneydoğu Anadolu"
+   ],
+   "answer": 0,
+   "explanation": "Yaz yağışlarıyla gelişen gür dağ çayırları Erzurum–Kars yöresinde büyükbaş hayvancılığı besler.",
+   "highlight": "plate:25"
+  },
+  {
+   "id": "tarim211",
+   "set": "tarim",
+   "text": "Kıl keçisi yetiştiriciliğinin yaygın olduğu alanlar hangisidir?",
+   "options": [
+    "Ergene Havzası",
+    "Toroslar ve Akdeniz'in makilik alanları",
+    "Çukurova'nın sulanan tarlaları",
+    "Doğu Karadeniz kıyıları",
+    "Konya Ovası"
+   ],
+   "answer": 1,
+   "explanation": "Kıl keçisi engebeli, makilik ve çalılık alanlara uyum sağlar; Toroslarda yaygındır.",
+   "highlight": ""
+  },
+  {
+   "id": "tarim212",
+   "set": "tarim",
+   "text": "İpek böcekçiliğinin en eski ve önemli merkezi hangi ildir?",
+   "options": [
+    "Bursa",
+    "Rize",
+    "Isparta",
+    "Kars",
+    "Van"
+   ],
+   "answer": 0,
+   "explanation": "İpek böceği dut yaprağıyla beslenir; Bursa tarihî İpek Yolu'nun da önemli ipek merkezidir.",
+   "highlight": "plate:16"
+  },
+  {
+   "id": "maden21",
+   "set": "maden",
+   "text": "Türkiye hangi madenin rezervinde dünyada ilk sıradadır?",
+   "options": [
+    "Demir",
+    "Bor",
+    "Bakır",
+    "Petrol",
+    "Altın"
+   ],
+   "answer": 1,
+   "explanation": "Dünya bor rezervlerinin yaklaşık %70'i Türkiye'dedir (Eskişehir, Kütahya, Balıkesir, Bursa).",
+   "highlight": ""
+  },
+  {
+   "id": "maden22",
+   "set": "maden",
+   "text": "Guleman (Elazığ) ve Fethiye (Muğla) hangi madenin çıkarıldığı yerlerdir?",
+   "options": [
+    "Krom",
+    "Bakır",
+    "Boksit",
+    "Kükürt",
+    "Mermer"
+   ],
+   "answer": 0,
+   "explanation": "Krom Elazığ (Guleman), Muğla (Fethiye–Köyceğiz) ve Bursa'da çıkarılır.",
+   "highlight": ""
+  },
+  {
+   "id": "maden23",
+   "set": "maden",
+   "text": "Murgul (Artvin) ve Küre (Kastamonu) hangi madenin çıkarıldığı yerlerdir?",
+   "options": [
+    "Demir",
+    "Bakır",
+    "Krom",
+    "Bor",
+    "Linyit"
+   ],
+   "answer": 1,
+   "explanation": "Bakır Artvin (Murgul), Kastamonu (Küre) ve Elazığ (Maden) çevresinde çıkarılır.",
+   "highlight": "plate:8"
+  },
+  {
+   "id": "maden24",
+   "set": "maden",
+   "text": "Türkiye'nin ilk petrol rafinerisi hangi ilde kurulmuştur?",
+   "options": [
+    "Kocaeli",
+    "İzmir",
+    "Batman",
+    "Kırıkkale",
+    "Mersin"
+   ],
+   "answer": 2,
+   "explanation": "İlk petrol rafinerisi 1955'te Raman petrollerinin çıkarıldığı Batman'da kurulmuştur.",
+   "highlight": "plate:72"
+  },
+  {
+   "id": "maden25",
+   "set": "maden",
+   "text": "Seydişehir'deki alüminyum tesisleri hangi madene dayanır?",
+   "options": [
+    "Boksit",
+    "Kükürt",
+    "Krom",
+    "Demir",
+    "Barit"
+   ],
+   "answer": 0,
+   "explanation": "Alüminyumun hammaddesi boksittir; Konya Seydişehir'de çıkarılıp işlenir.",
+   "highlight": "plate:42"
+  },
+  {
+   "id": "maden26",
+   "set": "maden",
+   "text": "Keçiborlu (Isparta) hangi madenle tanınır?",
+   "options": [
+    "Kükürt",
+    "Bor",
+    "Bakır",
+    "Linyit",
+    "Krom"
+   ],
+   "answer": 0,
+   "explanation": "Kükürt Türkiye'de Isparta Keçiborlu'da çıkarılmıştır.",
+   "highlight": "plate:32"
+  },
+  {
+   "id": "maden27",
+   "set": "maden",
+   "text": "Hidroelektrik potansiyeli en yüksek havza hangisidir?",
+   "options": [
+    "Sakarya",
+    "Kızılırmak",
+    "Fırat–Dicle",
+    "Seyhan",
+    "Büyük Menderes"
+   ],
+   "answer": 2,
+   "explanation": "Yüksek debi ve eğim nedeniyle Fırat–Dicle havzası en yüksek potansiyele sahiptir; Atatürk, Keban, Karakaya, Ilısu bu havzadadır.",
+   "highlight": ""
+  },
+  {
+   "id": "maden28",
+   "set": "maden",
+   "text": "Güneşlenme süresi ve güneş enerjisi potansiyeli en yüksek bölge hangisidir?",
+   "options": [
+    "Karadeniz",
+    "Marmara",
+    "Güneydoğu Anadolu",
+    "Doğu Anadolu",
+    "Ege"
+   ],
+   "answer": 2,
+   "explanation": "Bulutluluğun az, güneş ışınlarının geliş açısının büyük olduğu Güneydoğu Anadolu ve Akdeniz en yüksek potansiyele sahiptir.",
+   "highlight": ""
+  },
+  {
+   "id": "maden29",
+   "set": "maden",
+   "text": "Türkiye'nin ilk nükleer santrali hangi ilde inşa edilmektedir?",
+   "options": [
+    "Sinop",
+    "Mersin",
+    "Kırklareli",
+    "Çanakkale",
+    "Adana"
+   ],
+   "answer": 1,
+   "explanation": "Akkuyu Nükleer Santrali Mersin'in Gülnar ilçesindedir.",
+   "highlight": "plate:33"
+  },
+  {
+   "id": "maden210",
+   "set": "maden",
+   "text": "Türkiye'nin en büyük linyit yatağı hangisidir?",
+   "options": [
+    "Soma",
+    "Tunçbilek",
+    "Afşin–Elbistan",
+    "Yatağan",
+    "Çan"
+   ],
+   "answer": 2,
+   "explanation": "Afşin–Elbistan (Kahramanmaraş) en büyük linyit rezervidir ve büyük termik santrallere kaynak oluşturur.",
+   "highlight": "plate:46"
+  },
+  {
+   "id": "maden211",
+   "set": "maden",
+   "text": "Rüzgâr enerjisi santrallerinin en yoğun olduğu kıyılar hangisidir?",
+   "options": [
+    "Ege ve Marmara",
+    "Doğu Karadeniz",
+    "Akdeniz",
+    "Güneydoğu",
+    "İç Anadolu"
+   ],
+   "answer": 0,
+   "explanation": "Sürekli ve güçlü rüzgârların estiği İzmir, Balıkesir ve Çanakkale kıyılarında rüzgâr santralleri yoğunlaşır.",
+   "highlight": ""
+  },
+  {
+   "id": "sanayi1",
+   "set": "sanayi",
+   "text": "Türkiye'nin ilk demir-çelik fabrikası 1939'da hangi ilde kurulmuştur?",
+   "options": [
+    "Karabük",
+    "Zonguldak",
+    "Hatay",
+    "Sivas",
+    "Kocaeli"
+   ],
+   "answer": 0,
+   "explanation": "Karabük Demir-Çelik Fabrikaları, Zonguldak taşkömürüne yakınlığı nedeniyle 1939'da kurulmuştur.",
+   "highlight": "plate:78"
+  },
+  {
+   "id": "sanayi2",
+   "set": "sanayi",
+   "text": "Karabük, Ereğli (Zonguldak) ve İskenderun hangi sanayi kolunun merkezleridir?",
+   "options": [
+    "Şeker",
+    "Demir-çelik",
+    "Tekstil",
+    "Otomotiv",
+    "Kâğıt"
+   ],
+   "answer": 1,
+   "explanation": "Türkiye'nin büyük entegre demir-çelik tesisleri Karabük, Ereğli (Erdemir) ve İskenderun'dadır (İsdemir).",
+   "highlight": ""
+  },
+  {
+   "id": "sanayi3",
+   "set": "sanayi",
+   "text": "Otomotiv sanayisinin en fazla geliştiği iller hangileridir?",
+   "options": [
+    "Bursa – Kocaeli",
+    "Erzurum – Kars",
+    "Van – Hakkari",
+    "Rize – Artvin",
+    "Mardin – Siirt"
+   ],
+   "answer": 0,
+   "explanation": "Pazara, limanlara ve yan sanayiye yakın olan Bursa, Kocaeli ve Sakarya otomotivin merkezleridir.",
+   "highlight": ""
+  },
+  {
+   "id": "sanayi4",
+   "set": "sanayi",
+   "text": "Şeker fabrikalarının şeker pancarının yetiştiği yerlere yakın kurulmasının temel nedeni nedir?",
+   "options": [
+    "Ucuz enerji",
+    "Hammaddenin çabuk bozulması ve taşınmasının pahalı olması",
+    "Limanlara yakınlık",
+    "Nitelikli iş gücü",
+    "Sermaye birikimi"
+   ],
+   "answer": 1,
+   "explanation": "Şeker pancarı hacimli, ağır ve kısa sürede bozulan bir hammaddedir; bu yüzden fabrikalar tarlalara yakın kurulur.",
+   "highlight": ""
+  },
+  {
+   "id": "sanayi5",
+   "set": "sanayi",
+   "text": "Rize'de çay fabrikalarının yoğunlaşmasında etkili olan temel faktör hangisidir?",
+   "options": [
+    "Hammadde",
+    "Pazar",
+    "Ulaşım",
+    "Enerji",
+    "Sermaye"
+   ],
+   "answer": 0,
+   "explanation": "Çay yaprağı toplandıktan sonra kısa sürede işlenmelidir; fabrikalar hammaddenin yetiştiği Doğu Karadeniz'dedir.",
+   "highlight": "plate:53"
+  },
+  {
+   "id": "sanayi6",
+   "set": "sanayi",
+   "text": "Türkiye'de yük ve yolcu taşımacılığında en fazla kullanılan ulaşım yolu hangisidir?",
+   "options": [
+    "Demir yolu",
+    "Kara yolu",
+    "Deniz yolu",
+    "Hava yolu",
+    "Boru hattı"
+   ],
+   "answer": 1,
+   "explanation": "İç ulaşımda yük ve yolcu taşımacılığının büyük bölümü kara yoluyla yapılır.",
+   "highlight": ""
+  },
+  {
+   "id": "sanayi7",
+   "set": "sanayi",
+   "text": "Türkiye'nin dış ticaretinde en fazla kullanılan ulaşım yolu hangisidir?",
+   "options": [
+    "Kara yolu",
+    "Demir yolu",
+    "Deniz yolu",
+    "Hava yolu",
+    "Boru hattı"
+   ],
+   "answer": 2,
+   "explanation": "Üç tarafı denizlerle çevrili Türkiye'nin dış ticaretinin büyük kısmı limanlar üzerinden deniz yoluyla yapılır.",
+   "highlight": ""
+  },
+  {
+   "id": "sanayi8",
+   "set": "sanayi",
+   "text": "Doğu Karadeniz'de demir yolu ağının gelişmemesinin temel nedeni nedir?",
+   "options": [
+    "Nüfusun az olması",
+    "Dağların kıyıya paralel uzanması ve arazinin engebeli olması",
+    "Yağışın az olması",
+    "Limanların bulunmaması",
+    "Tarımın gelişmemesi"
+   ],
+   "answer": 1,
+   "explanation": "Kıyıya paralel yüksek dağlar ve dar kıyı şeridi demir yolu yapımını zorlaştırır ve pahalılaştırır.",
+   "highlight": ""
+  },
+  {
+   "id": "sanayi9",
+   "set": "sanayi",
+   "text": "İstanbul Boğazı'nın altından Avrupa ile Asya'yı demir yoluyla bağlayan proje hangisidir?",
+   "options": [
+    "Avrasya Tüneli",
+    "Marmaray",
+    "Yavuz Sultan Selim Köprüsü",
+    "Osmangazi Köprüsü",
+    "1915 Çanakkale Köprüsü"
+   ],
+   "answer": 1,
+   "explanation": "Marmaray, Boğaz'ın altından geçen demir yolu tüp tüneliyle iki yakayı bağlar (2013).",
+   "highlight": ""
+  },
+  {
+   "id": "sanayi10",
+   "set": "sanayi",
+   "text": "Türk Boğazlarından gemi geçişlerini düzenleyen antlaşma hangisidir?",
+   "options": [
+    "Lozan",
+    "Montrö",
+    "Sevr",
+    "Mondros",
+    "Paris"
+   ],
+   "answer": 1,
+   "explanation": "1936 Montrö Boğazlar Sözleşmesi, Boğazlarda Türkiye'nin egemenliğini ve geçiş kurallarını belirler.",
+   "highlight": "feature:istanbul-bogazi"
+  },
+  {
+   "id": "sanayi11",
+   "set": "sanayi",
+   "text": "Bakü–Tiflis–Ceyhan ham petrol boru hattı Türkiye'de hangi ilde denize ulaşır?",
+   "options": [
+    "Mersin",
+    "Adana",
+    "Hatay",
+    "Samsun",
+    "Trabzon"
+   ],
+   "answer": 1,
+   "explanation": "BTC boru hattı Adana'nın Ceyhan ilçesindeki terminalde son bulur.",
+   "highlight": ""
+  },
+  {
+   "id": "sanayi12",
+   "set": "sanayi",
+   "text": "Türkiye'de ihracatın en fazla yapıldığı il hangisidir?",
+   "options": [
+    "İstanbul",
+    "Ankara",
+    "İzmir",
+    "Bursa",
+    "Gaziantep"
+   ],
+   "answer": 0,
+   "explanation": "Sanayi, ticaret ve finansın merkezi İstanbul, ihracatta açık ara ilk sıradadır.",
+   "highlight": "plate:34"
+  },
+  {
+   "id": "sanayi13",
+   "set": "sanayi",
+   "text": "Palandöken kayak merkezi hangi ildedir?",
+   "options": [
+    "Kars",
+    "Erzurum",
+    "Bursa",
+    "Kayseri",
+    "Bolu"
+   ],
+   "answer": 1,
+   "explanation": "Palandöken (Erzurum), Uludağ (Bursa), Erciyes (Kayseri), Kartalkaya (Bolu) ve Sarıkamış (Kars) başlıca kış turizmi merkezleridir.",
+   "highlight": "plate:25"
+  },
+  {
+   "id": "sanayi14",
+   "set": "sanayi",
+   "text": "Termal (sağlık) turizminde öne çıkan il hangisidir?",
+   "options": [
+    "Afyonkarahisar",
+    "Rize",
+    "Mardin",
+    "Artvin",
+    "Siirt"
+   ],
+   "answer": 0,
+   "explanation": "Fay hatları boyunca sıcak su kaynaklarının bol olduğu Afyonkarahisar termal turizmin merkezlerindendir.",
+   "highlight": "plate:3"
+  },
+  {
+   "id": "sanayi15",
+   "set": "sanayi",
+   "text": "Sümela Manastırı hangi ildedir?",
+   "options": [
+    "Rize",
+    "Trabzon",
+    "Artvin",
+    "Giresun",
+    "Gümüşhane"
+   ],
+   "answer": 1,
+   "explanation": "Sümela Manastırı, Trabzon Maçka'da Altındere Vadisi'nde sarp bir kayalığa kurulmuştur.",
+   "highlight": "plate:61"
+  },
+  {
+   "id": "sanayi16",
+   "set": "sanayi",
+   "text": "Ereğli (Zonguldak) Demir-Çelik Fabrikası'nın kuruluş yerinde etkili olan faktör hangisidir?",
+   "options": [
+    "Taşkömürüne yakınlık ve deniz ulaşımı",
+    "Pamuk üretimi",
+    "Turizm potansiyeli",
+    "Jeotermal kaynaklar",
+    "Nüfusun az olması"
+   ],
+   "answer": 0,
+   "explanation": "Erdemir, Zonguldak taşkömürüne yakınlığı ve limanı sayesinde hem enerjiye hem deniz yoluna erişir.",
+   "highlight": ""
+  },
+  {
+   "id": "nufus21",
+   "set": "nufus",
+   "text": "Türkiye'de nüfusu en kalabalık il hangisidir?",
+   "options": [
+    "Ankara",
+    "İzmir",
+    "İstanbul",
+    "Bursa",
+    "Antalya"
+   ],
+   "answer": 2,
+   "explanation": "İstanbul, Türkiye nüfusunun yaklaşık beşte birini barındırır.",
+   "highlight": "plate:34"
+  },
+  {
+   "id": "nufus22",
+   "set": "nufus",
+   "text": "Türkiye'de nüfusu en az olan il hangisidir?",
+   "options": [
+    "Tunceli",
+    "Bayburt",
+    "Ardahan",
+    "Kilis",
+    "Gümüşhane"
+   ],
+   "answer": 1,
+   "explanation": "TÜİK verilerine göre nüfusu en az il Bayburt'tur; onu Tunceli ve Ardahan izler.",
+   "highlight": "plate:69"
+  },
+  {
+   "id": "nufus23",
+   "set": "nufus",
+   "text": "Nüfus yoğunluğunun en fazla olduğu coğrafi bölge hangisidir?",
+   "options": [
+    "Marmara",
+    "Ege",
+    "Akdeniz",
+    "İç Anadolu",
+    "Karadeniz"
+   ],
+   "answer": 0,
+   "explanation": "Sanayi, ticaret ve ulaşımın geliştiği Marmara nüfus yoğunluğunda ilk sıradadır.",
+   "highlight": ""
+  },
+  {
+   "id": "nufus24",
+   "set": "nufus",
+   "text": "Nüfus yoğunluğunun en az olduğu coğrafi bölge hangisidir?",
+   "options": [
+    "İç Anadolu",
+    "Doğu Anadolu",
+    "Karadeniz",
+    "Güneydoğu Anadolu",
+    "Akdeniz"
+   ],
+   "answer": 1,
+   "explanation": "Yükseltinin fazla, iklimin sert ve arazinin engebeli olması Doğu Anadolu'da nüfus yoğunluğunu düşürür.",
+   "highlight": ""
+  },
+  {
+   "id": "nufus25",
+   "set": "nufus",
+   "text": "Tabanı geniş, üst kısma doğru hızla daralan nüfus piramidi neyi gösterir?",
+   "options": [
+    "Doğurganlığın düşük olduğunu",
+    "Doğurganlığın yüksek, ortalama ömrün kısa olduğunu",
+    "Yaşlı nüfusun fazla olduğunu",
+    "Nüfusun azaldığını",
+    "Göç aldığını"
+   ],
+   "answer": 1,
+   "explanation": "Geniş taban çok sayıda doğumu, hızlı daralma ise ölüm oranının yüksek ve ortalama yaşam süresinin kısa olduğunu gösterir.",
+   "highlight": ""
+  },
+  {
+   "id": "nufus26",
+   "set": "nufus",
+   "text": "Cumhuriyet döneminde ilk nüfus sayımı hangi yıl yapılmıştır?",
+   "options": [
+    "1923",
+    "1927",
+    "1935",
+    "1950",
+    "1965"
+   ],
+   "answer": 1,
+   "explanation": "İlk genel nüfus sayımı 1927'de yapılmıştır; 2007'den beri Adrese Dayalı Nüfus Kayıt Sistemi kullanılır.",
+   "highlight": ""
+  },
+  {
+   "id": "nufus27",
+   "set": "nufus",
+   "text": "Doğu Karadeniz'de dağınık, İç Anadolu'da toplu yerleşmenin görülmesinde etkili olan temel faktör nedir?",
+   "options": [
+    "Su kaynaklarının dağılışı ve yer şekilleri",
+    "Enlem farkı",
+    "Deprem riski",
+    "Sanayi tesisleri",
+    "Turizm"
+   ],
+   "answer": 0,
+   "explanation": "Doğu Karadeniz'de su her yerde bulunur ve arazi engebelidir; İç Anadolu'da su kaynakları sınırlı olduğundan evler kaynak çevresinde toplanır.",
+   "highlight": ""
+  },
+  {
+   "id": "nufus28",
+   "set": "nufus",
+   "text": "Yazın hayvanlarla yüksek yerlere çıkılarak kullanılan geçici kırsal yerleşmeye ne ad verilir?",
+   "options": [
+    "Mezra",
+    "Yayla",
+    "Çiftlik",
+    "Divan",
+    "Kom"
+   ],
+   "answer": 1,
+   "explanation": "Yaylalar özellikle Karadeniz ve Toroslarda hayvancılık amacıyla yazın kullanılır; günümüzde turizm amaçlı da kullanılmaktadır.",
+   "highlight": ""
+  },
+  {
+   "id": "nufus29",
+   "set": "nufus",
+   "text": "Doğu ve Güneydoğu Anadolu'da hayvancılıkla ilgili, ahır ve ağıllardan oluşan geçici yerleşmeye ne ad verilir?",
+   "options": [
+    "Kom",
+    "Yayla",
+    "Divan",
+    "Dam",
+    "Çiftlik"
+   ],
+   "answer": 0,
+   "explanation": "Kom, Doğu ve Güneydoğu Anadolu'da hayvancılıkla uğraşanların kullandığı küçük geçici yerleşmelerdir.",
+   "highlight": ""
+  },
+  {
+   "id": "nufus210",
+   "set": "nufus",
+   "text": "Bir köye bağlı, birkaç evden oluşan ve tarım-hayvancılık amaçlı kullanılan küçük yerleşmeye ne ad verilir?",
+   "options": [
+    "Mezra",
+    "Kasaba",
+    "Divan",
+    "Oba",
+    "Yayla"
+   ],
+   "answer": 0,
+   "explanation": "Mezralar köye bağlı küçük yerleşmelerdir; özellikle Doğu ve Güneydoğu Anadolu'da yaygındır.",
+   "highlight": ""
+  },
+  {
+   "id": "nufus211",
+   "set": "nufus",
+   "text": "Türkiye'de iç göçün en temel nedeni hangisidir?",
+   "options": [
+    "Ekonomik (iş bulma) nedenler",
+    "Doğal afetler",
+    "Savaşlar",
+    "Siyasi nedenler",
+    "İklim değişikliği"
+   ],
+   "answer": 0,
+   "explanation": "Kırdan kente göçün başlıca nedeni iş olanakları, daha yüksek gelir, eğitim ve sağlık hizmetleridir.",
+   "highlight": ""
+  },
+  {
+   "id": "nufus212",
+   "set": "nufus",
+   "text": "Yaşlı nüfus oranının en yüksek olduğu il hangisidir?",
+   "options": [
+    "Şanlıurfa",
+    "Sinop",
+    "İstanbul",
+    "Şırnak",
+    "Van"
+   ],
+   "answer": 1,
+   "explanation": "Genç nüfusun göç ettiği Karadeniz illerinde yaşlı oranı yüksektir; Sinop ilk sıradadır.",
+   "highlight": "plate:57"
+  },
+  {
+   "id": "nufus213",
+   "set": "nufus",
+   "text": "Doğurganlık hızının en yüksek olduğu il hangisidir?",
+   "options": [
+    "Şanlıurfa",
+    "Bartın",
+    "Edirne",
+    "Kırklareli",
+    "Sinop"
+   ],
+   "answer": 0,
+   "explanation": "Doğurganlık Güneydoğu Anadolu'da yüksektir; Şanlıurfa ilk sıradadır.",
+   "highlight": "plate:63"
+  },
+  {
+   "id": "nufus214",
+   "set": "nufus",
+   "text": "Aşağıdakilerden hangisi kentleşmenin hızlanmasının sonuçlarından biri DEĞİLDİR?",
+   "options": [
+    "Gecekondulaşma",
+    "Altyapı sorunları",
+    "Kırsal nüfus oranının artması",
+    "Trafik sorunu",
+    "Çevre kirliliği"
+   ],
+   "answer": 2,
+   "explanation": "Kentleşme kırdan kente göçle hızlanır; bu yüzden kırsal nüfus oranı artmaz, azalır.",
+   "highlight": ""
+  },
+  {
+   "id": "bolge21",
+   "set": "bolge",
+   "text": "Güneydoğu Anadolu Projesi (GAP) kaç ili kapsar?",
+   "options": [
+    "5",
+    "7",
+    "9",
+    "11",
+    "13"
+   ],
+   "answer": 2,
+   "explanation": "GAP; Adıyaman, Batman, Diyarbakır, Gaziantep, Kilis, Mardin, Siirt, Şanlıurfa ve Şırnak olmak üzere 9 ili kapsar.",
+   "highlight": ""
+  },
+  {
+   "id": "bolge22",
+   "set": "bolge",
+   "text": "DOKAP hangi bölgeye yönelik kalkınma projesidir?",
+   "options": [
+    "Doğu Anadolu",
+    "Doğu Karadeniz",
+    "Konya Ovası",
+    "Güneydoğu Anadolu",
+    "Trakya"
+   ],
+   "answer": 1,
+   "explanation": "DOKAP: Doğu Karadeniz Bölgesel Gelişme Projesi.",
+   "highlight": ""
+  },
+  {
+   "id": "bolge23",
+   "set": "bolge",
+   "text": "KOP kısaltması hangi bölgesel kalkınma projesini ifade eder?",
+   "options": [
+    "Konya Ovası Projesi",
+    "Kocaeli Organize Projesi",
+    "Kıyı Ormanları Projesi",
+    "Karadeniz Ortak Projesi",
+    "Kapadokya Onarım Projesi"
+   ],
+   "answer": 0,
+   "explanation": "KOP, Konya Ovası ve çevresinde sulama ve kalkınmayı amaçlayan projedir.",
+   "highlight": "plate:42"
+  },
+  {
+   "id": "bolge24",
+   "set": "bolge",
+   "text": "DAP hangi bölgeye yönelik bir kalkınma projesidir?",
+   "options": [
+    "Doğu Anadolu",
+    "Doğu Akdeniz",
+    "Dicle Havzası",
+    "Dağlık Alanlar",
+    "Doğu Karadeniz"
+   ],
+   "answer": 0,
+   "explanation": "DAP: Doğu Anadolu Projesi; hayvancılık, tarım ve sanayinin geliştirilmesini amaçlar.",
+   "highlight": ""
+  },
+  {
+   "id": "bolge25",
+   "set": "bolge",
+   "text": "UNESCO listesinde hem doğal hem kültürel (karma) miras olarak yer alan alanlar hangileridir?",
+   "options": [
+    "Efes – Truva",
+    "Göreme – Pamukkale",
+    "Safranbolu – Bergama",
+    "Ani – Hattuşa",
+    "Selimiye – Divriği"
+   ],
+   "answer": 1,
+   "explanation": "Göreme Milli Parkı ve Kapadokya ile Hierapolis–Pamukkale karma (doğal + kültürel) mirastır.",
+   "highlight": "feature:u-pamukkale"
+  },
+  {
+   "id": "bolge26",
+   "set": "bolge",
+   "text": "Göbeklitepe hangi ildedir?",
+   "options": [
+    "Mardin",
+    "Şanlıurfa",
+    "Diyarbakır",
+    "Adıyaman",
+    "Gaziantep"
+   ],
+   "answer": 1,
+   "explanation": "Yaklaşık 12.000 yıllık Göbeklitepe Şanlıurfa'dadır ve 2018'de UNESCO listesine girmiştir.",
+   "highlight": "feature:u-gobeklitepe"
+  },
+  {
+   "id": "bolge27",
+   "set": "bolge",
+   "text": "Kommagene Krallığı'na ait dev heykellerin bulunduğu UNESCO alanı hangisidir?",
+   "options": [
+    "Nemrut Dağı (Adıyaman)",
+    "Erciyes Dağı",
+    "Ağrı Dağı",
+    "Süphan Dağı",
+    "Uludağ"
+   ],
+   "answer": 0,
+   "explanation": "Adıyaman'daki Nemrut Dağı'nın zirvesinde Kommagene Kralı Antiochos'un tümülüsü ve dev heykelleri bulunur.",
+   "highlight": "feature:u-nemrut"
+  },
+  {
+   "id": "bolge28",
+   "set": "bolge",
+   "text": "Kuşcenneti Milli Parkı hangi gölün kıyısındadır?",
+   "options": [
+    "Van Gölü",
+    "Manyas (Kuş) Gölü",
+    "Tuz Gölü",
+    "Eğirdir Gölü",
+    "Beyşehir Gölü"
+   ],
+   "answer": 1,
+   "explanation": "Balıkesir'deki Kuşcenneti Milli Parkı Manyas Gölü kıyısında, göçmen kuşların konakladığı bir alandır.",
+   "highlight": ""
+  },
+  {
+   "id": "bolge29",
+   "set": "bolge",
+   "text": "Ramsar Sözleşmesi neyin korunmasına yöneliktir?",
+   "options": [
+    "Ormanlar",
+    "Sulak alanlar",
+    "Tarihî yapılar",
+    "Dağlık alanlar",
+    "Kıyı kumulları"
+   ],
+   "answer": 1,
+   "explanation": "Ramsar Sözleşmesi uluslararası öneme sahip sulak alanları ve özellikle su kuşlarının yaşam alanlarını korur.",
    "highlight": ""
   }
  ]
