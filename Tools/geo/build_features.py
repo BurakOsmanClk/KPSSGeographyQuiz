@@ -16,7 +16,7 @@ import os
 import mapbox_earcut as earcut
 import numpy as np
 from shapely.geometry import shape, box, LineString, MultiLineString, Polygon, MultiPolygon, Point
-from shapely.ops import linemerge, unary_union, polylabel
+from shapely.ops import linemerge, unary_union, polylabel, nearest_points
 
 from build_provinces import load_provinces, get_projection
 
@@ -60,6 +60,20 @@ COUNTRY_TR = {"Greece": "Yunanistan", "Bulgaria": "Bulgaristan", "Georgia": "Gü
               "Azerbaijan": "Azerbaycan", "Iran": "İran", "Iraq": "Irak", "Syria": "Suriye", "Cyprus": "Kıbrıs",
               "Northern Cyprus": "Kıbrıs", "Russia": "Rusya", "Ukraine": "Ukrayna", "Romania": "Romanya",
               "Lebanon": "Lübnan", "Israel": "İsrail", "Jordan": "Ürdün", "Palestine": "Filistin"}
+# Kara sınırı olan komşular: "Komşu ülkeyi bul" bölümünde tıklanabilir alan olurlar.
+# (Türkçe ad, oyunda görünen ad, etiket [boylam, enlem] — MapLabelLayer'daki ülke adı konumlarıyla aynı, KPSS notu)
+LAND_NEIGHBORS = [
+    ("Yunanistan", "Yunanistan", [25.35, 41.25], "Trakya'da Meriç Nehri sınırı oluşturur."),
+    ("Bulgaristan", "Bulgaristan", [26.8, 42.25], "Trakya'da, Edirne ve Kırklareli ile komşudur."),
+    ("Gürcistan", "Gürcistan", [43.0, 41.85], "Doğu Karadeniz'de Artvin ve Ardahan ile komşudur."),
+    ("Ermenistan", "Ermenistan", [44.55, 40.55], "Kars ve Iğdır ile komşudur; sınırın bir bölümünü Arpaçay ve Aras oluşturur."),
+    ("Azerbaycan", "Nahçıvan (Azerbaycan)", [45.25, 39.3], "Türkiye'nin en kısa kara sınırı Azerbaycan'a bağlı Nahçıvan iledir (Iğdır)."),
+    ("İran", "İran", [44.95, 38.2], "Ağrı, Iğdır, Van ve Hakkari ile komşudur."),
+    ("Irak", "Irak", [43.6, 36.85], "Şırnak ve Hakkari ile komşudur."),
+    ("Suriye", "Suriye", [38.6, 36.25], "Türkiye'nin en uzun kara sınırı Suriye iledir (Hatay'dan Şırnak'a)."),
+]
+GATE_COUNTRY = {"Nahçıvan": "Azerbaycan"}  # kapı listesindeki sınır ülkesi → Natural Earth ülkesi
+
 DST = os.path.join(HERE, "..", "..", "Assets", "_Project", "Resources", "Data", "turkey_features.json")
 
 # id, Türkçe ad, Natural Earth'teki adları, KPSS bilgi notu
@@ -376,6 +390,46 @@ def main():
                 "subtype": c["subtype"], "info": c["info"], "label": [r4(x), r4(y)],
                 "lines": [], "vertices": [], "triangles": [], "outline": [],
             })
+
+    # ---------- Komşu ülkeler (soru alanı) ve kara hudut kapıları ----------
+    country_geoms = {}
+    for f in json.load(open(COUNTRIES_SRC, encoding="utf-8"))["features"]:
+        tr = COUNTRY_TR.get(f["properties"]["name"])
+        if tr is not None:
+            g = shape(f["geometry"]).buffer(0)
+            country_geoms[tr] = unary_union([country_geoms[tr], g]) if tr in country_geoms else g
+
+    gates_by_country = {}
+    for gate in manual.get("borderGates", []):
+        gates_by_country.setdefault(gate["country"], []).append(gate["name"])
+
+    for tr, shown, label, info in LAND_NEIGHBORS:
+        g = country_geoms[tr]
+        polys = [q for q in (list(g.geoms) if isinstance(g, MultiPolygon) else [g]) if q.area > 0.002]
+        verts, tris, outline = triangulate(polys)
+        gate_names = gates_by_country.get("Nahçıvan" if tr == "Azerbaycan" else tr, [])
+        note = info + (f" Sınır kapıları: {', '.join(gate_names)}." if gate_names else "")
+        features.append({
+            "id": "ulke-" + tr.lower().replace("ı", "i").replace("ü", "u").replace("ö", "o").replace("ç", "c").replace("ş", "s").replace("ğ", "g").replace("i̇", "i"),
+            "name": shown, "category": "country", "kind": "polygon", "subtype": tr, "info": note,
+            "label": [r4(c) for c in proj(*label)], "lines": [], "vertices": verts, "triangles": tris, "outline": outline,
+        })
+
+    # Kapılar: yaklaşık konum, o ülkeyle olan sınır çizgisinin en yakın noktasına oturtulur
+    turkey_edge = turkey.boundary
+    for gate in manual.get("borderGates", []):
+        ctry = GATE_COUNTRY.get(gate["country"], gate["country"])
+        shared = turkey_edge.intersection(country_geoms[ctry].buffer(0.03))
+        approx = Point(*gate["point"])
+        snapped = nearest_points(shared, approx)[0] if not shared.is_empty else approx
+        moved_km = approx.distance(snapped) * 111.0
+        if moved_km > 15:
+            print(f"  UYARI: {gate['name']} sınıra {moved_km:.0f} km kaydırıldı, konumu kontrol edin.")
+        x, y = proj(snapped.x, snapped.y)
+        features.append({
+            "id": gate["id"], "name": gate["name"], "category": "gate", "kind": "point", "subtype": gate["country"],
+            "info": gate["info"], "label": [r4(x), r4(y)], "lines": [], "vertices": [], "triangles": [], "outline": [],
+        })
 
     # ---------- Fay hatları ----------
     for fl in manual["faults"]:

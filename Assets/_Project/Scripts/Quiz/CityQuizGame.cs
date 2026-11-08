@@ -61,10 +61,15 @@ namespace KPSSGeography.Quiz
 
         /// <summary>
         /// Yer şekli bölümlerinde (dağ, ova, plato, akarsu, göl, kıyı, fay...) il sınırları ve il adları gizlenir;
-        /// harita yalnızca Türkiye'nin dış hattıyla boş silüet olarak görünür. UNESCO ve milli park bölümlerinde iller kalır.
+        /// harita yalnızca Türkiye'nin dış hattıyla boş silüet olarak görünür. UNESCO, milli park, komşu ülke ve
+        /// sınır kapısı bölümlerinde iller kalır (adları yine gizli).
         /// </summary>
         public bool HidesProvinces => Level != null && (Mode == QuizMode.Feature || Mode == QuizMode.FeatureChoice) &&
-                                      Level.category != "unesco" && Level.category != "park";
+                                      Level.category != "unesco" && Level.category != "park" &&
+                                      Level.category != "country" && Level.category != "gate";
+
+        /// <summary>Komşu ülke bölümünde haritadaki ülke adları gizlenir (cevabı ele vermesin).</summary>
+        public bool HidesCountryNames => Level != null && Level.category == "country";
 
         float ScoreScale => IsExam ? config.examScoreMultiplier : 1f;
         string ProgressId => IsExam ? ProgressStore.ExamKey(Level.id) : Level.id;

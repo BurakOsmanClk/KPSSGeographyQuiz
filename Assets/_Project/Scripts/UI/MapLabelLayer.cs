@@ -44,6 +44,7 @@ namespace KPSSGeography.UI
         readonly List<Label> reviewLabels = new List<Label>();
         readonly List<Rect> placed = new List<Rect>();
         bool provincesOn;
+        bool countriesOn = true;
         bool reviewing;
         float lastBlend = -1f;
         Vector3 lastCamPos;
@@ -113,6 +114,13 @@ namespace KPSSGeography.UI
         {
             provincesOn = on;
             if (!on) foreach (var l in provinceLabels) l.rt.gameObject.SetActive(false);
+            dirty = true;
+        }
+
+        /// <summary>Komşu ülke adlarını göster/gizle ("Komşu ülkeyi bul" bölümünde gizli).</summary>
+        public void SetCountryLabels(bool on)
+        {
+            countriesOn = on;
             dirty = true;
         }
 
@@ -198,7 +206,7 @@ namespace KPSSGeography.UI
                 // Sınav haritası boştur: deniz ve ülke adları buharlaşıp kaybolur
                 var bc = l.baseColor;
                 l.text.color = new Color(bc.r, bc.g, bc.b, bc.a * (1f - blend));
-                bool visible = blend < 0.99f;
+                bool visible = blend < 0.99f && (countriesOn || l.kind != Kind.Country);
                 if (l.rt.gameObject.activeSelf != visible) l.rt.gameObject.SetActive(visible);
             }
 

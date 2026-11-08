@@ -160,6 +160,7 @@ namespace KPSSGeography.UI
         {
             ExitReview(false);
             Labels?.SetProvinceLabels(false);
+            Labels?.SetCountryLabels(true);
             base.Hide();
             HideNameTag(true);
         }
@@ -668,6 +669,7 @@ namespace KPSSGeography.UI
         {
             ExitReview(false);
             Labels?.SetProvinceLabels(ProvinceNamesAllowed());
+            Labels?.SetCountryLabels(!game.HidesCountryNames);
             Show();
             endScreen.gameObject.SetActive(false);
             pauseScreen.gameObject.SetActive(false);

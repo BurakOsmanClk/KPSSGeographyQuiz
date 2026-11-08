@@ -3585,5 +3585,349 @@
     ]
    ]
   }
+ ],
+ "_aciklama_kapilar": "borderGates: kara hudut kapıları (Ticaret Bakanlığı listesi, 13.05.2026). 'point' [boylam, enlem] yaklaşıktır; build_features.py noktayı 'country' ülkesiyle olan sınır çizgisine oturtur.",
+ "borderGates": [
+  {
+   "id": "kapi-pazarkule",
+   "name": "Pazarkule",
+   "province": "Edirne",
+   "country": "Yunanistan",
+   "info": "Edirne – Yunanistan sınırı. Karşı kapı: Kastanion. Faal, daimi hudut kapısı.",
+   "point": [
+    26.5,
+    41.65
+   ]
+  },
+  {
+   "id": "kapi-ipsala",
+   "name": "İpsala",
+   "province": "Edirne",
+   "country": "Yunanistan",
+   "info": "Edirne – Yunanistan sınırı. Karşı kapı: Kipi. Faal, daimi hudut kapısı.",
+   "point": [
+    26.34,
+    40.92
+   ]
+  },
+  {
+   "id": "kapi-kapikule",
+   "name": "Kapıkule",
+   "province": "Edirne",
+   "country": "Bulgaristan",
+   "info": "Edirne – Bulgaristan sınırı. Karşı kapı: Kapitan Andreevo. Faal, daimi hudut kapısı.",
+   "point": [
+    26.33,
+    41.715
+   ]
+  },
+  {
+   "id": "kapi-hamzabeyli",
+   "name": "Hamzabeyli",
+   "province": "Edirne",
+   "country": "Bulgaristan",
+   "info": "Edirne – Bulgaristan sınırı. Karşı kapı: Lesova. Faal, daimi hudut kapısı.",
+   "point": [
+    26.56,
+    41.96
+   ]
+  },
+  {
+   "id": "kapi-derekoy",
+   "name": "Dereköy",
+   "province": "Kırklareli",
+   "country": "Bulgaristan",
+   "info": "Kırklareli – Bulgaristan sınırı. Karşı kapı: Malko Tırnova. Faal, daimi hudut kapısı.",
+   "point": [
+    27.39,
+    41.95
+   ]
+  },
+  {
+   "id": "kapi-sarp",
+   "name": "Sarp",
+   "province": "Artvin",
+   "country": "Gürcistan",
+   "info": "Artvin – Gürcistan sınırı. Karşı kapı: Sarpi. Faal, daimi hudut kapısı.",
+   "point": [
+    41.55,
+    41.52
+   ]
+  },
+  {
+   "id": "kapi-turkgozu",
+   "name": "Türkgözü",
+   "province": "Ardahan",
+   "country": "Gürcistan",
+   "info": "Ardahan – Gürcistan sınırı. Karşı kapı: Vale. Faal, daimi hudut kapısı.",
+   "point": [
+    42.82,
+    41.57
+   ]
+  },
+  {
+   "id": "kapi-aktas",
+   "name": "Aktaş",
+   "province": "Ardahan",
+   "country": "Gürcistan",
+   "info": "Ardahan – Gürcistan sınırı. Karşı kapı: Kartsakhi. Faal, daimi hudut kapısı.",
+   "point": [
+    43.22,
+    41.24
+   ]
+  },
+  {
+   "id": "kapi-muratli",
+   "name": "Muratlı",
+   "province": "Artvin",
+   "country": "Gürcistan",
+   "info": "Artvin – Gürcistan sınırı. Karşı kapı: Maradidi. Faal değil, daimi hudut kapısı.",
+   "point": [
+    41.84,
+    41.49
+   ]
+  },
+  {
+   "id": "kapi-alican",
+   "name": "Alican",
+   "province": "Iğdır",
+   "country": "Ermenistan",
+   "info": "Iğdır – Ermenistan sınırı. Karşı kapı: Margara. Faal değil, daimi hudut kapısı.",
+   "point": [
+    44.17,
+    40.05
+   ]
+  },
+  {
+   "id": "kapi-dilucu",
+   "name": "Dilucu",
+   "province": "Iğdır",
+   "country": "Nahçıvan",
+   "info": "Iğdır – Nahçıvan sınırı. Karşı kapı: Sederek. Faal, daimi hudut kapısı.",
+   "point": [
+    44.75,
+    39.66
+   ]
+  },
+  {
+   "id": "kapi-gurbulak",
+   "name": "Gürbulak",
+   "province": "Ağrı",
+   "country": "İran",
+   "info": "Ağrı – İran sınırı. Karşı kapı: Bazergan. Faal, daimi hudut kapısı.",
+   "point": [
+    44.36,
+    39.42
+   ]
+  },
+  {
+   "id": "kapi-kapikoy",
+   "name": "Kapıköy",
+   "province": "Van",
+   "country": "İran",
+   "info": "Van – İran sınırı. Karşı kapı: Razi. Faal, daimi hudut kapısı.",
+   "point": [
+    44.4,
+    38.28
+   ]
+  },
+  {
+   "id": "kapi-esendere",
+   "name": "Esendere",
+   "province": "Hakkari",
+   "country": "İran",
+   "info": "Hakkari – İran sınırı. Karşı kapı: Serow. Faal, daimi hudut kapısı.",
+   "point": [
+    44.59,
+    37.73
+   ]
+  },
+  {
+   "id": "kapi-habur",
+   "name": "Habur",
+   "province": "Şırnak",
+   "country": "Irak",
+   "info": "Şırnak – Irak sınırı. Karşı kapı: El-Halil. Faal, daimi hudut kapısı.",
+   "point": [
+    42.45,
+    37.12
+   ]
+  },
+  {
+   "id": "kapi-derecik",
+   "name": "Derecik",
+   "province": "Hakkari",
+   "country": "Irak",
+   "info": "Hakkari – Irak sınırı. Karşı kapı: Mergesur. Faal, daimi hudut kapısı.",
+   "point": [
+    44.36,
+    37.05
+   ]
+  },
+  {
+   "id": "kapi-uzumlu",
+   "name": "Üzümlü",
+   "province": "Hakkari",
+   "country": "Irak",
+   "info": "Hakkari – Irak sınırı. Karşı kapı: Serzeare. Faal, daimi hudut kapısı.",
+   "point": [
+    43.74,
+    37.2
+   ]
+  },
+  {
+   "id": "kapi-gulyazi",
+   "name": "Gülyazı",
+   "province": "Şırnak",
+   "country": "Irak",
+   "info": "Şırnak – Irak sınırı. Karşı kapı: Zaho. Faal değil, geçici hudut kapısı.",
+   "point": [
+    43.05,
+    37.28
+   ]
+  },
+  {
+   "id": "kapi-aktepe",
+   "name": "Aktepe",
+   "province": "Şırnak",
+   "country": "Irak",
+   "info": "Şırnak – Irak sınırı. Karşı kapı: Bacuka. Faal değil, daimi hudut kapısı.",
+   "point": [
+    43.2,
+    37.3
+   ]
+  },
+  {
+   "id": "kapi-ovakoy",
+   "name": "Ovaköy",
+   "province": "Şırnak",
+   "country": "Irak",
+   "info": "Şırnak – Irak sınırı. Karşı kapı: Karavala. Faal değil, daimi hudut kapısı.",
+   "point": [
+    42.37,
+    37.11
+   ]
+  },
+  {
+   "id": "kapi-karkamis",
+   "name": "Karkamış",
+   "province": "Gaziantep",
+   "country": "Suriye",
+   "info": "Gaziantep – Suriye sınırı. Karşı kapı: Carablus. Faal, daimi hudut kapısı.",
+   "point": [
+    38.01,
+    36.83
+   ]
+  },
+  {
+   "id": "kapi-cilvegozu",
+   "name": "Cilvegözü",
+   "province": "Hatay",
+   "country": "Suriye",
+   "info": "Hatay – Suriye sınırı. Karşı kapı: Babul Havva. Faal, daimi hudut kapısı.",
+   "point": [
+    36.67,
+    36.235
+   ]
+  },
+  {
+   "id": "kapi-yayladagi",
+   "name": "Yayladağı",
+   "province": "Hatay",
+   "country": "Suriye",
+   "info": "Hatay – Suriye sınırı. Karşı kapı: Kesep. Faal, daimi hudut kapısı.",
+   "point": [
+    36.0,
+    35.925
+   ]
+  },
+  {
+   "id": "kapi-nusaybin",
+   "name": "Nusaybin",
+   "province": "Mardin",
+   "country": "Suriye",
+   "info": "Mardin – Suriye sınırı. Karşı kapı: Kamışlı. Faal (Suriye'deki durum nedeniyle fiilen hizmet vermiyor), daimi hudut kapısı.",
+   "point": [
+    41.215,
+    37.06
+   ]
+  },
+  {
+   "id": "kapi-akcakale",
+   "name": "Akçakale",
+   "province": "Şanlıurfa",
+   "country": "Suriye",
+   "info": "Şanlıurfa – Suriye sınırı. Karşı kapı: Tell Abyat. Faal, daimi hudut kapısı.",
+   "point": [
+    38.95,
+    36.71
+   ]
+  },
+  {
+   "id": "kapi-oncupinar",
+   "name": "Öncüpınar",
+   "province": "Kilis",
+   "country": "Suriye",
+   "info": "Kilis – Suriye sınırı. Karşı kapı: Bab es Selame. Faal, daimi hudut kapısı.",
+   "point": [
+    37.08,
+    36.64
+   ]
+  },
+  {
+   "id": "kapi-cobanbey",
+   "name": "Çobanbey",
+   "province": "Kilis",
+   "country": "Suriye",
+   "info": "Kilis – Suriye sınırı. Karşı kapı: Ar Ra'i. Faal, geçici hudut kapısı.",
+   "point": [
+    37.53,
+    36.68
+   ]
+  },
+  {
+   "id": "kapi-ceylanpinar",
+   "name": "Ceylanpınar",
+   "province": "Şanlıurfa",
+   "country": "Suriye",
+   "info": "Şanlıurfa – Suriye sınırı. Karşı kapı: Resulayn. Faal (Suriye'deki durum nedeniyle fiilen hizmet vermiyor), geçici hudut kapısı.",
+   "point": [
+    40.06,
+    36.84
+   ]
+  },
+  {
+   "id": "kapi-kumlu",
+   "name": "Kumlu (Zeytin Dalı)",
+   "province": "Hatay",
+   "country": "Suriye",
+   "info": "Hatay – Suriye sınırı. Karşı kapı: Afrin. Faal (Suriye'deki durum nedeniyle fiilen hizmet vermiyor), geçici hudut kapısı.",
+   "point": [
+    36.55,
+    36.42
+   ]
+  },
+  {
+   "id": "kapi-mursitpinar",
+   "name": "Mürşitpınar",
+   "province": "Şanlıurfa",
+   "country": "Suriye",
+   "info": "Şanlıurfa – Suriye sınırı. Karşı kapı: Ayn el Arab. Faal değil, geçici hudut kapısı.",
+   "point": [
+    38.36,
+    36.89
+   ]
+  },
+  {
+   "id": "kapi-senyurt",
+   "name": "Şenyurt",
+   "province": "Mardin",
+   "country": "Suriye",
+   "info": "Mardin – Suriye sınırı. Karşı kapı: Derbesiye. Faal değil, daimi hudut kapısı.",
+   "point": [
+    40.64,
+    37.0
+   ]
+  }
  ]
 }
