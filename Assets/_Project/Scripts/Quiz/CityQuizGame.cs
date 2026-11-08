@@ -224,10 +224,16 @@ namespace KPSSGeography.Quiz
             switch (Mode)
             {
                 case QuizMode.Feature:
+                {
                     map.SetFocus(_ => false);
                     map.SetBordersHidden(HidesProvinces);
                     features.ShowCategory(Level.category);
-                    return map.Bounds;
+                    if (Level.category != "country") return map.Bounds;
+                    // Komşu ülkeler: kamera uzaklaşır ki Türkiye'nin çevresindeki ülkeler de rahat görünüp tıklansın
+                    Rect b = map.Bounds;
+                    float padX = b.width * 0.14f, padTop = b.height * 0.18f, padBottom = b.height * 0.3f;
+                    return new Rect(b.x - padX, b.y - padBottom, b.width + padX * 2f, b.height + padTop + padBottom);
+                }
                 case QuizMode.FeatureChoice:
                     map.SetFocus(_ => false);
                     map.SetBordersHidden(HidesProvinces);
