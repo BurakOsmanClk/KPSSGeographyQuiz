@@ -401,16 +401,21 @@ namespace KPSSGeography.UI
             bool on = !string.IsNullOrEmpty(body) || climate != null;
             bodyCard.gameObject.SetActive(on);
             if (!on) return;
+            // Uzun şıklar iki sütunlu ızgarada daha yüksek yer kaplar: kâğıt yukarı kayar ve kısalır
+            var q = currentQuestion;
+            bool grid = q != null && q.LongTitle && q.Choices != null && Array.Exists(q.Choices, c => c.Length > 12);
+            float maxH = grid ? 440f : 560f;
+            bodyCard.anchoredPosition = new Vector2(32f, grid ? 10f : -60f);
             if (climate != null)
             {
                 bodyText.text = "";
-                bodyCard.sizeDelta = new Vector2(bodyCard.sizeDelta.x, 520f);
+                bodyCard.sizeDelta = new Vector2(bodyCard.sizeDelta.x, Mathf.Min(520f, maxH));
                 chart.Show(bodyCard, climate);
                 return;
             }
             chart.Clear();
             bodyText.text = body;
-            float h = Mathf.Clamp(bodyText.preferredHeight + 56f, 200f, 560f);
+            float h = Mathf.Clamp(bodyText.preferredHeight + 56f, 200f, maxH);
             bodyCard.sizeDelta = new Vector2(bodyCard.sizeDelta.x, h);
         }
 

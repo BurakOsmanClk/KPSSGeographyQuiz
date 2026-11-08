@@ -24,6 +24,7 @@ namespace KPSSGeography.Quiz
         static readonly Rect NumberedViewport = new Rect(0.03f, 0.17f, 0.94f, 0.58f);
         /// <summary>Öncüllü (maddeli) sorular: solda soru kâğıdı, harita sağda.</summary>
         static readonly Rect BodyViewport = new Rect(0.36f, 0.17f, 0.62f, 0.58f);
+        static readonly Rect BodyGridViewport = new Rect(0.36f, 0.3f, 0.62f, 0.44f);
 
         public event Action GameStarted;
         public event Action<int> CountdownTick;
@@ -189,7 +190,10 @@ namespace KPSSGeography.Quiz
             }
             questions = builder.Build(Level);
             bool hasBody = questions.Exists(q => !string.IsNullOrEmpty(q.Body) || q.Chart != null);
-            Rect viewport = hasBody ? BodyViewport : Mode == QuizMode.Mcq ? McqViewport : Mode == QuizMode.Numbered ? NumberedViewport
+            // Uzun şıklar ("I ve II", eşleştirme satırları) iki sütunlu ızgaraya dizilir ve daha çok yer kaplar
+            bool gridChoices = questions.Exists(q => q.LongTitle && q.Choices != null && System.Array.Exists(q.Choices, c => c.Length > 12));
+            Rect viewport = hasBody ? (gridChoices ? BodyGridViewport : BodyViewport)
+                : Mode == QuizMode.Mcq ? McqViewport : Mode == QuizMode.Numbered ? (gridChoices ? McqViewport : NumberedViewport)
                 : UsesChoices ? ChoiceViewport : FindViewport;
             cameraController.FocusOn(focus, viewport);
 
