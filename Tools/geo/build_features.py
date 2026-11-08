@@ -18,7 +18,7 @@ import numpy as np
 from shapely.geometry import shape, box, LineString, MultiLineString, Polygon, MultiPolygon, Point
 from shapely.ops import linemerge, unary_union, polylabel, nearest_points, substring
 
-from build_provinces import load_provinces, get_projection
+from build_provinces import load_provinces, get_projection, NAMES
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RIVERS_SRC = os.path.join(HERE, "ne_10m_rivers_turkey.geojson")
@@ -390,8 +390,42 @@ def main():
 
     # ---------- Kıyı şekilleri ve miras alanları (nokta) ----------
     coast_cat = {"strait": "gulf", "gulf": "gulf", "peninsula": "peninsula", "island": "peninsula", "cape": "peninsula"}
+    land_parts = list(turkey.geoms) if isinstance(turkey, MultiPolygon) else [turkey]
+    province_geom = {NAMES[int(f["properties"]["iso_3166_2"].split("-")[1])]: g for f, g in zip(feats, geoms)}
+
+    def coast_area(c):
+        """Yarımada/ada: kara parçası; körfez/boğaz: çerçevenin içindeki deniz. Gerçek kıyı çizgisiyle kesilir."""
+        pt = Point(*c["point"])
+        if c["area"] == "island":
+            near = [q for q in land_parts if q.distance(pt) < 0.08 and q.area < 1.0]
+            return min(near, key=lambda q: q.distance(pt)) if near else None
+        # Çerçevenin köşeleri yuvarlatılır (açık deniz ve kara tarafında kutu görünmesin)
+        mask = Polygon(chaikin([tuple(q) for q in c["area"]], closed=True, iterations=3)).buffer(0)
+        if c.get("provinces"):
+            # Yarımadanın kara tarafı il sınırını takip eder
+            mask = mask.intersection(unary_union([province_geom[n] for n in c["provinces"]]))
+        if c["subtype"] in ("gulf", "strait"):
+            parts = polys_of(mask.difference(turkey))
+            return max(parts, key=lambda q: q.area) if parts else None
+        parts = polys_of(mask.intersection(turkey))
+        return min(parts, key=lambda q: q.distance(pt)) if parts else None
+
     for key, catmap in (("coast", coast_cat), ("heritage", {"unesco": "unesco", "park": "park"})):
         for c in manual[key]:
+            area = coast_area(c) if "area" in c else None
+            if area is not None:
+                geom_xy = to_xy(area).simplify(0.006)
+                polys = polys_of(geom_xy)
+                verts, tris, outline = triangulate_xy(polys)
+                lp = polylabel(max(polys, key=lambda q: q.area), tolerance=0.01)
+                features.append({
+                    "id": c["id"], "name": c["name"], "category": catmap[c["subtype"]], "kind": "polygon",
+                    "subtype": c["subtype"], "info": c["info"], "label": [r4(lp.x), r4(lp.y)],
+                    "lines": [], "vertices": verts, "triangles": tris, "outline": outline,
+                })
+                continue
+            if "area" in c:
+                print("UYARI: alan bulunamadı, nokta kullanılıyor:", c["id"])
             x, y = proj(*c["point"])
             features.append({
                 "id": c["id"], "name": c["name"], "category": catmap[c["subtype"]], "kind": "point",
@@ -455,6 +489,14 @@ def main():
         info = f"{tinfo} Örnek: {ct['info']}" if tinfo else ct["info"]
         base = {"id": ct["id"], "name": ct["name"], "category": "coasttype", "subtype": ct["type"],
                 "typeName": tname, "typeInfo": tinfo, "info": info, "vertices": [], "triangles": [], "outline": []}
+        if "ref" in ct:
+            # Haritadaki şeklin aynısı (yarımada, göl ya da boğaz alanı)
+            src = next((f for f in features if f["id"] == ct["ref"]), None)
+            if src is not None and src["kind"] == "polygon":
+                features.append(dict(base, kind="polygon", label=src["label"], lines=[],
+                                     vertices=src["vertices"], triangles=src["triangles"], outline=src["outline"]))
+                continue
+            print("UYARI: ref bulunamadı ya da alan değil:", ct["id"], ct["ref"])
         if "point" in ct:
             x, y = proj(*ct["point"])
             features.append(dict(base, kind="point", label=[r4(x), r4(y)], lines=[]))
@@ -467,7 +509,12 @@ def main():
         arc1 = substring(ring, d1, d2)
         tail, head = substring(ring, d2, ring.length), substring(ring, 0, d1)
         arc2 = LineString(list(tail.coords) + list(head.coords)[1:])
-        arc = arc1 if arc1.distance(v_pt) <= arc2.distance(v_pt) else arc2
+        # via'ya yakın yay seçilir; ikisi de yakınsa (çok kısa şeritler) kısa olan
+        da, db = arc1.distance(v_pt), arc2.distance(v_pt)
+        if abs(da - db) < 0.03:
+            arc = arc1 if arc1.length <= arc2.length else arc2
+        else:
+            arc = arc1 if da < db else arc2
         arc = arc.simplify(0.004)
         print(f"  kıyı şeridi {ct['id']}: {arc.length * 100:.0f} km (yaklaşık)")
         mid = arc.interpolate(0.5, normalized=True)

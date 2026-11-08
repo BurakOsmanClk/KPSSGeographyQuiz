@@ -90,7 +90,7 @@ namespace KPSSGeography.UI
             Add("Boğaz ve Körfezler", GeoFeature.Gulf, "strait", "gulf");
             Add("Yarımada, Ada, Burun", GeoFeature.Peninsula, "peninsula", "island", "cape");
             Add("Fay Hatları", GeoFeature.Fault);
-            Add("Kıyı Tipleri ve Şekilleri", GeoFeature.CoastType, "boyuna", "enine", "ria", "dalmacya", "kalankli", "limanli", "tombolo", "lagun");
+            Add("Kıyı Tipleri ve Şekilleri", GeoFeature.CoastType, "boyuna", "enine", "ria", "dalmacya", "kalankli", "limanli", "tombolo", "lagun", "kiyioku");
 
             var regionsTopic = new Topic { title = "Bölgeler", regions = true };
             foreach (var r in Regions.All)
@@ -123,6 +123,7 @@ namespace KPSSGeography.UI
             "limanli" => "Limanlı Kıyı",
             "tombolo" => "Tombolo",
             "lagun" => "Lagün",
+            "kiyioku" => "Kıyı Oku",
             "strait" => "Boğazlar",
             "gulf" => "Körfezler",
             "peninsula" => "Yarımadalar",

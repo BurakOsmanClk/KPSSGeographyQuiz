@@ -109,6 +109,26 @@ namespace KPSSGeography.Map
                     foreach (var l in data.lines)
                         b.AddDashedPolyline(LineMeshBuilder.ToPoints(l.points), 0.065f, 0.16f, 0.09f, palette.fault);
                     break;
+                case GeoFeature.Gulf when data.IsPolygon:
+                {
+                    // Körfez / boğaz: gerçek kıyıyla kesilmiş su alanı
+                    baseOrder = 22;
+                    Color water = data.subtype == "strait" ? palette.strait : palette.gulf;
+                    b.AddTriangles(data.vertices, data.triangles, new Color(water.r, water.g, water.b, 0.75f));
+                    foreach (var r in data.outline)
+                        b.AddPolyline(LineMeshBuilder.ToPoints(r.points), 0.03f, water, true);
+                    break;
+                }
+                case GeoFeature.Peninsula when data.IsPolygon:
+                {
+                    // Yarımada / ada: kara parçasının kendisi
+                    baseOrder = 22;
+                    Color land = data.subtype == "island" ? palette.island : palette.peninsula;
+                    b.AddTriangles(data.vertices, data.triangles, new Color(land.r, land.g, land.b, 0.85f));
+                    foreach (var r in data.outline)
+                        b.AddPolyline(LineMeshBuilder.ToPoints(r.points), 0.028f, palette.markerEdge, true);
+                    break;
+                }
                 case GeoFeature.Dam:
                 case GeoFeature.Gulf:
                 case GeoFeature.Peninsula:
@@ -132,7 +152,15 @@ namespace KPSSGeography.Map
                 {
                     // Kıyı tipi: kıyı çizgisi boyunca beyaz kenarlı renkli şerit; biriktirme şekli: renkli rozet
                     Color tc = palette.CoastTypeColor(data.subtype);
-                    if (data.IsLine)
+                    if (data.IsPolygon)
+                    {
+                        // Tombolo, lagün, ria: haritadaki yarımada / göl / boğaz şeklinin kendisi, tip renginde
+                        baseOrder = 23;
+                        b.AddTriangles(data.vertices, data.triangles, new Color(tc.r, tc.g, tc.b, 0.8f));
+                        foreach (var r in data.outline)
+                            b.AddPolyline(LineMeshBuilder.ToPoints(r.points), 0.03f, palette.coastEdge, true);
+                    }
+                    else if (data.IsLine)
                     {
                         baseOrder = 24;
                         foreach (var l in data.lines)
