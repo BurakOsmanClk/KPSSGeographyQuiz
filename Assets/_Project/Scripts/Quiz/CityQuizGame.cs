@@ -98,7 +98,8 @@ namespace KPSSGeography.Quiz
         public bool IsRunning => State != QuizState.Idle && State != QuizState.Finished;
 
         /// <summary>Doğru bilinen hedefler bölüm boyunca boyalı kalsın mı? ("haritayı doldurma" modları)</summary>
-        bool PersistentMarks => !IsExam && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.Feature || Mode == QuizMode.RegionAll);
+        /// Bölge modu bilerek yok: bölge rengine boyanan iller sonraki soruların cevabını ele verirdi.
+        bool PersistentMarks => !IsExam && (Mode == QuizMode.FindProvince || Mode == QuizMode.Feature || Mode == QuizMode.RegionAll);
 
         public float StreakMultiplier(int streak) =>
             1f + Mathf.Clamp(streak - 1, 0, config.maxStreakSteps) * config.streakStep;
@@ -164,7 +165,8 @@ namespace KPSSGeography.Quiz
             Rect focus = SetupMap();
             bool physical = Mode == QuizMode.Feature || Mode == QuizMode.FeatureChoice;
             relief?.SetStrength(physical ? 1f : 0.55f);
-            if (!IsExam && Level.HasRegionFilter && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.RegionAll))
+            // Bölge sınırı yalnızca "ili bul" bölümlerinde çizilir; "Bölgeyi Tamamla"da çizilirse cevabın kendisi olur
+            if (!IsExam && Level.HasRegionFilter && Mode == QuizMode.FindProvince)
             {
                 var rings = new List<Vector2[]>();
                 foreach (var region in Level.regions) rings.AddRange(map.GetRegionRings(region));
@@ -232,13 +234,12 @@ namespace KPSSGeography.Quiz
                     return map.SetFocus(Level.HasRegionFilter ? p => Level.IncludesRegion(p.Data.region) : null);
                 case QuizMode.RegionAll:
                 {
-                    // Kamera bölgeye odaklanır ama hiçbir il soluklaştırılmaz: bölge dışındaki il tıklanırsa yanlış sayılır
+                    // Bütün Türkiye görünür, hiçbir il soluklaştırılmaz ve bölge sınırı çizilmez:
+                    // kamera bölgeye yaklaşsaydı ya da sınır çizilseydi cevap haritada hazır olurdu. Bölge dışı il = yanlış.
                     features.ShowDefault();
-                    Rect r = map.SetFocus(p => Level.IncludesRegion(p.Data.region));
                     map.ClearFocus();
                     map.SetNeutral(true);
-                    float padX = r.width * 0.25f, padY = r.height * 0.25f;
-                    return new Rect(r.x - padX, r.y - padY, r.width + padX * 2f, r.height + padY * 2f);
+                    return map.Bounds;
                 }
                 default:
                     features.ShowDefault();
@@ -269,7 +270,7 @@ namespace KPSSGeography.Quiz
                 if (Current.ShowFeature != null) features.ShowOnly(Current.ShowFeature);
                 else features.ShowDefault();
             }
-            Current.Focus?.SetFocused(true);
+            if (!Current.FocusHidden) Current.Focus?.SetFocused(true);
 
             TimeLimit = QuestionTime;
             TimeRemaining = TimeLimit;

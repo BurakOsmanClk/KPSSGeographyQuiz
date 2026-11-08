@@ -83,12 +83,20 @@ namespace KPSSGeography.Quiz
                 return q;
             }).ToList();
 
+        // Bölge renkleri şıklarda kullanılmaz (harita renkleriyle eşleşip cevabı ele verirdi).
+        // "map": il haritada parlar, adı gizli · "name": yalnızca adı yazar, haritada gösterilmez.
         List<Question> Region(LevelDefinition level) =>
-            Take(ProvincesIn(level), level.questionCount).Select(p => new Question
+            Take(ProvincesIn(level), level.questionCount).Select(p =>
             {
-                Prompt = "BU İL HANGİ BÖLGEDE?", Title = Up(p.DisplayName), Type = AnswerType.Choice,
-                Choices = Regions.All, ChoiceColors = Regions.All.Select(palette.RegionColor).ToArray(),
-                CorrectChoice = System.Array.IndexOf(Regions.All, p.Data.region), Focus = p, AnswerLabel = p.Data.region
+                bool byName = level.variant == "name";
+                bool byMap = level.variant == "map";
+                return new Question
+                {
+                    Prompt = byMap ? "HARİTADA PARLAYAN İL HANGİ BÖLGEDE?" : "BU İL HANGİ BÖLGEDE?",
+                    Title = byMap ? "?" : Up(p.DisplayName), Type = AnswerType.Choice, Choices = Regions.All,
+                    CorrectChoice = System.Array.IndexOf(Regions.All, p.Data.region), Focus = p, FocusHidden = byName,
+                    AnswerLabel = p.Data.region
+                };
             }).ToList();
 
         List<Question> Feature(LevelDefinition level) =>

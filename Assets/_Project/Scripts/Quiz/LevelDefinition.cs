@@ -49,6 +49,11 @@ namespace KPSSGeography.Quiz
         public string set;
         /// <summary>Özellik adı (attribute ve featurechoice modları): climate | vegetation | laketype</summary>
         public string attribute;
+        /// <summary>
+        /// Bölge modu: "map" = il yalnızca haritada parlar, adı yazmaz (konumdan bölgeyi bil);
+        /// "name" = yalnızca adı yazar, haritada gösterilmez (adından bölgeyi bil). Cevaptan sonra ikisi de gösterilir.
+        /// </summary>
+        public string variant;
         public int plateMin;
         public int plateMax;
 

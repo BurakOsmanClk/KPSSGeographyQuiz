@@ -239,7 +239,7 @@ namespace KPSSGeography.Map
             };
             if (hasOverride && State == ProvinceState.Idle) target = overrideColor;
             else if (dimmed && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, uniformDim ? 1f : 0.82f);
-            else if (neutral && State == ProvinceState.Idle) target = Color.Lerp(baseColor, palette.dim, 0.78f);
+            else if (neutral && State == ProvinceState.Idle) target = palette.dim; // tamamen tek renk: bölge tonu cevabı ele vermesin
             float exam = ExamLook.Blend;
             if (exam > 0f && State == ProvinceState.Idle)
                 target = Color.Lerp(target, dimmed && !uniformDim ? palette.examDim : palette.examLand, exam);

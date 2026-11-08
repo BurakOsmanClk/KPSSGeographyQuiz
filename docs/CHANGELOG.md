@@ -5,6 +5,10 @@ giriş ekranının sağ altında ile **Ayarlar** penceresinde görünür (`Core/
 Biçim: `ANA.KÜÇÜK.YAMA` — yeni özellik = KÜÇÜK +1, hata düzeltmesi = YAMA +1, mağaza yayını = 1.0.0.
 
 ## Yayınlanmamış (0.5.0 adayı)
+- **Bölge bölümleri yeniden:** cevabı ele veren ipuçları kaldırıldı (bölge renkli şıklar, nötr haritada kalan bölge tonu,
+  bilinen illerin bölge rengine boyanması, "Bölgeyi Tamamla"da çizilen bölge sınırı ve bölgeye yaklaşan kamera).
+  "Yedi Bölge" → **Haritadan Bölge Bul** (il adı gizli), "Bölge Ustası" → **Adından Bölge Bil** (harita yardımı yok).
+  "Bölgeyi Tamamla" süreleri bütün Türkiye haritasına göre %20 uzatıldı.
 - **Esnek arayüz:** güvenli alan desteği (çentikli telefonlar) ve güvenli alana göre ölçek; her ekran boyutunda en az 1920×1080
   birimlik alan, ekranlar üst üste binmez. Bütün yazılar kutusuna sığar (satır kaydırma + gerekirse küçülme); uzun KPSS
   açıklamaları ve şıklar artık taşmıyor. A–E soru kartı PUAN paneline binmiyor; geri bildirim ve açıklama kartın altına yerleşiyor.
