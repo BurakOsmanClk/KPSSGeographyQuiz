@@ -123,7 +123,7 @@ namespace KPSSGeography.Core
             // Öğren: süresiz konu anlatımı (iklim, yer şekilleri, sular, ekonomi, beşeri)
             learn = new GameObject("LearnController").AddComponent<LearnScreen>();
             learn.Labels = labels;
-            learn.Initialize(uiRoot, map, features, relief, camController, sfx, topicDb, LessonDatabase.Load());
+            learn.Initialize(uiRoot, map, features, relief, effects, camController, sfx, topicDb, LessonDatabase.Load());
 
             // Reklamlar: Ads Mediation (LevelPlay) kurulana kadar test reklamı
             var mockAds = new GameObject("MockAdsController").AddComponent<MockAdService>();

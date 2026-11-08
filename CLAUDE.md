@@ -49,7 +49,7 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - Kurallar (`CityQuizGame.IsExam`): süre × `QuizConfig.examTimeScale` (0,8), puan × `examScoreMultiplier` (1,5), kalıcı boyama / hover / ışıltı / anlık bilgi notu / kontrol ipucu yok, ilerleme anahtarı `ProgressStore.ExamKey(id)` (`id@exam`; toplam yıldıza katılmaz). Bilgi notları "Haritayı incele"de okunur.
 
 ## Öğren ekranı
-- Giriş ekranındaki **ÖĞREN** butonu → `UI/LearnScreen.cs`: süresiz, puansız konu anlatımı. Veri: `Resources/Data/lessons.json` (`tabs`, `lessons`: `kind` = `attribute` | `feature` | `topicset`, `reference`, `notes`).
+- Giriş ekranındaki **ÖĞREN** butonu → `UI/LearnScreen.cs`: süresiz, puansız konu anlatımı. Veri: `Resources/Data/lessons.json` (`tabs`, `lessons`: `kind` = `attribute` | `feature` | `topicset` | `notes`, `reference`, `notes`). Konu setindeki bir başlığın `line` alanı varsa (enlem/boylam) çizgi kalıcı olarak çizilir (`MapEffects.DrawOutline(..., persistent: true, closed: false)`).
 - `attribute`: iller özelliğe göre boyanır (`ProvinceView.SetOverride`), renk açıklamasına dokununca tek tür öne çıkar. `feature`: kategori gösterilir (il sınırları gizli, UNESCO/park hariç), öğeye dokununca ad + tür + bilgi notu. `topicset`: konu setinin başlıkları seçilir, ilgili iller boyanır; ile dokununca o ilin öne çıktığı başlıklar.
 - Harita dokunuşları `GameBootstrap`'ta Öğren ekranı açıkken ona yönlendirilir. Yeni ders = lessons.json'a bir kayıt.
 
@@ -64,10 +64,10 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 ## Prototip
 - Herhangi bir sahnede Play → `GameBootstrap` otomatik oluşur (ya da **KPSS > Prototip Sahnesini Oluştur**). Her şey çalışma anında kurulur.
 - Akış (`Core/AppFlow.cs`): Giriş ekranı → Bölüm karuseli → Oyun → Sonuç (Tekrar / Sonraki / Bölümler).
-- Bölümler `Resources/Data/levels.json` içinde, `groups` ile sekmelere ayrılır (İller, Bölgeler, Yer Şekilleri, Sular ve Kıyılar, İklim, Ekonomi, Beşeri, KPSS Soruları). `mode` değerleri:
+- Bölümler `Resources/Data/levels.json` içinde, `groups` ile sekmelere ayrılır (İller, Konum, Bölgeler, Yer Şekilleri, Sular ve Kıyılar, İklim, Ekonomi, Beşeri, KPSS Soruları). `mode` değerleri:
   `find` (ili bul) · `region` (bölgesini seç) · `feature` + `category` (yer şekli bul: river, mountain, volcano, plain, plateau, lake, dam, gulf, peninsula, unesco, park, fault) · `topic` + `set` (konu setindeki illerden biri: tarım, maden, enerji, nüfus) · `plate` + `plateMin/Max` · `neighbor` · `attribute` + `attribute` (climate, vegetation) · `featurechoice` + `category` + `attribute` (göl tipi `laketype`, ova türü `plaintype`, plato türü `plateautype`, dağ türü `mountaintype`; öğenin `subtype`'ı boşsa tür sorusunda sorulmaz) · `regionall` (bölgenin bütün illeri; `timePerQuestion` = toplam süre) · `mcq` + `set` (A–E soru bankası) · `soon`.
 - Tüm modlar tek soru modeliyle çalışır: `Quiz/Question.cs` (haritadan seçme / butonla seçme / hepsini bul) ve `Quiz/QuestionBuilder.cs` (bölümden soru üretir). Yeni mod = QuestionBuilder'a bir metot + levels.json.
-- Konu setleri ve özellikler: `python Tools/content/build_topics.py` → `Resources/Data/topics.json` (il adları plakaya otomatik çevrilir). Soru bankası: `Resources/Data/questions.json` (`highlight`: `feature:<id>` ya da `plate:<no>`).
+- Konu setleri ve özellikler: `python Tools/content/build_topics.py` → `Resources/Data/topics.json` (il adları plakaya otomatik çevrilir). `enlem` seti (37–41° K paralelleri, 30/32/36/40/44° D meridyenleri) geçtiği iller `turkey_provinces.json` sınırlarından otomatik hesaplanır (`PARALLELS`, `MERIDIANS`). Soru bankası: `Resources/Data/questions.json` (`highlight`: `feature:<id>` ya da `plate:<no>`).
 - Bölge, iklim/bitki örtüsü ve "hepsini bul" modlarında iller nötr renge çevrilir (`TurkeyMap.SetNeutral`): bölge renkleri cevabı ele vermemeli.
 - İlerleme (yıldız, rekor, kilitler) `Meta/ProgressStore.cs` → PlayerPrefs. Yıldız: tamamlarsa 3 − hata (en az 1). Bir bölüm, önceki oynanabilir bölümden ≥1 yıldızla açılır. **Şu an geliştirme için tüm bölümler açık** (`GameBootstrap.UnlockAllLevelsForTesting = true`); yayından önce false yapılacak.
 - Harita renkleri bölgelere göre (`Map/MapPalette.cs`); doğru bilinen il bölge renginin doygun haline boyanır.

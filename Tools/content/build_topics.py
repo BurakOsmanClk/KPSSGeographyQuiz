@@ -145,6 +145,26 @@ TOPICS = [
     ("nufus", "yasli", "Yaşlı Nüfus Oranı En Yüksek", "BİR İL SEÇ", ("Sinop", "Kastamonu", "Giresun"),
      "Göç veren Karadeniz illerinde yaşlı nüfus oranı yüksektir; Sinop ilk sıradadır.", "TÜİK"),
 
+    # ---- Konum: uç noktalar ve güneş (matematik konumun sonuçları) ----
+    ("konum", "en-dogu", "En Doğudaki İl", "BİR İL SEÇ", ("Iğdır",),
+     "Türkiye'nin en doğu noktası Iğdır'ın Aralık ilçesindeki Dilucu (44° 48' D). Yerel saat en ileri buradadır.", "KPSS"),
+    ("konum", "en-bati", "En Batıdaki İl", "BİR İL SEÇ", ("Çanakkale",),
+     "En batı noktası Gökçeada'daki Avlaka Burnu (25° 40' D); karadaki en batı nokta Baba Burnu. İkisi de Çanakkale'dedir.", "KPSS"),
+    ("konum", "en-kuzey", "En Kuzeydeki İl", "BİR İL SEÇ", ("Sinop",),
+     "En kuzey noktası Sinop'taki İnceburun (42° 06' K). Kuzey Kutbu'na en yakın il Sinop'tur.", "KPSS"),
+    ("konum", "en-guney", "En Güneydeki İl", "BİR İL SEÇ", ("Hatay",),
+     "En güney noktası Hatay Yayladağı'ndaki Beysun köyü (35° 49' K). Ekvator'a en yakın il Hatay'dır.", "KPSS"),
+    ("konum", "gunes-ilk", "Güneşin İlk Doğduğu İl", "BİR İL SEÇ", ("Iğdır",),
+     "Dünya batıdan doğuya döndüğü için güneş Türkiye'de ilk olarak en doğudaki Iğdır'da doğar.", "KPSS"),
+    ("konum", "gunes-son", "Güneşin En Son Battığı İl", "BİR İL SEÇ", ("Çanakkale",),
+     "Güneş en son en batıdaki Çanakkale'de batar. Doğu ile batı arasında 19 boylam × 4 dk = 76 dakika yerel saat farkı vardır.", "KPSS"),
+    ("konum", "golge-uzun", "Öğle Gölgesi En Uzun", "BİR İL SEÇ", ("Sinop",),
+     "Kuzeye gidildikçe güneş ışınlarının geliş açısı küçülür; aynı anda öğle vakti cisimlerin gölgesi en uzun Sinop'ta olur.", "KPSS"),
+    ("konum", "golge-kisa", "Öğle Gölgesi En Kısa", "BİR İL SEÇ", ("Hatay",),
+     "En güneydeki Hatay'da güneş ışınları en büyük açıyla gelir; öğle gölgesi en kısadır. Türkiye'de ışınlar hiçbir zaman dik gelmez.", "KPSS"),
+    ("konum", "gunduz-uzun", "21 Haziran'da Gündüzü En Uzun", "BİR İL SEÇ", ("Sinop",),
+     "Kuzey Yarım Küre'de yaz gün dönümünde (21 Haziran) kuzeye gidildikçe gündüz uzar; en uzun gündüz Sinop'ta yaşanır. 21 Aralık'ta ise en kısa gündüz Sinop'tadır.", "KPSS"),
+
     # ---- İklim: sıcaklık ve yağış (il bazlı uç değerler) ----
     ("iklim2", "yagis-cok", "Yıllık Yağış En Fazla", "BİR İL SEÇ", ("Rize", "Artvin", "Trabzon", "Giresun"),
      "Nemli kuzey rüzgârları Doğu Karadeniz Dağları'na çarpıp yükselir (orografik yağış). Rize yılda 2.000 mm'yi aşan yağışla ilk sıradadır; yağış her mevsime dağılmıştır.", "MGM / KPSS"),
@@ -268,11 +288,51 @@ ATTRIBUTES = [
 ]
 
 
+PROVINCES_JSON = os.path.join(HERE, "..", "..", "Assets", "_Project", "Resources", "Data", "turkey_provinces.json")
+PARALLELS = (37, 38, 39, 40, 41)
+MERIDIANS = (30, 32, 36, 40, 44)
+
+
+def line_topics():
+    """Enlem ve boylamların geçtiği illeri il sınırlarından hesaplar (turkey_provinces.json, projeksiyon geri çevrilir)."""
+    from shapely.geometry import LineString, Polygon
+    from shapely.ops import unary_union
+    data = json.load(open(PROVINCES_JSON, encoding="utf-8"))
+    lon0, lat0, kx, ky = data["projection"]
+    shapes = {}
+    for p in data["provinces"]:
+        polys = []
+        for r in p["rings"]:
+            pts = r["points"]
+            coords = [(pts[i] / kx + lon0, pts[i + 1] / ky + lat0) for i in range(0, len(pts), 2)]
+            if len(coords) >= 3:
+                polys.append(Polygon(coords).buffer(0))
+        shapes[p["plate"]] = unary_union(polys)
+    out = []
+    for lat in PARALLELS:
+        line = [25.5, lat, 45.0, lat]
+        hit = sorted(pl for pl, g in shapes.items() if g.intersects(LineString([(line[0], lat), (line[2], lat)])))
+        out.append({"id": f"enlem-{lat}", "set": "enlem", "title": f"{lat}° Kuzey Enlemi", "question": "GEÇTİĞİ BİR İL SEÇ",
+                    "plates": hit, "line": line, "source": "Natural Earth il sınırları",
+                    "info": f"{lat}° K paraleli Türkiye'yi batıdan doğuya keser. Türkiye 36°–42° K enlemleri arasındadır; "
+                            "1 enlem yaklaşık 111 km olduğundan kuzey–güney uzunluğu yaklaşık 660 km'dir."})
+    for lon in MERIDIANS:
+        line = [lon, 35.7, lon, 42.2]
+        hit = sorted(pl for pl, g in shapes.items() if g.intersects(LineString([(lon, line[1]), (lon, line[3])])))
+        extra = " Türkiye'nin ortak saati (UTC+3) 45° D boylamına göredir." if lon == 44 else ""
+        out.append({"id": f"boylam-{lon}", "set": "enlem", "title": f"{lon}° Doğu Boylamı", "question": "GEÇTİĞİ BİR İL SEÇ",
+                    "plates": hit, "line": line, "source": "Natural Earth il sınırları",
+                    "info": f"{lon}° D meridyeni Türkiye'yi kuzeyden güneye keser. Türkiye 26°–45° D boylamları arasındadır; "
+                            "her boylam 4 dakikalık yerel saat farkı demektir." + extra})
+    return out
+
+
 def main():
     out_topics = []
     for set_id, tid, title, question, names, info, source in TOPICS:
         out_topics.append({"id": tid, "set": set_id, "title": title, "question": question,
                            "plates": plates(*names), "info": info, "source": source})
+    out_topics.extend(line_topics())
     out_attrs = []
     for a in ATTRIBUTES:
         groups = []

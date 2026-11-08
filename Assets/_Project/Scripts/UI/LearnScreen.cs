@@ -14,7 +14,8 @@ namespace KPSSGeography.UI
     /// altında dersler bulunur. Her ders haritayı kendi görünümüne getirir:
     /// • attribute: iller özelliğe göre boyanır (iklim tipleri, bitki örtüsü) + renk açıklaması.
     /// • feature: yer şekli kategorisi gösterilir (il sınırları gizli); öğeye dokununca bilgi kartı.
-    /// • topicset: konu setinin başlıkları (ürün, maden...) seçilir; ilgili iller boyanır.
+    /// • topicset: konu setinin başlıkları (ürün, maden...) seçilir; ilgili iller boyanır (varsa paralel/meridyen çizilir).
+    /// • notes: yalnızca ders notu; harita normal görünümde.
     /// Haritada kaydırma ve yakınlaştırma serbesttir. Sınav görünümü bu ekranda kullanılmaz.
     /// </summary>
     public class LearnScreen : UIScreen
@@ -32,6 +33,7 @@ namespace KPSSGeography.UI
         TurkeyMap map;
         FeatureLayer features;
         ReliefLayer relief;
+        MapEffects effects;
         MapCameraController cam;
         SfxPlayer sfx;
         TopicDatabase topics;
@@ -59,12 +61,13 @@ namespace KPSSGeography.UI
         public bool AcceptsProvinceInput => IsVisible && current != null && current.kind != "feature";
         public bool AcceptsFeatureInput => IsVisible && current != null && current.kind == "feature";
 
-        public void Initialize(Transform parent, TurkeyMap turkeyMap, FeatureLayer featureLayer, ReliefLayer reliefLayer,
+        public void Initialize(Transform parent, TurkeyMap turkeyMap, FeatureLayer featureLayer, ReliefLayer reliefLayer, MapEffects mapEffects,
             MapCameraController cameraController, SfxPlayer sfxPlayer, TopicDatabase topicDb, LessonDatabase lessonDb)
         {
             map = turkeyMap;
             features = featureLayer;
             relief = reliefLayer;
+            effects = mapEffects;
             cam = cameraController;
             sfx = sfxPlayer;
             topics = topicDb;
@@ -166,6 +169,7 @@ namespace KPSSGeography.UI
             base.Hide();
             if (!wasVisible) return;
             ClearMap();
+            effects?.Clear();
             Labels?.ClearReview();
             Labels?.SetProvinceLabels(false);
             features.ShowDefault();
@@ -230,12 +234,25 @@ namespace KPSSGeography.UI
                 case "attribute": SetupAttribute(lesson.reference); break;
                 case "feature": SetupFeature(lesson.reference); break;
                 case "topicset": SetupTopics(lesson.reference); break;
+                default: SetupNotes(); break;
             }
+            // Başlık/renk listesi yoksa ders notu sağ panelin tamamını kullanır
+            notesBody.rectTransform.sizeDelta = new Vector2(NotesPanelWidth - 52, chipButtons.Count > 0 ? 430 : 790);
             TextScaler.Apply(Root);
+        }
+
+        void SetupNotes()
+        {
+            features.ShowDefault();
+            relief?.SetStrength(0.55f);
+            Labels?.SetProvinceLabels(true);
+            cam.FocusOn(map.Bounds, MapViewport);
+            ShowInfo(current.title, "Ders notu", "Bu derste harita etkileşimi yok; sağdaki notu oku. Haritayı kaydırıp yakınlaştırarak inceleyebilirsin.");
         }
 
         void ClearMap()
         {
+            effects?.Clear();
             map.ResetAll();
             foreach (var p in map.Provinces) p.SetOverride(null);
             selectedFeature = null;
@@ -310,6 +327,19 @@ namespace KPSSGeography.UI
                 bool on = t != null && t.plates != null && Array.IndexOf(t.plates, p.Data.plate) >= 0;
                 p.SetOverride(on ? Highlight : (Color?)null);
                 p.SetNeutral(!on);
+            }
+            effects?.Clear();
+            if (t != null && t.HasLine)
+            {
+                // Paralel / meridyen çizgisi (birkaç ara noktayla, harita projeksiyonunda)
+                var pts = new Vector2[16];
+                for (int i = 0; i < pts.Length; i++)
+                {
+                    float u = i / (pts.Length - 1f);
+                    Vector3 w = map.LonLatToMap(Mathf.Lerp(t.line[0], t.line[2], u), Mathf.Lerp(t.line[1], t.line[3], u));
+                    pts[i] = w;
+                }
+                effects?.DrawOutline(new List<Vector2[]> { pts }, new Color(0.9f, 0.2f, 0.25f, 1f), true, false);
             }
             if (t != null)
             {

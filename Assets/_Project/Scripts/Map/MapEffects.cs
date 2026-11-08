@@ -17,6 +17,8 @@ namespace KPSSGeography.Map
             public float total;
             public Color color;
             public float time;
+            public bool persistent;
+            public bool closed;
         }
 
         class Particle
@@ -50,15 +52,18 @@ namespace KPSSGeography.Map
         }
 
         /// <summary>Verilen halkaları (bölge dış hattı) sırayla çizer, bekletir ve söndürür.</summary>
-        public void DrawOutline(List<Vector2[]> rings, Color color)
+        /// <paramref name="persistent"/>: söndürülmez ve efekt ayarından bağımsızdır (öğretici çizgiler, ör. paralel).
+        /// <paramref name="closed"/>: false ise açık çizgi (son noktadan başa dönmez).
+        public void DrawOutline(List<Vector2[]> rings, Color color, bool persistent = false, bool closed = true)
         {
-            if (!GameSettings.Effects || rings == null || rings.Count == 0) return;
-            var o = new Outline { rings = rings, color = color, lengths = new float[rings.Count] };
+            if ((!GameSettings.Effects && !persistent) || rings == null || rings.Count == 0) return;
+            var o = new Outline { rings = rings, color = color, lengths = new float[rings.Count], persistent = persistent, closed = closed };
             for (int r = 0; r < rings.Count; r++)
             {
                 float len = 0f;
                 var ring = rings[r];
-                for (int i = 0; i < ring.Length; i++) len += Vector2.Distance(ring[i], ring[(i + 1) % ring.Length]);
+                int segs = closed ? ring.Length : ring.Length - 1;
+                for (int i = 0; i < segs; i++) len += Vector2.Distance(ring[i], ring[(i + 1) % ring.Length]);
                 o.lengths[r] = len;
                 o.total += len;
             }
@@ -105,7 +110,7 @@ namespace KPSSGeography.Map
                 var o = outlines[k];
                 o.time += dt;
                 float drawn = Mathf.Clamp01(o.time / DrawDuration);
-                float fade = 1f - Mathf.Clamp01((o.time - DrawDuration - HoldDuration) / FadeDuration);
+                float fade = o.persistent ? 1f : 1f - Mathf.Clamp01((o.time - DrawDuration - HoldDuration) / FadeDuration);
                 if (fade <= 0f)
                 {
                     outlines.RemoveAt(k);
@@ -117,7 +122,7 @@ namespace KPSSGeography.Map
                 for (int r = 0; r < o.rings.Count && budget > 0f; r++)
                 {
                     float take = Mathf.Min(budget, o.lengths[r]);
-                    builder.AddPolyline(Partial(o.rings[r], take), 0.07f, c);
+                    builder.AddPolyline(Partial(o.rings[r], take, o.closed), 0.07f, c);
                     budget -= take;
                 }
             }
@@ -150,11 +155,12 @@ namespace KPSSGeography.Map
         static float EaseOut(float x) => 1f - (1f - x) * (1f - x);
 
         /// <summary>Halkanın baştan itibaren <paramref name="length"/> uzunluğundaki kısmı.</summary>
-        static List<Vector2> Partial(Vector2[] ring, float length)
+        static List<Vector2> Partial(Vector2[] ring, float length, bool closed)
         {
             var pts = new List<Vector2> { ring[0] };
             float acc = 0f;
-            for (int i = 0; i < ring.Length; i++)
+            int segs = closed ? ring.Length : ring.Length - 1;
+            for (int i = 0; i < segs; i++)
             {
                 Vector2 a = ring[i], b = ring[(i + 1) % ring.Length];
                 float seg = Vector2.Distance(a, b);

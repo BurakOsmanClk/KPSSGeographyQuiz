@@ -16,6 +16,10 @@ namespace KPSSGeography.Data
         public int[] plates;
         public string info;
         public string source;
+        /// <summary>İsteğe bağlı çizgi [boylam1, enlem1, boylam2, enlem2] (ör. enlem/boylam setinde paralel veya meridyen).</summary>
+        public float[] line;
+
+        public bool HasLine => line != null && line.Length >= 4;
     }
 
     [Serializable]
@@ -107,7 +111,7 @@ namespace KPSSGeography.Data
         public string id;
         public string tab;
         public string title;
-        /// <summary>attribute (illeri özelliğe göre boya) | feature (yer şekli kategorisi) | topicset (konu seti)</summary>
+        /// <summary>attribute (illeri özelliğe göre boya) | feature (yer şekli kategorisi) | topicset (konu seti) | notes (yalnızca ders notu)</summary>
         public string kind;
         /// <summary>attribute id, yer şekli kategorisi ya da konu seti.</summary>
         public string reference;

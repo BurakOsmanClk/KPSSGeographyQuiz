@@ -959,6 +959,246 @@
    "answer": 0,
    "explanation": "Taraçalar, karanın yavaş yavaş yükselmesi (epirojenez) sonucu eski kıyı düzlüklerinin yükseklerde kalmasıdır.",
    "highlight": ""
+  },
+  {
+   "id": "konum1",
+   "set": "konum",
+   "text": "Türkiye hangi enlemler arasında yer alır?",
+   "options": [
+    "26°–45° Kuzey",
+    "36°–42° Kuzey",
+    "32°–40° Kuzey",
+    "36°–42° Güney",
+    "40°–48° Kuzey"
+   ],
+   "answer": 1,
+   "explanation": "Türkiye 36°–42° kuzey paralelleri arasındadır: Kuzey Yarım Küre'de, orta kuşakta yer alır.",
+   "highlight": ""
+  },
+  {
+   "id": "konum2",
+   "set": "konum",
+   "text": "Türkiye hangi boylamlar arasında yer alır?",
+   "options": [
+    "26°–45° Doğu",
+    "36°–42° Doğu",
+    "26°–45° Batı",
+    "20°–40° Doğu",
+    "30°–50° Doğu"
+   ],
+   "answer": 0,
+   "explanation": "Türkiye 26°–45° doğu meridyenleri arasındadır; Başlangıç Meridyeni'nin doğusundadır.",
+   "highlight": ""
+  },
+  {
+   "id": "konum3",
+   "set": "konum",
+   "text": "Türkiye'nin en doğusu ile en batısı arasındaki yerel saat farkı ne kadardır?",
+   "options": [
+    "19 dakika",
+    "45 dakika",
+    "60 dakika",
+    "76 dakika",
+    "90 dakika"
+   ],
+   "answer": 3,
+   "explanation": "İki boylam arasındaki yerel saat farkı 4 dakikadır: 45 − 26 = 19 boylam × 4 dk = 76 dakika.",
+   "highlight": ""
+  },
+  {
+   "id": "konum4",
+   "set": "konum",
+   "text": "Türkiye'nin kullandığı ortak saat (UTC+3) hangi boylamın yerel saatidir?",
+   "options": [
+    "30° Doğu",
+    "36° Doğu",
+    "39° Doğu",
+    "45° Doğu",
+    "26° Doğu"
+   ],
+   "answer": 3,
+   "explanation": "Türkiye 2016'dan beri sürekli UTC+3'ü, yani 45° doğu boylamının yerel saatini kullanır.",
+   "highlight": ""
+  },
+  {
+   "id": "konum5",
+   "set": "konum",
+   "text": "Türkiye'de güneş ışınlarının yıl boyunca hiçbir zaman dik gelmemesinin nedeni nedir?",
+   "options": [
+    "Kuzey Yarım Küre'de olması",
+    "Yengeç Dönencesi'nin kuzeyinde olması",
+    "Doğu Yarım Küre'de olması",
+    "Ortalama yükseltinin fazla olması",
+    "Üç tarafının denizlerle çevrili olması"
+   ],
+   "answer": 1,
+   "explanation": "Güneş ışınları en fazla Yengeç Dönencesi'ne (23° 27' K) dik gelebilir; Türkiye bu çizginin kuzeyindedir.",
+   "highlight": ""
+  },
+  {
+   "id": "konum6",
+   "set": "konum",
+   "text": "Türkiye'de öğle vakti cisimlerin gölgesi hangi yöne düşer?",
+   "options": [
+    "Güney",
+    "Doğu",
+    "Kuzey",
+    "Batı",
+    "Mevsime göre değişir"
+   ],
+   "answer": 2,
+   "explanation": "Türkiye Yengeç Dönencesi'nin kuzeyinde olduğundan güneş öğle vakti hep güneyde görünür; gölgeler kuzeye düşer.",
+   "highlight": ""
+  },
+  {
+   "id": "konum7",
+   "set": "konum",
+   "text": "Aşağıdakilerden hangisi Türkiye'nin matematik konumunun bir sonucudur?",
+   "options": [
+    "Doğu Anadolu'da kışların sert geçmesi",
+    "Kuzeyden güneye gidildikçe sıcaklığın artması",
+    "Karadeniz kıyılarının her mevsim yağışlı olması",
+    "Boğazların stratejik önemi",
+    "Ege kıyılarının girintili çıkıntılı olması"
+   ],
+   "answer": 1,
+   "explanation": "Enlem etkisi matematik konumdur: güneye gidildikçe ışınların geliş açısı büyür, sıcaklık artar. Diğerleri özel konumla (yükselti, dağlar, denizler) ilgilidir.",
+   "highlight": ""
+  },
+  {
+   "id": "konum8",
+   "set": "konum",
+   "text": "Aşağıdakilerden hangisi Türkiye'nin özel konumunun bir sonucudur?",
+   "options": [
+    "Dört mevsimin belirgin yaşanması",
+    "Öğle gölgelerinin kuzeye düşmesi",
+    "Doğu ile batı arasında 76 dakika saat farkı",
+    "Doğuya gidildikçe yükseltinin artması ve kışların sertleşmesi",
+    "Gece ile gündüz sürelerinin yıl içinde değişmesi"
+   ],
+   "answer": 3,
+   "explanation": "Yükselti, dağların uzanışı ve denizler özel konumdur. Mevsimler, gölge yönü, saat farkı ve gündüz süresi matematik konumun sonucudur.",
+   "highlight": ""
+  },
+  {
+   "id": "konum9",
+   "set": "konum",
+   "text": "21 Haziran'da Türkiye'de gündüzün en uzun yaşandığı il hangisidir?",
+   "options": [
+    "Hatay",
+    "Iğdır",
+    "Çanakkale",
+    "Sinop",
+    "Ankara"
+   ],
+   "answer": 3,
+   "explanation": "Kuzey Yarım Küre'de yazın kuzeye gidildikçe gündüz uzar; en kuzeydeki il Sinop'tur (İnceburun).",
+   "highlight": "plate:57"
+  },
+  {
+   "id": "konum10",
+   "set": "konum",
+   "text": "Türkiye'de güneş ilk olarak hangi ilde doğar?",
+   "options": [
+    "Hakkari",
+    "Iğdır",
+    "Kars",
+    "Van",
+    "Sinop"
+   ],
+   "answer": 1,
+   "explanation": "Dünya batıdan doğuya döndüğü için güneş önce en doğudaki yerde doğar: Iğdır (Aralık–Dilucu, 44° 48' D).",
+   "highlight": "plate:76"
+  },
+  {
+   "id": "konum11",
+   "set": "konum",
+   "text": "1 enlem yaklaşık 111 km ise Türkiye'nin kuzey–güney doğrultusundaki uzunluğu yaklaşık kaç km'dir?",
+   "options": [
+    "Yaklaşık 330 km",
+    "Yaklaşık 660 km",
+    "Yaklaşık 1.100 km",
+    "Yaklaşık 1.600 km",
+    "Yaklaşık 2.100 km"
+   ],
+   "answer": 1,
+   "explanation": "Türkiye 36°–42° K arasında 6 enleme yayılır: 6 × 111 ≈ 666 km. Doğu–batı uzunluğu ise yaklaşık 1.660 km'dir.",
+   "highlight": ""
+  },
+  {
+   "id": "konum12",
+   "set": "konum",
+   "text": "Türkiye'nin en uzun kara sınırı hangi ülkeyledir?",
+   "options": [
+    "İran",
+    "Gürcistan",
+    "Irak",
+    "Suriye",
+    "Bulgaristan"
+   ],
+   "answer": 3,
+   "explanation": "En uzun kara sınırı Suriye ile, en kısası Azerbaycan'a bağlı Nahçıvan iledir.",
+   "highlight": ""
+  },
+  {
+   "id": "konum13",
+   "set": "konum",
+   "text": "Türkiye'nin en kısa kara sınırı hangi ülkeyledir?",
+   "options": [
+    "Ermenistan",
+    "Yunanistan",
+    "Azerbaycan (Nahçıvan)",
+    "Gürcistan",
+    "Bulgaristan"
+   ],
+   "answer": 2,
+   "explanation": "Iğdır'daki kısa Nahçıvan sınırı Türkiye'nin en kısa kara sınırıdır.",
+   "highlight": "plate:76"
+  },
+  {
+   "id": "konum14",
+   "set": "konum",
+   "text": "Türkiye'nin ortalama yükseltisi yaklaşık kaç metredir?",
+   "options": [
+    "330 m",
+    "530 m",
+    "1.132 m",
+    "2.132 m",
+    "3.000 m"
+   ],
+   "answer": 2,
+   "explanation": "Türkiye'nin ortalama yükseltisi yaklaşık 1.132 m'dir; Avrupa ortalamasının (yaklaşık 330 m) çok üstündedir. Yükselti batıdan doğuya artar.",
+   "highlight": ""
+  },
+  {
+   "id": "konum15",
+   "set": "konum",
+   "text": "Batıdan doğuya yükseltinin artmasının sonuçlarından biri DEĞİLDİR?",
+   "options": [
+    "Ortalama sıcaklığın azalması",
+    "Kar örtüsünün yerde kalma süresinin uzaması",
+    "Ürünlerin olgunlaşma süresinin uzaması",
+    "Nüfus yoğunluğunun azalması",
+    "Doğu Karadeniz'in çok yağış alması"
+   ],
+   "answer": 4,
+   "explanation": "Doğu Karadeniz'in çok yağış alması denizden gelen nemli havanın kıyıya paralel dağlara çarpmasıyla (orografik yağış) ilgilidir, batı–doğu yükselti farkıyla değil.",
+   "highlight": ""
+  },
+  {
+   "id": "konum16",
+   "set": "konum",
+   "text": "Aşağıdakilerden hangisi Türkiye'nin jeopolitik önemini artıran özel konum özelliklerindendir?",
+   "options": [
+    "Orta kuşakta yer alması",
+    "Kuzey Yarım Küre'de olması",
+    "Asya ile Avrupa arasında köprü konumunda olması ve boğazlara sahip olması",
+    "Gölgelerin kuzeye düşmesi",
+    "Dört mevsimin belirgin olması"
+   ],
+   "answer": 2,
+   "explanation": "Kıtalar arasında köprü olması, boğazlar, enerji yolları ve üç tarafının denizlerle çevrili olması özel konumdur; jeopolitik önemi artırır.",
+   "highlight": ""
   }
  ]
 }

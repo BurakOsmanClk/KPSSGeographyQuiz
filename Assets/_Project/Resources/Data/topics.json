@@ -751,6 +751,105 @@
    "source": "TÜİK"
   },
   {
+   "id": "en-dogu",
+   "set": "konum",
+   "title": "En Doğudaki İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    76
+   ],
+   "info": "Türkiye'nin en doğu noktası Iğdır'ın Aralık ilçesindeki Dilucu (44° 48' D). Yerel saat en ileri buradadır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "en-bati",
+   "set": "konum",
+   "title": "En Batıdaki İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    17
+   ],
+   "info": "En batı noktası Gökçeada'daki Avlaka Burnu (25° 40' D); karadaki en batı nokta Baba Burnu. İkisi de Çanakkale'dedir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "en-kuzey",
+   "set": "konum",
+   "title": "En Kuzeydeki İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    57
+   ],
+   "info": "En kuzey noktası Sinop'taki İnceburun (42° 06' K). Kuzey Kutbu'na en yakın il Sinop'tur.",
+   "source": "KPSS"
+  },
+  {
+   "id": "en-guney",
+   "set": "konum",
+   "title": "En Güneydeki İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    31
+   ],
+   "info": "En güney noktası Hatay Yayladağı'ndaki Beysun köyü (35° 49' K). Ekvator'a en yakın il Hatay'dır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "gunes-ilk",
+   "set": "konum",
+   "title": "Güneşin İlk Doğduğu İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    76
+   ],
+   "info": "Dünya batıdan doğuya döndüğü için güneş Türkiye'de ilk olarak en doğudaki Iğdır'da doğar.",
+   "source": "KPSS"
+  },
+  {
+   "id": "gunes-son",
+   "set": "konum",
+   "title": "Güneşin En Son Battığı İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    17
+   ],
+   "info": "Güneş en son en batıdaki Çanakkale'de batar. Doğu ile batı arasında 19 boylam × 4 dk = 76 dakika yerel saat farkı vardır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "golge-uzun",
+   "set": "konum",
+   "title": "Öğle Gölgesi En Uzun",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    57
+   ],
+   "info": "Kuzeye gidildikçe güneş ışınlarının geliş açısı küçülür; aynı anda öğle vakti cisimlerin gölgesi en uzun Sinop'ta olur.",
+   "source": "KPSS"
+  },
+  {
+   "id": "golge-kisa",
+   "set": "konum",
+   "title": "Öğle Gölgesi En Kısa",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    31
+   ],
+   "info": "En güneydeki Hatay'da güneş ışınları en büyük açıyla gelir; öğle gölgesi en kısadır. Türkiye'de ışınlar hiçbir zaman dik gelmez.",
+   "source": "KPSS"
+  },
+  {
+   "id": "gunduz-uzun",
+   "set": "konum",
+   "title": "21 Haziran'da Gündüzü En Uzun",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    57
+   ],
+   "info": "Kuzey Yarım Küre'de yaz gün dönümünde (21 Haziran) kuzeye gidildikçe gündüz uzar; en uzun gündüz Sinop'ta yaşanır. 21 Aralık'ta ise en kısa gündüz Sinop'tadır.",
+   "source": "KPSS"
+  },
+  {
    "id": "yagis-cok",
    "set": "iklim2",
    "title": "Yıllık Yağış En Fazla",
@@ -895,6 +994,288 @@
    ],
    "info": "Yüksek dağlarda buzulların aşındırdığı çanaklarda sirk gölleri oluşur; Kaçkar, Cilo–Sat, Ağrı ve Aladağlar'da görülür. Ağrı Dağı'nda güncel buzul vardır.",
    "source": "KPSS"
+  },
+  {
+   "id": "enlem-37",
+   "set": "enlem",
+   "title": "37° Kuzey Enlemi",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    1,
+    7,
+    15,
+    20,
+    27,
+    30,
+    31,
+    33,
+    42,
+    47,
+    48,
+    63,
+    70,
+    79,
+    80
+   ],
+   "line": [
+    25.5,
+    37,
+    45.0,
+    37
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "37° K paraleli Türkiye'yi batıdan doğuya keser. Türkiye 36°–42° K enlemleri arasındadır; 1 enlem yaklaşık 111 km olduğundan kuzey–güney uzunluğu yaklaşık 660 km'dir."
+  },
+  {
+   "id": "enlem-38",
+   "set": "enlem",
+   "title": "38° Kuzey Enlemi",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    1,
+    2,
+    3,
+    9,
+    13,
+    20,
+    21,
+    32,
+    35,
+    38,
+    42,
+    44,
+    46,
+    51,
+    56,
+    63,
+    65,
+    68,
+    72
+   ],
+   "line": [
+    25.5,
+    38,
+    45.0,
+    38
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "38° K paraleli Türkiye'yi batıdan doğuya keser. Türkiye 36°–42° K enlemleri arasındadır; 1 enlem yaklaşık 111 km olduğundan kuzey–güney uzunluğu yaklaşık 660 km'dir."
+  },
+  {
+   "id": "enlem-39",
+   "set": "enlem",
+   "title": "39° Kuzey Enlemi",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    3,
+    6,
+    12,
+    13,
+    23,
+    35,
+    38,
+    40,
+    42,
+    43,
+    44,
+    45,
+    49,
+    50,
+    58,
+    62,
+    65,
+    68
+   ],
+   "line": [
+    25.5,
+    39,
+    45.0,
+    39
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "39° K paraleli Türkiye'yi batıdan doğuya keser. Türkiye 36°–42° K enlemleri arasındadır; 1 enlem yaklaşık 111 km olduğundan kuzey–güney uzunluğu yaklaşık 660 km'dir."
+  },
+  {
+   "id": "enlem-40",
+   "set": "enlem",
+   "title": "40° Kuzey Enlemi",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    6,
+    10,
+    11,
+    16,
+    17,
+    19,
+    24,
+    25,
+    26,
+    29,
+    36,
+    58,
+    60,
+    66,
+    71,
+    76
+   ],
+   "line": [
+    25.5,
+    40,
+    45.0,
+    40
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "40° K paraleli Türkiye'yi batıdan doğuya keser. Türkiye 36°–42° K enlemleri arasındadır; 1 enlem yaklaşık 111 km olduğundan kuzey–güney uzunluğu yaklaşık 660 km'dir."
+  },
+  {
+   "id": "enlem-41",
+   "set": "enlem",
+   "title": "41° Kuzey Enlemi",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    5,
+    8,
+    14,
+    18,
+    19,
+    22,
+    28,
+    34,
+    36,
+    37,
+    41,
+    52,
+    53,
+    54,
+    55,
+    59,
+    61,
+    75,
+    78,
+    81
+   ],
+   "line": [
+    25.5,
+    41,
+    45.0,
+    41
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "41° K paraleli Türkiye'yi batıdan doğuya keser. Türkiye 36°–42° K enlemleri arasındadır; 1 enlem yaklaşık 111 km olduğundan kuzey–güney uzunluğu yaklaşık 660 km'dir."
+  },
+  {
+   "id": "boylam-30",
+   "set": "enlem",
+   "title": "30° Doğu Boylamı",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    3,
+    7,
+    11,
+    15,
+    20,
+    41,
+    43,
+    54
+   ],
+   "line": [
+    30,
+    35.7,
+    30,
+    42.2
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "30° D meridyeni Türkiye'yi kuzeyden güneye keser. Türkiye 26°–45° D boylamları arasındadır; her boylam 4 dakikalık yerel saat farkı demektir."
+  },
+  {
+   "id": "boylam-32",
+   "set": "enlem",
+   "title": "32° Doğu Boylamı",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    6,
+    7,
+    14,
+    26,
+    42,
+    67
+   ],
+   "line": [
+    32,
+    35.7,
+    32,
+    42.2
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "32° D meridyeni Türkiye'yi kuzeyden güneye keser. Türkiye 26°–45° D boylamları arasındadır; her boylam 4 dakikalık yerel saat farkı demektir."
+  },
+  {
+   "id": "boylam-36",
+   "set": "enlem",
+   "title": "36° Doğu Boylamı",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    1,
+    5,
+    31,
+    38,
+    55,
+    58,
+    60,
+    66,
+    80
+   ],
+   "line": [
+    36,
+    35.7,
+    36,
+    42.2
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "36° D meridyeni Türkiye'yi kuzeyden güneye keser. Türkiye 26°–45° D boylamları arasındadır; her boylam 4 dakikalık yerel saat farkı demektir."
+  },
+  {
+   "id": "boylam-40",
+   "set": "enlem",
+   "title": "40° Doğu Boylamı",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    21,
+    23,
+    24,
+    61,
+    62,
+    63,
+    69
+   ],
+   "line": [
+    40,
+    35.7,
+    40,
+    42.2
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "40° D meridyeni Türkiye'yi kuzeyden güneye keser. Türkiye 26°–45° D boylamları arasındadır; her boylam 4 dakikalık yerel saat farkı demektir."
+  },
+  {
+   "id": "boylam-44",
+   "set": "enlem",
+   "title": "44° Doğu Boylamı",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    4,
+    30,
+    65,
+    76
+   ],
+   "line": [
+    44,
+    35.7,
+    44,
+    42.2
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "44° D meridyeni Türkiye'yi kuzeyden güneye keser. Türkiye 26°–45° D boylamları arasındadır; her boylam 4 dakikalık yerel saat farkı demektir. Türkiye'nin ortak saati (UTC+3) 45° D boylamına göredir."
   }
  ],
  "attributes": [

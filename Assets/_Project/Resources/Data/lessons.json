@@ -1,6 +1,10 @@
 {
  "tabs": [
   {
+   "id": "konum",
+   "title": "KONUM"
+  },
+  {
    "id": "iklim",
    "title": "İKLİM"
   },
@@ -22,6 +26,30 @@
   }
  ],
  "lessons": [
+  {
+   "id": "uc-noktalar",
+   "tab": "konum",
+   "title": "Matematik Konum",
+   "kind": "topicset",
+   "reference": "konum",
+   "notes": "Türkiye <b>36°–42° K</b> enlemleri ile <b>26°–45° D</b> boylamları arasındadır.\n<b>Uç noktalar:</b> doğu Iğdır (Dilucu), batı Çanakkale (Gökçeada, Avlaka Burnu), kuzey Sinop (İnceburun), güney Hatay (Beysun).\n<b>Sonuçları:</b> Kuzey Yarım Küre ve orta kuşaktadır; dört mevsim belirgindir. Güneş ışınları hiç dik gelmez, öğle gölgeleri kuzeye düşer. Güneyden kuzeye sıcaklık azalır, gölge boyu uzar. Doğu ile batı arasında 19 boylam × 4 dk = <b>76 dakika</b> yerel saat farkı vardır; güneş önce Iğdır'da doğar. Ortak saat UTC+3 (45° D).\n\n<color=#8ECAE6>Sağdan bir başlık seç: ilgili iller boyanır. Bir ile dokunursan o ilin öne çıktığı başlıklar listelenir.</color>"
+  },
+  {
+   "id": "enlem-boylam",
+   "tab": "konum",
+   "title": "Enlem ve Boylam",
+   "kind": "topicset",
+   "reference": "enlem",
+   "notes": "<b>Paralel (enlem):</b> Ekvator'a paralel çemberler. 1 enlem ≈ 111 km; Türkiye'nin kuzey–güney uzunluğu ≈ 660 km.\n<b>Meridyen (boylam):</b> kutupları birleştiren yarım çemberler. Komşu iki meridyen arasında 4 dakika yerel saat farkı vardır; doğudaki yerin saati ileridir.\nKPSS'de sık sorulan kalıp: \"40° kuzey paraleli aşağıdaki illerin hangisinden geçmez?\"\n\n<color=#8ECAE6>Sağdan bir paralel ya da meridyen seç: çizgi haritada çizilir ve geçtiği iller boyanır.</color>"
+  },
+  {
+   "id": "ozel-konum",
+   "tab": "konum",
+   "title": "Özel Konum",
+   "kind": "notes",
+   "reference": "",
+   "notes": "Özel konum, bir yerin yeryüzündeki diğer yerlere göre durumudur: yükselti, dağların uzanışı, denizler, komşular.\n<b>Yükselti:</b> ortalama ≈ 1.132 m; batıdan doğuya artar. Bu yüzden doğuda kışlar sert, kar örtüsü uzun, nüfus seyrektir.\n<b>Dağlar kıyıya paralel:</b> kıyı ile iç kesim arasında iklim farkı büyüktür.\n<b>Üç tarafı denizlerle çevrili, boğazlara sahip, Asya–Avrupa köprüsü:</b> jeopolitik önemi yüksektir.\n<b>Komşular:</b> en uzun kara sınırı Suriye, en kısası Azerbaycan (Nahçıvan).\n<b>Ayırt et:</b> enlem, gölge, mevsim, saat farkı → matematik konum. Yükselti, dağ, deniz, komşu → özel konum."
+  },
   {
    "id": "iklim-tipleri",
    "tab": "iklim",

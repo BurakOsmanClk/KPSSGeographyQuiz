@@ -5,6 +5,9 @@ giriş ekranının sağ altında ile **Ayarlar** penceresinde görünür (`Core/
 Biçim: `ANA.KÜÇÜK.YAMA` — yeni özellik = KÜÇÜK +1, hata düzeltmesi = YAMA +1, mağaza yayını = 1.0.0.
 
 ## Yayınlanmamış (0.5.0 adayı)
+- **Yeni KONUM sekmesi** (3 bölüm): **Uç Noktalar ve Güneş** (en doğu/batı/kuzey/güney il, güneşin ilk doğduğu/en son battığı il,
+  gölge boyu, gündüz süresi), **Enlem ve Boylam** (paralel/meridyenin geçtiği ili bul; iller il sınırlarından hesaplanır),
+  **Matematik ve Özel Konum** (16 A–E sorusu). Öğren'e KONUM sekmesi: Matematik Konum, Enlem ve Boylam (çizgi haritada çizilir), Özel Konum.
 - **Öğren ekranı:** giriş ekranında ÖĞREN butonu. 5 sekme, 23 ders: iklim tipleri ve bitki örtüsü haritası, sıcaklık–yağış,
   dağ/volkan/ova/plato/fay, dış kuvvetler, akarsu/göl/baraj/boğaz/yarımada, tarım/hayvancılık/maden/enerji, nüfus, UNESCO, milli park.
   Her derste ders notu + haritada dokunarak bilgi kartı; süre ve puan yok.
