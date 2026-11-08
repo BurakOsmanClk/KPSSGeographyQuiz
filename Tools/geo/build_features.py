@@ -16,7 +16,7 @@ import os
 import mapbox_earcut as earcut
 import numpy as np
 from shapely.geometry import shape, box, LineString, MultiLineString, Polygon, MultiPolygon, Point
-from shapely.ops import linemerge, unary_union, polylabel, nearest_points
+from shapely.ops import linemerge, unary_union, polylabel, nearest_points, substring
 
 from build_provinces import load_provinces, get_projection
 
@@ -445,6 +445,35 @@ def main():
             "id": gate["id"], "name": gate["name"], "category": "gate", "kind": "point", "subtype": gate["country"],
             "info": gate["info"], "label": [r4(x), r4(y)], "lines": [], "vertices": [], "triangles": [], "outline": [],
         })
+
+    # ---------- Kıyı tipleri (kıyı şeridi) ve kıyı biriktirme şekilleri (nokta) ----------
+    # Şerit: from → to arasında Türkiye kıyısının (ana kara halkası) iki yayından via'ya yakın olanı alınır.
+    type_info = manual.get("coastTypeInfo", {})
+    polys = list(turkey.geoms) if isinstance(turkey, MultiPolygon) else [turkey]
+    for ct in manual.get("coastTypes", []):
+        tname, tinfo = type_info.get(ct["type"], [ct["type"], ""])
+        info = f"{tinfo} Örnek: {ct['info']}" if tinfo else ct["info"]
+        base = {"id": ct["id"], "name": ct["name"], "category": "coasttype", "subtype": ct["type"],
+                "typeName": tname, "typeInfo": tinfo, "info": info, "vertices": [], "triangles": [], "outline": []}
+        if "point" in ct:
+            x, y = proj(*ct["point"])
+            features.append(dict(base, kind="point", label=[r4(x), r4(y)], lines=[]))
+            continue
+        sg = ct["segment"]
+        a_pt, b_pt, v_pt = Point(*sg["from"]), Point(*sg["to"]), Point(*sg["via"])
+        poly = min(polys, key=lambda q: q.exterior.distance(a_pt))
+        ring = LineString(poly.exterior.coords)
+        d1, d2 = sorted((ring.project(a_pt), ring.project(b_pt)))
+        arc1 = substring(ring, d1, d2)
+        tail, head = substring(ring, d2, ring.length), substring(ring, 0, d1)
+        arc2 = LineString(list(tail.coords) + list(head.coords)[1:])
+        arc = arc1 if arc1.distance(v_pt) <= arc2.distance(v_pt) else arc2
+        arc = arc.simplify(0.004)
+        print(f"  kıyı şeridi {ct['id']}: {arc.length * 100:.0f} km (yaklaşık)")
+        mid = arc.interpolate(0.5, normalized=True)
+        mx, my = proj(mid.x, mid.y)
+        # flat() boylam/enlemi kendisi projekte eder
+        features.append(dict(base, kind="line", label=[r4(mx), r4(my)], lines=[{"points": flat(list(arc.coords))}]))
 
     # ---------- Fay hatları ----------
     for fl in manual["faults"]:

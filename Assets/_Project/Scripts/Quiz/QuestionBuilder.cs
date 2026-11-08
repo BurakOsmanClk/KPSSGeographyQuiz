@@ -92,7 +92,27 @@ namespace KPSSGeography.Quiz
                 CorrectChoice = System.Array.IndexOf(Regions.All, p.Data.region), Focus = p, AnswerLabel = p.Data.region
             }).ToList();
 
-        List<Question> Feature(LevelDefinition level) =>
+        /// <summary>Kıyı tipleri: her tip bir soru; o tipin bütün örnekleri (şerit ya da nokta) doğru cevaptır.</summary>
+        List<Question> CoastTypes(LevelDefinition level)
+        {
+            var groups = features.Features.Where(f => f.Category == GeoFeature.CoastType).GroupBy(f => f.Data.subtype).ToList();
+            return Take(groups, level.questionCount).Select(g =>
+            {
+                var first = g.First().Data;
+                bool shape = first.subtype == "tombolo" || first.subtype == "lagun";
+                var q = new Question
+                {
+                    Prompt = shape ? "BU KIYI ŞEKLİNİN BİR ÖRNEĞİNİ HARİTADA BUL" : "BU KIYI TİPİNİN BİR ÖRNEĞİNİ HARİTADA BUL",
+                    Title = Up(string.IsNullOrEmpty(first.typeName) ? first.subtype : first.typeName),
+                    Type = AnswerType.Map, Layer = MapLayer.Features, Info = first.typeInfo
+                };
+                q.Correct.AddRange(g);
+                q.AnswerLabel = JoinNames(g.Select(f => f.DisplayName));
+                return q;
+            }).ToList();
+        }
+
+        List<Question> Feature(LevelDefinition level) => level.category == GeoFeature.CoastType ? CoastTypes(level) :
             Take(features.Features.Where(f => FeatureLayer.Matches(level.category, f.Category)), level.questionCount).Select(f =>
             {
                 var q = new Question { Prompt = $"BU {GeoFeatureDatabase.CategoryNoun(level.category)} HARİTADA BUL", Title = Up(f.DisplayName),

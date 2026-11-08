@@ -82,6 +82,23 @@ namespace KPSSGeography.Map
         public Color gateRed = new Color32(0xD6, 0x28, 0x28, 0xFF);
         public Color gatePost = new Color32(0x3A, 0x44, 0x50, 0xFF);
 
+        [Header("Kıyı tipleri")]
+        public Color coastEdge = new Color(1f, 1f, 1f, 0.95f);
+
+        /// <summary>Kıyı tipi / şekli rengi (her tip ayrı renk; harita ve eğitim ekranı).</summary>
+        public Color CoastTypeColor(string type) => type switch
+        {
+            "boyuna" => new Color32(0x1E, 0x88, 0xE5, 0xFF),
+            "enine" => new Color32(0xE5, 0x39, 0x35, 0xFF),
+            "ria" => new Color32(0x8E, 0x24, 0xAA, 0xFF),
+            "dalmacya" => new Color32(0x00, 0x89, 0x7B, 0xFF),
+            "kalankli" => new Color32(0xF5, 0x7C, 0x00, 0xFF),
+            "limanli" => new Color32(0x6D, 0x4C, 0x41, 0xFF),
+            "tombolo" => new Color32(0xF2, 0xB7, 0x05, 0xFF),
+            "lagun" => new Color32(0x00, 0xAC, 0xC1, 0xFF),
+            _ => new Color32(0x54, 0x6E, 0x7A, 0xFF)
+        };
+
         [Header("Dış hat (il sınırları gizliyken)")]
         public Color outline = new Color32(0x6F, 0x78, 0x84, 0xE6);
 

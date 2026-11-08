@@ -28,6 +28,8 @@ namespace KPSSGeography.Data
         public const string Country = "country";
         /// <summary>Kara hudut kapısı (nokta). subtype = açıldığı ülke.</summary>
         public const string Gate = "gate";
+        /// <summary>Kıyı tipi şeridi (çizgi) ya da kıyı biriktirme şekli (nokta). subtype = boyuna | enine | ria | dalmacya | kalankli | limanli | tombolo | lagun.</summary>
+        public const string CoastType = "coasttype";
 
         public string id;
         public string name;
@@ -37,6 +39,9 @@ namespace KPSSGeography.Data
         public string kind;
         /// <summary>Alt tür: göl tipi, kıyı şekli türü (strait/gulf/peninsula/island/cape), unesco/park vb.</summary>
         public string subtype;
+        /// <summary>Kıyı tiplerinde tipin adı ve tanımı (ör. "Ria Kıyı").</summary>
+        public string typeName;
+        public string typeInfo;
         /// <summary>KPSS bilgi notu (cevaptan sonra gösterilir).</summary>
         public string info;
         public float[] label;
@@ -105,6 +110,7 @@ namespace KPSSGeography.Data
             GeoFeature.Fault => "FAY HATTINI",
             GeoFeature.Country => "ÜLKEYİ",
             GeoFeature.Gate => "SINIR KAPISINI",
+            GeoFeature.CoastType => "KIYI TİPİNİ",
             _ => "YER ŞEKLİNİ"
         };
     }
