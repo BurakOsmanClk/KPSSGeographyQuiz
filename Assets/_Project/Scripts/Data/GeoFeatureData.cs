@@ -13,6 +13,8 @@ namespace KPSSGeography.Data
         public const string River = "river";
         public const string Mountain = "mountain";
         public const string Volcano = "volcano";
+        /// <summary>Masif arazi: başkalaşım geçirmiş en eski, sert kütleler (nokta).</summary>
+        public const string Massif = "massif";
         public const string Plain = "plain";
         public const string Plateau = "plateau";
         public const string Lake = "lake";
@@ -96,6 +98,7 @@ namespace KPSSGeography.Data
             GeoFeature.River => "AKARSUYU",
             GeoFeature.Mountain => "DAĞI",
             GeoFeature.Volcano => "VOLKANİK DAĞI",
+            GeoFeature.Massif => "MASİFİ",
             GeoFeature.Plain => "OVAYI",
             GeoFeature.Plateau => "PLATOYU",
             GeoFeature.Lake => "GÖLÜ",

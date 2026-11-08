@@ -53,6 +53,8 @@ namespace KPSSGeography.UI
         Text infoTitle;
         Text infoBody;
         Text emptyHint;
+        Button namesButton;
+        bool namesHidden;
 
         public bool AcceptsMapInput { get; private set; }
         public bool AcceptsFeatureInput { get; private set; }
@@ -80,6 +82,7 @@ namespace KPSSGeography.UI
             Add("Akarsular", GeoFeature.River);
             Add("Dağlar", GeoFeature.Mountain, "Kıvrım", "Kırık (horst)");
             Add("Volkanik Dağlar", GeoFeature.Volcano);
+            Add("Masif Araziler", GeoFeature.Massif);
             Add("Ovalar", GeoFeature.Plain, "Delta", "Tektonik", "Karstik (polye)", "Göl tabanı");
             Add("Platolar", GeoFeature.Plateau, "Aşınım", "Tabaka", "Karstik", "Lav örtülü");
             Add("Göller", GeoFeature.Lake, "Tektonik", "Volkanik", "Karstik", "Heyelan set", "Alüvyal set", "Kıyı set", "Baraj (yapay)");
@@ -191,6 +194,11 @@ namespace KPSSGeography.UI
                 }
             }
 
+            // --- İsimleri gizle/göster (haritanın sağ üstünde): kendini sınamak için ---
+            namesButton = UIFactory.Button("Names", Root, "", Theme.NavyPanel, new Vector2(330, 68), ToggleNames, null, 26);
+            namesButton.GetComponent<RectTransform>().Place(new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-Margin, -Margin), new Vector2(330, 68));
+            RefreshNamesButton();
+
             // --- Bilgi kartı (haritanın sağ altında) ---
             var card = UIFactory.Card("Info", Root, Theme.NavyPanel, true);
             infoCard = card.rectTransform.Place(new Vector2(1f, 0f), new Vector2(1f, 0f), new Vector2(-Margin, Margin), new Vector2(640, 190));
@@ -229,6 +237,22 @@ namespace KPSSGeography.UI
             return btn;
         }
 
+        /// <summary>Haritadaki adları gizler ya da geri getirir; seçim konu değişse de korunur.</summary>
+        void ToggleNames()
+        {
+            sfx.Play(Sfx.Click);
+            namesHidden = !namesHidden;
+            labels.SetStudyLabelsVisible(!namesHidden);
+            RefreshNamesButton();
+        }
+
+        void RefreshNamesButton()
+        {
+            UIFactory.SetButtonLabel(namesButton, namesHidden ? "İSİMLERİ GÖSTER" : "İSİMLERİ GİZLE");
+            UIFactory.SetButtonColor(namesButton, namesHidden ? Theme.Amber : Theme.NavyPanel);
+            namesButton.GetComponentInChildren<Text>().color = namesHidden ? Theme.Ink : Color.white;
+        }
+
         // ================== Akış ==================
 
         public void Open()
@@ -236,6 +260,7 @@ namespace KPSSGeography.UI
             Show();
             labels.SetProvinceLabels(false);
             labels.SetCountryLabels(true);
+            labels.SetStudyLabelsVisible(!namesHidden);
             emptyHint.gameObject.SetActive(selected == null);
             if (selected != null) Apply(selected);
             else FocusMap(map.Bounds);
@@ -250,6 +275,7 @@ namespace KPSSGeography.UI
             SetFocused(null);
             labels.ClearStudy();
             labels.SetCountryLabels(true);
+            labels.SetStudyLabelsVisible(true);
             HideInfo();
         }
 

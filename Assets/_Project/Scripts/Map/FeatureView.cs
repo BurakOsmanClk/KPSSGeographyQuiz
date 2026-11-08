@@ -93,6 +93,11 @@ namespace KPSSGeography.Map
                     b.AddQuad(c + new Vector2(-0.065f, 0.12f), c + new Vector2(0.065f, 0.12f), c + new Vector2(0.05f, 0.17f), c + new Vector2(-0.05f, 0.17f), palette.lava);
                     b.AddTriangle(c + new Vector2(-0.03f, 0.17f), c + new Vector2(0f, 0.26f), c + new Vector2(0.03f, 0.17f), palette.lava);
                     break;
+                case GeoFeature.Massif:
+                    // Katmanlı kaya bloğu: koyu çerçeveli taş moru altıgen, içinde açık renkli başkalaşım şeritleri
+                    baseOrder = 26;
+                    BuildMassif(b, data.LabelPoint);
+                    break;
                 case GeoFeature.Lake:
                     baseOrder = 21;
                     b.AddTriangles(data.vertices, data.triangles, palette.lake);
@@ -216,6 +221,31 @@ namespace KPSSGeography.Map
                     b.AddCircle(c, 0.12f, palette.park);
                     b.AddTriangle(c + new Vector2(-0.07f, -0.05f), c + new Vector2(0f, 0.08f), c + new Vector2(0.07f, -0.05f), Color.white);
                     break;
+            }
+        }
+
+        void BuildMassif(LineMeshBuilder b, Vector2 c)
+        {
+            b.AddCircle(c + new Vector2(0.012f, -0.02f), 0.16f, new Color(0f, 0f, 0f, 0.2f));
+            AddHexagon(b, c, 0.16f, palette.markerEdge);
+            AddHexagon(b, c, 0.13f, palette.massif);
+            // Başkalaşım (foliasyon) şeritleri
+            for (int i = -1; i <= 1; i++)
+            {
+                float y = i * 0.045f;
+                float half = 0.085f - Mathf.Abs(i) * 0.02f;
+                b.AddQuad(c + new Vector2(-half, y - 0.012f), c + new Vector2(half, y + 0.004f),
+                    c + new Vector2(half, y + 0.018f), c + new Vector2(-half, y + 0.002f), palette.massifLight);
+            }
+        }
+
+        static void AddHexagon(LineMeshBuilder b, Vector2 c, float r, Color color)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                float a0 = Mathf.Deg2Rad * (60f * i + 30f), a1 = Mathf.Deg2Rad * (60f * (i + 1) + 30f);
+                // saat yönünde (diğer şekillerle aynı yön; arka yüz kesilmesin)
+                b.AddTriangle(c, c + new Vector2(Mathf.Cos(a1), Mathf.Sin(a1)) * r, c + new Vector2(Mathf.Cos(a0), Mathf.Sin(a0)) * r, color);
             }
         }
 

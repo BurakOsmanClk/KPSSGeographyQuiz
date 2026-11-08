@@ -276,6 +276,14 @@ def main():
             "label": [r4(x), r4(y)], "lines": [], "vertices": [], "triangles": [], "outline": [],
         })
 
+    # ---------- Masif araziler (nokta) ----------
+    for v in manual.get("massifs", []):
+        x, y = proj(*v["point"])
+        features.append({
+            "id": v["id"], "name": v["name"], "category": "massif", "kind": "point", "info": v["info"],
+            "label": [r4(x), r4(y)], "lines": [], "vertices": [], "triangles": [], "outline": [],
+        })
+
     # ---------- Ovalar ve platolar ----------
     for key, cat in (("plains", "plain"), ("plateaus", "plateau")):
         for a in manual[key]:

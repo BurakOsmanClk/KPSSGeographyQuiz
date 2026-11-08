@@ -22,7 +22,7 @@ namespace KPSSGeography.Quiz
         Attribute,
         /// <summary>Vurgulanan yer şeklinin türünü (göl tipi) seç.</summary>
         FeatureChoice,
-        /// <summary>Bir bölgenin bütün illerini süre bitmeden bul.</summary>
+        /// <summary>Bir bölgenin bütün illeri tek tek sorulur; bölge sınırı çizili.</summary>
         RegionAll,
         /// <summary>A–E şıklı KPSS sorusu.</summary>
         Mcq,
@@ -45,7 +45,7 @@ namespace KPSSGeography.Quiz
         public int questionCount;
         public float timePerQuestion;
         public int maxMistakes = 3;
-        /// <summary>Yer şekli bölümleri: river | mountain | volcano | plain | plateau | lake | dam | gulf | peninsula | unesco | park | fault | country | gate</summary>
+        /// <summary>Yer şekli bölümleri: river | mountain | volcano | massif | plain | plateau | lake | dam | gulf | peninsula | unesco | park | fault | country | gate</summary>
         public string category;
         /// <summary>Konu / soru seti (topic ve mcq modları).</summary>
         public string set;
@@ -85,7 +85,7 @@ namespace KPSSGeography.Quiz
             QuizMode.Neighbor => "KOMŞU İLLER",
             QuizMode.Attribute => "ÖZELLİK SEÇ",
             QuizMode.FeatureChoice => "TÜRÜNÜ SEÇ",
-            QuizMode.RegionAll => "HEPSİNİ BUL",
+            QuizMode.RegionAll => "BÖLGEYİ TAMAMLA",
             QuizMode.Mcq => "KPSS SORUSU",
             QuizMode.BorderCountry => "SINIR KOMŞUSU",
             _ => "YAKINDA"
