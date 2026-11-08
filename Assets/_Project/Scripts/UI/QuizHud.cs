@@ -794,8 +794,10 @@ namespace KPSSGeography.UI
             {
                 string answer = q.AnswerLabel;
                 string msg;
+                // Haritadan seçmeli soruda doğru yer gösterilmez, ama yanlış tıklanan yerin adı söylenir
                 if (hideAnswer)
-                    msg = r.Outcome == AnswerOutcome.TimedOut ? "SÜRE DOLDU!" : "YANLIŞ!";
+                    msg = r.Outcome == AnswerOutcome.TimedOut ? "SÜRE DOLDU!"
+                        : r.Clicked != null ? $"YANLIŞ! Burası {r.Clicked.DisplayName}" : "YANLIŞ!";
                 else if (r.Outcome == AnswerOutcome.TimedOut)
                     msg = q.RequireAll ? $"SÜRE DOLDU!  {r.Found} / {q.Correct.Count} il bulundu" : $"SÜRE DOLDU!  Doğru cevap: {answer}";
                 else if (r.Clicked != null)
@@ -803,7 +805,8 @@ namespace KPSSGeography.UI
                 else
                     msg = $"YANLIŞ!  Doğru cevap: {answer}";
                 ShowFeedback(msg, Theme.Error);
-                if (tag != null && !hideAnswer) ShowNameTag(tag, Theme.Error);
+                if (hideAnswer) { if (r.Clicked != null) ShowNameTag(r.Clicked, Theme.Error); }
+                else if (tag != null) ShowNameTag(tag, Theme.Error);
                 streakText.text = "";
                 if (!q.RequireAll) LoseHeart();
             }
