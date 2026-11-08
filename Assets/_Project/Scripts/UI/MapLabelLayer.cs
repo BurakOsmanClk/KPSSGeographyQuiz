@@ -45,6 +45,7 @@ namespace KPSSGeography.UI
         readonly List<Label> provinceLabels = new List<Label>();
         readonly List<Label> reviewLabels = new List<Label>();
         readonly List<Label> studyLabels = new List<Label>();
+        bool studyLabelsOn = true;
         readonly List<Rect> placed = new List<Rect>();
         bool provincesOn;
         bool countriesOn = true;
@@ -176,6 +177,13 @@ namespace KPSSGeography.UI
             dirty = true;
         }
 
+        /// <summary>Eğitim etiketlerini gizle/göster (kendini sınama: adlar kapalıyken yerler yine dokunulabilir).</summary>
+        public void SetStudyLabelsVisible(bool on)
+        {
+            studyLabelsOn = on;
+            dirty = true;
+        }
+
         public void ClearStudy()
         {
             foreach (var l in studyLabels) Destroy(l.rt.gameObject);
@@ -256,7 +264,7 @@ namespace KPSSGeography.UI
             {
                 Vector2 p = ToCanvas(l.world, canvasSize) + new Vector2(0f, 6f);
                 var r = new Rect(p.x - l.size.x / 2f, p.y, l.size.x, l.size.y);
-                bool show = p.x > -80 && p.x < canvasSize.x + 80 && p.y > -40 && p.y < canvasSize.y + 40;
+                bool show = studyLabelsOn && p.x > -80 && p.x < canvasSize.x + 80 && p.y > -40 && p.y < canvasSize.y + 40;
                 if (show)
                     foreach (var other in placed)
                         if (other.Overlaps(r)) { show = false; break; }
