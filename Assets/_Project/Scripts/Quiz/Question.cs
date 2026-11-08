@@ -50,6 +50,9 @@ namespace KPSSGeography.Quiz
         /// <summary>KPSS sorusunda vurgulanacak yer şekli (sadece o gösterilir).</summary>
         public FeatureView ShowFeature;
 
+        /// <summary>Numaralı harita sorusu: haritada sırasıyla I, II, III… diye işaretlenen yerler.</summary>
+        public readonly List<IMapTarget> Markers = new List<IMapTarget>();
+
         /// <summary>Doğru cevaptan sonra haritada boyanacak ek hedef (sınır komşusu sorusunda sorulan il).</summary>
         public IMapTarget MarkOnCorrect;
 

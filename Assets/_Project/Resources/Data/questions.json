@@ -479,6 +479,211 @@
    "answer": 1,
    "explanation": "Göreme ve Kapadokya (Nevşehir) 1985'te UNESCO Dünya Mirası Listesi'ne girmiştir.",
    "highlight": "feature:u-goreme"
+  },
+  {
+   "id": "h1",
+   "set": "harita",
+   "text": "Jeotermal kaynaklardan elde edilen ısıyla örtü altı (sera) tarımı yapmak isteyen bir girişimcinin, numaralandırılan illerden hangilerinde yatırım yapması daha uygundur?",
+   "options": [
+    "I ve II",
+    "I ve III",
+    "II ve IV",
+    "III ve V",
+    "IV ve V"
+   ],
+   "answer": 0,
+   "explanation": "Kırıklı yapısı nedeniyle Batı Anadolu jeotermal kaynak bakımından zengindir; Denizli (Sarayköy) ve Afyonkarahisar jeotermal seracılıkta öne çıkar.",
+   "highlight": "",
+   "markers": [
+    "plate:20",
+    "plate:3",
+    "plate:61",
+    "plate:44",
+    "plate:22"
+   ],
+   "answerMarkers": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": "h2",
+   "set": "harita",
+   "text": "Numaralandırılan illerden hangisinde heyelan olaylarının daha sık görülmesi beklenir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 1,
+   "explanation": "Eğimin fazla, yağışın bol ve toprağın killi olduğu Doğu Karadeniz'de (Rize) heyelan sık görülür.",
+   "highlight": "",
+   "markers": [
+    "plate:42",
+    "plate:53",
+    "plate:63",
+    "plate:22",
+    "plate:35"
+   ],
+   "answerMarkers": [
+    1
+   ]
+  },
+  {
+   "id": "h3",
+   "set": "harita",
+   "text": "Numaralandırılan illerin hangilerinde akarsuların denize döküldüğü yerde biriktirdiği alüvyonlarla oluşmuş delta ovaları bulunur?",
+   "options": [
+    "I ve II",
+    "I ve III",
+    "II ve IV",
+    "III ve V",
+    "IV ve V"
+   ],
+   "answer": 1,
+   "explanation": "Samsun'da Bafra (Kızılırmak) ve Çarşamba (Yeşilırmak), Adana'da Çukurova (Seyhan ve Ceyhan) delta ovalarıdır.",
+   "highlight": "",
+   "markers": [
+    "plate:55",
+    "plate:6",
+    "plate:1",
+    "plate:25",
+    "plate:38"
+   ],
+   "answerMarkers": [
+    0,
+    2
+   ]
+  },
+  {
+   "id": "h4",
+   "set": "harita",
+   "text": "Numaralandırılan illerin hangilerinde rüzgâr enerjisi santrallerinin kurulu gücü daha fazladır?",
+   "options": [
+    "I ve II",
+    "I ve V",
+    "II ve IV",
+    "III ve IV",
+    "III ve V"
+   ],
+   "answer": 2,
+   "explanation": "Ege ve Marmara kıyıları (İzmir, Çanakkale, Balıkesir) rüzgâr enerjisinde öne çıkar. Konya güneş enerjisi, Batman petrol, Zonguldak taşkömürü ile bilinir.",
+   "highlight": "",
+   "markers": [
+    "plate:42",
+    "plate:17",
+    "plate:72",
+    "plate:35",
+    "plate:67"
+   ],
+   "answerMarkers": [
+    1,
+    3
+   ]
+  },
+  {
+   "id": "h5",
+   "set": "harita",
+   "text": "Numaralandırılan illerin hangilerinde kayak merkezlerine bağlı kış turizmi gelişmiştir?",
+   "options": [
+    "Yalnız I",
+    "I ve II",
+    "I, III ve V",
+    "II, III ve IV",
+    "II, IV ve V"
+   ],
+   "answer": 2,
+   "explanation": "Palandöken (Erzurum), Uludağ (Bursa) ve Erciyes (Kayseri) Türkiye'nin önemli kayak merkezleridir.",
+   "highlight": "",
+   "markers": [
+    "plate:25",
+    "plate:48",
+    "plate:16",
+    "plate:9",
+    "plate:38"
+   ],
+   "answerMarkers": [
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "id": "h6",
+   "set": "harita",
+   "text": "Numaralandırılan illerden hangisinde kalkerli arazide oluşan karstik şekiller (mağara, düden, polye) daha yaygındır?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 0,
+   "explanation": "Toroslar ile Teke ve Taşeli platolarında kalker yaygındır; Antalya çevresinde mağara, düden ve polyeler çoktur.",
+   "highlight": "",
+   "markers": [
+    "plate:7",
+    "plate:53",
+    "plate:22",
+    "plate:55",
+    "plate:65"
+   ],
+   "answerMarkers": [
+    0
+   ]
+  },
+  {
+   "id": "h7",
+   "set": "harita",
+   "text": "Hammaddesi olan taşkömürüne yakınlığı nedeniyle demir-çelik fabrikası kurulmuş il, numaralandırılanlardan hangisidir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 0,
+   "explanation": "Ereğli (Zonguldak) ve Karabük demir-çelik fabrikaları, Zonguldak taşkömürü havzasına yakınlık nedeniyle kurulmuştur.",
+   "highlight": "",
+   "markers": [
+    "plate:67",
+    "plate:42",
+    "plate:65",
+    "plate:9",
+    "plate:21"
+   ],
+   "answerMarkers": [
+    0
+   ]
+  },
+  {
+   "id": "h8",
+   "set": "harita",
+   "text": "Numaralandırılan göllerden hangisi, heyelanla düşen malzemenin bir vadinin önünü kapatmasıyla oluşmuştur?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 1,
+   "explanation": "Tortum Gölü (Erzurum) heyelan set gölüdür. Tuz Gölü tektonik, Salda karstik, Terkos kıyı set, Çıldır volkanik set gölüdür.",
+   "highlight": "",
+   "markers": [
+    "feature:gol-tuz",
+    "feature:gol-tortum",
+    "feature:gol-salda",
+    "feature:gol-terkos",
+    "feature:gol-cildir"
+   ],
+   "answerMarkers": [
+    1
+   ]
   }
  ]
 }

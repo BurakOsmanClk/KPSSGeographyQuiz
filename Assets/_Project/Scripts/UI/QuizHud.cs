@@ -161,6 +161,7 @@ namespace KPSSGeography.UI
             ExitReview(false);
             Labels?.SetProvinceLabels(false);
             Labels?.SetCountryLabels(true);
+            Labels?.ClearMarkers();
             base.Hide();
             HideNameTag(true);
         }
@@ -275,7 +276,8 @@ namespace KPSSGeography.UI
         void SetupChoices(Question q)
         {
             activeChoices = Mathf.Min(q.Choices.Length, MaxChoices);
-            bool grid = q.LongTitle;
+            // Uzun soru + uzun şıklar → iki sütunlu ızgara; numaralı haritanın kısa şıkları (A) I) tek satırda
+            bool grid = q.LongTitle && System.Array.Exists(q.Choices, c => c.Length > 12);
             for (int i = 0; i < MaxChoices; i++)
             {
                 var btn = choiceButtons[i];
@@ -675,6 +677,7 @@ namespace KPSSGeography.UI
             QuizMode.Topic => false,
             QuizMode.Attribute => false,
             QuizMode.FeatureChoice => false,
+            QuizMode.Numbered => false, // doğru il bilgi notunda ("IV: Konya") yazar; ✕ doğru ilin üstüne çıkmasın
             _ => true
         };
 
@@ -729,6 +732,15 @@ namespace KPSSGeography.UI
             var q = info.Question;
             currentQuestion = q;
             HideNameTag(false);
+            // Numaralı harita: işaretli yerlere I, II, III… rozetleri
+            if (q.Markers.Count > 0)
+            {
+                var items = new List<(Vector3, string)>();
+                for (int i = 0; i < q.Markers.Count && i < QuestionBuilder.Roman.Length; i++)
+                    items.Add((q.Markers[i].LabelWorldPosition, QuestionBuilder.Roman[i]));
+                Labels?.ShowMarkers(items);
+            }
+            else Labels?.ClearMarkers();
             LayoutTargetCard(q.LongTitle);
             promptText.text = q.Prompt;
             targetName.text = q.Title;
@@ -830,6 +842,7 @@ namespace KPSSGeography.UI
         void OnGameEnded(GameResult res)
         {
             HideNameTag(false);
+            Labels?.ClearMarkers();
             continueScreen.gameObject.SetActive(false);
             continueWaiting = false;
             Animate("hud", Tween.Run(0.25f, t => hudGroup.alpha = 1f - t));

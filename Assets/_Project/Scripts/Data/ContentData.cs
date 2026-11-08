@@ -68,7 +68,11 @@ namespace KPSSGeography.Data
         }
     }
 
-    /// <summary>A–E şıklı KPSS sorusu. highlight: "feature:&lt;id&gt;" ya da "plate:&lt;no&gt;" (boş olabilir).</summary>
+    /// <summary>
+    /// A–E şıklı KPSS sorusu. highlight: "feature:&lt;id&gt;" ya da "plate:&lt;no&gt;" (boş olabilir).
+    /// Numaralı harita sorusu: markers = haritada I, II, III… diye numaralanan yerler (aynı biçimde),
+    /// answerMarkers = doğru olan numaraların sırası (0 = I); cevaptan sonra haritada yeşile boyanırlar.
+    /// </summary>
     [Serializable]
     public class McqQuestion
     {
@@ -79,6 +83,8 @@ namespace KPSSGeography.Data
         public int answer;
         public string explanation;
         public string highlight;
+        public string[] markers;
+        public int[] answerMarkers;
     }
 
     [Serializable]
