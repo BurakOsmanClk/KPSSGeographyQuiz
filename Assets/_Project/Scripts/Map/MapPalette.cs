@@ -48,6 +48,9 @@ namespace KPSSGeography.Map
         public Color mountainMark = new Color32(0x5E, 0x3A, 0x22, 0xFF);
         public Color volcano = new Color32(0x6D, 0x45, 0x2C, 0xFF);
         public Color lava = new Color32(0xF0, 0x55, 0x2E, 0xFF);
+        /// <summary>Masif arazi işareti: eski, başkalaşmış kaya (koyu taş moru).</summary>
+        public Color massif = new Color32(0x6E, 0x5A, 0x8C, 0xFF);
+        public Color massifLight = new Color32(0xB9, 0xA8, 0xD4, 0xFF);
         public Color plain = new Color32(0x72, 0xC4, 0x72, 0xE0);
         public Color plainEdge = new Color32(0x3E, 0x8E, 0x41, 0xFF);
         public Color plateau = new Color32(0xD9, 0xA5, 0x5B, 0xE0);
@@ -86,6 +89,23 @@ namespace KPSSGeography.Map
         public Color factory = new Color32(0x37, 0x41, 0x51, 0xFF);
 
         public Color MineralColor(string mineral) => mineral == "demir" ? mineIron : mineOther;
+        [Header("Kıyı tipleri")]
+        public Color coastEdge = new Color(1f, 1f, 1f, 0.95f);
+
+        /// <summary>Kıyı tipi / şekli rengi (her tip ayrı renk; harita ve eğitim ekranı).</summary>
+        public Color CoastTypeColor(string type) => type switch
+        {
+            "boyuna" => new Color32(0x1E, 0x88, 0xE5, 0xFF),
+            "enine" => new Color32(0xE5, 0x39, 0x35, 0xFF),
+            "ria" => new Color32(0x8E, 0x24, 0xAA, 0xFF),
+            "dalmacya" => new Color32(0x00, 0x89, 0x7B, 0xFF),
+            "kalankli" => new Color32(0xF5, 0x7C, 0x00, 0xFF),
+            "limanli" => new Color32(0x6D, 0x4C, 0x41, 0xFF),
+            "tombolo" => new Color32(0xF2, 0xB7, 0x05, 0xFF),
+            "lagun" => new Color32(0x00, 0xAC, 0xC1, 0xFF),
+            "kiyioku" => new Color32(0xD8, 0x1B, 0x60, 0xFF),
+            _ => new Color32(0x54, 0x6E, 0x7A, 0xFF)
+        };
 
         [Header("Dış hat (il sınırları gizliyken)")]
         public Color outline = new Color32(0x6F, 0x78, 0x84, 0xE6);

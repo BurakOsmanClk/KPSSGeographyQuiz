@@ -2799,7 +2799,25 @@
     29.07,
     41.12
    ],
-   "info": "Karadeniz'i Marmara Denizi'ne bağlar; Asya ile Avrupa'yı ayırır."
+   "info": "Karadeniz'i Marmara Denizi'ne bağlar; Asya ile Avrupa'yı ayırır.",
+   "area": [
+    [
+     28.95,
+     41.0
+    ],
+    [
+     29.1,
+     40.99
+    ],
+    [
+     29.18,
+     41.24
+    ],
+    [
+     29.0,
+     41.25
+    ]
+   ]
   },
   {
    "id": "canakkale-bogazi",
@@ -2809,7 +2827,29 @@
     26.4,
     40.2
    ],
-   "info": "Marmara Denizi'ni Ege Denizi'ne bağlar."
+   "info": "Marmara Denizi'ni Ege Denizi'ne bağlar.",
+   "area": [
+    [
+     26.15,
+     40.0
+    ],
+    [
+     26.3,
+     39.97
+    ],
+    [
+     26.78,
+     40.37
+    ],
+    [
+     26.72,
+     40.46
+    ],
+    [
+     26.62,
+     40.44
+    ]
+   ]
   },
   {
    "id": "saros",
@@ -2819,7 +2859,25 @@
     26.45,
     40.55
    ],
-   "info": "Gelibolu Yarımadası'nın kuzeybatısında, Ege'de."
+   "info": "Gelibolu Yarımadası'nın kuzeybatısında, Ege'de.",
+   "area": [
+    [
+     26.05,
+     40.45
+    ],
+    [
+     26.72,
+     40.48
+    ],
+    [
+     26.85,
+     40.62
+    ],
+    [
+     26.12,
+     40.74
+    ]
+   ]
   },
   {
    "id": "izmit",
@@ -2829,7 +2887,25 @@
     29.55,
     40.73
    ],
-   "info": "Marmara'nın doğusunda; tektonik kökenli, sanayinin yoğun olduğu körfez."
+   "info": "Marmara'nın doğusunda; tektonik kökenli, sanayinin yoğun olduğu körfez.",
+   "area": [
+    [
+     29.3,
+     40.66
+    ],
+    [
+     29.95,
+     40.68
+    ],
+    [
+     29.95,
+     40.8
+    ],
+    [
+     29.3,
+     40.83
+    ]
+   ]
   },
   {
    "id": "gemlik",
@@ -2839,7 +2915,25 @@
     28.95,
     40.42
    ],
-   "info": "Marmara'nın güneydoğusunda, Bursa kıyısında."
+   "info": "Marmara'nın güneydoğusunda, Bursa kıyısında.",
+   "area": [
+    [
+     28.82,
+     40.34
+    ],
+    [
+     29.15,
+     40.34
+    ],
+    [
+     29.15,
+     40.5
+    ],
+    [
+     28.82,
+     40.5
+    ]
+   ]
   },
   {
    "id": "edremit",
@@ -2849,7 +2943,25 @@
     26.75,
     39.5
    ],
-   "info": "Kaz Dağı'nın güneyinde, Ege'de; zeytinlikleriyle bilinir."
+   "info": "Kaz Dağı'nın güneyinde, Ege'de; zeytinlikleriyle bilinir.",
+   "area": [
+    [
+     26.62,
+     39.3
+    ],
+    [
+     27.05,
+     39.3
+    ],
+    [
+     27.05,
+     39.62
+    ],
+    [
+     26.62,
+     39.58
+    ]
+   ]
   },
   {
    "id": "candarli",
@@ -2859,7 +2971,25 @@
     26.9,
     38.9
    ],
-   "info": "İzmir'in kuzeyinde, Ege'de."
+   "info": "İzmir'in kuzeyinde, Ege'de.",
+   "area": [
+    [
+     26.75,
+     38.84
+    ],
+    [
+     27.1,
+     38.84
+    ],
+    [
+     27.1,
+     39.05
+    ],
+    [
+     26.75,
+     39.05
+    ]
+   ]
   },
   {
    "id": "izmir-korfezi",
@@ -2869,7 +2999,25 @@
     26.95,
     38.5
    ],
-   "info": "Ege'nin en büyük körfezlerinden; Gediz Nehri yakınına dökülür."
+   "info": "Ege'nin en büyük körfezlerinden; Gediz Nehri yakınına dökülür.",
+   "area": [
+    [
+     26.62,
+     38.38
+    ],
+    [
+     27.15,
+     38.38
+    ],
+    [
+     27.15,
+     38.7
+    ],
+    [
+     26.62,
+     38.72
+    ]
+   ]
   },
   {
    "id": "kusadasi",
@@ -2879,7 +3027,25 @@
     27.15,
     37.85
    ],
-   "info": "Aydın kıyısında, Ege'de."
+   "info": "Aydın kıyısında, Ege'de.",
+   "area": [
+    [
+     27.05,
+     37.65
+    ],
+    [
+     27.32,
+     37.65
+    ],
+    [
+     27.32,
+     37.98
+    ],
+    [
+     27.05,
+     37.98
+    ]
+   ]
   },
   {
    "id": "gokova",
@@ -2889,7 +3055,25 @@
     28.0,
     36.97
    ],
-   "info": "Muğla'da, Bodrum ile Datça yarımadaları arasında."
+   "info": "Muğla'da, Bodrum ile Datça yarımadaları arasında.",
+   "area": [
+    [
+     27.42,
+     36.88
+    ],
+    [
+     28.35,
+     36.88
+    ],
+    [
+     28.35,
+     37.08
+    ],
+    [
+     27.42,
+     37.08
+    ]
+   ]
   },
   {
    "id": "antalya-korfezi",
@@ -2899,7 +3083,25 @@
     30.95,
     36.65
    ],
-   "info": "Akdeniz'in en büyük körfezlerinden; kıyısında Antalya yer alır."
+   "info": "Akdeniz'in en büyük körfezlerinden; kıyısında Antalya yer alır.",
+   "area": [
+    [
+     30.4,
+     36.2
+    ],
+    [
+     31.6,
+     36.2
+    ],
+    [
+     31.6,
+     36.92
+    ],
+    [
+     30.4,
+     36.92
+    ]
+   ]
   },
   {
    "id": "iskenderun",
@@ -2909,7 +3111,25 @@
     36.0,
     36.7
    ],
-   "info": "Akdeniz'in doğusunda, Hatay–Adana kıyısında; liman ve sanayi bölgesi."
+   "info": "Akdeniz'in doğusunda, Hatay–Adana kıyısında; liman ve sanayi bölgesi.",
+   "area": [
+    [
+     35.6,
+     36.3
+    ],
+    [
+     36.25,
+     36.3
+    ],
+    [
+     36.25,
+     36.97
+    ],
+    [
+     35.6,
+     36.97
+    ]
+   ]
   },
   {
    "id": "gelibolu",
@@ -2919,7 +3139,36 @@
     26.45,
     40.35
    ],
-   "info": "Trakya'nın güneybatısında; Çanakkale Boğazı ile Saros Körfezi arasında."
+   "info": "Trakya'nın güneybatısında; Çanakkale Boğazı ile Saros Körfezi arasında.",
+   "area": [
+    [
+     26.05,
+     40.0
+    ],
+    [
+     26.22,
+     39.99
+    ],
+    [
+     26.68,
+     40.39
+    ],
+    [
+     26.82,
+     40.56
+    ],
+    [
+     26.6,
+     40.66
+    ],
+    [
+     26.05,
+     40.35
+    ]
+   ],
+   "provinces": [
+    "Çanakkale"
+   ]
   },
   {
    "id": "kapidag",
@@ -2929,7 +3178,28 @@
     27.85,
     40.45
    ],
-   "info": "Marmara'da; eskiden ada iken kıyıya bağlanmış (tombolo) yarımada."
+   "info": "Marmara'da; eskiden ada iken kıyıya bağlanmış (tombolo) yarımada.",
+   "area": [
+    [
+     27.62,
+     40.38
+    ],
+    [
+     28.02,
+     40.38
+    ],
+    [
+     28.06,
+     40.56
+    ],
+    [
+     27.6,
+     40.56
+    ]
+   ],
+   "provinces": [
+    "Balıkesir"
+   ]
   },
   {
    "id": "biga",
@@ -2939,7 +3209,28 @@
     26.95,
     40.05
    ],
-   "info": "Marmara ile Ege arasında, Çanakkale ilinin Anadolu yakasında."
+   "info": "Marmara ile Ege arasında, Çanakkale ilinin Anadolu yakasında.",
+   "area": [
+    [
+     26.0,
+     39.4
+    ],
+    [
+     27.35,
+     39.4
+    ],
+    [
+     27.35,
+     40.45
+    ],
+    [
+     26.0,
+     40.45
+    ]
+   ],
+   "provinces": [
+    "Çanakkale"
+   ]
   },
   {
    "id": "kocaeli-yarimadasi",
@@ -2949,7 +3240,29 @@
     29.75,
     41.05
    ],
-   "info": "İstanbul Boğazı'nın doğusunda, Karadeniz ile İzmit Körfezi arasında."
+   "info": "İstanbul Boğazı'nın doğusunda, Karadeniz ile İzmit Körfezi arasında.",
+   "area": [
+    [
+     29.0,
+     40.6
+    ],
+    [
+     30.45,
+     40.6
+    ],
+    [
+     30.45,
+     41.25
+    ],
+    [
+     29.0,
+     41.25
+    ]
+   ],
+   "provinces": [
+    "Kocaeli",
+    "İstanbul"
+   ]
   },
   {
    "id": "karaburun",
@@ -2959,7 +3272,28 @@
     26.52,
     38.6
    ],
-   "info": "İzmir'in batısında, Ege'de."
+   "info": "İzmir'in batısında, Ege'de.",
+   "area": [
+    [
+     26.25,
+     38.42
+    ],
+    [
+     26.62,
+     38.42
+    ],
+    [
+     26.62,
+     38.75
+    ],
+    [
+     26.25,
+     38.75
+    ]
+   ],
+   "provinces": [
+    "İzmir"
+   ]
   },
   {
    "id": "bodrum",
@@ -2969,7 +3303,28 @@
     27.4,
     37.05
    ],
-   "info": "Muğla'da, Gökova Körfezi'nin kuzeyinde."
+   "info": "Muğla'da, Gökova Körfezi'nin kuzeyinde.",
+   "area": [
+    [
+     27.2,
+     36.95
+    ],
+    [
+     27.56,
+     36.95
+    ],
+    [
+     27.56,
+     37.16
+    ],
+    [
+     27.2,
+     37.16
+    ]
+   ],
+   "provinces": [
+    "Muğla"
+   ]
   },
   {
    "id": "datca",
@@ -2979,7 +3334,28 @@
     27.65,
     36.73
    ],
-   "info": "Muğla'da, Gökova Körfezi'nin güneyinde uzanan dar yarımada."
+   "info": "Muğla'da, Gökova Körfezi'nin güneyinde uzanan dar yarımada.",
+   "area": [
+    [
+     27.35,
+     36.64
+    ],
+    [
+     27.98,
+     36.64
+    ],
+    [
+     27.98,
+     36.86
+    ],
+    [
+     27.35,
+     36.86
+    ]
+   ],
+   "provinces": [
+    "Muğla"
+   ]
   },
   {
    "id": "sinop",
@@ -2989,7 +3365,28 @@
     35.12,
     42.02
    ],
-   "info": "Karadeniz'de; eskiden ada iken kıyıya bağlanmış (tombolo) yarımada."
+   "info": "Karadeniz'de; eskiden ada iken kıyıya bağlanmış (tombolo) yarımada.",
+   "area": [
+    [
+     34.98,
+     41.95
+    ],
+    [
+     35.26,
+     41.95
+    ],
+    [
+     35.26,
+     42.12
+    ],
+    [
+     34.98,
+     42.12
+    ]
+   ],
+   "provinces": [
+    "Sinop"
+   ]
   },
   {
    "id": "gokceada",
@@ -2999,7 +3396,8 @@
     25.85,
     40.18
    ],
-   "info": "Türkiye'nin en büyük adası (Çanakkale)."
+   "info": "Türkiye'nin en büyük adası (Çanakkale).",
+   "area": "island"
   },
   {
    "id": "bozcaada",
@@ -3009,7 +3407,8 @@
     26.03,
     39.83
    ],
-   "info": "Çanakkale'de, Ege'de; bağcılıkla bilinir."
+   "info": "Çanakkale'de, Ege'de; bağcılıkla bilinir.",
+   "area": "island"
   },
   {
    "id": "marmara-adasi",
@@ -3019,7 +3418,8 @@
     27.6,
     40.62
    ],
-   "info": "Marmara Denizi'nin en büyük adası; mermeriyle ünlüdür (Balıkesir)."
+   "info": "Marmara Denizi'nin en büyük adası; mermeriyle ünlüdür (Balıkesir).",
+   "area": "island"
   },
   {
    "id": "inceburun",
@@ -3928,6 +4328,273 @@
     40.64,
     37.0
    ]
+  }
+ ],
+ "_aciklama_kiyi": "Kıyı tipleri ve dalga-akıntı biriktirme şekilleri. type: boyuna | enine | ria | dalmacya | kalankli | limanli | tombolo | lagun. segment: kıyı şeridi (from → to, via = doğru yayı seçmek için ara nokta; çizgi Türkiye kıyısından otomatik kesilir) ya da point. Örnekler KPSS kaynaklarında tutarlı olanlardır (Haliç ve kıyı oku tartışmalı olduğu için yok).",
+ "coastTypeInfo": {
+  "boyuna": [
+   "Boyuna Kıyı",
+   "Dağların kıyıya paralel uzandığı kıyı. Girinti çıkıntı ve doğal liman azdır, kıyıdan iç kesime ulaşım zordur; denizel etki içerilere sokulamaz."
+  ],
+  "enine": [
+   "Enine Kıyı",
+   "Dağların kıyıya dik uzandığı kıyı. Girinti çıkıntı, körfez, yarımada ve doğal liman çoktur; denizel etki iç kesimlere kadar sokulur."
+  ],
+  "ria": [
+   "Ria Kıyı",
+   "Akarsu vadilerinin deniz suları altında kalmasıyla oluşan, derin ve uzun koylu kıyı."
+  ],
+  "dalmacya": [
+   "Dalmaçya Kıyı",
+   "Kıyıya paralel uzanan dağların sular altında kalmasıyla tepelerinin kıyıya paralel adalar dizisi oluşturduğu kıyı."
+  ],
+  "kalankli": [
+   "Kalanklı Kıyı",
+   "Karstik (kalkerli) arazide oluşmuş dar ve derin vadilerin deniz suları altında kalmasıyla oluşan kıyı."
+  ],
+  "limanli": [
+   "Limanlı Kıyı",
+   "Geniş tabanlı vadi ve körfezlerin sular altında kalmasıyla oluşan kıyı; ağızları zamanla kıyı setleriyle kapanıp lagünlere dönüşebilir."
+  ],
+  "tombolo": [
+   "Tombolo",
+   "Kıyı oku ya da kıyı setiyle bir adanın karaya bağlanmasıdır (dalga ve akıntı biriktirme şekli)."
+  ],
+  "lagun": [
+   "Lagün (Kıyı Set Gölü)",
+   "Kıyı okunun ya da setinin bir koyun önünü kapatmasıyla denizden ayrılan göl (dalga ve akıntı biriktirme şekli)."
+  ],
+  "kiyioku": [
+   "Kıyı Oku",
+   "Kıyı akıntılarının taşıdığı kum ve çakılın bir koyun ya da burnun önünde dil gibi uzanarak birikmesidir; büyüyüp koyun önünü kapatırsa lagün oluşur."
+  ]
+ },
+ "coastTypes": [
+  {
+   "id": "kiyi-boyuna-karadeniz",
+   "name": "Karadeniz Kıyıları",
+   "type": "boyuna",
+   "segment": {
+    "from": [
+     29.6,
+     41.17
+    ],
+    "to": [
+     41.55,
+     41.5
+    ],
+    "via": [
+     34.9,
+     42.0
+    ]
+   },
+   "info": "Kuzey Anadolu Dağları kıyıya paraleldir: kıyı düz, doğal liman az, iç kesimle ulaşım zordur."
+  },
+  {
+   "id": "kiyi-boyuna-akdeniz",
+   "name": "Akdeniz Kıyıları (Antalya–Anamur)",
+   "type": "boyuna",
+   "segment": {
+    "from": [
+     30.75,
+     36.85
+    ],
+    "to": [
+     33.35,
+     36.12
+    ],
+    "via": [
+     32.8,
+     36.08
+    ]
+   },
+   "info": "Toros Dağları kıyıya paraleldir; Antalya ile Anamur arasında tipik boyuna kıyı görülür."
+  },
+  {
+   "id": "kiyi-enine-ege",
+   "name": "Ege Kıyıları",
+   "type": "enine",
+   "segment": {
+    "from": [
+     26.95,
+     39.55
+    ],
+    "to": [
+     27.55,
+     37.05
+    ],
+    "via": [
+     26.35,
+     38.35
+    ]
+   },
+   "info": "Ege'de dağlar kıyıya dik uzanır: Edremit, İzmir, Kuşadası gibi körfezler, Karaburun ve Bodrum gibi yarımadalar oluşur."
+  },
+  {
+   "id": "kiyi-ria-istanbul",
+   "name": "İstanbul Boğazı",
+   "type": "ria",
+   "point": [
+    29.07,
+    41.12
+   ],
+   "info": "Akarsu vadisinin deniz suları altında kalmasıyla oluşmuştur; Türkiye'deki en bilinen ria örneğidir.",
+   "ref": "istanbul-bogazi"
+  },
+  {
+   "id": "kiyi-ria-canakkale",
+   "name": "Çanakkale Boğazı",
+   "type": "ria",
+   "point": [
+    26.45,
+    40.25
+   ],
+   "info": "İstanbul Boğazı gibi sular altında kalmış bir akarsu vadisidir (ria).",
+   "ref": "canakkale-bogazi"
+  },
+  {
+   "id": "kiyi-dalmacya",
+   "name": "Kaş–Finike Kıyıları",
+   "type": "dalmacya",
+   "segment": {
+    "from": [
+     29.64,
+     36.2
+    ],
+    "to": [
+     30.15,
+     36.3
+    ],
+    "via": [
+     29.95,
+     36.2
+    ]
+   },
+   "info": "Türkiye'de tipik dalmaçya kıyısı Kaş ile Finike arasındadır; kıyıya paralel küçük adalar dikkat çeker (Kekova)."
+  },
+  {
+   "id": "kiyi-kalankli",
+   "name": "Mersin–Silifke Kıyıları",
+   "type": "kalankli",
+   "segment": {
+    "from": [
+     33.93,
+     36.37
+    ],
+    "to": [
+     34.6,
+     36.78
+    ],
+    "via": [
+     34.25,
+     36.55
+    ]
+   },
+   "info": "Mersin ile Silifke arasında karstik vadilerin deniz seviyesine kadar uzandığı yerlerde kalanklı kıyı görülür."
+  },
+  {
+   "id": "kiyi-limanli",
+   "name": "Büyükçekmece–Küçükçekmece Kıyıları",
+   "type": "limanli",
+   "segment": {
+    "from": [
+     28.5,
+     41.01
+    ],
+    "to": [
+     28.8,
+     40.98
+    ],
+    "via": [
+     28.65,
+     40.98
+    ]
+   },
+   "info": "Çekmece göllerinin bulunduğu kıyı limanlı kıyıdır; koylarının ağzı kıyı setleriyle kapanmış ve göller lagüne dönüşmüştür."
+  },
+  {
+   "id": "kiyi-tombolo-kapidag",
+   "name": "Kapıdağ",
+   "type": "tombolo",
+   "point": [
+    27.86,
+    40.42
+   ],
+   "info": "Kapıdağ eskiden bir adaydı; kıyı oku ile karaya bağlanarak yarımada olmuştur (tombolo).",
+   "ref": "kapidag"
+  },
+  {
+   "id": "kiyi-tombolo-sinop",
+   "name": "Sinop",
+   "type": "tombolo",
+   "point": [
+    35.15,
+    42.02
+   ],
+   "info": "Sinop'taki Boztepe eski bir adadır; dar bir kıyı okuyla (tombolo) karaya bağlanmıştır. Sinop şehri bu kıyı oku üzerinde kuruludur.",
+   "ref": "sinop"
+  },
+  {
+   "id": "kiyi-lagun-terkos",
+   "name": "Terkos (Durusu) Gölü",
+   "type": "lagun",
+   "point": [
+    28.55,
+    41.32
+   ],
+   "info": "İstanbul'un Karadeniz kıyısındaki lagün. Büyükçekmece ve Küçükçekmece gölleri de lagündür.",
+   "ref": "gol-terkos"
+  },
+  {
+   "id": "kiyi-lagun-akyatan",
+   "name": "Akyatan Gölü",
+   "type": "lagun",
+   "point": [
+    35.25,
+    36.62
+   ],
+   "info": "Seyhan–Ceyhan deltası kıyısındaki lagün; önemli bir kuş yaşam alanıdır.",
+   "ref": "gol-akyatan"
+  },
+  {
+   "id": "kiyi-oku-cardak",
+   "name": "Çardak (Lapseki)",
+   "type": "kiyioku",
+   "segment": {
+    "from": [
+     26.68,
+     40.395
+    ],
+    "to": [
+     26.78,
+     40.37
+    ],
+    "via": [
+     26.73,
+     40.38
+    ]
+   },
+   "info": "Çanakkale Boğazı'nın doğu kıyısında, Çardak'ta kıyı akıntılarının biriktirdiği kıyı oku; arkasında küçük bir lagün oluşmuştur."
+  },
+  {
+   "id": "kiyi-oku-iztuzu",
+   "name": "İztuzu (Dalyan)",
+   "type": "kiyioku",
+   "segment": {
+    "from": [
+     28.59,
+     36.8
+    ],
+    "to": [
+     28.67,
+     36.79
+    ],
+    "via": [
+     28.63,
+     36.78
+    ]
+   },
+   "info": "Muğla Dalyan'da Köyceğiz Gölü ile deniz arasında uzanan kumsal kıyı seti (kıyı kordonu); caretta carettaların yumurtlama alanıdır."
   }
  ],
  "_aciklama_madenler": "Maden yatakları ve madeni işleyen fabrikalar (nokta, [boylam, enlem]). kind: site = madenin çıkarıldığı yer, factory = madeni işleyen tesis. mineral: maden kimliği (demir, bakır...). Yalnızca KPSS/MEB kaynaklarında öne çıkan yerler; konumu belirsiz olanlar eklenmez.",

@@ -43,10 +43,21 @@ namespace KPSSGeography.Quiz
 
         /// <summary>Soru boyunca nabız gibi vurgulanan hedef (bölge/komşu/iklim sorularında il, göl tipi sorusunda göl).</summary>
         public IMapTarget Focus;
+        /// <summary>Focus soru sırasında haritada vurgulanmaz (ör. komşu iller: sorulan il yalnızca adıyla verilir).</summary>
+        public bool FocusHidden;
         /// <summary>Tek doğru cevaplı harita sorularında doğru hedef (yanlışta gösterilir).</summary>
         public IMapTarget Reveal;
         /// <summary>KPSS sorusunda vurgulanacak yer şekli (sadece o gösterilir).</summary>
         public FeatureView ShowFeature;
+
+        /// <summary>KPSS tipi öncül metni (giriş + maddeler); soru kâğıdı gibi solda ayrı bir panelde gösterilir.</summary>
+        public string Body;
+
+        /// <summary>Numaralı harita sorusu: haritada sırasıyla I, II, III… diye işaretlenen yerler.</summary>
+        public readonly List<IMapTarget> Markers = new List<IMapTarget>();
+        /// <summary>Numaralı harita: işaret yerine oklar/doğru parçaları (I, II… sırasıyla) ve doğru olanların sırası.</summary>
+        public readonly List<MapShape> Shapes = new List<MapShape>();
+        public readonly List<int> CorrectShapes = new List<int>();
 
         /// <summary>Doğru cevaptan sonra haritada boyanacak ek hedef (sınır komşusu sorusunda sorulan il).</summary>
         public IMapTarget MarkOnCorrect;
@@ -59,7 +70,7 @@ namespace KPSSGeography.Quiz
 
         /// <summary>
         /// Yanlış cevapta (ya da süre bitince) doğru cevap gösterilmez mi? Haritadan seçmeli sorularda gösterilmez:
-        /// doğru yeri ve tıklanan yerin adını göstermek sonraki sorular için ipucu olur. "Hepsini bul" hariç.
+        /// doğru yeri göstermek sonraki sorular için ipucu olur. Yanlış tıklanan yerin adı ise söylenir (QuizHud). "Hepsini bul" hariç.
         /// </summary>
         public bool HidesAnswerOnMiss => Type == AnswerType.Map && !RequireAll;
 

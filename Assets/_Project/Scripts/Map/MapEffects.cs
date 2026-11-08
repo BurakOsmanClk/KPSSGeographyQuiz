@@ -5,6 +5,33 @@ using UnityEngine;
 namespace KPSSGeography.Map
 {
     /// <summary>
+    /// Numaralı harita sorusunda haritaya çizilen şekil: kavisli ok (ticaret, göç, rüzgâr, akış yönü)
+    /// ya da uçları noktalı doğru parçası (güzergâh). Koordinatlar dünya birimindedir.
+    /// </summary>
+    public class MapShape
+    {
+        public Vector2 from;
+        public Vector2 to;
+        public bool arrow;
+        /// <summary>Numaranın yanına yazılan kısa açıklama (ör. "Fındık"); boş olabilir.</summary>
+        public string caption;
+
+        Vector2 Dir => (to - from).normalized;
+        Vector2 Perp => new Vector2(-Dir.y, Dir.x);
+        float Bulge => arrow ? 0.18f * Vector2.Distance(from, to) : 0f;
+        Vector2 Control => (from + to) * 0.5f + Perp * Bulge;
+
+        public Vector2 Point(float t)
+        {
+            float u = 1f - t;
+            return u * u * from + 2f * u * t * Control + t * t * to;
+        }
+
+        /// <summary>Numara rozetinin konumu: şeklin ortasının biraz dışı.</summary>
+        public Vector2 LabelPoint => Point(0.5f) + Perp * (arrow ? 0.32f : 0.3f);
+    }
+
+    /// <summary>
     /// Dünya koordinatlı hafif efektler: bölüm başında bölge sınırının "çizilerek" belirmesi ve
     /// doğru cevapta ışıltı patlaması. Tek bir mesh her kare yeniden kurulur (efekt yokken hiç iş yapılmaz).
     /// </summary>
@@ -50,9 +77,10 @@ namespace KPSSGeography.Map
         }
 
         /// <summary>Verilen halkaları (bölge dış hattı) sırayla çizer, bekletir ve söndürür.</summary>
-        public void DrawOutline(List<Vector2[]> rings, Color color)
+        /// <param name="force">Efektler kapalıyken de çiz (sınır, oyunun bir parçasıysa).</param>
+        public void DrawOutline(List<Vector2[]> rings, Color color, bool force = false)
         {
-            if (!GameSettings.Effects || rings == null || rings.Count == 0) return;
+            if ((!GameSettings.Effects && !force) || rings == null || rings.Count == 0) return;
             var o = new Outline { rings = rings, color = color, lengths = new float[rings.Count] };
             for (int r = 0; r < rings.Count; r++)
             {
@@ -88,6 +116,71 @@ namespace KPSSGeography.Map
             outlines.Clear();
             particles.Clear();
             if (mesh != null) mesh.Clear();
+            ClearShapes();
+        }
+
+        // ---------- Numaralı harita şekilleri (ok / doğru parçası) ----------
+
+        Mesh shapeMesh;
+
+        /// <summary>Okları ve doğru parçalarını çizer; <paramref name="highlight"/>'taki sıradakiler vurgu renginde.</summary>
+        public void SetShapes(IList<MapShape> shapes, ICollection<int> highlight, Color normal, Color accent)
+        {
+            if (shapeMesh == null)
+            {
+                var go = new GameObject("QuestionShapes");
+                go.transform.SetParent(transform, false);
+                shapeMesh = new Mesh { name = "QuestionShapes" };
+                go.AddComponent<MeshFilter>().sharedMesh = shapeMesh;
+                var r = go.AddComponent<MeshRenderer>();
+                r.sharedMaterial = meshRenderer != null ? meshRenderer.sharedMaterial : null;
+                r.sortingOrder = 65;
+            }
+            var b = new LineMeshBuilder();
+            for (int i = 0; i < shapes.Count; i++)
+            {
+                var s = shapes[i];
+                Color c = highlight != null && highlight.Contains(i) ? accent : normal;
+                Color halo = new Color(1f, 1f, 1f, 0.85f);
+                if (s.arrow) AddArrow(b, s, c, halo);
+                else
+                {
+                    var pts = new[] { s.from, s.to };
+                    b.AddPolyline(pts, 0.13f, halo);
+                    b.AddPolyline(pts, 0.07f, c);
+                    b.AddCircle(s.from, 0.11f, c);
+                    b.AddCircle(s.to, 0.11f, c);
+                }
+            }
+            shapeMesh.Clear();
+            shapeMesh.SetVertices(b.Vertices);
+            shapeMesh.SetColors(b.Colors);
+            shapeMesh.SetTriangles(b.Triangles, 0);
+            shapeMesh.RecalculateBounds();
+        }
+
+        static void AddArrow(LineMeshBuilder b, MapShape s, Color c, Color halo)
+        {
+            const int steps = 20;
+            float head = Mathf.Min(0.32f, Vector2.Distance(s.from, s.to) * 0.3f);
+            var pts = new List<Vector2>();
+            for (int i = 0; i <= steps; i++) pts.Add(s.Point(i / (float)steps));
+            // Uç: son teğet yönünde üçgen; çizgi ucun gerisinde biter
+            Vector2 tip = s.to;
+            Vector2 tangent = (s.Point(1f) - s.Point(0.92f)).normalized;
+            Vector2 baseCenter = tip - tangent * head;
+            while (pts.Count > 2 && Vector2.Distance(pts[pts.Count - 1], tip) < head) pts.RemoveAt(pts.Count - 1);
+            pts.Add(baseCenter);
+            Vector2 n = new Vector2(-tangent.y, tangent.x) * head * 0.55f;
+            b.AddPolyline(pts, 0.13f, halo);
+            b.AddPolyline(pts, 0.07f, c);
+            b.AddTriangle(baseCenter + n * 1.25f + tangent * -0.02f, tip + tangent * 0.06f, baseCenter - n * 1.25f + tangent * -0.02f, halo);
+            b.AddTriangle(baseCenter + n, tip, baseCenter - n, c);
+        }
+
+        public void ClearShapes()
+        {
+            if (shapeMesh != null) shapeMesh.Clear();
         }
 
         void LateUpdate()

@@ -93,6 +93,11 @@ namespace KPSSGeography.Map
                     b.AddQuad(c + new Vector2(-0.065f, 0.12f), c + new Vector2(0.065f, 0.12f), c + new Vector2(0.05f, 0.17f), c + new Vector2(-0.05f, 0.17f), palette.lava);
                     b.AddTriangle(c + new Vector2(-0.03f, 0.17f), c + new Vector2(0f, 0.26f), c + new Vector2(0.03f, 0.17f), palette.lava);
                     break;
+                case GeoFeature.Massif:
+                    // Katmanlı kaya bloğu: koyu çerçeveli taş moru altıgen, içinde açık renkli başkalaşım şeritleri
+                    baseOrder = 26;
+                    BuildMassif(b, data.LabelPoint);
+                    break;
                 case GeoFeature.Lake:
                     baseOrder = 21;
                     b.AddTriangles(data.vertices, data.triangles, palette.lake);
@@ -104,6 +109,21 @@ namespace KPSSGeography.Map
                     foreach (var l in data.lines)
                         b.AddDashedPolyline(LineMeshBuilder.ToPoints(l.points), 0.065f, 0.16f, 0.09f, palette.fault);
                     break;
+                case GeoFeature.Gulf when !data.IsPoint:
+                case GeoFeature.Peninsula when !data.IsPoint:
+                {
+                    // Körfez, boğaz, yarımada, ada: gerçek kıyı çizgisi boyunca beyaz kenarlı renkli şerit
+                    baseOrder = 24;
+                    Color tone = data.subtype == "strait" ? palette.strait : data.subtype == "gulf" ? palette.gulf
+                        : data.subtype == "island" ? palette.island : palette.peninsula;
+                    foreach (var l in data.lines)
+                    {
+                        var pts = LineMeshBuilder.ToPoints(l.points);
+                        b.AddPolyline(pts, 0.17f, palette.coastEdge);
+                        b.AddPolyline(pts, 0.11f, tone);
+                    }
+                    break;
+                }
                 case GeoFeature.Dam:
                 case GeoFeature.Gulf:
                 case GeoFeature.Peninsula:
@@ -127,6 +147,39 @@ namespace KPSSGeography.Map
                     baseOrder = 28;
                     BuildMine(b, data);
                     break;
+                case GeoFeature.CoastType:
+                {
+                    // Kıyı tipi: kıyı çizgisi boyunca beyaz kenarlı renkli şerit; biriktirme şekli: renkli rozet
+                    Color tc = palette.CoastTypeColor(data.subtype);
+                    if (data.IsPolygon)
+                    {
+                        // Tombolo, lagün, ria: haritadaki yarımada / göl / boğaz şeklinin kendisi, tip renginde
+                        baseOrder = 23;
+                        b.AddTriangles(data.vertices, data.triangles, new Color(tc.r, tc.g, tc.b, 0.8f));
+                        foreach (var r in data.outline)
+                            b.AddPolyline(LineMeshBuilder.ToPoints(r.points), 0.03f, palette.coastEdge, true);
+                    }
+                    else if (data.IsLine)
+                    {
+                        baseOrder = 24;
+                        foreach (var l in data.lines)
+                        {
+                            var pts = LineMeshBuilder.ToPoints(l.points);
+                            b.AddPolyline(pts, 0.16f, palette.coastEdge);
+                            b.AddPolyline(pts, 0.1f, tc);
+                        }
+                    }
+                    else
+                    {
+                        baseOrder = 27;
+                        Vector2 cp = data.LabelPoint;
+                        b.AddCircle(cp + new Vector2(0.012f, -0.02f), 0.16f, new Color(0f, 0f, 0f, 0.2f));
+                        b.AddCircle(cp, 0.15f, palette.markerEdge);
+                        b.AddCircle(cp, 0.125f, Color.white);
+                        b.AddCircle(cp, 0.09f, tc);
+                    }
+                    break;
+                }
                 case GeoFeature.Plain:
                 case GeoFeature.Plateau:
                     bool plain = data.category == GeoFeature.Plain;
@@ -228,6 +281,31 @@ namespace KPSSGeography.Map
             // Maden rengi şerit (hangi madeni işlediği)
             b.AddQuad(c + new Vector2(-0.09f, -0.075f), c + new Vector2(0.09f, -0.075f),
                 c + new Vector2(0.09f, -0.05f), c + new Vector2(-0.09f, -0.05f), ore);
+        }
+
+        void BuildMassif(LineMeshBuilder b, Vector2 c)
+        {
+            b.AddCircle(c + new Vector2(0.012f, -0.02f), 0.16f, new Color(0f, 0f, 0f, 0.2f));
+            AddHexagon(b, c, 0.16f, palette.markerEdge);
+            AddHexagon(b, c, 0.13f, palette.massif);
+            // Başkalaşım (foliasyon) şeritleri
+            for (int i = -1; i <= 1; i++)
+            {
+                float y = i * 0.045f;
+                float half = 0.085f - Mathf.Abs(i) * 0.02f;
+                b.AddQuad(c + new Vector2(-half, y - 0.012f), c + new Vector2(half, y + 0.004f),
+                    c + new Vector2(half, y + 0.018f), c + new Vector2(-half, y + 0.002f), palette.massifLight);
+            }
+        }
+
+        static void AddHexagon(LineMeshBuilder b, Vector2 c, float r, Color color)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                float a0 = Mathf.Deg2Rad * (60f * i + 30f), a1 = Mathf.Deg2Rad * (60f * (i + 1) + 30f);
+                // saat yönünde (diğer şekillerle aynı yön; arka yüz kesilmesin)
+                b.AddTriangle(c, c + new Vector2(Mathf.Cos(a1), Mathf.Sin(a1)) * r, c + new Vector2(Mathf.Cos(a0), Mathf.Sin(a0)) * r, color);
+            }
         }
 
         /// <summary>Sınır kapısı: beyaz rozet üzerinde kırmızı-beyaz şeritli bariyer kolu ve direği.</summary>

@@ -22,12 +22,14 @@ namespace KPSSGeography.Quiz
         Attribute,
         /// <summary>Vurgulanan yer şeklinin türünü (göl tipi) seç.</summary>
         FeatureChoice,
-        /// <summary>Bir bölgenin bütün illerini süre bitmeden bul.</summary>
+        /// <summary>Bir bölgenin bütün illeri tek tek sorulur; bölge sınırı çizili.</summary>
         RegionAll,
         /// <summary>A–E şıklı KPSS sorusu.</summary>
         Mcq,
         /// <summary>Adı verilen sınır ilinin komşu olduğu ülkeyi haritada seç.</summary>
         BorderCountry,
+        /// <summary>ÖSYM tipi numaralı harita: haritada I–V işaretli yerler, soru A) I … E) V şıklarıyla.</summary>
+        Numbered,
         /// <summary>Henüz hazır olmayan bölüm ("Yakında").</summary>
         ComingSoon
     }
@@ -45,7 +47,7 @@ namespace KPSSGeography.Quiz
         public int questionCount;
         public float timePerQuestion;
         public int maxMistakes = 3;
-        /// <summary>Yer şekli bölümleri: river | mountain | volcano | plain | plateau | lake | dam | gulf | peninsula | unesco | park | fault | country | gate</summary>
+        /// <summary>Yer şekli bölümleri: river | mountain | volcano | massif | plain | plateau | lake | dam | gulf | peninsula | unesco | park | fault | country | gate</summary>
         public string category;
         /// <summary>Konu / soru seti (topic ve mcq modları).</summary>
         public string set;
@@ -69,6 +71,7 @@ namespace KPSSGeography.Quiz
             "regionall" => QuizMode.RegionAll,
             "mcq" => QuizMode.Mcq,
             "bordercountry" => QuizMode.BorderCountry,
+            "numbered" => QuizMode.Numbered,
             _ => QuizMode.ComingSoon
         };
 
@@ -85,9 +88,10 @@ namespace KPSSGeography.Quiz
             QuizMode.Neighbor => "KOMŞU İLLER",
             QuizMode.Attribute => "ÖZELLİK SEÇ",
             QuizMode.FeatureChoice => "TÜRÜNÜ SEÇ",
-            QuizMode.RegionAll => "HEPSİNİ BUL",
+            QuizMode.RegionAll => "BÖLGEYİ TAMAMLA",
             QuizMode.Mcq => "KPSS SORUSU",
             QuizMode.BorderCountry => "SINIR KOMŞUSU",
+            QuizMode.Numbered => "NUMARALI HARİTA",
             _ => "YAKINDA"
         };
 

@@ -13,6 +13,8 @@ namespace KPSSGeography.Data
         public const string River = "river";
         public const string Mountain = "mountain";
         public const string Volcano = "volcano";
+        /// <summary>Masif arazi: başkalaşım geçirmiş en eski, sert kütleler (nokta).</summary>
+        public const string Massif = "massif";
         public const string Plain = "plain";
         public const string Plateau = "plateau";
         public const string Lake = "lake";
@@ -28,6 +30,8 @@ namespace KPSSGeography.Data
         public const string Gate = "gate";
         /// <summary>Maden yatağı ya da madeni işleyen fabrika (nokta). subtype = "&lt;maden&gt;-site" | "&lt;maden&gt;-factory".</summary>
         public const string Mine = "mine";
+        /// <summary>Kıyı tipi şeridi (çizgi) ya da kıyı biriktirme şekli (nokta). subtype = boyuna | enine | ria | dalmacya | kalankli | limanli | tombolo | lagun.</summary>
+        public const string CoastType = "coasttype";
 
         public string id;
         public string name;
@@ -45,6 +49,9 @@ namespace KPSSGeography.Data
         public string color;
         public string MineralDisplay => string.IsNullOrEmpty(mineralName) ? GeoFeatureDatabase.MineralName(mineral) : mineralName;
         public bool IsFactory => subtype != null && subtype.EndsWith("-factory");
+        /// <summary>Kıyı tiplerinde tipin adı ve tanımı (ör. "Ria Kıyı").</summary>
+        public string typeName;
+        public string typeInfo;
         /// <summary>KPSS bilgi notu (cevaptan sonra gösterilir).</summary>
         public string info;
         public float[] label;
@@ -101,6 +108,7 @@ namespace KPSSGeography.Data
             GeoFeature.River => "AKARSUYU",
             GeoFeature.Mountain => "DAĞI",
             GeoFeature.Volcano => "VOLKANİK DAĞI",
+            GeoFeature.Massif => "MASİFİ",
             GeoFeature.Plain => "OVAYI",
             GeoFeature.Plateau => "PLATOYU",
             GeoFeature.Lake => "GÖLÜ",
@@ -113,6 +121,7 @@ namespace KPSSGeography.Data
             GeoFeature.Country => "ÜLKEYİ",
             GeoFeature.Gate => "SINIR KAPISINI",
             GeoFeature.Mine => "MADEN YERİNİ",
+            GeoFeature.CoastType => "KIYI TİPİNİ",
             _ => "YER ŞEKLİNİ"
         };
 
