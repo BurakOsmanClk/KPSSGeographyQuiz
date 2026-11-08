@@ -108,6 +108,42 @@ LAKE_NAMES = {
 }
 
 
+
+# Maden kimliği → (Türkçe ad, harita ikonu rengi). Eğitim ekranı alt başlıkları bu sırayla listelenir.
+MINERALS = {
+    "demir": ("Demir", "#A23B22"), "bakir": ("Bakır", "#D9822B"), "krom": ("Krom", "#00897B"),
+    "boksit": ("Boksit", "#C2185B"), "kursun-cinko": ("Kurşun-Çinko", "#546E7A"), "manganez": ("Manganez", "#5E35B1"),
+    "civa": ("Cıva", "#00ACC1"), "nikel": ("Nikel", "#2E7D32"), "volfram": ("Volfram", "#3949AB"),
+    "antimon": ("Antimon", "#8D6E63"), "altin": ("Altın", "#F2B705"), "bor": ("Bor", "#1E88E5"),
+    "kukurt": ("Kükürt", "#C0CA33"), "fosfat": ("Fosfat", "#6D4C41"), "tuz": ("Tuz", "#90CAF9"),
+    "mermer": ("Mermer", "#D6D6D6"), "zimpara": ("Zımpara", "#37474F"), "lule-tasi": ("Lüle Taşı", "#FFE082"),
+    "oltu-tasi": ("Oltu Taşı", "#212121"), "feldispat": ("Feldispat", "#FF8A65"), "trona": ("Trona", "#26A69A"),
+    "ponza": ("Ponza", "#A1887F"), "barit": ("Barit", "#F06292"), "perlit": ("Perlit", "#B39DDB"),
+    "bentonit": ("Bentonit", "#9CCC65"),
+}
+MINE_MIN_GAP = 0.34  # harita birimi: iki maden ikonunun merkezleri arasındaki en az uzaklık (ikon yarıçapı ~0.155)
+
+
+def cluster_points(pts, gap):
+    """Birbirine gap'ten yakın noktaları gruplar (bağlantılı bileşenler)."""
+    n = len(pts)
+    parent = list(range(n))
+
+    def find(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return a
+
+    for i in range(n):
+        for j in range(i + 1, n):
+            if (pts[i][0] - pts[j][0]) ** 2 + (pts[i][1] - pts[j][1]) ** 2 < gap * gap:
+                parent[find(i)] = find(j)
+    groups = {}
+    for i in range(n):
+        groups.setdefault(find(i), []).append(i)
+    return list(groups.values())
+
 def ellipse(center, rx_km, ry_km, angle_deg, n=28):
     lon0, lat0 = center
     ky = 1 / 111.0
@@ -439,12 +475,25 @@ def main():
         })
 
     # ---------- Madenler: yataklar (site) ve fabrikalar (factory), nokta ----------
-    # subtype = "<maden>-<tür>" (ör. demir-site): eğitim ekranı alt başlıkları ve oyun bunu kullanır; mineral ayrıca yazılır
-    for m in manual.get("mines", []):
-        x, y = proj(*m["point"])
+    # subtype = "<maden>-<tür>" (ör. demir-site); mineral, mineralName ve color (harita ikonu) ayrıca yazılır.
+    # Aynı yere düşen ikonlar (ör. Milas: boksit, zımpara, feldispat) küçük bir halka üzerinde yan yana açılır.
+    mines = manual.get("mines", [])
+    pts = [list(proj(*m["point"])) for m in mines]
+    for cluster in cluster_points(pts, MINE_MIN_GAP):
+        if len(cluster) < 2:
+            continue
+        cx = sum(pts[i][0] for i in cluster) / len(cluster)
+        cy = sum(pts[i][1] for i in cluster) / len(cluster)
+        n = len(cluster)
+        radius = MINE_MIN_GAP / (2 * math.sin(math.pi / n)) if n > 2 else MINE_MIN_GAP / 2
+        for k, i in enumerate(sorted(cluster, key=lambda j: mines[j]["id"])):
+            ang = math.pi / 2 + 2 * math.pi * k / n
+            pts[i] = [cx + radius * math.cos(ang), cy + radius * math.sin(ang)]
+    for m, (x, y) in zip(mines, pts):
+        name, color = MINERALS.get(m["mineral"], (m["mineral"].capitalize(), "#6B4F9E"))
         features.append({
             "id": m["id"], "name": m["name"], "category": "mine", "kind": "point",
-            "subtype": f"{m['mineral']}-{m['kind']}", "mineral": m["mineral"],
+            "subtype": f"{m['mineral']}-{m['kind']}", "mineral": m["mineral"], "mineralName": name, "color": color,
             "info": m["info"], "label": [r4(x), r4(y)], "lines": [], "vertices": [], "triangles": [], "outline": [],
         })
 

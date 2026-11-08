@@ -96,7 +96,11 @@ namespace KPSSGeography.UI
             Add("UNESCO Mirasları", GeoFeature.Unesco);
             Add("Milli Parklar", GeoFeature.Park);
             Add("Komşu Ülkeler", GeoFeature.Country);
-            Add("Demir: Yataklar ve Fabrikalar", GeoFeature.Mine, "demir-site", "demir-factory");
+            // Madenler: her maden bir alt başlık (yatak ve işleme tesisleri birlikte), veri sırasıyla
+            var mineTopic = new Topic { title = "Madenler", category = GeoFeature.Mine };
+            foreach (var g in features.Features.Where(f => f.Category == GeoFeature.Mine).GroupBy(f => f.Data.mineral))
+                mineTopic.children.Add(new Topic { title = g.First().Data.MineralDisplay, category = GeoFeature.Mine, subtype = g.Key, parent = mineTopic });
+            topics.Add(mineTopic);
             Add("Sınır Kapıları", GeoFeature.Gate, "Yunanistan", "Bulgaristan", "Gürcistan", "Ermenistan", "Nahçıvan", "İran", "Irak", "Suriye");
         }
 
@@ -311,14 +315,19 @@ namespace KPSSGeography.UI
             // Oyundaki yer şekli haritalarıyla aynı görünüm: iller soluk, yer şekli bölümlerinde il sınırları gizli
             map.SetFocus(_ => false);
             map.SetBordersHidden(!keepProvinces);
-            features.ShowWhere(f => f.Category == cat && (t.subtype == null || f.Data.subtype == t.subtype));
+            // Madenlerde alt başlık = maden kimliği (yatak + tesis birlikte); diğerlerinde alt tür
+            features.ShowWhere(f => f.Category == cat && (t.subtype == null ||
+                (cat == GeoFeature.Mine ? f.Data.mineral == t.subtype : f.Data.subtype == t.subtype)));
             labels.SetCountryLabels(cat != GeoFeature.Country); // ülke adları kendi etiketleriyle gelir
             relief?.SetStrength(keepProvinces ? 0.55f : 1f);
             AcceptsFeatureInput = true;
 
             var shown = features.Features.Where(f => f.gameObject.activeSelf)
                 .OrderByDescending(f => f.Data.IsPolygon ? 1 : 0).ToList();
-            labels.ShowStudy(shown.Select(f => (f.LabelWorldPosition, f.DisplayName, (Action)(() => ShowFeature(f)))));
+            // Bütün madenler birlikte gösterilirken etikette madenin adı da yazar (ör. "Krom: Guleman")
+            bool allMines = cat == GeoFeature.Mine && t.subtype == null;
+            labels.ShowStudy(shown.Select(f => (f.LabelWorldPosition,
+                allMines ? $"{f.Data.MineralDisplay}: {f.DisplayName}" : f.DisplayName, (Action)(() => ShowFeature(f)))));
 
             FocusMap(cat == GeoFeature.Country ? CountriesView() : map.Bounds);
         }
@@ -394,7 +403,9 @@ namespace KPSSGeography.UI
                 ? "" : SubtypeTitle(f.Data.subtype);
             if (f.Category == GeoFeature.Gate) type = f.Data.subtype + " sınırı";
             if (f.Category == GeoFeature.Mine)
-                type = f.Data.IsFactory ? "Demir-çelik fabrikası" : GeoFeatureDatabase.MineralName(f.Data.mineral) + " yatağı";
+                type = f.Data.IsFactory
+                    ? (f.Data.mineral == "demir" ? "Demir-çelik fabrikası" : f.Data.MineralDisplay + " işleme tesisi")
+                    : f.Data.MineralDisplay + " yatağı";
             ShowInfo(f.DisplayName + (type.Length > 0 ? $"  •  {type}" : ""),
                 string.IsNullOrEmpty(f.Data.info) ? "Bu yer için bilgi notu yok." : f.Data.info);
         }

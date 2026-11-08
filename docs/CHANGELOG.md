@@ -9,7 +9,9 @@ Biçim: `ANA.KÜÇÜK.YAMA` — yeni özellik = KÜÇÜK +1, hata düzeltmesi = 
 - **MADENLER sekmesi:** Madenler, Ekonomi'den ayrı sekmeye taşındı.
 - **Demir: Yataklar ve Fabrikalar** bölümü: ders atlaslarındaki gibi demir yatakları (Divriği, Hekimhan–Hasançelebi, Avnik,
   Yahyalı) ve demir-çelik fabrikaları (Karabük, Ereğli, İskenderun) haritada ikonlarla; "haritada bul" soruları ve bilgi notları.
-  EĞİTİM ekranına "Demir: Yataklar ve Fabrikalar" konusu eklendi.
+- **EĞİTİM → Madenler:** 25 maden, 79 yer haritada (yataklar kare, işleme tesisleri bacalı ikon; maden başına renk). Alt başlıklar:
+  demir, bakır, krom, boksit, kurşun-çinko, manganez, cıva, nikel, volfram, antimon, altın, bor, kükürt, fosfat, tuz, mermer, zımpara,
+  lüle taşı, oltu taşı, feldispat, trona, ponza, barit, perlit, bentonit. Sorular şimdilik yalnızca demirde.
 ## 0.4.0 — Prototip (şu anki sürüm)
 - **Sınav modu:** bölüm seçim ekranından açılıp kapanır. Açılınca renkli, isimli harita "buharlaşarak" soluk gri, boş KPSS
   haritasına dönüşür (sinema şeritleri, yükselen buhar, kamera yaklaşması, başlık kartı).

@@ -39,6 +39,11 @@ namespace KPSSGeography.Data
         public string subtype;
         /// <summary>Maden öğelerinde maden kimliği (demir, bakır...).</summary>
         public string mineral;
+        /// <summary>Maden öğelerinde madenin Türkçe adı (ör. "Kurşun-Çinko").</summary>
+        public string mineralName;
+        /// <summary>Maden öğelerinde harita ikonunun rengi (#RRGGBB).</summary>
+        public string color;
+        public string MineralDisplay => string.IsNullOrEmpty(mineralName) ? GeoFeatureDatabase.MineralName(mineral) : mineralName;
         public bool IsFactory => subtype != null && subtype.EndsWith("-factory");
         /// <summary>KPSS bilgi notu (cevaptan sonra gösterilir).</summary>
         public string info;

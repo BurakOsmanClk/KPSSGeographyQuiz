@@ -205,7 +205,8 @@ namespace KPSSGeography.Map
         void BuildMine(LineMeshBuilder b, GeoFeature data)
         {
             Vector2 c = data.LabelPoint;
-            Color ore = palette.MineralColor(data.mineral);
+            Color ore = !string.IsNullOrEmpty(data.color) && ColorUtility.TryParseHtmlString(data.color, out var parsed)
+                ? parsed : palette.MineralColor(data.mineral);
             b.AddCircle(c + new Vector2(0.012f, -0.02f), 0.16f, new Color(0f, 0f, 0f, 0.22f));
             b.AddCircle(c, 0.155f, palette.markerEdge);
             b.AddCircle(c, 0.13f, Color.white);

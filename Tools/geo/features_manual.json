@@ -4015,6 +4015,870 @@
     36.77
    ],
    "info": "İSDEMİR (1975), Hatay. Limana kurulmuştur: Divriği ve Hekimhan cevheri demir yoluyla gelir, kömür büyük ölçüde deniz yoluyla getirilir."
+  },
+  {
+   "id": "bakir-murgul",
+   "name": "Murgul",
+   "mineral": "bakir",
+   "kind": "site",
+   "province": "Artvin",
+   "point": [
+    41.56,
+    41.27
+   ],
+   "info": "Artvin. Türkiye'nin en önemli bakır yataklarından; Karadeniz Bakır İşletmeleri'nin temel sahası."
+  },
+  {
+   "id": "bakir-kure",
+   "name": "Küre",
+   "mineral": "bakir",
+   "kind": "site",
+   "province": "Kastamonu",
+   "point": [
+    33.71,
+    41.81
+   ],
+   "info": "Kastamonu. Tarih boyunca işletilen bakır (ve pirit) yatağı."
+  },
+  {
+   "id": "bakir-maden",
+   "name": "Maden (Ergani)",
+   "mineral": "bakir",
+   "kind": "site",
+   "province": "Elazığ",
+   "point": [
+    39.67,
+    38.39
+   ],
+   "info": "Elazığ. Eski adıyla Ergani Bakır İşletmesi; Türkiye'nin ilk modern bakır işletmelerinden."
+  },
+  {
+   "id": "bakir-cayeli",
+   "name": "Çayeli",
+   "mineral": "bakir",
+   "kind": "site",
+   "province": "Rize",
+   "point": [
+    40.73,
+    41.09
+   ],
+   "info": "Rize. Doğu Karadeniz'deki önemli bakır-çinko yatağı."
+  },
+  {
+   "id": "bakir-samsun",
+   "name": "Samsun Bakır İzabe Tesisi",
+   "mineral": "bakir",
+   "kind": "factory",
+   "province": "Samsun",
+   "point": [
+    36.45,
+    41.22
+   ],
+   "info": "Samsun. Bakır cevherinin işlendiği izabe (eritme) tesisi; Murgul ve Çayeli cevheri burada işlenmiştir."
+  },
+  {
+   "id": "krom-guleman",
+   "name": "Guleman",
+   "mineral": "krom",
+   "kind": "site",
+   "province": "Elazığ",
+   "point": [
+    39.82,
+    38.48
+   ],
+   "info": "Elazığ (Alacakaya). Türkiye'nin en önemli krom yatağı; krom Türkiye'nin önemli ihraç madenlerindendir."
+  },
+  {
+   "id": "krom-fethiye",
+   "name": "Fethiye–Köyceğiz",
+   "mineral": "krom",
+   "kind": "site",
+   "province": "Muğla",
+   "point": [
+    28.95,
+    36.8
+   ],
+   "info": "Muğla. Batı Toroslar'daki önemli krom sahası."
+  },
+  {
+   "id": "krom-orhaneli",
+   "name": "Orhaneli",
+   "mineral": "krom",
+   "kind": "site",
+   "province": "Bursa",
+   "point": [
+    28.99,
+    39.9
+   ],
+   "info": "Bursa. Marmara'daki krom yataklarından."
+  },
+  {
+   "id": "krom-aladag",
+   "name": "Aladağ",
+   "mineral": "krom",
+   "kind": "site",
+   "province": "Adana",
+   "point": [
+    35.4,
+    37.55
+   ],
+   "info": "Adana. Doğu Toroslar'daki krom yataklarından."
+  },
+  {
+   "id": "boksit-seydisehir",
+   "name": "Seydişehir",
+   "mineral": "boksit",
+   "kind": "site",
+   "province": "Konya",
+   "point": [
+    31.85,
+    37.42
+   ],
+   "info": "Konya. Türkiye'nin en önemli boksit (alüminyum cevheri) yatağı."
+  },
+  {
+   "id": "boksit-akseki",
+   "name": "Akseki",
+   "mineral": "boksit",
+   "kind": "site",
+   "province": "Antalya",
+   "point": [
+    31.79,
+    37.05
+   ],
+   "info": "Antalya. Seydişehir tesislerine cevher sağlayan boksit sahası."
+  },
+  {
+   "id": "boksit-milas",
+   "name": "Milas",
+   "mineral": "boksit",
+   "kind": "site",
+   "province": "Muğla",
+   "point": [
+    27.78,
+    37.31
+   ],
+   "info": "Muğla. Ege'deki boksit yataklarından."
+  },
+  {
+   "id": "boksit-islahiye",
+   "name": "İslahiye",
+   "mineral": "boksit",
+   "kind": "site",
+   "province": "Gaziantep",
+   "point": [
+    36.63,
+    37.03
+   ],
+   "info": "Gaziantep. Güneydoğu'daki boksit yatağı."
+  },
+  {
+   "id": "boksit-seydisehir-tesis",
+   "name": "Seydişehir Alüminyum Tesisleri",
+   "mineral": "boksit",
+   "kind": "factory",
+   "province": "Konya",
+   "point": [
+    31.85,
+    37.42
+   ],
+   "info": "Konya (1973). Boksitten alüminyum üretilen Türkiye'nin tek entegre alüminyum tesisi."
+  },
+  {
+   "id": "kursun-cinko-yenice",
+   "name": "Yenice",
+   "mineral": "kursun-cinko",
+   "kind": "site",
+   "province": "Çanakkale",
+   "point": [
+    27.26,
+    39.93
+   ],
+   "info": "Çanakkale. Kurşun-çinko yataklarından."
+  },
+  {
+   "id": "kursun-cinko-balya",
+   "name": "Balya",
+   "mineral": "kursun-cinko",
+   "kind": "site",
+   "province": "Balıkesir",
+   "point": [
+    27.58,
+    39.75
+   ],
+   "info": "Balıkesir. Tarihî kurşun-çinko sahası."
+  },
+  {
+   "id": "kursun-cinko-akdagmadeni",
+   "name": "Akdağmadeni",
+   "mineral": "kursun-cinko",
+   "kind": "site",
+   "province": "Yozgat",
+   "point": [
+    35.88,
+    39.66
+   ],
+   "info": "Yozgat. Adını madenlerinden alan ilçe; kurşun-çinko yatakları."
+  },
+  {
+   "id": "kursun-cinko-camardi",
+   "name": "Çamardı (Bolkar)",
+   "mineral": "kursun-cinko",
+   "kind": "site",
+   "province": "Niğde",
+   "point": [
+    35.07,
+    37.83
+   ],
+   "info": "Niğde. Bolkar Dağları'ndaki kurşun-çinko yatakları."
+  },
+  {
+   "id": "kursun-cinko-keban",
+   "name": "Keban",
+   "mineral": "kursun-cinko",
+   "kind": "site",
+   "province": "Elazığ",
+   "point": [
+    38.74,
+    38.8
+   ],
+   "info": "Elazığ. Kurşun-çinko (ve gümüş) yatakları."
+  },
+  {
+   "id": "kursun-cinko-yahyali",
+   "name": "Yahyalı (Zamantı)",
+   "mineral": "kursun-cinko",
+   "kind": "site",
+   "province": "Kayseri",
+   "point": [
+    35.36,
+    38.1
+   ],
+   "info": "Kayseri. Zamantı kurşun-çinko sahası."
+  },
+  {
+   "id": "manganez-eregli",
+   "name": "Ereğli",
+   "mineral": "manganez",
+   "kind": "site",
+   "province": "Zonguldak",
+   "point": [
+    31.42,
+    41.28
+   ],
+   "info": "Zonguldak. Manganez yataklarından; manganez çelik üretiminde katkı maddesidir."
+  },
+  {
+   "id": "manganez-borcka",
+   "name": "Borçka",
+   "mineral": "manganez",
+   "kind": "site",
+   "province": "Artvin",
+   "point": [
+    41.68,
+    41.36
+   ],
+   "info": "Artvin. Doğu Karadeniz'deki manganez yatakları."
+  },
+  {
+   "id": "manganez-tavas",
+   "name": "Tavas",
+   "mineral": "manganez",
+   "kind": "site",
+   "province": "Denizli",
+   "point": [
+    29.07,
+    37.57
+   ],
+   "info": "Denizli. Ege'deki manganez yataklarından."
+  },
+  {
+   "id": "civa-odemis",
+   "name": "Ödemiş (Halıköy)",
+   "mineral": "civa",
+   "kind": "site",
+   "province": "İzmir",
+   "point": [
+    27.97,
+    38.23
+   ],
+   "info": "İzmir. Türkiye'nin bilinen cıva yatağı; günümüzde üretim büyük ölçüde durmuştur."
+  },
+  {
+   "id": "civa-sarayonu",
+   "name": "Sarayönü",
+   "mineral": "civa",
+   "kind": "site",
+   "province": "Konya",
+   "point": [
+    32.4,
+    38.26
+   ],
+   "info": "Konya. Cıva yataklarından."
+  },
+  {
+   "id": "nikel-caldag",
+   "name": "Çaldağ (Turgutlu)",
+   "mineral": "nikel",
+   "kind": "site",
+   "province": "Manisa",
+   "point": [
+    27.7,
+    38.5
+   ],
+   "info": "Manisa. Türkiye'nin en büyük nikel yatağı."
+  },
+  {
+   "id": "nikel-gordes",
+   "name": "Gördes",
+   "mineral": "nikel",
+   "kind": "site",
+   "province": "Manisa",
+   "point": [
+    28.3,
+    38.93
+   ],
+   "info": "Manisa. Nikel yataklarından."
+  },
+  {
+   "id": "volfram-uludag",
+   "name": "Uludağ",
+   "mineral": "volfram",
+   "kind": "site",
+   "province": "Bursa",
+   "point": [
+    29.12,
+    40.1
+   ],
+   "info": "Bursa. Türkiye'nin en önemli volfram (tungsten) yatağı; üretim son yıllarda durmuştur."
+  },
+  {
+   "id": "volfram-keskin",
+   "name": "Keskin",
+   "mineral": "volfram",
+   "kind": "site",
+   "province": "Kırıkkale",
+   "point": [
+    33.61,
+    39.67
+   ],
+   "info": "Kırıkkale. Volfram yataklarından."
+  },
+  {
+   "id": "antimon-gediz",
+   "name": "Gediz–Simav",
+   "mineral": "antimon",
+   "kind": "site",
+   "province": "Kütahya",
+   "point": [
+    29.25,
+    39.05
+   ],
+   "info": "Kütahya. Türkiye'nin başlıca antimon yatakları."
+  },
+  {
+   "id": "altin-ovacik",
+   "name": "Ovacık (Bergama)",
+   "mineral": "altin",
+   "kind": "site",
+   "province": "İzmir",
+   "point": [
+    27.18,
+    39.12
+   ],
+   "info": "İzmir. Türkiye'nin modern ilk altın madenlerinden."
+  },
+  {
+   "id": "altin-kisladag",
+   "name": "Kışladağ",
+   "mineral": "altin",
+   "kind": "site",
+   "province": "Uşak",
+   "point": [
+    29.15,
+    38.55
+   ],
+   "info": "Uşak (Eşme). Türkiye'nin en büyük altın madenlerinden."
+  },
+  {
+   "id": "altin-ilic",
+   "name": "İliç",
+   "mineral": "altin",
+   "kind": "site",
+   "province": "Erzincan",
+   "point": [
+    38.57,
+    39.45
+   ],
+   "info": "Erzincan. Önemli altın madeni."
+  },
+  {
+   "id": "altin-mastra",
+   "name": "Mastra",
+   "mineral": "altin",
+   "kind": "site",
+   "province": "Gümüşhane",
+   "point": [
+    39.48,
+    40.48
+   ],
+   "info": "Gümüşhane. Altın madeni; ilin adı da tarihî gümüş madenciliğinden gelir."
+  },
+  {
+   "id": "bor-kirka",
+   "name": "Kırka",
+   "mineral": "bor",
+   "kind": "site",
+   "province": "Eskişehir",
+   "point": [
+    30.53,
+    39.29
+   ],
+   "info": "Eskişehir (Seyitgazi). Dünyanın en büyük bor (tinkal) yataklarından. Türkiye dünya bor rezervinin yaklaşık %70'ine sahiptir."
+  },
+  {
+   "id": "bor-emet",
+   "name": "Emet",
+   "mineral": "bor",
+   "kind": "site",
+   "province": "Kütahya",
+   "point": [
+    29.26,
+    39.34
+   ],
+   "info": "Kütahya. Kolemanit türü bor yatakları."
+  },
+  {
+   "id": "bor-bigadic",
+   "name": "Bigadiç",
+   "mineral": "bor",
+   "kind": "site",
+   "province": "Balıkesir",
+   "point": [
+    28.13,
+    39.39
+   ],
+   "info": "Balıkesir. Bor yataklarından."
+  },
+  {
+   "id": "bor-susurluk",
+   "name": "Susurluk",
+   "mineral": "bor",
+   "kind": "site",
+   "province": "Balıkesir",
+   "point": [
+    28.16,
+    39.91
+   ],
+   "info": "Balıkesir. Bor yataklarından."
+  },
+  {
+   "id": "bor-mkpasa",
+   "name": "Mustafakemalpaşa (Kestelek)",
+   "mineral": "bor",
+   "kind": "site",
+   "province": "Bursa",
+   "point": [
+    28.41,
+    40.04
+   ],
+   "info": "Bursa. Bor yataklarından."
+  },
+  {
+   "id": "bor-bandirma",
+   "name": "Bandırma Bor Tesisleri",
+   "mineral": "bor",
+   "kind": "factory",
+   "province": "Balıkesir",
+   "point": [
+    27.97,
+    40.35
+   ],
+   "info": "Balıkesir. Bor cevherinin işlendiği (boraks, borik asit) tesisler; limanla dışa açılır."
+  },
+  {
+   "id": "kukurt-keciborlu",
+   "name": "Keçiborlu",
+   "mineral": "kukurt",
+   "kind": "site",
+   "province": "Isparta",
+   "point": [
+    30.3,
+    37.94
+   ],
+   "info": "Isparta. Türkiye'nin bilinen kükürt yatağı."
+  },
+  {
+   "id": "fosfat-mazidagi",
+   "name": "Mazıdağı",
+   "mineral": "fosfat",
+   "kind": "site",
+   "province": "Mardin",
+   "point": [
+    40.48,
+    37.48
+   ],
+   "info": "Mardin. Türkiye'nin en önemli fosfat yatağı; gübre sanayisinin hammaddesi."
+  },
+  {
+   "id": "tuz-tuzgolu",
+   "name": "Tuz Gölü (göl tuzu)",
+   "mineral": "tuz",
+   "kind": "site",
+   "province": "Aksaray",
+   "point": [
+    33.55,
+    38.65
+   ],
+   "info": "Aksaray–Konya–Ankara. Türkiye'nin tuz ihtiyacının büyük kısmı buradaki göl tuzundan karşılanır."
+  },
+  {
+   "id": "tuz-cankiri",
+   "name": "Çankırı (kaya tuzu)",
+   "mineral": "tuz",
+   "kind": "site",
+   "province": "Çankırı",
+   "point": [
+    33.62,
+    40.6
+   ],
+   "info": "Çankırı. Kaya tuzu yatakları; tuz mağarasıyla da bilinir."
+  },
+  {
+   "id": "tuz-camalti",
+   "name": "Çamaltı (deniz tuzu)",
+   "mineral": "tuz",
+   "kind": "site",
+   "province": "İzmir",
+   "point": [
+    26.95,
+    38.52
+   ],
+   "info": "İzmir. Türkiye'nin en büyük deniz tuzlası."
+  },
+  {
+   "id": "tuz-kagizman",
+   "name": "Kağızman (kaya tuzu)",
+   "mineral": "tuz",
+   "kind": "site",
+   "province": "Kars",
+   "point": [
+    43.13,
+    40.15
+   ],
+   "info": "Kars. Kaya tuzu yatakları."
+  },
+  {
+   "id": "tuz-tuzluca",
+   "name": "Tuzluca (kaya tuzu)",
+   "mineral": "tuz",
+   "kind": "site",
+   "province": "Iğdır",
+   "point": [
+    43.66,
+    40.05
+   ],
+   "info": "Iğdır. Kaya tuzu yatakları."
+  },
+  {
+   "id": "mermer-iscehisar",
+   "name": "İscehisar",
+   "mineral": "mermer",
+   "kind": "site",
+   "province": "Afyonkarahisar",
+   "point": [
+    30.75,
+    38.86
+   ],
+   "info": "Afyonkarahisar. Türkiye'nin en önemli mermer bölgesi."
+  },
+  {
+   "id": "mermer-marmara",
+   "name": "Marmara Adası",
+   "mineral": "mermer",
+   "kind": "site",
+   "province": "Balıkesir",
+   "point": [
+    27.62,
+    40.62
+   ],
+   "info": "Balıkesir. Antik çağdan beri işletilen mermer; Marmara Denizi adını buradan alır."
+  },
+  {
+   "id": "mermer-denizli",
+   "name": "Denizli",
+   "mineral": "mermer",
+   "kind": "site",
+   "province": "Denizli",
+   "point": [
+    29.09,
+    37.78
+   ],
+   "info": "Denizli. Mermer ve traverten üretimi."
+  },
+  {
+   "id": "mermer-bilecik",
+   "name": "Bilecik",
+   "mineral": "mermer",
+   "kind": "site",
+   "province": "Bilecik",
+   "point": [
+    29.98,
+    40.14
+   ],
+   "info": "Bilecik. Mermer ocakları."
+  },
+  {
+   "id": "zimpara-tire",
+   "name": "Tire",
+   "mineral": "zimpara",
+   "kind": "site",
+   "province": "İzmir",
+   "point": [
+    27.73,
+    38.09
+   ],
+   "info": "İzmir. Zımpara taşı yatakları; Türkiye zımpara rezervinde dünyada ilk sıralardadır."
+  },
+  {
+   "id": "zimpara-soke",
+   "name": "Söke",
+   "mineral": "zimpara",
+   "kind": "site",
+   "province": "Aydın",
+   "point": [
+    27.41,
+    37.75
+   ],
+   "info": "Aydın. Zımpara yatakları."
+  },
+  {
+   "id": "zimpara-milas",
+   "name": "Milas",
+   "mineral": "zimpara",
+   "kind": "site",
+   "province": "Muğla",
+   "point": [
+    27.78,
+    37.31
+   ],
+   "info": "Muğla. Zımpara yatakları."
+  },
+  {
+   "id": "lule-tasi-eskisehir",
+   "name": "Eskişehir (lüle taşı)",
+   "mineral": "lule-tasi",
+   "kind": "site",
+   "province": "Eskişehir",
+   "point": [
+    30.52,
+    39.78
+   ],
+   "info": "Eskişehir. Lüle taşı yalnızca Eskişehir'de çıkarılır; pipo ve süs eşyası yapılır."
+  },
+  {
+   "id": "oltu-tasi-oltu",
+   "name": "Oltu",
+   "mineral": "oltu-tasi",
+   "kind": "site",
+   "province": "Erzurum",
+   "point": [
+    41.99,
+    40.55
+   ],
+   "info": "Erzurum. Oltu taşı (siyah kehribar) yalnızca Oltu çevresinde çıkarılır; tespih ve takı yapılır."
+  },
+  {
+   "id": "feldispat-cine",
+   "name": "Çine",
+   "mineral": "feldispat",
+   "kind": "site",
+   "province": "Aydın",
+   "point": [
+    28.06,
+    37.61
+   ],
+   "info": "Aydın. Feldispat yatakları; cam ve seramik sanayisinin hammaddesi."
+  },
+  {
+   "id": "feldispat-milas",
+   "name": "Milas",
+   "mineral": "feldispat",
+   "kind": "site",
+   "province": "Muğla",
+   "point": [
+    27.78,
+    37.31
+   ],
+   "info": "Muğla. Feldispat yatakları."
+  },
+  {
+   "id": "feldispat-simav",
+   "name": "Simav",
+   "mineral": "feldispat",
+   "kind": "site",
+   "province": "Kütahya",
+   "point": [
+    28.98,
+    39.09
+   ],
+   "info": "Kütahya. Feldispat yatakları."
+  },
+  {
+   "id": "feldispat-demirci",
+   "name": "Demirci",
+   "mineral": "feldispat",
+   "kind": "site",
+   "province": "Manisa",
+   "point": [
+    28.66,
+    39.05
+   ],
+   "info": "Manisa. Feldispat yatakları."
+  },
+  {
+   "id": "trona-beypazari",
+   "name": "Beypazarı",
+   "mineral": "trona",
+   "kind": "site",
+   "province": "Ankara",
+   "point": [
+    31.92,
+    40.17
+   ],
+   "info": "Ankara. Dünyanın önemli trona (doğal soda) yataklarından; cam ve deterjan sanayisinde kullanılır."
+  },
+  {
+   "id": "trona-kazan",
+   "name": "Kahramankazan",
+   "mineral": "trona",
+   "kind": "site",
+   "province": "Ankara",
+   "point": [
+    32.68,
+    40.2
+   ],
+   "info": "Ankara. Trona yatakları."
+  },
+  {
+   "id": "ponza-nevsehir",
+   "name": "Nevşehir",
+   "mineral": "ponza",
+   "kind": "site",
+   "province": "Nevşehir",
+   "point": [
+    34.71,
+    38.62
+   ],
+   "info": "Nevşehir. Türkiye pomza (ponza) rezervinin büyük bölümü buradadır (MTA); hafif yapı malzemesi."
+  },
+  {
+   "id": "ponza-kayseri",
+   "name": "Kayseri",
+   "mineral": "ponza",
+   "kind": "site",
+   "province": "Kayseri",
+   "point": [
+    35.49,
+    38.72
+   ],
+   "info": "Kayseri. Erciyes volkanizmasına bağlı pomza yatakları."
+  },
+  {
+   "id": "ponza-tatvan",
+   "name": "Tatvan",
+   "mineral": "ponza",
+   "kind": "site",
+   "province": "Bitlis",
+   "point": [
+    42.28,
+    38.5
+   ],
+   "info": "Bitlis. Nemrut volkanına bağlı pomza ve perlit yatakları."
+  },
+  {
+   "id": "barit-alanya",
+   "name": "Alanya",
+   "mineral": "barit",
+   "kind": "site",
+   "province": "Antalya",
+   "point": [
+    32.0,
+    36.55
+   ],
+   "info": "Antalya. Barit yatakları; petrol sondajında ağırlaştırıcı olarak kullanılır."
+  },
+  {
+   "id": "barit-kmaras",
+   "name": "Kahramanmaraş",
+   "mineral": "barit",
+   "kind": "site",
+   "province": "Kahramanmaraş",
+   "point": [
+    36.94,
+    37.58
+   ],
+   "info": "Kahramanmaraş. Barit yatakları."
+  },
+  {
+   "id": "perlit-pasinler",
+   "name": "Pasinler",
+   "mineral": "perlit",
+   "kind": "site",
+   "province": "Erzurum",
+   "point": [
+    41.68,
+    39.98
+   ],
+   "info": "Erzurum. Perlit yatakları; Türkiye dünya perlit rezervinde ilk sıralardadır."
+  },
+  {
+   "id": "perlit-kizilcahamam",
+   "name": "Kızılcahamam",
+   "mineral": "perlit",
+   "kind": "site",
+   "province": "Ankara",
+   "point": [
+    32.65,
+    40.47
+   ],
+   "info": "Ankara. Perlit yatakları."
+  },
+  {
+   "id": "bentonit-unye",
+   "name": "Ünye",
+   "mineral": "bentonit",
+   "kind": "site",
+   "province": "Ordu",
+   "point": [
+    37.28,
+    41.13
+   ],
+   "info": "Ordu. Türkiye'nin en büyük bentonit yatakları (Ünye–Fatsa); sondaj ve döküm sanayisinde kullanılır."
+  },
+  {
+   "id": "bentonit-resadiye",
+   "name": "Reşadiye",
+   "mineral": "bentonit",
+   "kind": "site",
+   "province": "Tokat",
+   "point": [
+    37.33,
+    40.39
+   ],
+   "info": "Tokat. Bentonit yatakları."
+  },
+  {
+   "id": "bentonit-cankiri",
+   "name": "Çankırı",
+   "mineral": "bentonit",
+   "kind": "site",
+   "province": "Çankırı",
+   "point": [
+    33.62,
+    40.6
+   ],
+   "info": "Çankırı. Bentonit yatakları (döküm bentoniti)."
   }
  ]
 }

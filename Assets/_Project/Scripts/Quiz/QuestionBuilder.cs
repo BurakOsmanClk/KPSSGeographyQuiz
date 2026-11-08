@@ -98,7 +98,7 @@ namespace KPSSGeography.Quiz
                 level.questionCount).Select(f =>
             {
                 string prompt = level.category == GeoFeature.Mine
-                    ? (f.Data.IsFactory ? "BU FABRİKAYI HARİTADA BUL" : $"BU {Up(GeoFeatureDatabase.MineralName(f.Data.mineral))} YATAĞINI HARİTADA BUL")
+                    ? (f.Data.IsFactory ? "BU FABRİKAYI HARİTADA BUL" : $"BU {Up(f.Data.MineralDisplay)} YATAĞINI HARİTADA BUL")
                     : $"BU {GeoFeatureDatabase.CategoryNoun(level.category)} HARİTADA BUL";
                 var q = new Question { Prompt = prompt, Title = Up(f.DisplayName),
                     Type = AnswerType.Map, Layer = MapLayer.Features, Reveal = f, Info = f.Data.info, AnswerLabel = f.DisplayName };
