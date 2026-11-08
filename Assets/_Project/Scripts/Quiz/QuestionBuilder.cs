@@ -332,6 +332,12 @@ namespace KPSSGeography.Quiz
                 AddMarkers(q, m);
                 if (q.Markers.Count > 0 || q.Shapes.Count > 0) pool.Add(q);
             }
+            foreach (var s in sets.Where(s => s.StartsWith("match:")))
+                for (int k = 0; k < 4; k++)
+                {
+                    var q = MatchQuestion(s.Substring(6));
+                    if (q != null) pool.Add(q);
+                }
             if (System.Array.IndexOf(sets, "iklim-grafik") >= 0)
                 foreach (var c in Climate.cities)
                 {
@@ -382,6 +388,117 @@ namespace KPSSGeography.Quiz
             };
             q.Markers.AddRange(markers);
             q.Correct.Add(correct);
+            return q;
+        }
+
+        // ================== Eşleştirme (I, II, III → tür) ==================
+
+        /// <summary>Eşleştirme şıkkı: "I: Alüvyal  ·  II: Çernezyom  ·  III: Terra-rossa".</summary>
+        public static string MatchRow(IList<string> values) =>
+            string.Join("  ·  ", values.Select((v, i) => $"{Roman[i]}: {v}"));
+
+        /// <summary>
+        /// Doğru satır + 4 yanlış satır üretir: önce doğru değerlerin farklı sıralamaları, yetmezse başka bir türün
+        /// karıştığı satırlar. Dönüş: şıklar ve doğru şıkkın sırası.
+        /// </summary>
+        static (string[] options, int answer) MatchOptions(string[] correct, string[] allChoices)
+        {
+            var rows = new List<string[]>();
+            var used = correct.Distinct().ToList();
+            var pool = new List<string>(used);
+            foreach (var c in Shuffled(allChoices))
+                if (!pool.Contains(c)) { pool.Add(c); if (pool.Count >= Mathf.Max(3, used.Count + 1)) break; }
+
+            // Aynı değerlerin bütün sıralamaları, sonra bir değeri başka türle değiştiren satırlar
+            var candidates = new List<string[]>();
+            foreach (var a in pool) foreach (var b in pool) foreach (var c in pool)
+            {
+                var row = new[] { a, b, c };
+                if (row.SequenceEqual(correct)) continue;
+                if (used.Count >= 3 && row.Distinct().Count() < 3) continue; // tekrarlı satır (X, X, Y) zayıf çeldirici
+                candidates.Add(row);
+            }
+            var perms = Shuffled(candidates.Where(r => r.OrderBy(x => x).SequenceEqual(correct.OrderBy(x => x))));
+            var others = Shuffled(candidates.Where(r => !r.OrderBy(x => x).SequenceEqual(correct.OrderBy(x => x))));
+            rows.AddRange(perms.Take(3));
+            rows.AddRange(others.Take(4 - rows.Count));
+            if (rows.Count < 4) return (null, -1);
+            rows.Insert(Random.Range(0, 5), correct);
+            int answer = rows.FindIndex(r => ReferenceEquals(r, correct));
+            return (rows.Select(r => MatchRow(r)).ToArray(), answer);
+        }
+
+        static string MatchTitle(string attribute) => attribute switch
+        {
+            "climate" => "Haritada numaralarla gösterilen illerde görülen iklim tipleri aşağıdakilerin hangisinde doğru eşleştirilmiştir?",
+            "vegetation" => "Haritada numaralarla gösterilen illerdeki doğal bitki örtüsü aşağıdakilerin hangisinde doğru eşleştirilmiştir?",
+            "laketype" => "Haritada numaralarla gösterilen göllerin oluşum tipleri aşağıdakilerin hangisinde doğru eşleştirilmiştir?",
+            "plaintype" => "Haritada numaralarla gösterilen ovaların oluşum türleri aşağıdakilerin hangisinde doğru eşleştirilmiştir?",
+            "plateautype" => "Haritada numaralarla gösterilen platoların oluşum türleri aşağıdakilerin hangisinde doğru eşleştirilmiştir?",
+            "mountaintype" => "Haritada numaralarla gösterilen dağların oluşum türleri aşağıdakilerin hangisinde doğru eşleştirilmiştir?",
+            _ => "Haritada numaralarla gösterilen yerler aşağıdakilerin hangisinde doğru eşleştirilmiştir?"
+        };
+
+        /// <summary>
+        /// Otomatik eşleştirme sorusu: il özelliği (iklim, bitki örtüsü) ya da yer şekli türü (göl/ova/plato/dağ tipi).
+        /// Haritada üç yer I, II, III diye işaretlenir; şıklar "I: … · II: … · III: …" satırlarıdır.
+        /// </summary>
+        Question MatchQuestion(string attributeId)
+        {
+            var attr = topics.Attribute(attributeId);
+            if (attr == null || attr.choices == null || attr.choices.Length < 2) return null;
+            var targets = new List<IMapTarget>();
+            var values = new List<string>();
+
+            if (attr.groups != null && attr.groups.Length > 0)
+            {
+                // İl özelliği: farklı değerlerden birer il, haritaya yayılmış
+                foreach (var g in Shuffled(attr.groups.Where(g => g.plates != null && g.plates.Length > 0)))
+                {
+                    if (targets.Count >= 3) break;
+                    foreach (int plate in Shuffled(g.plates))
+                    {
+                        var p = map.GetByPlate(plate);
+                        if (p == null) continue;
+                        if (targets.Exists(t => Vector2.Distance(t.LabelWorldPosition, p.transform.position) < map.Bounds.width * 0.12f)) continue;
+                        targets.Add(p);
+                        values.Add(attr.choices[g.choice]);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                string category = attributeId switch
+                {
+                    "laketype" => GeoFeature.Lake, "plaintype" => GeoFeature.Plain,
+                    "plateautype" => GeoFeature.Plateau, "mountaintype" => GeoFeature.Mountain, _ => null
+                };
+                if (category == null) return null;
+                var feats = features.Features.Where(f => f.Category == category && System.Array.IndexOf(attr.choices, f.Data.subtype) >= 0).ToList();
+                bool distinct = attr.choices.Length >= 3;
+                foreach (var f in Shuffled(feats))
+                {
+                    if (targets.Count >= 3) break;
+                    if (distinct && values.Contains(f.Data.subtype)) continue;
+                    if (targets.Exists(t => Vector2.Distance(t.LabelWorldPosition, f.LabelWorldPosition) < map.Bounds.width * 0.08f)) continue;
+                    targets.Add(f);
+                    values.Add(f.Data.subtype);
+                }
+            }
+            if (targets.Count < 3) return null;
+
+            var (options, answer) = MatchOptions(values.ToArray(), attr.choices);
+            if (options == null) return null;
+            var q = new Question
+            {
+                Prompt = "EŞLEŞTİRME", Title = MatchTitle(attributeId), LongTitle = true, Type = AnswerType.Choice,
+                Choices = options.Select((o, i) => $"{Letters[i]})  {o}").ToArray(), CorrectChoice = answer,
+                Info = string.Join("  ", targets.Select((t, i) => $"{Roman[i]}: {t.DisplayName} – {values[i]}.")),
+                AnswerLabel = $"{Letters[answer]}) {options[answer]}"
+            };
+            q.Markers.AddRange(targets);
+            q.Correct.AddRange(targets);
             return q;
         }
 
