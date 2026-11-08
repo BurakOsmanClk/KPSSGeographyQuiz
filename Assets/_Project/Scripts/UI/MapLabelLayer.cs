@@ -125,7 +125,7 @@ namespace KPSSGeography.UI
             {
                 if (target == null) continue;
                 var bg = UIFactory.Panel("Review", root, correct ? Theme.Success : Theme.Error, true);
-                var t = UIFactory.Label("Text", bg.transform, text, 20, Color.white, TextAnchor.MiddleCenter, FontStyle.Bold);
+                var t = UIFactory.Label("Text", bg.transform, text, 20, Color.white, TextAnchor.MiddleCenter, FontStyle.Bold).NoFit();
                 t.rectTransform.Stretch(10, 10, 2, 2);
                 float w = t.preferredWidth + 28f;
                 bg.rectTransform.Place(Vector2.zero, new Vector2(0.5f, 0f), Vector2.zero, new Vector2(w, 34));
@@ -161,7 +161,7 @@ namespace KPSSGeography.UI
 
         Label CreateLabel(string text, Kind kind, int size, Color color, FontStyle style)
         {
-            var t = UIFactory.Label(kind + "Label", root, text, size, color, TextAnchor.MiddleCenter, style);
+            var t = UIFactory.Label(kind + "Label", root, text, size, color, TextAnchor.MiddleCenter, style).NoFit();
             if (kind == Kind.Province)
             {
                 var o = t.gameObject.AddComponent<Outline>();

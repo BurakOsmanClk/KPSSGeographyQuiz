@@ -5,6 +5,9 @@ giriş ekranının sağ altında ile **Ayarlar** penceresinde görünür (`Core/
 Biçim: `ANA.KÜÇÜK.YAMA` — yeni özellik = KÜÇÜK +1, hata düzeltmesi = YAMA +1, mağaza yayını = 1.0.0.
 
 ## Yayınlanmamış (0.5.0 adayı)
+- **Esnek arayüz:** güvenli alan desteği (çentikli telefonlar) ve güvenli alana göre ölçek; her ekran boyutunda en az 1920×1080
+  birimlik alan, ekranlar üst üste binmez. Bütün yazılar kutusuna sığar (satır kaydırma + gerekirse küçülme); uzun KPSS
+  açıklamaları ve şıklar artık taşmıyor. A–E soru kartı PUAN paneline binmiyor; geri bildirim ve açıklama kartın altına yerleşiyor.
 - **A–E soru bankası 80 → 151 soru**, KPSS müfredat sırasıyla 9 konu bölümü + **Genel Deneme** (bütün konulardan 20 soru):
   Konum (18), Yer Şekilleri (22), Sular ve Göller (17), İklim ve Bitki Örtüsü (19), Tarım ve Hayvancılık (16), Madenler ve Enerji (16),
   Sanayi–Ulaşım–Ticaret–Turizm (16, yeni), Nüfus ve Yerleşme (15), Bölgesel Projeler ve Koruma (12). Hepsi KPSS SORULARI sekmesinde;

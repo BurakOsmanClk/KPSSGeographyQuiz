@@ -80,6 +80,7 @@ namespace KPSSGeography.UI
         // Bilgi notu (yer şekli soruları)
         Text infoText;
         CanvasGroup infoGroup;
+        RectTransform infoRect;
 
         // Devam teklifi
         RectTransform continueScreen;
@@ -211,7 +212,7 @@ namespace KPSSGeography.UI
             examBadge.gameObject.SetActive(false);
 
             streakText = UIFactory.Label("Streak", hud, "", 30, Theme.Amber, TextAnchor.MiddleLeft, FontStyle.Bold, true);
-            streakText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(0f, 0.5f), new Vector2(34, -166), new Vector2(460, 40));
+            streakText.rectTransform.Place(new Vector2(0f, 1f), new Vector2(0f, 0.5f), new Vector2(34, -166), new Vector2(360, 40));
 
             // --- İlerleme ve canlar (sağ üst) ---
             var rightPanel = UIFactory.Card("StatusPanel", hud, Theme.NavyPanel);
@@ -223,7 +224,7 @@ namespace KPSSGeography.UI
 
             // --- Geri bildirim ---
             feedbackText = UIFactory.Label("Feedback", hud, "", 40, Theme.Text, TextAnchor.MiddleCenter, FontStyle.Bold, true);
-            feedbackText.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -204), new Vector2(1200, 50));
+            feedbackText.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -190), new Vector2(1200, 50));
             var outline = feedbackText.gameObject.AddComponent<Outline>();
             outline.effectColor = new Color(0f, 0f, 0f, 0.5f);
             outline.effectDistance = new Vector2(2f, -2f);
@@ -231,10 +232,10 @@ namespace KPSSGeography.UI
             feedbackGroup.alpha = 0f;
 
             var infoBg = UIFactory.Card("Info", hud, Theme.NavyPanel);
-            infoBg.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -258), new Vector2(1100, 84));
-            infoText = UIFactory.Label("Text", infoBg.transform, "", 26, Theme.Text, TextAnchor.MiddleCenter);
-            infoText.horizontalOverflow = HorizontalWrapMode.Wrap;
-            infoText.rectTransform.Stretch(28, 28, 8, 8);
+            // Açıklamalar 2–4 satır olabilir: kutu yeterince yüksek, yazı gerekirse küçülerek sığar
+            infoRect = infoBg.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -248), new Vector2(1100, 118));
+            infoText = UIFactory.Label("Text", infoBg.transform, "", 26, Theme.Text, TextAnchor.MiddleCenter).Fit(0.62f);
+            infoText.rectTransform.Stretch(28, 28, 10, 10);
             infoGroup = infoBg.gameObject.AddComponent<CanvasGroup>();
             infoGroup.alpha = 0f;
 
@@ -293,8 +294,7 @@ namespace KPSSGeography.UI
                 }
                 choiceLabels[i].text = label;
                 choiceLabels[i].alignment = grid ? TextAnchor.MiddleLeft : TextAnchor.MiddleCenter;
-                choiceLabels[i].fontSize = grid ? 26 : (activeChoices > 6 ? 24 : 27);
-                choiceLabels[i].horizontalOverflow = grid ? HorizontalWrapMode.Wrap : HorizontalWrapMode.Overflow;
+                choiceLabels[i].SetSize(grid ? 26 : (activeChoices > 6 ? 24 : 27), 0.6f);
                 choiceLabels[i].rectTransform.offsetMin = new Vector2(grid ? 26 : 6, 4);
                 choiceLabels[i].rectTransform.offsetMax = new Vector2(grid ? -18 : -6, -4);
 
@@ -366,12 +366,20 @@ namespace KPSSGeography.UI
         /// <summary>Hedef kartını soru türüne göre boyutlandırır (KPSS sorusunda geniş ve çok satırlı).</summary>
         void LayoutTargetCard(bool longText)
         {
-            targetCard.sizeDelta = longText ? new Vector2(1240, 236) : new Vector2(760, 160);
-            targetName.fontSize = longText ? 34 : 64;
-            targetName.horizontalOverflow = longText ? HorizontalWrapMode.Wrap : HorizontalWrapMode.Overflow;
+            // Sol üstteki PUAN paneli x≈398'e, sağ üstteki durum paneli x≈1596'ya kadar uzanır (1920 genişlikte):
+            // geniş kart bu ikisinin arasına sığmalı (1100 → 410..1510).
+            float w = longText ? 1100f : 760f, h = longText ? 236f : 160f;
+            targetCard.sizeDelta = new Vector2(w, h);
+            targetName.SetSize(longText ? 34 : 64, longText ? 0.6f : 0.5f);
             targetName.lineSpacing = longText ? 1.1f : 1f;
             targetName.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, longText ? -50 : -48),
-                new Vector2(longText ? 1160 : 720, longText ? 130 : 68));
+                new Vector2(w - 60f, longText ? 130 : 68));
+            promptText.rectTransform.sizeDelta = new Vector2(w - 40f, 30f);
+
+            // Geri bildirim ve açıklama kartın hemen altına gelir (kartın arkasında kalmasın)
+            float cardBottom = 22f + h;
+            feedbackText.rectTransform.anchoredPosition = new Vector2(0f, -(cardBottom + 8f));
+            infoRect.anchoredPosition = new Vector2(0f, -(cardBottom + 64f));
         }
 
         void BuildNameTag()
@@ -698,7 +706,7 @@ namespace KPSSGeography.UI
         {
             countdownText.gameObject.SetActive(true);
             countdownText.text = n > 0 ? n.ToString() : "BAŞLA!";
-            countdownText.fontSize = n > 0 ? 200 : 150;
+            countdownText.SetSize(n > 0 ? 200 : 150);
             var rt = countdownText.rectTransform;
             Animate("countdown", Tween.Run(n > 0 ? 0.55f : 0.45f, t =>
             {
@@ -1024,7 +1032,7 @@ namespace KPSSGeography.UI
             nameTagTarget = target;
             nameTagText.text = target.DisplayName;
             nameTagIcon.sprite = accent == Theme.Success ? ShapeSprites.Check : ShapeSprites.Cross;
-            nameTag.sizeDelta = new Vector2(nameTagText.preferredWidth + 84f, 54f);
+            nameTag.sizeDelta = new Vector2(Mathf.Min(nameTagText.preferredWidth + 84f, 760f), 54f);
             nameTagImage.color = Color.Lerp(Theme.NavyPanel, accent, 0.55f);
             nameTag.SetAsLastSibling();
             Animate("nametag", Tween.Run(0.25f, t =>

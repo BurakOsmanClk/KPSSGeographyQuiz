@@ -20,7 +20,7 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - Proje dosyaları `Assets/_Project/` altında.
 - Namespace: `KPSSGeography` (alt namespace'ler: `.Core`, `.Content`, `.Map`, `.Gameplay`, `.Meta`, `.Services`, `.UI`, `.App`, editör kodu `.EditorTools`). Prototipteki `.Data` ve `.Quiz` M0'da `.Content` ve `.Gameplay` olarak taşınacak.
 - Input: projede yalnızca **Input System** aktif (`activeInputHandler: 1`); eski `UnityEngine.Input` API'si kullanılmaz.
-- UI hedefi: **UI Toolkit** (UXML/USS). Şu anki arayüz (giriş ekranı, bölüm karuseli, HUD, sonuç ekranı) kodla kurulan uGUI'dir; renkler `UI/Theme.cs`, ikonlar `UI/ShapeSprites.cs` (SDF ile üretilir). Arayüz canvas'ları 1920×1080 referans + `ScreenMatchMode.Expand` kullanır (her en-boy oranında en az 1920×1080 alan; yerleşimler bu alana sığacak şekilde tasarlanır). UI Toolkit'e geçişte bu tasarım referans alınır.
+- UI hedefi: **UI Toolkit** (UXML/USS). Şu anki arayüz (giriş ekranı, bölüm karuseli, HUD, sonuç ekranı) kodla kurulan uGUI'dir; renkler `UI/Theme.cs`, ikonlar `UI/ShapeSprites.cs` (SDF ile üretilir). Ana arayüz canvas'ı `UI/SafeAreaFitter.cs` ile kurulur: içerik cihazın güvenli alanına (çentik dışı) oturur ve ölçek, güvenli alan her zaman en az 1920×1080 birim olacak şekilde hesaplanır; yerleşimler 1920×1080'e sığacak şekilde tasarlanır, böylece hiçbir ekranda çakışmaz. Yazılar varsayılan olarak kutusuna sığar (`UIFactory.Label` → `Fit()`: satır kaydırma + en uygun boyut, taşmaz); boyutu kodla değişen yazılarda `SetSize()`, serbest taşması gerekenlerde (harita etiketleri) `NoFit()` kullanılır. UI Toolkit'e geçişte bu tasarım referans alınır.
 - Soru verileri koddan ayrı tutulur (JSON veya ScriptableObject).
 
 ## İl haritası verisi

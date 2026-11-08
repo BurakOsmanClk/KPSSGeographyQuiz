@@ -116,9 +116,9 @@ namespace KPSSGeography.UI
             t.alignment = anchor;
             t.fontStyle = style;
             t.raycastTarget = false;
-            t.horizontalOverflow = HorizontalWrapMode.Overflow;
-            t.verticalOverflow = VerticalWrapMode.Overflow;
             t.supportRichText = true;
+            // Varsayılan: yazı kutusuna sarılır ve gerekirse küçülerek sığar; hiçbir ekranda kutunun dışına taşmaz
+            t.Fit();
             if (shadow)
             {
                 var s = rt.gameObject.AddComponent<Shadow>();
@@ -126,6 +126,39 @@ namespace KPSSGeography.UI
                 s.effectDistance = new Vector2(0f, -3f);
             }
             return t;
+        }
+
+        /// <summary>
+        /// Yazıyı kutusuna sığdırır: satır kaydırma + en uygun boyut (fontSize'dan aşağı, en az <paramref name="minScale"/> katı).
+        /// Sığmazsa taşmak yerine kesilir. Kutu boyutunu bu yüzden gerçekçi verin.
+        /// </summary>
+        public static Text Fit(this Text t, float minScale = 0.55f)
+        {
+            t.horizontalOverflow = HorizontalWrapMode.Wrap;
+            t.verticalOverflow = VerticalWrapMode.Truncate;
+            t.resizeTextForBestFit = true;
+            t.resizeTextMaxSize = t.fontSize;
+            t.resizeTextMinSize = Mathf.Max(10, Mathf.RoundToInt(t.fontSize * minScale));
+            return t;
+        }
+
+        /// <summary>Sığdırmayı kapatır (boyutu kodla sürekli değişen ya da serbest taşması istenen yazılar, ör. harita etiketleri).</summary>
+        public static Text NoFit(this Text t)
+        {
+            t.resizeTextForBestFit = false;
+            t.horizontalOverflow = HorizontalWrapMode.Overflow;
+            t.verticalOverflow = VerticalWrapMode.Overflow;
+            return t;
+        }
+
+        /// <summary>Yazı boyutunu değiştirir; sığdırma açıksa en büyük ve en küçük boyutu da günceller (Büyük yazı ayarına uyar).</summary>
+        public static void SetSize(this Text t, int size, float minScale = 0.55f)
+        {
+            int s = Mathf.RoundToInt(size * Core.GameSettings.TextScale);
+            t.fontSize = s;
+            if (!t.resizeTextForBestFit) return;
+            t.resizeTextMaxSize = s;
+            t.resizeTextMinSize = Mathf.Max(10, Mathf.RoundToInt(s * minScale));
         }
 
         /// <summary>Yuvarlak köşeli, gölgeli, üzerine gelince büyüyen buton.</summary>

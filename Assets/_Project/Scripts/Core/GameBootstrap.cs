@@ -158,14 +158,11 @@ namespace KPSSGeography.Core
             var canvas = go.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvas.sortingOrder = 10;
-            var scaler = go.AddComponent<CanvasScaler>();
-            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1920, 1080);
-            // Expand: kullanılabilir alan her en-boy oranında en az 1920×1080 kalır; geniş/dar pencerelerde
-            // (Free Aspect, 20:9 telefon, tablet) ekranlar üst üste binmez, fazlalık kenarlarda boşluk olur.
-            scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
+            go.AddComponent<CanvasScaler>();
             go.AddComponent<GraphicRaycaster>();
-            root = (RectTransform)go.transform;
+            // Güvenli alan + ölçek: içerik çentik/kamera deliği dışında kalır ve güvenli alan her zaman en az
+            // 1920×1080 birimdir; her telefonda, tablette ve pencere boyutunda ekranlar üst üste binmez.
+            root = go.AddComponent<SafeAreaFitter>().Initialize();
             return canvas;
         }
 

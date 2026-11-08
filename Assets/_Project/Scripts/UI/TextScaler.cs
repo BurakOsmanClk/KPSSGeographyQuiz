@@ -17,10 +17,18 @@ namespace KPSSGeography.UI
             {
                 if (!baseSizes.TryGetValue(t, out int size))
                 {
-                    size = t.fontSize;
+                    size = t.resizeTextForBestFit ? t.resizeTextMaxSize : t.fontSize;
                     baseSizes[t] = size;
                 }
-                t.fontSize = Mathf.RoundToInt(size * k);
+                int s = Mathf.RoundToInt(size * k);
+                t.fontSize = s;
+                if (t.resizeTextForBestFit)
+                {
+                    // Sığdırma açık yazılarda üst sınır büyür; kutuya sığmazsa yine küçülür (taşmaz)
+                    float minScale = size > 0 ? Mathf.Clamp01(t.resizeTextMinSize / (float)Mathf.Max(1, t.resizeTextMaxSize)) : 0.55f;
+                    t.resizeTextMaxSize = s;
+                    t.resizeTextMinSize = Mathf.Max(10, Mathf.RoundToInt(s * minScale));
+                }
             }
         }
     }

@@ -240,11 +240,9 @@ namespace KPSSGeography.UI
             accent.rectTransform.Place(new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), new Vector2(0, 0), new Vector2(8, 120));
 
             titleText = UIFactory.Label("Title", band.transform, "", 44, Color.white, TextAnchor.MiddleCenter, FontStyle.Bold, true);
-            titleText.horizontalOverflow = HorizontalWrapMode.Overflow;
             titleText.rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -14), new Vector2(820, 56));
 
             subtitleText = UIFactory.Label("Subtitle", band.transform, "", 26, Color.white, TextAnchor.MiddleCenter, FontStyle.Normal);
-            subtitleText.horizontalOverflow = HorizontalWrapMode.Overflow;
             subtitleText.rectTransform.Place(new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0, 14), new Vector2(820, 36));
         }
     }
