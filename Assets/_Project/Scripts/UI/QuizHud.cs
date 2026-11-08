@@ -30,6 +30,7 @@ namespace KPSSGeography.UI
         RectTransform targetCard;
         RectTransform bodyCard;
         Text bodyText;
+        ClimateChart chart;
         Text promptText;
         Text targetName;
         RectTransform timerFill;
@@ -390,14 +391,24 @@ namespace KPSSGeography.UI
             bodyText.horizontalOverflow = HorizontalWrapMode.Wrap;
             bodyText.lineSpacing = 1.15f;
             bodyText.rectTransform.Stretch(28, 28, 26, 26);
+            chart = bodyCard.gameObject.AddComponent<ClimateChart>();
             bodyCard.gameObject.SetActive(false);
         }
 
-        void ShowBody(string body)
+        /// <summary>Soldaki soru kâğıdı: öncül metni ya da iklim grafiği.</summary>
+        void ShowBody(string body, ClimateCity climate = null)
         {
-            bool on = !string.IsNullOrEmpty(body);
+            bool on = !string.IsNullOrEmpty(body) || climate != null;
             bodyCard.gameObject.SetActive(on);
             if (!on) return;
+            if (climate != null)
+            {
+                bodyText.text = "";
+                bodyCard.sizeDelta = new Vector2(bodyCard.sizeDelta.x, 520f);
+                chart.Show(bodyCard, climate);
+                return;
+            }
+            chart.Clear();
             bodyText.text = body;
             float h = Mathf.Clamp(bodyText.preferredHeight + 56f, 200f, 560f);
             bodyCard.sizeDelta = new Vector2(bodyCard.sizeDelta.x, h);
@@ -758,7 +769,7 @@ namespace KPSSGeography.UI
             var q = info.Question;
             currentQuestion = q;
             HideNameTag(false);
-            ShowBody(q.Body);
+            ShowBody(q.Body, q.Chart);
             // Numaralı harita: işaretli yerlere I, II, III… rozetleri
             if (q.Shapes.Count > 0)
             {
