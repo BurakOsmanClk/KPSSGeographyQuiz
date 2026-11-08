@@ -12,6 +12,7 @@ namespace KPSSGeography.UI
     /// • Deniz, boğaz ve komşu ülke adları (her zaman).
     /// • İl adları: açıkken yakınlaşma düzeyine göre büyükten küçüğe belirir, çakışanlar gizlenir.
     /// • "Haritayı incele" etiketleri: turda sorulan yerler, doğru/yanlış renginde ve dokunulabilir.
+    /// • Eğitim etiketleri: seçilen konudaki yerlerin adları; çakışanlar gizlenir, yakınlaşınca belirir.
     /// </summary>
     public class MapLabelLayer : MonoBehaviour
     {
@@ -21,7 +22,8 @@ namespace KPSSGeography.UI
             Strait,
             Country,
             Province,
-            Review
+            Review,
+            Study
         }
 
         class Label
@@ -42,6 +44,7 @@ namespace KPSSGeography.UI
         readonly List<Label> fixedLabels = new List<Label>();
         readonly List<Label> provinceLabels = new List<Label>();
         readonly List<Label> reviewLabels = new List<Label>();
+        readonly List<Label> studyLabels = new List<Label>();
         readonly List<Rect> placed = new List<Rect>();
         bool provincesOn;
         bool countriesOn = true;
@@ -150,6 +153,36 @@ namespace KPSSGeography.UI
             dirty = true;
         }
 
+        /// <summary>Eğitim ekranı: verilen konumlara dokunulabilir isim etiketleri koyar (sıra = öncelik).</summary>
+        public void ShowStudy(IEnumerable<(Vector3 world, string text, Action onClick)> items, int fontSize = 18)
+        {
+            ClearStudy();
+            foreach (var (world, text, onClick) in items)
+            {
+                var bg = UIFactory.Panel("Study", root, Theme.NavyPanel, true);
+                var t = UIFactory.Label("Text", bg.transform, text, fontSize, Color.white, TextAnchor.MiddleCenter, FontStyle.Bold);
+                t.rectTransform.Stretch(8, 8, 2, 2);
+                float w = t.preferredWidth + 22f, h = fontSize + 12f;
+                bg.rectTransform.Place(Vector2.zero, new Vector2(0.5f, 0f), Vector2.zero, new Vector2(w, h));
+                var btn = bg.gameObject.AddComponent<Button>();
+                btn.targetGraphic = bg;
+                if (onClick != null) btn.onClick.AddListener(() => onClick());
+                studyLabels.Add(new Label
+                {
+                    kind = Kind.Study, rt = bg.rectTransform, text = t, world = world, baseSize = fontSize, size = new Vector2(w, h)
+                });
+            }
+            TextScaler.Apply(root);
+            dirty = true;
+        }
+
+        public void ClearStudy()
+        {
+            foreach (var l in studyLabels) Destroy(l.rt.gameObject);
+            studyLabels.Clear();
+            dirty = true;
+        }
+
         public void ClearReview()
         {
             foreach (var l in reviewLabels) Destroy(l.rt.gameObject);
@@ -216,6 +249,23 @@ namespace KPSSGeography.UI
                 Vector2 p = ToCanvas(l.world, canvasSize) + new Vector2(0f, 10f);
                 l.rt.anchoredPosition = p;
                 placed.Add(new Rect(p.x - l.size.x / 2f, p.y, l.size.x, l.size.y));
+            }
+
+            // Eğitim etiketleri: üst üste binen gizlenir (yakınlaşınca açılır)
+            foreach (var l in studyLabels)
+            {
+                Vector2 p = ToCanvas(l.world, canvasSize) + new Vector2(0f, 6f);
+                var r = new Rect(p.x - l.size.x / 2f, p.y, l.size.x, l.size.y);
+                bool show = p.x > -80 && p.x < canvasSize.x + 80 && p.y > -40 && p.y < canvasSize.y + 40;
+                if (show)
+                    foreach (var other in placed)
+                        if (other.Overlaps(r)) { show = false; break; }
+                if (show)
+                {
+                    placed.Add(r);
+                    l.rt.anchoredPosition = p;
+                }
+                if (l.rt.gameObject.activeSelf != show) l.rt.gameObject.SetActive(show);
             }
 
             if (!provincesOn) return;

@@ -74,6 +74,18 @@ namespace KPSSGeography.Map
             }
         }
 
+        /// <summary>Eğitim ekranı: koşula uyan öğeleri gösterir (ör. yalnızca kıvrım dağları).</summary>
+        public void ShowWhere(System.Func<FeatureView, bool> include, bool interactive = true)
+        {
+            foreach (var f in features)
+            {
+                f.ResetVisual();
+                bool match = include(f);
+                f.gameObject.SetActive(match);
+                f.Interactive = match && interactive;
+            }
+        }
+
         /// <summary>Tek bir öğeyi gösterir (ör. KPSS sorusunda vurgulanan göl), diğerlerini gizler.</summary>
         public void ShowOnly(FeatureView target)
         {
