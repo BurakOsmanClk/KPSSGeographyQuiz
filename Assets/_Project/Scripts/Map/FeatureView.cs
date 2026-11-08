@@ -112,6 +112,17 @@ namespace KPSSGeography.Map
                     baseOrder = 27;
                     BuildMarker(b, data);
                     break;
+                case GeoFeature.Country:
+                    // İller gibi pastel dolgu + beyaz sınır
+                    baseOrder = -12; // gri dekor ülkelerin (-20) üstünde, Türkiye gölgesinin (-10) altında
+                    b.AddTriangles(data.vertices, data.triangles, palette.CountryColor(data.subtype));
+                    foreach (var r in data.outline)
+                        b.AddPolyline(LineMeshBuilder.ToPoints(r.points), 0.03f, palette.countryBorder, true);
+                    break;
+                case GeoFeature.Gate:
+                    baseOrder = 28;
+                    BuildGate(b, data.LabelPoint);
+                    break;
                 case GeoFeature.Plain:
                 case GeoFeature.Plateau:
                     bool plain = data.category == GeoFeature.Plain;
@@ -181,6 +192,35 @@ namespace KPSSGeography.Map
                     b.AddTriangle(c + new Vector2(-0.07f, -0.05f), c + new Vector2(0f, 0.08f), c + new Vector2(0.07f, -0.05f), Color.white);
                     break;
             }
+        }
+
+        /// <summary>Sınır kapısı: beyaz rozet üzerinde kırmızı-beyaz şeritli bariyer kolu ve direği.</summary>
+        void BuildGate(LineMeshBuilder b, Vector2 c)
+        {
+            b.AddCircle(c + new Vector2(0.012f, -0.02f), 0.15f, new Color(0f, 0f, 0f, 0.22f));
+            b.AddCircle(c, 0.15f, palette.markerEdge);
+            b.AddCircle(c, 0.125f, Color.white);
+
+            // Direk ve ayağı
+            b.AddQuad(c + new Vector2(-0.098f, -0.085f), c + new Vector2(-0.032f, -0.085f),
+                c + new Vector2(-0.032f, -0.06f), c + new Vector2(-0.098f, -0.06f), palette.gatePost);
+            b.AddQuad(c + new Vector2(-0.08f, -0.06f), c + new Vector2(-0.05f, -0.06f),
+                c + new Vector2(-0.05f, 0.05f), c + new Vector2(-0.08f, 0.05f), palette.gatePost);
+
+            // Bariyer kolu: koyu çerçeve + kırmızı/beyaz şeritler
+            float x0 = -0.065f, x1 = 0.105f, y0 = 0.0f, y1 = 0.05f, pad = 0.012f;
+            b.AddQuad(c + new Vector2(x0 - pad, y0 - pad), c + new Vector2(x1 + pad, y0 - pad),
+                c + new Vector2(x1 + pad, y1 + pad), c + new Vector2(x0 - pad, y1 + pad), palette.gatePost);
+            const int stripes = 5;
+            float w = (x1 - x0) / stripes;
+            for (int i = 0; i < stripes; i++)
+            {
+                float a = x0 + i * w, z = a + w;
+                b.AddQuad(c + new Vector2(a, y0), c + new Vector2(z, y0), c + new Vector2(z, y1), c + new Vector2(a, y1),
+                    i % 2 == 0 ? palette.gateRed : Color.white);
+            }
+            // Direğin tepesindeki menteşe
+            b.AddCircle(c + new Vector2(-0.065f, 0.025f), 0.026f, palette.gatePost, 10);
         }
 
         Rect ComputeBounds()

@@ -54,6 +54,12 @@ namespace KPSSGeography.Quiz
 
         public bool Accepts(IMapTarget target) => Correct.Contains(target);
 
+        /// <summary>
+        /// Yanlış cevapta (ya da süre bitince) doğru cevap gösterilmez mi? Haritadan seçmeli sorularda gösterilmez:
+        /// doğru yeri ve tıklanan yerin adını göstermek sonraki sorular için ipucu olur. "Hepsini bul" hariç.
+        /// </summary>
+        public bool HidesAnswerOnMiss => Type == AnswerType.Map && !RequireAll;
+
         /// <summary>İsim etiketinin gösterileceği hedef.</summary>
         public IMapTarget TagTarget => Reveal ?? Focus ?? (Correct.Count == 1 ? Correct[0] : null);
     }

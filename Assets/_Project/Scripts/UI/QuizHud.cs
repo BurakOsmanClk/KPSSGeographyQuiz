@@ -160,6 +160,7 @@ namespace KPSSGeography.UI
         {
             ExitReview(false);
             Labels?.SetProvinceLabels(false);
+            Labels?.SetCountryLabels(true);
             base.Hide();
             HideNameTag(true);
         }
@@ -668,6 +669,7 @@ namespace KPSSGeography.UI
         {
             ExitReview(false);
             Labels?.SetProvinceLabels(ProvinceNamesAllowed());
+            Labels?.SetCountryLabels(!game.HidesCountryNames);
             Show();
             endScreen.gameObject.SetActive(false);
             pauseScreen.gameObject.SetActive(false);
@@ -762,7 +764,9 @@ namespace KPSSGeography.UI
             }
 
             // Sınavda bilgi notu cevaptan hemen sonra verilmez; "Haritayı incele" ekranında okunur
-            if (!game.IsExam && !string.IsNullOrEmpty(r.Info)) ShowInfo(r.Info, r.IsCorrect ? 2.0f : 3.2f);
+            // Haritadan seçmeli soruda yanlışta not da gösterilmez: cevabı ele verir
+            bool hideAnswer = !r.IsCorrect && q.HidesAnswerOnMiss;
+            if (!game.IsExam && !hideAnswer && !string.IsNullOrEmpty(r.Info)) ShowInfo(r.Info, r.IsCorrect ? 2.0f : 3.2f);
             IMapTarget tag = r.IsCorrect && r.Clicked != null ? r.Clicked : q.TagTarget;
 
             if (r.IsCorrect)
@@ -790,14 +794,16 @@ namespace KPSSGeography.UI
             {
                 string answer = q.AnswerLabel;
                 string msg;
-                if (r.Outcome == AnswerOutcome.TimedOut)
+                if (hideAnswer)
+                    msg = r.Outcome == AnswerOutcome.TimedOut ? "SÜRE DOLDU!" : "YANLIŞ!";
+                else if (r.Outcome == AnswerOutcome.TimedOut)
                     msg = q.RequireAll ? $"SÜRE DOLDU!  {r.Found} / {q.Correct.Count} il bulundu" : $"SÜRE DOLDU!  Doğru cevap: {answer}";
                 else if (r.Clicked != null)
                     msg = $"YANLIŞ! ({r.Clicked.DisplayName})  Doğru cevap: {answer}";
                 else
                     msg = $"YANLIŞ!  Doğru cevap: {answer}";
                 ShowFeedback(msg, Theme.Error);
-                if (tag != null) ShowNameTag(tag, Theme.Error);
+                if (tag != null && !hideAnswer) ShowNameTag(tag, Theme.Error);
                 streakText.text = "";
                 if (!q.RequireAll) LoseHeart();
             }

@@ -46,6 +46,8 @@ namespace KPSSGeography.Quiz
 
         List<Question> questions = new List<Question>();
         readonly HashSet<IMapTarget> found = new HashSet<IMapTarget>();
+        /// <summary>Bu turda doğru bilinen hedefler (il, akarsu, dağ...). Bölüm boyunca tekrar tıklanamaz.</summary>
+        readonly HashSet<IMapTarget> solved = new HashSet<IMapTarget>();
         Coroutine flow;
         bool continueUsed;
 
@@ -59,10 +61,15 @@ namespace KPSSGeography.Quiz
 
         /// <summary>
         /// Yer şekli bölümlerinde (dağ, ova, plato, akarsu, göl, kıyı, fay...) il sınırları ve il adları gizlenir;
-        /// harita yalnızca Türkiye'nin dış hattıyla boş silüet olarak görünür. UNESCO ve milli park bölümlerinde iller kalır.
+        /// harita yalnızca Türkiye'nin dış hattıyla boş silüet olarak görünür. UNESCO, milli park, komşu ülke ve
+        /// sınır kapısı bölümlerinde iller kalır (adları yine gizli).
         /// </summary>
         public bool HidesProvinces => Level != null && (Mode == QuizMode.Feature || Mode == QuizMode.FeatureChoice) &&
-                                      Level.category != "unesco" && Level.category != "park";
+                                      Level.category != "unesco" && Level.category != "park" &&
+                                      Level.category != "country" && Level.category != "gate";
+
+        /// <summary>Komşu ülke bölümünde haritadaki ülke adları gizlenir (cevabı ele vermesin).</summary>
+        public bool HidesCountryNames => Level != null && Level.category == "country";
 
         float ScoreScale => IsExam ? config.examScoreMultiplier : 1f;
         string ProgressId => IsExam ? ProgressStore.ExamKey(Level.id) : Level.id;
@@ -96,6 +103,9 @@ namespace KPSSGeography.Quiz
         public bool AcceptsFeatureInput => Answering && Current.Type == AnswerType.Map && Current.Layer == MapLayer.Features;
         public bool AcceptsChoiceInput => Answering && Current.Type == AnswerType.Choice;
         public bool IsRunning => State != QuizState.Idle && State != QuizState.Finished;
+
+        /// <summary>Hedef bu turda zaten doğru bilindi mi? (Üzerine gelince vurgulanmaz, tıklanınca yok sayılır.)</summary>
+        public bool IsSolved(IMapTarget target) => target != null && solved.Contains(target);
 
         /// <summary>Doğru bilinen hedefler bölüm boyunca boyalı kalsın mı? ("haritayı doldurma" modları)</summary>
         bool PersistentMarks => !IsExam && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.Feature || Mode == QuizMode.RegionAll);
@@ -136,6 +146,7 @@ namespace KPSSGeography.Quiz
             Current?.Focus?.SetFocused(false);
             Current = null;
             State = QuizState.Idle;
+            solved.Clear();
             map.ResetAll();
             features.ShowDefault();
             cameraController.SetAttractMode();
@@ -188,6 +199,7 @@ namespace KPSSGeography.Quiz
             TimeRemaining = TimeLimit;
             continueUsed = false;
             found.Clear();
+            solved.Clear();
 
             State = QuizState.Countdown;
             GameStarted?.Invoke();
@@ -212,10 +224,16 @@ namespace KPSSGeography.Quiz
             switch (Mode)
             {
                 case QuizMode.Feature:
+                {
                     map.SetFocus(_ => false);
                     map.SetBordersHidden(HidesProvinces);
                     features.ShowCategory(Level.category);
-                    return map.Bounds;
+                    if (Level.category != "country") return map.Bounds;
+                    // Komşu ülkeler: kamera uzaklaşır ki Türkiye'nin çevresindeki ülkeler de rahat görünüp tıklansın
+                    Rect b = map.Bounds;
+                    float padX = b.width * 0.14f, padTop = b.height * 0.18f, padBottom = b.height * 0.3f;
+                    return new Rect(b.x - padX, b.y - padBottom, b.width + padX * 2f, b.height + padTop + padBottom);
+                }
                 case QuizMode.FeatureChoice:
                     map.SetFocus(_ => false);
                     map.SetBordersHidden(HidesProvinces);
@@ -327,6 +345,10 @@ namespace KPSSGeography.Quiz
 
         void SubmitTarget(IMapTarget clicked)
         {
+            // Doğru bilinen yer tekrar tıklanamaz: ne puan ne hata, hiçbir şey olmaz.
+            // Tek istisna: aynı yer bu sorunun da cevabıysa (konu/komşu setleri çakışabilir), yoksa soru cevapsız kalırdı.
+            if (solved.Contains(clicked) && !(Current.Accepts(clicked) && !found.Contains(clicked))) return;
+
             if (Current.RequireAll)
             {
                 SubmitPartial(clicked);
@@ -344,6 +366,7 @@ namespace KPSSGeography.Quiz
             if (Current.Accepts(clicked))
             {
                 found.Add(clicked);
+                solved.Add(clicked);
                 Streak++;
                 BestStreak = Mathf.Max(BestStreak, Streak);
                 float multiplier = StreakMultiplier(Streak);
@@ -415,6 +438,7 @@ namespace KPSSGeography.Quiz
             Score += points;
 
             Current.Focus?.SetFocused(false);
+            if (clicked != null) solved.Add(clicked);
             IMapTarget mark = clicked ?? Current.Focus;
             if (mark != null)
             {
@@ -435,11 +459,17 @@ namespace KPSSGeography.Quiz
             Mistakes++;
             Streak = 0;
 
-            float delay = config.wrongFeedback + FeedbackBonus;
+            bool hideAnswer = Current.HidesAnswerOnMiss;
+            float delay = config.wrongFeedback + (hideAnswer ? 0f : FeedbackBonus);
             clicked?.PlayWrongClick();
             Current.Focus?.SetFocused(false);
 
-            if (Current.Reveal != null)
+            if (hideAnswer)
+            {
+                // Haritadan seçmeli soruda doğru yer gösterilmez (ipucu olmasın); sadece "Haritayı incele"de görünür.
+                if (Current.Reveal != null) Record(Current.Reveal, Current, false);
+            }
+            else if (Current.Reveal != null)
             {
                 Current.Reveal.SetState(ProvinceState.Missed);
                 Current.Reveal.PlayReveal(delay);

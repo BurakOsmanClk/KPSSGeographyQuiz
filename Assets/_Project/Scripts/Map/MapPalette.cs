@@ -65,6 +65,20 @@ namespace KPSSGeography.Map
         public Color featureCorrect = new Color32(0x2E, 0xB8, 0x5C, 0xFF);
         public Color featureMissed = new Color32(0xE5, 0x48, 0x4D, 0xFF);
 
+        [Header("Komşu ülkeler ve sınır kapıları")]
+        public Color countryGreece = new Color32(0xA9, 0xC8, 0xEC, 0xFF);
+        public Color countryBulgaria = new Color32(0xA8, 0xDC, 0xC8, 0xFF);
+        public Color countryGeorgia = new Color32(0xF4, 0xB6, 0xB0, 0xFF);
+        public Color countryArmenia = new Color32(0xD0, 0xC2, 0xEE, 0xFF);
+        public Color countryAzerbaijan = new Color32(0x9F, 0xD5, 0xD9, 0xFF);
+        public Color countryIran = new Color32(0xEB, 0xD3, 0x9C, 0xFF);
+        public Color countryIraq = new Color32(0xF2, 0xC2, 0x9C, 0xFF);
+        public Color countrySyria = new Color32(0xC5, 0xDD, 0xA0, 0xFF);
+        public Color countryBorder = new Color(1f, 1f, 1f, 0.9f);
+        /// <summary>Bariyerin kırmızı şeritleri (kırmızı-beyaz hudut bariyeri).</summary>
+        public Color gateRed = new Color32(0xD6, 0x28, 0x28, 0xFF);
+        public Color gatePost = new Color32(0x3A, 0x44, 0x50, 0xFF);
+
         [Header("Dış hat (il sınırları gizliyken)")]
         public Color outline = new Color32(0x6F, 0x78, 0x84, 0xE6);
 
@@ -101,6 +115,20 @@ namespace KPSSGeography.Map
             featureMissed = on ? new Color32(0xE6, 0x9F, 0x00, 0xFF) : defaults[2];
             wrongFlash = on ? new Color32(0xD5, 0x5E, 0x00, 0xFF) : defaults[3];
         }
+
+        /// <summary>Komşu ülkenin pastel rengi (illerdeki bölge renkleri gibi).</summary>
+        public Color CountryColor(string country) => country switch
+        {
+            "Yunanistan" => countryGreece,
+            "Bulgaristan" => countryBulgaria,
+            "Gürcistan" => countryGeorgia,
+            "Ermenistan" => countryArmenia,
+            "Azerbaycan" => countryAzerbaijan,
+            "İran" => countryIran,
+            "Irak" => countryIraq,
+            "Suriye" => countrySyria,
+            _ => this.country
+        };
 
         public Color RegionColor(string region) => region switch
         {

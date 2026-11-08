@@ -22,6 +22,10 @@ namespace KPSSGeography.Data
         public const string Unesco = "unesco";
         public const string Park = "park";
         public const string Fault = "fault";
+        /// <summary>Kara sınırı olan komşu ülke (alan). subtype = ülke adı.</summary>
+        public const string Country = "country";
+        /// <summary>Kara hudut kapısı (nokta). subtype = açıldığı ülke.</summary>
+        public const string Gate = "gate";
 
         public string id;
         public string name;
@@ -94,6 +98,8 @@ namespace KPSSGeography.Data
             GeoFeature.Unesco => "MİRAS ALANINI",
             GeoFeature.Park => "MİLLİ PARKI",
             GeoFeature.Fault => "FAY HATTINI",
+            GeoFeature.Country => "ÜLKEYİ",
+            GeoFeature.Gate => "SINIR KAPISINI",
             _ => "YER ŞEKLİNİ"
         };
     }
