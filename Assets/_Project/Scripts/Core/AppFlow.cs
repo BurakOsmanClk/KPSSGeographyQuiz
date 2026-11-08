@@ -21,10 +21,13 @@ namespace KPSSGeography.Core
         ProgressStore progress;
         AdPolicy ads;
         ExamModeController exam;
+        StudyScreen study;
 
         public void Initialize(CityQuizGame quizGame, QuizHud quizHud, TitleScreen titleScreen, LevelSelectScreen levelSelect,
-            LevelCatalog levelCatalog, ProgressStore progressStore, AdPolicy adPolicy, ExamModeController examController)
+            LevelCatalog levelCatalog, ProgressStore progressStore, AdPolicy adPolicy, ExamModeController examController,
+            StudyScreen studyScreen)
         {
+            study = studyScreen;
             ads = adPolicy;
             exam = examController;
             game = quizGame;
@@ -35,6 +38,8 @@ namespace KPSSGeography.Core
             progress = progressStore;
 
             title.PlayRequested += () => ShowLevels(null);
+            title.StudyRequested += ShowStudy;
+            study.BackRequested += ShowTitle;
             levels.BackRequested += ShowTitle;
             levels.PlayRequested += Play;
 
@@ -67,10 +72,21 @@ namespace KPSSGeography.Core
 
         void ShowTitle()
         {
+            study.Hide();
             LeaveGame();
             levels.Hide();
             exam.SetLook(false, false); // giriş ekranında harita her zaman renkli
             title.Show();
+        }
+
+        /// <summary>Eğitim: soru yok; konular soldan seçilir, harita sağda adlarıyla gösterilir.</summary>
+        void ShowStudy()
+        {
+            LeaveGame();
+            title.Hide();
+            levels.Hide();
+            exam.SetLook(false, false); // eğitimde harita her zaman renkli
+            study.Open();
         }
 
         void ShowLevels(LevelDefinition focus)
