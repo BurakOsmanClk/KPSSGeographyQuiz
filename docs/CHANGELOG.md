@@ -8,7 +8,8 @@ Biçim: `ANA.KÜÇÜK.YAMA` — yeni özellik = KÜÇÜK +1, hata düzeltmesi = 
 ## Yayınlanmamış
 - **Kıyı Tipleri ve Şekilleri** bölümü (Sular ve Kıyılar): boyuna (Karadeniz; Antalya–Anamur), enine (Ege), ria (İstanbul ve
   Çanakkale boğazları), dalmaçya (Kaş–Finike), kalanklı (Mersin–Silifke), limanlı (Çekmece kıyıları), tombolo (Kapıdağ, Sinop),
-  lagün (Terkos, Akyatan). Kıyı tipleri haritada gerçek kıyı çizgisi boyunca renkli şerit. EĞİTİM ekranına aynı konu eklendi.
+  lagün (Terkos, Akyatan), kıyı oku (Çardak, İztuzu). Kıyı tipleri haritada gerçek kıyı çizgisi boyunca renkli şerit. EĞİTİM ekranına aynı konu eklendi.
+- Yarımadalar, adalar, körfezler ve boğazlar artık nokta değil, gerçek kıyı çizgisi boyunca renkli şerit olarak çiziliyor (Gelibolu gibi büyük yarımadalarda dolu alan haritayı bozuyordu).
 ## 0.4.0 — Prototip (şu anki sürüm)
 - **Sınav modu:** bölüm seçim ekranından açılıp kapanır. Açılınca renkli, isimli harita "buharlaşarak" soluk gri, boş KPSS
   haritasına dönüşür (sinema şeritleri, yükselen buhar, kamera yaklaşması, başlık kartı).

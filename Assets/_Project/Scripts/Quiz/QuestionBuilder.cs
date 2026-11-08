@@ -102,7 +102,7 @@ namespace KPSSGeography.Quiz
             return Take(groups, level.questionCount).Select(g =>
             {
                 var first = g.First().Data;
-                bool shape = first.subtype == "tombolo" || first.subtype == "lagun";
+                bool shape = first.subtype == "tombolo" || first.subtype == "lagun" || first.subtype == "kiyioku";
                 var q = new Question
                 {
                     Prompt = shape ? "BU KIYI ŞEKLİNİN BİR ÖRNEĞİNİ HARİTADA BUL" : "BU KIYI TİPİNİN BİR ÖRNEĞİNİ HARİTADA BUL",
