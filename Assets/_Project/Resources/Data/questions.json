@@ -479,6 +479,550 @@
    "answer": 1,
    "explanation": "Göreme ve Kapadokya (Nevşehir) 1985'te UNESCO Dünya Mirası Listesi'ne girmiştir.",
    "highlight": "feature:u-goreme"
+  },
+  {
+   "id": "h1",
+   "set": "harita",
+   "text": "Jeotermal kaynaklardan elde edilen ısıyla örtü altı (sera) tarımı yapmak isteyen bir girişimcinin, numaralandırılan illerden hangilerinde yatırım yapması daha uygundur?",
+   "options": [
+    "I ve II",
+    "I ve III",
+    "II ve IV",
+    "III ve V",
+    "IV ve V"
+   ],
+   "answer": 0,
+   "explanation": "Kırıklı yapısı nedeniyle Batı Anadolu jeotermal kaynak bakımından zengindir; Denizli (Sarayköy) ve Afyonkarahisar jeotermal seracılıkta öne çıkar.",
+   "highlight": "",
+   "markers": [
+    "plate:20",
+    "plate:3",
+    "plate:61",
+    "plate:44",
+    "plate:22"
+   ],
+   "answerMarkers": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": "h2",
+   "set": "harita",
+   "text": "Numaralandırılan illerden hangisinde heyelan olaylarının daha sık görülmesi beklenir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 1,
+   "explanation": "Eğimin fazla, yağışın bol ve toprağın killi olduğu Doğu Karadeniz'de (Rize) heyelan sık görülür.",
+   "highlight": "",
+   "markers": [
+    "plate:42",
+    "plate:53",
+    "plate:63",
+    "plate:22",
+    "plate:35"
+   ],
+   "answerMarkers": [
+    1
+   ]
+  },
+  {
+   "id": "h3",
+   "set": "harita",
+   "text": "Numaralandırılan illerin hangilerinde akarsuların denize döküldüğü yerde biriktirdiği alüvyonlarla oluşmuş delta ovaları bulunur?",
+   "options": [
+    "I ve II",
+    "I ve III",
+    "II ve IV",
+    "III ve V",
+    "IV ve V"
+   ],
+   "answer": 1,
+   "explanation": "Samsun'da Bafra (Kızılırmak) ve Çarşamba (Yeşilırmak), Adana'da Çukurova (Seyhan ve Ceyhan) delta ovalarıdır.",
+   "highlight": "",
+   "markers": [
+    "plate:55",
+    "plate:6",
+    "plate:1",
+    "plate:25",
+    "plate:38"
+   ],
+   "answerMarkers": [
+    0,
+    2
+   ]
+  },
+  {
+   "id": "h4",
+   "set": "harita",
+   "text": "Numaralandırılan illerin hangilerinde rüzgâr enerjisi santrallerinin kurulu gücü daha fazladır?",
+   "options": [
+    "I ve II",
+    "I ve V",
+    "II ve IV",
+    "III ve IV",
+    "III ve V"
+   ],
+   "answer": 2,
+   "explanation": "Ege ve Marmara kıyıları (İzmir, Çanakkale, Balıkesir) rüzgâr enerjisinde öne çıkar. Konya güneş enerjisi, Batman petrol, Zonguldak taşkömürü ile bilinir.",
+   "highlight": "",
+   "markers": [
+    "plate:42",
+    "plate:17",
+    "plate:72",
+    "plate:35",
+    "plate:67"
+   ],
+   "answerMarkers": [
+    1,
+    3
+   ]
+  },
+  {
+   "id": "h5",
+   "set": "harita",
+   "text": "Numaralandırılan illerin hangilerinde kayak merkezlerine bağlı kış turizmi gelişmiştir?",
+   "options": [
+    "Yalnız I",
+    "I ve II",
+    "I, III ve V",
+    "II, III ve IV",
+    "II, IV ve V"
+   ],
+   "answer": 2,
+   "explanation": "Palandöken (Erzurum), Uludağ (Bursa) ve Erciyes (Kayseri) Türkiye'nin önemli kayak merkezleridir.",
+   "highlight": "",
+   "markers": [
+    "plate:25",
+    "plate:48",
+    "plate:16",
+    "plate:9",
+    "plate:38"
+   ],
+   "answerMarkers": [
+    0,
+    2,
+    4
+   ]
+  },
+  {
+   "id": "h6",
+   "set": "harita",
+   "text": "Numaralandırılan illerden hangisinde kalkerli arazide oluşan karstik şekiller (mağara, düden, polye) daha yaygındır?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 0,
+   "explanation": "Toroslar ile Teke ve Taşeli platolarında kalker yaygındır; Antalya çevresinde mağara, düden ve polyeler çoktur.",
+   "highlight": "",
+   "markers": [
+    "plate:7",
+    "plate:53",
+    "plate:22",
+    "plate:55",
+    "plate:65"
+   ],
+   "answerMarkers": [
+    0
+   ]
+  },
+  {
+   "id": "h7",
+   "set": "harita",
+   "text": "Hammaddesi olan taşkömürüne yakınlığı nedeniyle demir-çelik fabrikası kurulmuş il, numaralandırılanlardan hangisidir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 0,
+   "explanation": "Ereğli (Zonguldak) ve Karabük demir-çelik fabrikaları, Zonguldak taşkömürü havzasına yakınlık nedeniyle kurulmuştur.",
+   "highlight": "",
+   "markers": [
+    "plate:67",
+    "plate:42",
+    "plate:65",
+    "plate:9",
+    "plate:21"
+   ],
+   "answerMarkers": [
+    0
+   ]
+  },
+  {
+   "id": "h8",
+   "set": "harita",
+   "text": "Numaralandırılan göllerden hangisi, heyelanla düşen malzemenin bir vadinin önünü kapatmasıyla oluşmuştur?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 1,
+   "explanation": "Tortum Gölü (Erzurum) heyelan set gölüdür. Tuz Gölü tektonik, Salda karstik, Terkos kıyı set, Çıldır volkanik set gölüdür.",
+   "highlight": "",
+   "markers": [
+    "feature:gol-tuz",
+    "feature:gol-tortum",
+    "feature:gol-salda",
+    "feature:gol-terkos",
+    "feature:gol-cildir"
+   ],
+   "answerMarkers": [
+    1
+   ]
+  },
+  {
+   "id": "b1",
+   "set": "oncullu",
+   "text": "Bu faktörlerin neden olduğu doğal afet, numaralandırılan illerin hangisinde daha sık yaşanır?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 2,
+   "explanation": "Çığ; kar yağışının fazla, yamaçların dik olduğu Hakkari, Van, Bitlis ve Erzurum gibi Doğu Anadolu illerinde sık görülür.",
+   "highlight": "",
+   "markers": [
+    "plate:35",
+    "plate:42",
+    "plate:30",
+    "plate:7",
+    "plate:22"
+   ],
+   "answerMarkers": [
+    2
+   ],
+   "body": "Bir doğal afetin oluşmasında etkili olan bazı faktörler şunlardır:\n•  Kar örtüsünün kalın ve uzun süreli olması\n•  Yamaç eğiminin fazla olması\n•  İlkbaharda sıcaklığın birden yükselmesi\n•  Yamaçlarda ormanın az olması"
+  },
+  {
+   "id": "b2",
+   "set": "oncullu",
+   "text": "Bu bilgiler numaralandırılan ovalardan hangisine aittir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 2,
+   "explanation": "Bafra Ovası, Kızılırmak'ın Karadeniz'e döküldüğü yerde oluşmuş bir delta ovasıdır. Konya göl tabanı; Muş, Erzincan ve Eskişehir tektonik ovalardır.",
+   "highlight": "",
+   "markers": [
+    "feature:konya",
+    "feature:mus",
+    "feature:bafra",
+    "feature:erzincan",
+    "feature:eskisehir"
+   ],
+   "answerMarkers": [
+    2
+   ],
+   "body": "Numaralandırılan ovalardan biriyle ilgili bilgiler:\n•  Akarsuyun taşıdığı alüvyonların denize döküldüğü yerde birikmesiyle oluşmuştur\n•  Kıyının sığ, gelgit etkisinin zayıf olması oluşumunu kolaylaştırmıştır\n•  Verimli toprakları nedeniyle yoğun tarım yapılır"
+  },
+  {
+   "id": "b3",
+   "set": "oncullu",
+   "text": "Bu akarsu, numaralandırılanlardan hangisidir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 3,
+   "explanation": "Çoruh, Erzurum'dan doğar; Gürcistan'da (Batum) Karadeniz'e dökülür. Hızlı akışı nedeniyle üzerinde çok sayıda baraj vardır.",
+   "highlight": "",
+   "markers": [
+    "feature:kizilirmak",
+    "feature:sakarya",
+    "feature:seyhan",
+    "feature:coruh",
+    "feature:gediz"
+   ],
+   "answerMarkers": [
+    3
+   ],
+   "body": "Bir akarsuyla ilgili bilgiler:\n•  Doğu Karadeniz'in en hızlı akan akarsularındandır\n•  Üzerinde Deriner ve Yusufeli barajları bulunur\n•  Sınırımızı geçerek Batum yakınında Karadeniz'e dökülür"
+  },
+  {
+   "id": "b4",
+   "set": "oncullu",
+   "text": "Bu dağ, numaralandırılanlardan hangisidir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 1,
+   "explanation": "Bozdağlar, Ege'de Gediz ve Küçük Menderes grabenleri arasında yükselen bir horsttur. Küre, Bolkar ve Munzur kıvrım dağlarıdır.",
+   "highlight": "",
+   "markers": [
+    "feature:kure",
+    "feature:bozdaglar",
+    "feature:bolkar",
+    "feature:palandoken",
+    "feature:munzur"
+   ],
+   "answerMarkers": [
+    1
+   ],
+   "body": "Bir dağla ilgili bilgiler:\n•  Kırılma sonucu yükselmiş bir horsttur\n•  Doğu–batı doğrultusunda uzanır\n•  Kuzeyinde Gediz, güneyinde Küçük Menderes grabenleri yer alır"
+  },
+  {
+   "id": "b5",
+   "set": "oncullu",
+   "text": "Bu plato, numaralandırılanlardan hangisidir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 2,
+   "explanation": "Erzurum-Kars Platosu lav örtülü bir platodur; çayırları sayesinde büyükbaş hayvancılık yaygındır. Taşeli karstik, Bozok ve Gaziantep tabaka, Çatalca-Kocaeli aşınım platosudur.",
+   "highlight": "",
+   "markers": [
+    "feature:taseli",
+    "feature:bozok",
+    "feature:erzurum-kars",
+    "feature:gaziantep",
+    "feature:catalca-kocaeli"
+   ],
+   "answerMarkers": [
+    2
+   ],
+   "body": "Bir platoyla ilgili bilgiler:\n•  Volkanik faaliyetlerle çıkan lavların geniş alanları örtmesiyle oluşmuştur\n•  Yaz yağışları sayesinde gür çayırlar yetişir\n•  Büyükbaş ve mera hayvancılığı yaygındır"
+  },
+  {
+   "id": "b6",
+   "set": "oncullu",
+   "text": "Bu özellikler numaralandırılan illerden hangisine aittir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 2,
+   "explanation": "Akdeniz iklimi: yazlar sıcak ve kurak, kışlar ılık ve yağışlı; doğal bitki örtüsü makidir. Muz, Antalya (Alanya, Gazipaşa) ve Mersin (Anamur) kıyılarında yetişir.",
+   "highlight": "",
+   "markers": [
+    "plate:25",
+    "plate:52",
+    "plate:7",
+    "plate:42",
+    "plate:36"
+   ],
+   "answerMarkers": [
+    2
+   ],
+   "body": "Bir ilin iklim ve bitki örtüsü özellikleri:\n•  Yazlar sıcak ve kurak, kışlar ılık ve yağışlıdır\n•  Doğal bitki örtüsü makidir\n•  Turunçgil ve muz yetiştirilir"
+  },
+  {
+   "id": "b7",
+   "set": "oncullu",
+   "text": "Buna göre numaralandırılan illerden hangisinin turizm özelliğine değinilmemiştir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 1,
+   "explanation": "Edirne (Selimiye), Çorum (Hattuşa), Nevşehir (Göreme) ve Şanlıurfa (Göbeklitepe) anlatılmıştır. Bursa'ya (Cumalıkızık, Uludağ) değinilmemiştir.",
+   "highlight": "",
+   "markers": [
+    "plate:22",
+    "plate:16",
+    "plate:19",
+    "plate:50",
+    "plate:63"
+   ],
+   "answerMarkers": [
+    1
+   ],
+   "body": "Numaralandırılan illerden dördünün turizm özellikleri:\n•  Peribacaları ve kaya oyma kiliseleriyle UNESCO Dünya Mirası Listesi'ndedir\n•  Mimar Sinan'ın ustalık eseri Selimiye Camii bu ildedir\n•  Bilinen en eski tapınak alanlarından Göbeklitepe bu ildedir\n•  Hititlerin başkenti Hattuşa bu ilin sınırları içindedir"
+  },
+  {
+   "id": "b8",
+   "set": "oncullu",
+   "text": "Bu madenin çıkarıldığı illerden biri, numaralandırılanlardan hangisidir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 2,
+   "explanation": "Bor; Balıkesir, Kütahya, Bursa ve Eskişehir'de çıkarılır. Zonguldak taşkömürü, Batman petrol, Elazığ krom, Muğla boksit ve mermerle bilinir.",
+   "highlight": "",
+   "markers": [
+    "plate:67",
+    "plate:72",
+    "plate:26",
+    "plate:23",
+    "plate:48"
+   ],
+   "answerMarkers": [
+    2
+   ],
+   "body": "Bir madenle ilgili bilgiler:\n•  Dünya rezervlerinin büyük bölümü Türkiye'dedir\n•  Cam, seramik, deterjan ve roket yakıtı yapımında kullanılır\n•  Devlet eliyle işletilen stratejik bir madendir"
+  },
+  {
+   "id": "o1",
+   "set": "oklar",
+   "text": "Haritada oklarla bazı tarım ürünlerinin bölgeler arası ticaret yönleri gösterilmiştir. Numaralandırılan oklardan hangisinin gösterdiği ticaret beklenmez?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 3,
+   "explanation": "Çay yalnızca Doğu Karadeniz'de (Rize çevresi) yetişir; ticareti Rize'den diğer bölgelere doğru olur, İstanbul'dan Rize'ye olmaz. Fındık Karadeniz'den, pamuk Ege'den (tekstil merkezi Denizli'ye), turunçgil Akdeniz'den diğer bölgelere gider; tahıl üretimi az olan Karadeniz'e İç Anadolu'dan buğday gelir.",
+   "highlight": "",
+   "markers": [
+    "arrow:52>34|Fındık",
+    "arrow:9>20|Pamuk",
+    "arrow:33>6|Turunçgil",
+    "arrow:34>53|Çay",
+    "arrow:42>61|Buğday"
+   ],
+   "answerMarkers": [
+    3
+   ],
+   "body": "İç ticaretin canlı olmasının nedenlerinden biri, bölgeler arasındaki doğal koşul farklarıdır. Farklı ürünler yetiştiren bölgeler bu ürünleri birbirleriyle değiş tokuş eder."
+  },
+  {
+   "id": "o2",
+   "set": "oklar",
+   "text": "Türkiye'nin yer şekilleri ve yükselti özellikleri dikkate alındığında, numaralandırılan güzergâhların hangilerinde kara yolu ve demir yolu yapım maliyetinin daha fazla olması beklenir?",
+   "options": [
+    "I ve III",
+    "II ve IV",
+    "II ve V",
+    "III ve V",
+    "IV ve V"
+   ],
+   "answer": 1,
+   "explanation": "Doğu Karadeniz Dağları'nı (II, Trabzon–Gümüşhane) ve Toroslar'ı (IV, Antalya–Konya) aşan yollarda tünel, viyadük ve virajlar maliyeti artırır. Konya Ovası (I), Ergene Havzası (III) ve İç Anadolu platoları (V) daha düzdür.",
+   "highlight": "",
+   "markers": [
+    "line:32.5,37.9>34.0,38.4",
+    "line:39.75,41.0>39.45,39.95",
+    "line:26.6,41.7>27.5,41.0",
+    "line:30.7,36.95>31.9,37.8",
+    "line:30.5,39.8>32.0,39.9"
+   ],
+   "answerMarkers": [
+    1,
+    3
+   ],
+   "body": ""
+  },
+  {
+   "id": "o3",
+   "set": "oklar",
+   "text": "Numaralandırılan oklardan hangisi, akarsuyun akış yönünü doğru göstermektedir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 0,
+   "explanation": "Kızılırmak, Sivas'tan doğup Kayseri–Nevşehir yayını çizerek Bafra'da Karadeniz'e dökülür. Sakarya kuzeye (Karadeniz), Seyhan güneye (Akdeniz), Fırat güneydoğuya (Suriye), Gediz batıya (Ege) akar.",
+   "highlight": "",
+   "markers": [
+    "arrow:38>55|Kızılırmak",
+    "arrow:54>26|Sakarya",
+    "arrow:1>38|Seyhan",
+    "arrow:63>23|Fırat",
+    "arrow:35>43|Gediz"
+   ],
+   "answerMarkers": [
+    0
+   ],
+   "body": ""
+  },
+  {
+   "id": "o4",
+   "set": "oklar",
+   "text": "Numaralandırılan oklardan hangisi, Türkiye'de iç göçün genel yönüyle uyuşmaz?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 3,
+   "explanation": "İç göç genellikle doğudan batıya, kırdan kente ve sanayi, ticaret ve hizmetin geliştiği büyük şehirlere doğrudur. İstanbul'dan Ardahan'a göç bu genel yönün tersidir.",
+   "highlight": "",
+   "markers": [
+    "arrow:25>34",
+    "arrow:21>35",
+    "arrow:46>1",
+    "arrow:34>75",
+    "arrow:65>7"
+   ],
+   "answerMarkers": [
+    3
+   ],
+   "body": ""
+  },
+  {
+   "id": "o5",
+   "set": "oklar",
+   "text": "Marmara çevresinde esen yerel rüzgârlardan lodosun esiş yönü, numaralandırılan oklardan hangisiyle gösterilmiştir?",
+   "options": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
+   ],
+   "answer": 1,
+   "explanation": "Lodos güneybatıdan esen ılık ve nemli rüzgârdır. Poyraz kuzeydoğudan (I), karayel kuzeybatıdan (III), keşişleme güneydoğudan (IV), kıble güneyden (V) eser.",
+   "highlight": "",
+   "markers": [
+    "arrow:30.6,41.6>29.4,40.9",
+    "arrow:26.4,39.6>27.6,40.4",
+    "arrow:26.6,41.95>27.5,41.35",
+    "arrow:30.4,39.7>29.4,40.3",
+    "arrow:28.4,39.25>28.4,40.05"
+   ],
+   "answerMarkers": [
+    1
+   ],
+   "body": ""
   }
  ]
 }

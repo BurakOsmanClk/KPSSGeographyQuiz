@@ -45,6 +45,7 @@ namespace KPSSGeography.UI
         readonly List<Label> provinceLabels = new List<Label>();
         readonly List<Label> reviewLabels = new List<Label>();
         readonly List<Label> studyLabels = new List<Label>();
+        readonly List<Label> markerLabels = new List<Label>();
         bool studyLabelsOn = true;
         readonly List<Rect> placed = new List<Rect>();
         bool provincesOn;
@@ -191,6 +192,36 @@ namespace KPSSGeography.UI
             dirty = true;
         }
 
+        /// <summary>
+        /// Numaralı harita sorusu: işaretli yerlere I, II, III… rozetleri koyar. Her zaman görünür
+        /// (sınav görünümünde de), çakışma yüzünden gizlenmez.
+        /// </summary>
+        public void ShowMarkers(IEnumerable<(Vector3 world, string text)> items)
+        {
+            ClearMarkers();
+            foreach (var (world, text) in items)
+            {
+                var bg = UIFactory.Panel("Marker", root, Theme.Ink, false);
+                var t = UIFactory.Label("Text", bg.transform, text, 26, Color.white, TextAnchor.MiddleCenter, FontStyle.Bold);
+                t.rectTransform.Stretch(4, 4, 0, 0);
+                float w = Mathf.Max(44f, t.preferredWidth + 20f), h = 40f;
+                bg.rectTransform.Place(Vector2.zero, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(w, h));
+                var outline = bg.gameObject.AddComponent<Outline>();
+                outline.effectColor = Color.white;
+                outline.effectDistance = new Vector2(2f, -2f);
+                markerLabels.Add(new Label { kind = Kind.Study, rt = bg.rectTransform, text = t, world = world, baseSize = 26, size = new Vector2(w, h) });
+            }
+            TextScaler.Apply(root);
+            dirty = true;
+        }
+
+        public void ClearMarkers()
+        {
+            foreach (var l in markerLabels) Destroy(l.rt.gameObject);
+            markerLabels.Clear();
+            dirty = true;
+        }
+
         public void ClearReview()
         {
             foreach (var l in reviewLabels) Destroy(l.rt.gameObject);
@@ -252,6 +283,13 @@ namespace KPSSGeography.UI
             }
 
             placed.Clear();
+            foreach (var l in markerLabels)
+            {
+                Vector2 p = ToCanvas(l.world, canvasSize);
+                l.rt.anchoredPosition = p;
+                l.rt.SetAsLastSibling();
+                placed.Add(new Rect(p.x - l.size.x / 2f, p.y - l.size.y / 2f, l.size.x, l.size.y));
+            }
             foreach (var l in reviewLabels)
             {
                 Vector2 p = ToCanvas(l.world, canvasSize) + new Vector2(0f, 10f);

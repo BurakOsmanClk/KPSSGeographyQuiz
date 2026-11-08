@@ -68,6 +68,7 @@ namespace KPSSGeography.Quiz
                 case QuizMode.RegionAll: return RegionAll(level);
                 case QuizMode.Mcq: return Mcq(level);
                 case QuizMode.BorderCountry: return BorderCountry(level);
+                case QuizMode.Numbered: return Numbered(level);
                 default: return new List<Question>();
             }
         }
@@ -221,6 +222,166 @@ namespace KPSSGeography.Quiz
             }).ToList();
         }
 
+        // ================== Numaralı harita (ÖSYM tipi) ==================
+
+        public static readonly string[] Roman = { "I", "II", "III", "IV", "V", "VI" };
+        static readonly string[] Letters = { "A", "B", "C", "D", "E" };
+
+        /// <summary>"plate:42" ya da "feature:kizilirmak" biçimindeki hedefi çözer.</summary>
+        IMapTarget ResolveTarget(string spec)
+        {
+            if (string.IsNullOrEmpty(spec)) return null;
+            if (spec.StartsWith("feature:")) return features.Find(spec.Substring(8));
+            if (spec.StartsWith("plate:") && int.TryParse(spec.Substring(6), out int plate)) return map.GetByPlate(plate);
+            return null;
+        }
+
+        /// <summary>Şekil ucu: "42" (il plakası, ilin merkezi) ya da "28.5,40.9" (boylam,enlem).</summary>
+        Vector2? ResolvePoint(string spec)
+        {
+            spec = spec.Trim();
+            if (spec.Contains(","))
+            {
+                var parts = spec.Split(',');
+                if (parts.Length == 2 && float.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture, out float lon) &&
+                    float.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out float lat))
+                    return (Vector2)map.LonLatToMap(lon, lat);
+                return null;
+            }
+            if (int.TryParse(spec, out int plate))
+            {
+                var p = map.GetByPlate(plate);
+                if (p != null) return (Vector2)p.transform.position;
+            }
+            return null;
+        }
+
+        /// <summary>"arrow:52>34|Fındık" ya da "line:42>6" biçimindeki şekli çözer.</summary>
+        MapShape ResolveShape(string spec)
+        {
+            bool arrow = spec.StartsWith("arrow:");
+            if (!arrow && !spec.StartsWith("line:")) return null;
+            string body = spec.Substring(arrow ? 6 : 5);
+            string caption = null;
+            int bar = body.IndexOf('|');
+            if (bar >= 0) { caption = body.Substring(bar + 1); body = body.Substring(0, bar); }
+            var ends = body.Split('>');
+            if (ends.Length != 2) return null;
+            var a = ResolvePoint(ends[0]);
+            var b = ResolvePoint(ends[1]);
+            if (a == null || b == null) return null;
+            return new MapShape { from = a.Value, to = b.Value, arrow = arrow, caption = caption };
+        }
+
+        /// <summary>
+        /// Elle yazılmış soruda haritadaki numaralı yerleri ve doğru numaraları kurar.
+        /// İşaret biçimleri: "plate:42", "feature:kizilirmak", "arrow:52>34|Fındık", "line:42>6" (uçlar plaka ya da "boylam,enlem").
+        /// </summary>
+        void AddMarkers(Question q, McqQuestion m)
+        {
+            if (m.markers == null || m.markers.Length == 0) return;
+            if (m.markers[0].StartsWith("arrow:") || m.markers[0].StartsWith("line:"))
+            {
+                foreach (var spec in m.markers)
+                {
+                    var s = ResolveShape(spec);
+                    if (s == null) Debug.LogWarning($"[KPSS] '{m.id}' sorusunda çizilemeyen şekil: {spec}");
+                    else q.Shapes.Add(s);
+                }
+                if (m.answerMarkers != null) q.CorrectShapes.AddRange(m.answerMarkers);
+                return;
+            }
+            foreach (var spec in m.markers)
+            {
+                var t = ResolveTarget(spec);
+                if (t == null) Debug.LogWarning($"[KPSS] '{m.id}' sorusunda bulunamayan işaret: {spec}");
+                q.Markers.Add(t);
+            }
+            q.Markers.RemoveAll(t => t == null);
+            if (m.answerMarkers != null)
+                foreach (int i in m.answerMarkers)
+                    if (i >= 0 && i < q.Markers.Count) q.Correct.Add(q.Markers[i]);
+        }
+
+        /// <summary>
+        /// Numaralı harita bölümü. <c>set</c> virgülle ayrılmış konu setleri (tarim1, maden…) ve/veya soru bankası setleridir.
+        /// Konu setlerinden otomatik soru üretilir: haritada 5 il I–V diye numaralanır, biri o konuda öne çıkan il,
+        /// diğer dördü ise konunun illerinden, onların komşularından ve doğru ilin bölgesinden uzak illerdir (tartışmalı şık olmasın).
+        /// Soru bankasındaki <c>markers</c>'lı sorular olduğu gibi eklenir ("I ve II" tipi şıklar).
+        /// </summary>
+        List<Question> Numbered(LevelDefinition level)
+        {
+            var sets = (level.set ?? "").Split(',').Select(s => s.Trim()).Where(s => s.Length > 0).ToArray();
+            var pool = new List<Question>();
+            foreach (var m in mcq.questions.Where(m => System.Array.IndexOf(sets, m.set) >= 0 && m.markers != null && m.markers.Length > 0))
+            {
+                var q = new Question
+                {
+                    Prompt = string.IsNullOrEmpty(m.body) ? "HARİTADA NUMARALANDIRILAN YERLER" : "KPSS SORUSU",
+                    Title = m.text, Body = m.body, LongTitle = true, Type = AnswerType.Choice,
+                    Choices = m.options.Select((o, i) => $"{Letters[i]})  {o}").ToArray(), CorrectChoice = m.answer,
+                    Info = m.explanation, AnswerLabel = $"{Letters[m.answer]}) {m.options[m.answer]}"
+                };
+                AddMarkers(q, m);
+                if (q.Markers.Count > 0 || q.Shapes.Count > 0) pool.Add(q);
+            }
+            foreach (var t in topics.topics.Where(t => System.Array.IndexOf(sets, t.set) >= 0))
+            {
+                var q = NumberedFromTopic(t);
+                if (q != null) pool.Add(q);
+            }
+            return Take(pool, level.questionCount);
+        }
+
+        Question NumberedFromTopic(TopicSet t)
+        {
+            var answers = t.plates.Select(map.GetByPlate).Where(p => p != null).ToList();
+            if (answers.Count == 0) return null;
+            var correct = answers[Random.Range(0, answers.Count)];
+
+            // Tartışmalı olmasın: konunun illeri, onların komşuları ve doğru ilin bölgesi şık olamaz
+            var banned = new HashSet<int>(t.plates);
+            foreach (var a in answers)
+                if (a.Data.neighbors != null) foreach (int n in a.Data.neighbors) banned.Add(n);
+            var candidates = Shuffled(map.Provinces.Where(p => !banned.Contains(p.Data.plate) && p.Data.region != correct.Data.region));
+
+            // Şıklar haritaya yayılsın (birbirine çok yakın işaret olmasın)
+            var chosen = new List<ProvinceView> { correct };
+            foreach (float minDist in new[] { map.Bounds.width * 0.16f, map.Bounds.width * 0.1f, 0f })
+            {
+                foreach (var c in candidates)
+                {
+                    if (chosen.Count >= 5) break;
+                    if (chosen.Contains(c)) continue;
+                    if (chosen.All(o => Vector2.Distance(o.transform.position, c.transform.position) >= minDist)) chosen.Add(c);
+                }
+                if (chosen.Count >= 5) break;
+            }
+            if (chosen.Count < 5) return null;
+
+            var markers = Shuffled(chosen);
+            int answer = markers.IndexOf(correct);
+            var q = new Question
+            {
+                Prompt = "HARİTADA NUMARALANDIRILAN İLLER", Title = NumberedSentence(t), LongTitle = true, Type = AnswerType.Choice,
+                Choices = Enumerable.Range(0, 5).Select(i => $"{Letters[i]})  {Roman[i]}").ToArray(), CorrectChoice = answer,
+                Info = $"{Roman[answer]}: {correct.DisplayName}. {t.info}", AnswerLabel = $"{Letters[answer]}) {Roman[answer]} – {correct.DisplayName}"
+            };
+            q.Markers.AddRange(markers);
+            q.Correct.Add(correct);
+            return q;
+        }
+
+        /// <summary>Konu setinden ÖSYM üslubunda soru cümlesi.</summary>
+        static string NumberedSentence(TopicSet t) => t.set switch
+        {
+            "tarim1" or "tarim2" => $"Numaralandırılan illerden hangisi {t.title} üretiminde ilk sıralarda yer alır?",
+            "hayvan" => $"Numaralandırılan illerden hangisinde {t.title} yetiştiriciliği en yaygındır?",
+            "maden" => $"Numaralandırılan illerden hangisinde {t.title} bakımından önemli yataklar bulunur?",
+            "nufus" => $"Numaralandırılan illerden hangisi “{t.title}” arasında yer alır?",
+            _ => $"Numaralandırılan illerden hangisi {t.title} bakımından öne çıkar?"
+        };
+
         /// <summary>Sınır ilinin adı verilir, oyuncu komşu olduğu ülkeyi haritada seçer (birden fazlaysa herhangi biri).</summary>
         List<Question> BorderCountry(LevelDefinition level)
         {
@@ -272,6 +433,7 @@ namespace KPSSGeography.Quiz
                     Choices = m.options.Select((o, i) => $"{letters[i]})  {o}").ToArray(), CorrectChoice = m.answer,
                     Info = m.explanation, AnswerLabel = $"{letters[m.answer]}) {m.options[m.answer]}"
                 };
+                AddMarkers(q, m);
                 if (!string.IsNullOrEmpty(m.highlight))
                 {
                     if (m.highlight.StartsWith("feature:"))

@@ -58,6 +58,7 @@ namespace KPSSGeography.UI
             Quiz.QuizMode.RegionAll => Hex(0xE76F51),
             Quiz.QuizMode.Mcq => Hex(0xB5179E),
             Quiz.QuizMode.BorderCountry => Hex(0x457B9D),
+            Quiz.QuizMode.Numbered => Hex(0x7B2CBF),
             _ => Locked
         };
 
