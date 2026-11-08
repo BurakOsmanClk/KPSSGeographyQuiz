@@ -21,6 +21,9 @@ namespace KPSSGeography.Quiz
         static readonly Rect FindViewport = new Rect(0.03f, 0.06f, 0.94f, 0.72f);
         static readonly Rect ChoiceViewport = new Rect(0.03f, 0.2f, 0.94f, 0.58f);
         static readonly Rect McqViewport = new Rect(0.03f, 0.3f, 0.94f, 0.44f);
+        static readonly Rect NumberedViewport = new Rect(0.03f, 0.17f, 0.94f, 0.58f);
+        /// <summary>Öncüllü (maddeli) sorular: solda soru kâğıdı, harita sağda.</summary>
+        static readonly Rect BodyViewport = new Rect(0.36f, 0.17f, 0.62f, 0.58f);
 
         public event Action GameStarted;
         public event Action<int> CountdownTick;
@@ -96,7 +99,8 @@ namespace KPSSGeography.Quiz
 
         /// <summary>Bölümde butonlu soru var mı? (HUD ve kamera yerleşimi için)</summary>
         public bool UsesChoices => Mode == QuizMode.Region || Mode == QuizMode.Plate || Mode == QuizMode.Attribute ||
-                                   Mode == QuizMode.FeatureChoice || Mode == QuizMode.Mcq;
+                                   Mode == QuizMode.FeatureChoice || Mode == QuizMode.Mcq ||
+                                   Mode == QuizMode.Numbered;
 
         bool Answering => State == QuizState.Playing && !IsPaused && Current != null;
         public bool AcceptsMapInput => Answering && Current.Type == AnswerType.Map && Current.Layer == MapLayer.Provinces;
@@ -183,10 +187,12 @@ namespace KPSSGeography.Quiz
                 foreach (var region in Level.regions) rings.AddRange(map.GetRegionRings(region));
                 effects?.DrawOutline(rings, new Color(1f, 0.72f, 0.1f, 1f), regionAll);
             }
-            Rect viewport = Mode == QuizMode.Mcq ? McqViewport : UsesChoices ? ChoiceViewport : FindViewport;
+            questions = builder.Build(Level);
+            bool hasBody = questions.Exists(q => !string.IsNullOrEmpty(q.Body));
+            Rect viewport = hasBody ? BodyViewport : Mode == QuizMode.Mcq ? McqViewport : Mode == QuizMode.Numbered ? NumberedViewport
+                : UsesChoices ? ChoiceViewport : FindViewport;
             cameraController.FocusOn(focus, viewport);
 
-            questions = builder.Build(Level);
             if (questions.Count == 0) Debug.LogWarning($"[KPSS] '{Level.id}' bölümü için soru üretilemedi.");
 
             TimeLimit = QuestionTime;
@@ -232,6 +238,10 @@ namespace KPSSGeography.Quiz
                     features.ShowCategory(Level.category);
                     return Level.category == "country" ? CountriesView() : map.Bounds;
                 }
+                case QuizMode.Numbered:
+                    features.ShowDefault();
+                    map.SetFocus(null);
+                    return map.Bounds;
                 case QuizMode.BorderCountry:
                     // İller soluk, ülkeler tıklanabilir; bilinen il doygun rengiyle boyanır
                     map.SetFocus(_ => false);
@@ -299,12 +309,57 @@ namespace KPSSGeography.Quiz
                 if (Current.ShowFeature != null) features.ShowOnly(Current.ShowFeature);
                 else features.ShowDefault();
             }
+            if (Mode == QuizMode.Mcq || Mode == QuizMode.Numbered) ApplyMarkers();
             if (!Current.FocusHidden) Current.Focus?.SetFocused(true);
 
             TimeLimit = QuestionTime;
             TimeRemaining = TimeLimit;
             State = QuizState.Playing;
             QuestionStarted?.Invoke(new QuestionInfo(Current, Mode, QuestionIndex, questions.Count));
+        }
+
+        /// <summary>
+        /// Numaralı harita sorusu: işaretli iller öne çıkar (diğerleri soluk), işaretli yer şekilleri gösterilir.
+        /// Numaralar (I, II…) QuizHud tarafından harita yazısı olarak konur.
+        /// </summary>
+        void ApplyMarkers()
+        {
+            if (Current.Shapes.Count > 0)
+            {
+                // Ok ve güzergâh soruları: harita tam renkli, şekiller üstte
+                map.SetFocus(null);
+                effects?.SetShapes(Current.Shapes, null, ShapeColor, ShapeColor);
+                return;
+            }
+            effects?.ClearShapes();
+            if (Current.Markers.Count == 0)
+            {
+                map.SetFocus(null);
+                return;
+            }
+            map.SetFocus(p => Current.Markers.Contains(p));
+            if (Current.Markers.Exists(m => m is FeatureView))
+                features.ShowWhere(f => Current.Markers.Contains(f), false);
+        }
+
+        /// <summary>Numaralı harita: cevaptan sonra doğru numaralı yer(ler) yeşile boyanır.</summary>
+        static readonly Color ShapeColor = new Color32(0x1B, 0x2A, 0x3A, 0xFF);
+
+        void RevealMarkers(bool correct, float delay)
+        {
+            if (Current.Shapes.Count > 0)
+            {
+                effects?.SetShapes(Current.Shapes, Current.CorrectShapes, ShapeColor, ExamLook.Blend > 0.5f ? ShapeColor : new Color32(0x2E, 0xB8, 0x5C, 0xFF));
+                return;
+            }
+            if (Current.Markers.Count == 0) return;
+            foreach (var t in Current.Correct)
+            {
+                t.SetState(ProvinceState.Correct);
+                if (correct) t.PlayCorrect();
+                else t.PlayReveal(delay);
+                Record(t, Current, correct);
+            }
         }
 
         void Update()
@@ -461,6 +516,7 @@ namespace KPSSGeography.Quiz
                 Sparkle(mark);
                 if (Current.MarkOnCorrect == null) Record(mark, Current, true);
             }
+            RevealMarkers(true, 0f);
             if (Current.MarkOnCorrect != null)
             {
                 // Sorulan il haritada belirir: oyuncu ilin hangi ülkeyle nasıl sınırı olduğunu görür
@@ -507,6 +563,7 @@ namespace KPSSGeography.Quiz
                 Current.Focus.PlayReveal(delay);
                 Record(Current.Focus, Current, false);
             }
+            if (Current.Type == AnswerType.Choice) RevealMarkers(false, delay);
 
             sfx.Play(Sfx.Wrong);
             cameraController.Shake();
