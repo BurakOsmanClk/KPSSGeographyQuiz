@@ -109,24 +109,19 @@ namespace KPSSGeography.Map
                     foreach (var l in data.lines)
                         b.AddDashedPolyline(LineMeshBuilder.ToPoints(l.points), 0.065f, 0.16f, 0.09f, palette.fault);
                     break;
-                case GeoFeature.Gulf when data.IsPolygon:
+                case GeoFeature.Gulf when !data.IsPoint:
+                case GeoFeature.Peninsula when !data.IsPoint:
                 {
-                    // Körfez / boğaz: gerçek kıyıyla kesilmiş su alanı
-                    baseOrder = 22;
-                    Color water = data.subtype == "strait" ? palette.strait : palette.gulf;
-                    b.AddTriangles(data.vertices, data.triangles, new Color(water.r, water.g, water.b, 0.75f));
-                    foreach (var r in data.outline)
-                        b.AddPolyline(LineMeshBuilder.ToPoints(r.points), 0.03f, water, true);
-                    break;
-                }
-                case GeoFeature.Peninsula when data.IsPolygon:
-                {
-                    // Yarımada / ada: kara parçasının kendisi
-                    baseOrder = 22;
-                    Color land = data.subtype == "island" ? palette.island : palette.peninsula;
-                    b.AddTriangles(data.vertices, data.triangles, new Color(land.r, land.g, land.b, 0.85f));
-                    foreach (var r in data.outline)
-                        b.AddPolyline(LineMeshBuilder.ToPoints(r.points), 0.028f, palette.markerEdge, true);
+                    // Körfez, boğaz, yarımada, ada: gerçek kıyı çizgisi boyunca beyaz kenarlı renkli şerit
+                    baseOrder = 24;
+                    Color tone = data.subtype == "strait" ? palette.strait : data.subtype == "gulf" ? palette.gulf
+                        : data.subtype == "island" ? palette.island : palette.peninsula;
+                    foreach (var l in data.lines)
+                    {
+                        var pts = LineMeshBuilder.ToPoints(l.points);
+                        b.AddPolyline(pts, 0.17f, palette.coastEdge);
+                        b.AddPolyline(pts, 0.11f, tone);
+                    }
                     break;
                 }
                 case GeoFeature.Dam:

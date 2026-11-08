@@ -391,6 +391,11 @@ def main():
     # ---------- Kıyı şekilleri ve miras alanları (nokta) ----------
     coast_cat = {"strait": "gulf", "gulf": "gulf", "peninsula": "peninsula", "island": "peninsula", "cape": "peninsula"}
     land_parts = list(turkey.geoms) if isinstance(turkey, MultiPolygon) else [turkey]
+    # Kıyı çizgisi: Türkiye'nin dış sınırından komşu ülkelerle olan kara sınırları çıkarılır
+    coastline = turkey.boundary
+    for f in json.load(open(COUNTRIES_SRC, encoding="utf-8"))["features"]:
+        if COUNTRY_TR.get(f["properties"]["name"]) is not None:
+            coastline = coastline.difference(shape(f["geometry"]).buffer(0.03))
     province_geom = {NAMES[int(f["properties"]["iso_3166_2"].split("-")[1])]: g for f, g in zip(feats, geoms)}
 
     def coast_area(c):
@@ -414,16 +419,22 @@ def main():
         for c in manual[key]:
             area = coast_area(c) if "area" in c else None
             if area is not None:
-                geom_xy = to_xy(area).simplify(0.006)
-                polys = polys_of(geom_xy)
-                verts, tris, outline = triangulate_xy(polys)
-                lp = polylabel(max(polys, key=lambda q: q.area), tolerance=0.01)
-                features.append({
-                    "id": c["id"], "name": c["name"], "category": catmap[c["subtype"]], "kind": "polygon",
-                    "subtype": c["subtype"], "info": c["info"], "label": [r4(lp.x), r4(lp.y)],
-                    "lines": [], "vertices": verts, "triangles": tris, "outline": outline,
-                })
-                continue
+                # Alan doldurulmaz (haritayı bozuyordu): yalnızca gerçek kıyı çizgisi şerit olarak çizilir.
+                # Yarımada/körfez/boğazda çerçevenin kara içindeki yapay kenarı atılır, adada bütün kıyı kalır.
+                shore = area.boundary.intersection(coastline.buffer(0.004))
+                parts = [g for g in getattr(shore, "geoms", [shore]) if isinstance(g, LineString) and g.length > 0.01]
+                merged = linemerge(parts) if len(parts) > 1 else (parts[0] if parts else None)
+                lines = [g for g in getattr(merged, "geoms", [merged]) if g is not None and g.length > 0.02]
+                if lines:
+                    lp = polylabel(area, tolerance=0.002) if c["subtype"] not in ("gulf", "strait") else area.representative_point()
+                    lx, ly = proj(lp.x, lp.y)
+                    features.append({
+                        "id": c["id"], "name": c["name"], "category": catmap[c["subtype"]], "kind": "line",
+                        "subtype": c["subtype"], "info": c["info"], "label": [r4(lx), r4(ly)],
+                        "lines": [{"points": flat(list(g.simplify(0.003).coords))} for g in lines],
+                        "vertices": [], "triangles": [], "outline": [],
+                    })
+                    continue
             if "area" in c:
                 print("UYARI: alan bulunamadı, nokta kullanılıyor:", c["id"])
             x, y = proj(*c["point"])
@@ -492,8 +503,8 @@ def main():
         if "ref" in ct:
             # Haritadaki şeklin aynısı (yarımada, göl ya da boğaz alanı)
             src = next((f for f in features if f["id"] == ct["ref"]), None)
-            if src is not None and src["kind"] == "polygon":
-                features.append(dict(base, kind="polygon", label=src["label"], lines=[],
+            if src is not None and src["kind"] in ("polygon", "line"):
+                features.append(dict(base, kind=src["kind"], label=src["label"], lines=src["lines"],
                                      vertices=src["vertices"], triangles=src["triangles"], outline=src["outline"]))
                 continue
             print("UYARI: ref bulunamadı ya da alan değil:", ct["id"], ct["ref"])
