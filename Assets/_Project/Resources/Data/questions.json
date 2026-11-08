@@ -1023,6 +1023,110 @@
     1
    ],
    "body": ""
+  },
+  {
+   "id": "t1",
+   "set": "toprak",
+   "text": "Haritada numaralarla gösterilen alanlarda yaygın olarak görülen toprak tipleri aşağıdakilerin hangisinde doğru eşleştirilmiştir?",
+   "options": [
+    "I: Alüvyal  ·  II: Çernezyom  ·  III: Terra-rossa",
+    "I: Terra-rossa  ·  II: Alüvyal  ·  III: Çernezyom",
+    "I: Terra-rossa  ·  II: Çernezyom  ·  III: Alüvyal",
+    "I: Çernezyom  ·  II: Terra-rossa  ·  III: Alüvyal",
+    "I: Terra-rossa  ·  II: Kahverengi orman  ·  III: Alüvyal"
+   ],
+   "answer": 2,
+   "explanation": "Antalya: kalker üzerinde, Akdeniz ikliminde oluşan kırmızı renkli terra-rossa. Kars: çayır örtüsü altında, organik maddece zengin kara topraklar (çernezyom). Bafra Ovası: akarsuların taşıdığı malzemelerle oluşan alüvyal topraklar.",
+   "highlight": "",
+   "markers": [
+    "plate:7",
+    "plate:36",
+    "feature:bafra"
+   ],
+   "answerMarkers": [
+    0,
+    1,
+    2
+   ],
+   "body": ""
+  },
+  {
+   "id": "t2",
+   "set": "toprak",
+   "text": "Haritada numaralarla gösterilen alanlarda yaygın olarak görülen toprak tipleri aşağıdakilerin hangisinde doğru eşleştirilmiştir?",
+   "options": [
+    "I: Laterit  ·  II: Kahverengi bozkır  ·  III: Kahverengi orman",
+    "I: Kahverengi orman  ·  II: Kahverengi bozkır  ·  III: Laterit",
+    "I: Laterit  ·  II: Kahverengi orman  ·  III: Kahverengi bozkır",
+    "I: Kahverengi bozkır  ·  II: Laterit  ·  III: Kahverengi orman",
+    "I: Terra-rossa  ·  II: Kahverengi bozkır  ·  III: Kahverengi orman"
+   ],
+   "answer": 0,
+   "explanation": "Rize: bol yağışlı ve ılık Doğu Karadeniz kıyılarında yıkanmış, kırmızı-sarı laterit topraklar. Konya: kurak İç Anadolu'da kahverengi bozkır toprakları. Kastamonu: Karadeniz'in iç kesimlerindeki ormanlarda kahverengi orman toprakları.",
+   "highlight": "",
+   "markers": [
+    "plate:53",
+    "plate:42",
+    "plate:37"
+   ],
+   "answerMarkers": [
+    0,
+    1,
+    2
+   ],
+   "body": ""
+  },
+  {
+   "id": "t3",
+   "set": "toprak",
+   "text": "Haritada numaralarla gösterilen alanlarda yaygın olarak görülen toprak tipleri aşağıdakilerin hangisinde doğru eşleştirilmiştir?",
+   "options": [
+    "I: Terra-rossa  ·  II: Çernezyom  ·  III: Alüvyal",
+    "I: Alüvyal  ·  II: Terra-rossa  ·  III: Çernezyom",
+    "I: Çernezyom  ·  II: Alüvyal  ·  III: Terra-rossa",
+    "I: Alüvyal  ·  II: Laterit  ·  III: Terra-rossa",
+    "I: Alüvyal  ·  II: Çernezyom  ·  III: Terra-rossa"
+   ],
+   "answer": 4,
+   "explanation": "Çukurova: Seyhan ve Ceyhan'ın oluşturduğu delta ovasında alüvyal topraklar. Ardahan: Erzurum-Kars Platosu'nda çayırlar altında çernezyom. Mersin: Akdeniz kıyısında kalker üzerinde terra-rossa.",
+   "highlight": "",
+   "markers": [
+    "feature:cukurova",
+    "plate:75",
+    "plate:33"
+   ],
+   "answerMarkers": [
+    0,
+    1,
+    2
+   ],
+   "body": ""
+  },
+  {
+   "id": "t4",
+   "set": "toprak",
+   "text": "Haritada numaralarla gösterilen alanlarda yaygın olarak görülen toprak tipleri aşağıdakilerin hangisinde doğru eşleştirilmiştir?",
+   "options": [
+    "I: Kahverengi orman  ·  II: Kahverengi bozkır  ·  III: Terra-rossa",
+    "I: Kahverengi bozkır  ·  II: Kahverengi orman  ·  III: Terra-rossa",
+    "I: Terra-rossa  ·  II: Kahverengi orman  ·  III: Kahverengi bozkır",
+    "I: Kahverengi bozkır  ·  II: Terra-rossa  ·  III: Kahverengi orman",
+    "I: Kahverengi bozkır  ·  II: Kahverengi orman  ·  III: Çernezyom"
+   ],
+   "answer": 1,
+   "explanation": "Şanlıurfa: yarı kurak Güneydoğu Anadolu'da kahverengi bozkır toprakları. Bolu: Batı Karadeniz'in iç kesimlerindeki ormanlar altında kahverengi orman toprakları. İzmir: Akdeniz iklimi ve kalkerli alanlarda terra-rossa.",
+   "highlight": "",
+   "markers": [
+    "plate:63",
+    "plate:14",
+    "plate:35"
+   ],
+   "answerMarkers": [
+    0,
+    1,
+    2
+   ],
+   "body": ""
   }
  ]
 }
