@@ -4,6 +4,11 @@ Sürüm numarası Unity'de **Player Settings > Version** alanındadır (`Project
 giriş ekranının sağ altında ile **Ayarlar** penceresinde görünür (`Core/AppInfo.cs`).
 Biçim: `ANA.KÜÇÜK.YAMA` — yeni özellik = KÜÇÜK +1, hata düzeltmesi = YAMA +1, mağaza yayını = 1.0.0.
 
+
+## Yayınlanmamış
+- İller sekmesi: Ege ve Akdeniz ayrı bölümler. Bölge bölümleri o bölgenin bütün illerini sorar (Marmara 11, Ege 8, Akdeniz 8,
+  Karadeniz 18, İç Anadolu 13, Doğu Anadolu 14, Güneydoğu Anadolu 9; yedi bölge yedi ayrı bölüm). Tüm Türkiye 81 soru; Plakalar 01–40 ve 41–81 bütün plakalar.
+- Komşu İller: sorulan il haritada parlatılmaz (yalnızca adı yazar); doğru cevaptan sonra haritada belirir.
 ## 0.4.0 — Prototip (şu anki sürüm)
 - **Sınav modu:** bölüm seçim ekranından açılıp kapanır. Açılınca renkli, isimli harita "buharlaşarak" soluk gri, boş KPSS
   haritasına dönüşür (sinema şeritleri, yükselen buhar, kamera yaklaşması, başlık kartı).

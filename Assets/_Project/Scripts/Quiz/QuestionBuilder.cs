@@ -156,8 +156,9 @@ namespace KPSSGeography.Quiz
         List<Question> Neighbor(LevelDefinition level) =>
             Take(ProvincesIn(level).Where(p => p.Data.neighbors != null && p.Data.neighbors.Length > 0), level.questionCount).Select(p =>
             {
+                // Sorulan il haritada parlatılmaz (konumu soruda verilmesin); doğru cevaptan sonra haritada belirir
                 var q = new Question { Prompt = "BU İLE KOMŞU BİR İL SEÇ", Title = Up(p.DisplayName), Type = AnswerType.Map,
-                    Layer = MapLayer.Provinces, Focus = p };
+                    Layer = MapLayer.Provinces, Focus = p, FocusHidden = true, MarkOnCorrect = p };
                 foreach (int n in p.Data.neighbors)
                 {
                     var nv = map.GetByPlate(n);
