@@ -45,7 +45,7 @@ namespace KPSSGeography.Quiz
         public int questionCount;
         public float timePerQuestion;
         public int maxMistakes = 3;
-        /// <summary>Yer şekli bölümleri: river | mountain | volcano | plain | plateau | lake | dam | gulf | peninsula | unesco | park | fault | country | gate</summary>
+        /// <summary>Yer şekli bölümleri: river | mountain | volcano | massif | plain | plateau | lake | dam | gulf | peninsula | unesco | park | fault | country | gate</summary>
         public string category;
         /// <summary>Konu / soru seti (topic ve mcq modları).</summary>
         public string set;

@@ -3929,5 +3929,134 @@
     37.0
    ]
   }
+ ],
+ "_aciklama_masifler": "massifs: KPSS'de sorulan masif araziler (nokta). 'point' [boylam, enlem] yaklaşık merkezdir.",
+ "massifs": [
+  {
+   "id": "masif-yildiz",
+   "name": "Yıldız (Istranca) Masifi",
+   "point": [
+    27.55,
+    41.8
+   ],
+   "info": "Trakya'nın kuzeyinde, Kırklareli çevresinde; Yıldız (Istranca) Dağları'nı oluşturur. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-kaz",
+   "name": "Kaz (Biga) Masifi",
+   "point": [
+    26.85,
+    39.72
+   ],
+   "info": "Biga Yarımadası'nda, Kaz Dağı çevresinde. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-uludag",
+   "name": "Uludağ Masifi",
+   "point": [
+    29.15,
+    40.05
+   ],
+   "info": "Bursa'nın güneyinde, Uludağ çevresinde. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-saruhan",
+   "name": "Saruhan-Manisa Masifi",
+   "point": [
+    28.05,
+    38.85
+   ],
+   "info": "Ege'de, Manisa (Saruhan) çevresinde. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-mentese",
+   "name": "Menteşe Masifi",
+   "point": [
+    28.35,
+    37.3
+   ],
+   "info": "Ege'nin güneyinde, Muğla çevresinde; Menteşe Dağları'nı oluşturur. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-sultan",
+   "name": "Sultan Dağları Masifi",
+   "point": [
+    31.25,
+    38.3
+   ],
+   "info": "Afyonkarahisar ile Konya (Akşehir) arasında, Sultan Dağları çevresinde. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-kirsehir",
+   "name": "Kırşehir Masifi",
+   "point": [
+    34.2,
+    39.25
+   ],
+   "info": "İç Anadolu'nun ortasında, Kırşehir çevresinde geniş bir masif (Orta Anadolu / Kızılırmak masifi). Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-anamur",
+   "name": "Anamur Masifi",
+   "point": [
+    32.85,
+    36.25
+   ],
+   "info": "Akdeniz kıyısında, Mersin'in batısında Anamur çevresinde. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-bitlis",
+   "name": "Bitlis Masifi",
+   "point": [
+    42.1,
+    38.4
+   ],
+   "info": "Van Gölü'nün güneybatısında, Bitlis çevresinde; Doğu Anadolu'nun en büyük masifidir. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-mardin",
+   "name": "Mardin Masifi",
+   "point": [
+    40.75,
+    37.3
+   ],
+   "info": "Güneydoğu Anadolu'da, Mardin Eşiği çevresinde. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-tokat",
+   "name": "Tokat Masifi",
+   "point": [
+    36.55,
+    40.3
+   ],
+   "info": "Karadeniz'in iç kesiminde, Tokat çevresinde. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-ilgaz",
+   "name": "Ilgaz Masifi",
+   "point": [
+    33.7,
+    41.05
+   ],
+   "info": "Çankırı ile Kastamonu arasında, Ilgaz Dağları çevresinde. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-daday",
+   "name": "Daday-Devrekani Masifi",
+   "point": [
+    33.65,
+    41.55
+   ],
+   "info": "Batı Karadeniz'de, Kastamonu'nun kuzeyinde (Daday ve Devrekani çevresi). Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  },
+  {
+   "id": "masif-zonguldak",
+   "name": "Zonguldak Masifi",
+   "point": [
+    31.85,
+    41.35
+   ],
+   "info": "Batı Karadeniz kıyısında; Paleozoik yaşlı bu arazide taşkömürü yatakları bulunur. Masifler 1. jeolojik zamanda (Paleozoik) ya da daha önce oluşmuş, başkalaşım (metamorfizma) geçirerek sertleşmiş en eski kütlelerdir; kıvrılmaz, kırılırlar."
+  }
  ]
 }
