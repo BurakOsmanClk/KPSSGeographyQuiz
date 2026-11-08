@@ -87,15 +87,16 @@ namespace KPSSGeography.Core
             var builder = new QuestionBuilder(map, features, TopicDatabase.Load(), McqDatabase.Load(), palette);
             game.Initialize(quizConfig, map, features, sfx, camController, progress, builder, relief, effects);
 
+            StudyScreen study = null; // aşağıda arayüzle birlikte kurulur
             var pointer = map.gameObject.AddComponent<MapPointer>();
             pointer.Initialize(map, cam);
-            pointer.CanInteract = () => game.AcceptsMapInput;
+            pointer.CanInteract = () => game.AcceptsMapInput || (study != null && study.AcceptsMapInput);
             pointer.ProvinceClicked += game.SubmitProvince;
             pointer.HoverBlocked = game.IsSolved;
 
             var featurePointer = features.gameObject.AddComponent<FeaturePointer>();
             featurePointer.Initialize(features, cam);
-            featurePointer.CanInteract = () => game.AcceptsFeatureInput;
+            featurePointer.CanInteract = () => game.AcceptsFeatureInput || (study != null && study.AcceptsFeatureInput);
             featurePointer.FeatureClicked += game.SubmitFeature;
             featurePointer.HoverBlocked = game.IsSolved;
 
@@ -112,6 +113,10 @@ namespace KPSSGeography.Core
             levels.Initialize(uiRoot, canvas, catalog, progress, sfx);
             var title = new GameObject("TitleController").AddComponent<TitleScreen>();
             title.Initialize(uiRoot, progress, sfx);
+            study = new GameObject("StudyController").AddComponent<StudyScreen>();
+            study.Initialize(uiRoot, map, features, camController, labels, effects, relief, sfx, palette);
+            pointer.ProvinceClicked += study.OnProvinceClicked;
+            featurePointer.FeatureClicked += study.OnFeatureClicked;
 
             // Reklamlar: Ads Mediation (LevelPlay) kurulana kadar test reklamı
             var mockAds = new GameObject("MockAdsController").AddComponent<MockAdService>();
@@ -134,7 +139,7 @@ namespace KPSSGeography.Core
             exam.Initialize(camController, sfx);
 
             var flow = gameObject.AddComponent<AppFlow>();
-            flow.Initialize(game, hud, title, levels, catalog, progress, adPolicy, exam);
+            flow.Initialize(game, hud, title, levels, catalog, progress, adPolicy, exam, study);
 
             Debug.Log($"[KPSS] Hazır: {map.Provinces.Count} il, {features.Features.Count} yer şekli, {catalog.levels.Length} bölüm yüklendi.");
         }
