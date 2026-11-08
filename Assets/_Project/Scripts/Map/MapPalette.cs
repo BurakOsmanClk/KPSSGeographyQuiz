@@ -48,6 +48,9 @@ namespace KPSSGeography.Map
         public Color mountainMark = new Color32(0x5E, 0x3A, 0x22, 0xFF);
         public Color volcano = new Color32(0x6D, 0x45, 0x2C, 0xFF);
         public Color lava = new Color32(0xF0, 0x55, 0x2E, 0xFF);
+        /// <summary>Masif arazi işareti: eski, başkalaşmış kaya (koyu taş moru).</summary>
+        public Color massif = new Color32(0x6E, 0x5A, 0x8C, 0xFF);
+        public Color massifLight = new Color32(0xB9, 0xA8, 0xD4, 0xFF);
         public Color plain = new Color32(0x72, 0xC4, 0x72, 0xE0);
         public Color plainEdge = new Color32(0x3E, 0x8E, 0x41, 0xFF);
         public Color plateau = new Color32(0xD9, 0xA5, 0x5B, 0xE0);

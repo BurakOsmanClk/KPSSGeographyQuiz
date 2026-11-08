@@ -80,6 +80,7 @@ namespace KPSSGeography.UI
             Add("Akarsular", GeoFeature.River);
             Add("Dağlar", GeoFeature.Mountain, "Kıvrım", "Kırık (horst)");
             Add("Volkanik Dağlar", GeoFeature.Volcano);
+            Add("Masif Araziler", GeoFeature.Massif);
             Add("Ovalar", GeoFeature.Plain, "Delta", "Tektonik", "Karstik (polye)", "Göl tabanı");
             Add("Platolar", GeoFeature.Plateau, "Aşınım", "Tabaka", "Karstik", "Lav örtülü");
             Add("Göller", GeoFeature.Lake, "Tektonik", "Volkanik", "Karstik", "Heyelan set", "Alüvyal set", "Kıyı set", "Baraj (yapay)");
