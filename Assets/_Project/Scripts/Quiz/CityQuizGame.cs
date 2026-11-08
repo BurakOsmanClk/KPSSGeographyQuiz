@@ -297,7 +297,7 @@ namespace KPSSGeography.Quiz
                 if (Current.ShowFeature != null) features.ShowOnly(Current.ShowFeature);
                 else features.ShowDefault();
             }
-            Current.Focus?.SetFocused(true);
+            if (!Current.FocusHidden) Current.Focus?.SetFocused(true);
 
             TimeLimit = QuestionTime;
             TimeRemaining = TimeLimit;

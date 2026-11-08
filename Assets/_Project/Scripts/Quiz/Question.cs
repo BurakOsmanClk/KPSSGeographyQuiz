@@ -43,6 +43,8 @@ namespace KPSSGeography.Quiz
 
         /// <summary>Soru boyunca nabız gibi vurgulanan hedef (bölge/komşu/iklim sorularında il, göl tipi sorusunda göl).</summary>
         public IMapTarget Focus;
+        /// <summary>Focus soru sırasında haritada vurgulanmaz (ör. komşu iller: sorulan il yalnızca adıyla verilir).</summary>
+        public bool FocusHidden;
         /// <summary>Tek doğru cevaplı harita sorularında doğru hedef (yanlışta gösterilir).</summary>
         public IMapTarget Reveal;
         /// <summary>KPSS sorusunda vurgulanacak yer şekli (sadece o gösterilir).</summary>
