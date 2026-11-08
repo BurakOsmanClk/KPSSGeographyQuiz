@@ -59,7 +59,7 @@ namespace KPSSGeography.Quiz
 
         /// <summary>
         /// Yanlış cevapta (ya da süre bitince) doğru cevap gösterilmez mi? Haritadan seçmeli sorularda gösterilmez:
-        /// doğru yeri ve tıklanan yerin adını göstermek sonraki sorular için ipucu olur. "Hepsini bul" hariç.
+        /// doğru yeri göstermek sonraki sorular için ipucu olur. Yanlış tıklanan yerin adı ise söylenir (QuizHud). "Hepsini bul" hariç.
         /// </summary>
         public bool HidesAnswerOnMiss => Type == AnswerType.Map && !RequireAll;
 
