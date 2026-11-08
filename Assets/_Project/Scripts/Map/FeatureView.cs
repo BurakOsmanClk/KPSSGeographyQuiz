@@ -123,6 +123,31 @@ namespace KPSSGeography.Map
                     baseOrder = 28;
                     BuildGate(b, data.LabelPoint);
                     break;
+                case GeoFeature.CoastType:
+                {
+                    // Kıyı tipi: kıyı çizgisi boyunca beyaz kenarlı renkli şerit; biriktirme şekli: renkli rozet
+                    Color tc = palette.CoastTypeColor(data.subtype);
+                    if (data.IsLine)
+                    {
+                        baseOrder = 24;
+                        foreach (var l in data.lines)
+                        {
+                            var pts = LineMeshBuilder.ToPoints(l.points);
+                            b.AddPolyline(pts, 0.16f, palette.coastEdge);
+                            b.AddPolyline(pts, 0.1f, tc);
+                        }
+                    }
+                    else
+                    {
+                        baseOrder = 27;
+                        Vector2 cp = data.LabelPoint;
+                        b.AddCircle(cp + new Vector2(0.012f, -0.02f), 0.16f, new Color(0f, 0f, 0f, 0.2f));
+                        b.AddCircle(cp, 0.15f, palette.markerEdge);
+                        b.AddCircle(cp, 0.125f, Color.white);
+                        b.AddCircle(cp, 0.09f, tc);
+                    }
+                    break;
+                }
                 case GeoFeature.Plain:
                 case GeoFeature.Plateau:
                     bool plain = data.category == GeoFeature.Plain;

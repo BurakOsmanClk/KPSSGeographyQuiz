@@ -3929,5 +3929,222 @@
     37.0
    ]
   }
+ ],
+ "_aciklama_kiyi": "Kıyı tipleri ve dalga-akıntı biriktirme şekilleri. type: boyuna | enine | ria | dalmacya | kalankli | limanli | tombolo | lagun. segment: kıyı şeridi (from → to, via = doğru yayı seçmek için ara nokta; çizgi Türkiye kıyısından otomatik kesilir) ya da point. Örnekler KPSS kaynaklarında tutarlı olanlardır (Haliç ve kıyı oku tartışmalı olduğu için yok).",
+ "coastTypeInfo": {
+  "boyuna": [
+   "Boyuna Kıyı",
+   "Dağların kıyıya paralel uzandığı kıyı. Girinti çıkıntı ve doğal liman azdır, kıyıdan iç kesime ulaşım zordur; denizel etki içerilere sokulamaz."
+  ],
+  "enine": [
+   "Enine Kıyı",
+   "Dağların kıyıya dik uzandığı kıyı. Girinti çıkıntı, körfez, yarımada ve doğal liman çoktur; denizel etki iç kesimlere kadar sokulur."
+  ],
+  "ria": [
+   "Ria Kıyı",
+   "Akarsu vadilerinin deniz suları altında kalmasıyla oluşan, derin ve uzun koylu kıyı."
+  ],
+  "dalmacya": [
+   "Dalmaçya Kıyı",
+   "Kıyıya paralel uzanan dağların sular altında kalmasıyla tepelerinin kıyıya paralel adalar dizisi oluşturduğu kıyı."
+  ],
+  "kalankli": [
+   "Kalanklı Kıyı",
+   "Karstik (kalkerli) arazide oluşmuş dar ve derin vadilerin deniz suları altında kalmasıyla oluşan kıyı."
+  ],
+  "limanli": [
+   "Limanlı Kıyı",
+   "Geniş tabanlı vadi ve körfezlerin sular altında kalmasıyla oluşan kıyı; ağızları zamanla kıyı setleriyle kapanıp lagünlere dönüşebilir."
+  ],
+  "tombolo": [
+   "Tombolo",
+   "Kıyı oku ya da kıyı setiyle bir adanın karaya bağlanmasıdır (dalga ve akıntı biriktirme şekli)."
+  ],
+  "lagun": [
+   "Lagün (Kıyı Set Gölü)",
+   "Kıyı okunun ya da setinin bir koyun önünü kapatmasıyla denizden ayrılan göl (dalga ve akıntı biriktirme şekli)."
+  ]
+ },
+ "coastTypes": [
+  {
+   "id": "kiyi-boyuna-karadeniz",
+   "name": "Karadeniz Kıyıları",
+   "type": "boyuna",
+   "segment": {
+    "from": [
+     29.6,
+     41.17
+    ],
+    "to": [
+     41.55,
+     41.5
+    ],
+    "via": [
+     34.9,
+     42.0
+    ]
+   },
+   "info": "Kuzey Anadolu Dağları kıyıya paraleldir: kıyı düz, doğal liman az, iç kesimle ulaşım zordur."
+  },
+  {
+   "id": "kiyi-boyuna-akdeniz",
+   "name": "Akdeniz Kıyıları (Antalya–Anamur)",
+   "type": "boyuna",
+   "segment": {
+    "from": [
+     30.75,
+     36.85
+    ],
+    "to": [
+     33.35,
+     36.12
+    ],
+    "via": [
+     32.8,
+     36.08
+    ]
+   },
+   "info": "Toros Dağları kıyıya paraleldir; Antalya ile Anamur arasında tipik boyuna kıyı görülür."
+  },
+  {
+   "id": "kiyi-enine-ege",
+   "name": "Ege Kıyıları",
+   "type": "enine",
+   "segment": {
+    "from": [
+     26.95,
+     39.55
+    ],
+    "to": [
+     27.55,
+     37.05
+    ],
+    "via": [
+     26.35,
+     38.35
+    ]
+   },
+   "info": "Ege'de dağlar kıyıya dik uzanır: Edremit, İzmir, Kuşadası gibi körfezler, Karaburun ve Bodrum gibi yarımadalar oluşur."
+  },
+  {
+   "id": "kiyi-ria-istanbul",
+   "name": "İstanbul Boğazı",
+   "type": "ria",
+   "point": [
+    29.07,
+    41.12
+   ],
+   "info": "Akarsu vadisinin deniz suları altında kalmasıyla oluşmuştur; Türkiye'deki en bilinen ria örneğidir."
+  },
+  {
+   "id": "kiyi-ria-canakkale",
+   "name": "Çanakkale Boğazı",
+   "type": "ria",
+   "point": [
+    26.45,
+    40.25
+   ],
+   "info": "İstanbul Boğazı gibi sular altında kalmış bir akarsu vadisidir (ria)."
+  },
+  {
+   "id": "kiyi-dalmacya",
+   "name": "Kaş–Finike Kıyıları",
+   "type": "dalmacya",
+   "segment": {
+    "from": [
+     29.64,
+     36.2
+    ],
+    "to": [
+     30.15,
+     36.3
+    ],
+    "via": [
+     29.95,
+     36.2
+    ]
+   },
+   "info": "Türkiye'de tipik dalmaçya kıyısı Kaş ile Finike arasındadır; kıyıya paralel küçük adalar dikkat çeker (Kekova)."
+  },
+  {
+   "id": "kiyi-kalankli",
+   "name": "Mersin–Silifke Kıyıları",
+   "type": "kalankli",
+   "segment": {
+    "from": [
+     33.93,
+     36.37
+    ],
+    "to": [
+     34.6,
+     36.78
+    ],
+    "via": [
+     34.25,
+     36.55
+    ]
+   },
+   "info": "Mersin ile Silifke arasında karstik vadilerin deniz seviyesine kadar uzandığı yerlerde kalanklı kıyı görülür."
+  },
+  {
+   "id": "kiyi-limanli",
+   "name": "Büyükçekmece–Küçükçekmece Kıyıları",
+   "type": "limanli",
+   "segment": {
+    "from": [
+     28.5,
+     41.01
+    ],
+    "to": [
+     28.8,
+     40.98
+    ],
+    "via": [
+     28.65,
+     40.98
+    ]
+   },
+   "info": "Çekmece göllerinin bulunduğu kıyı limanlı kıyıdır; koylarının ağzı kıyı setleriyle kapanmış ve göller lagüne dönüşmüştür."
+  },
+  {
+   "id": "kiyi-tombolo-kapidag",
+   "name": "Kapıdağ",
+   "type": "tombolo",
+   "point": [
+    27.86,
+    40.42
+   ],
+   "info": "Kapıdağ eskiden bir adaydı; kıyı oku ile karaya bağlanarak yarımada olmuştur (tombolo)."
+  },
+  {
+   "id": "kiyi-tombolo-sinop",
+   "name": "Sinop",
+   "type": "tombolo",
+   "point": [
+    35.15,
+    42.02
+   ],
+   "info": "Sinop'taki Boztepe eski bir adadır; dar bir kıyı okuyla (tombolo) karaya bağlanmıştır. Sinop şehri bu kıyı oku üzerinde kuruludur."
+  },
+  {
+   "id": "kiyi-lagun-terkos",
+   "name": "Terkos (Durusu) Gölü",
+   "type": "lagun",
+   "point": [
+    28.55,
+    41.32
+   ],
+   "info": "İstanbul'un Karadeniz kıyısındaki lagün. Büyükçekmece ve Küçükçekmece gölleri de lagündür."
+  },
+  {
+   "id": "kiyi-lagun-akyatan",
+   "name": "Akyatan Gölü",
+   "type": "lagun",
+   "point": [
+    35.25,
+    36.62
+   ],
+   "info": "Seyhan–Ceyhan deltası kıyısındaki lagün; önemli bir kuş yaşam alanıdır."
+  }
  ]
 }
