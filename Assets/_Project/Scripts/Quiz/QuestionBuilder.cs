@@ -71,6 +71,7 @@ namespace KPSSGeography.Quiz
                 case QuizMode.Mcq: return Mcq(level);
                 case QuizMode.BorderCountry: return BorderCountry(level);
                 case QuizMode.Numbered: return Numbered(level);
+                case QuizMode.Boss: return Boss(level);
                 default: return new List<Question>();
             }
         }
@@ -222,6 +223,79 @@ namespace KPSSGeography.Quiz
                 Prompt = attr.prompt, Title = Up(f.DisplayName), Type = AnswerType.Choice, Choices = attr.choices, ChoiceColors = colors,
                 CorrectChoice = System.Array.IndexOf(attr.choices, f.Data.subtype), Focus = f, Info = f.Data.info, AnswerLabel = f.Data.subtype
             }).ToList();
+        }
+
+        // ================== Boss savaşı ==================
+
+        /// <summary>Boss 1 (Fay Hattı) fayları: ilk ikisi her zaman, üçüncüsü grabenlerden biri.</summary>
+        static readonly string[] BossFaults = { "kaf", "daf" };
+        static readonly string[] BossGrabens = { "gediz-graben", "menderes-graben" };
+        /// <summary>Boss 2 (İller) için görece kolay, çok bilinen konular.</summary>
+        static readonly string[] BossEasyTopics = { "findik", "cay", "tutun", "zeytin", "muz", "kayisi", "pamuk", "antep-fistigi", "turuncgil", "bor" };
+
+        /// <summary>
+        /// Boss savaşı: 1. raund Fay Hattı boss'u (3 soru: fayın geçtiği bir il), 2. raund İller boss'u (3 soru: kolay
+        /// konu setleri). Her doğru il bir vuruş; raund = boss'un 3 canı.
+        /// </summary>
+        List<Question> Boss(LevelDefinition level)
+        {
+            var list = new List<Question>();
+            var faults = BossFaults.Concat(new[] { BossGrabens[Random.Range(0, BossGrabens.Length)] });
+            foreach (var id in faults)
+            {
+                var f = features.Find(id);
+                if (f == null) continue;
+                var plates = ProvincesAlong(f);
+                if (plates.Count == 0) continue;
+                var q = new Question
+                {
+                    Prompt = "FAY HATTI", Title = $"{f.DisplayName} üzerinde bulunan bir il seç.", Type = AnswerType.Map,
+                    Layer = MapLayer.Provinces, Info = f.Data.info, AnswerLabel = f.DisplayName, Round = 1
+                };
+                q.Correct.AddRange(plates);
+                list.Add(q);
+            }
+
+            bool first = true;
+            foreach (var t in Take(topics.topics.Where(t => System.Array.IndexOf(BossEasyTopics, t.id) >= 0), 3))
+            {
+                var q = new Question
+                {
+                    Prompt = "İLLER", Title = $"{t.title}: {t.question.ToLower(TR)}.", Type = AnswerType.Map, Layer = MapLayer.Provinces,
+                    Info = t.info, AnswerLabel = t.title, Round = 2, PreDelay = first ? 3.2f : 0f
+                };
+                foreach (int plate in t.plates)
+                {
+                    var p = map.GetByPlate(plate);
+                    if (p != null) q.Correct.Add(p);
+                }
+                first = false;
+                if (q.Correct.Count > 0) list.Add(q);
+            }
+            return list;
+        }
+
+        /// <summary>Bir çizgi yer şeklinin (fay) üzerinden geçtiği iller: çizgi boyunca örnek noktalar alınır.</summary>
+        List<ProvinceView> ProvincesAlong(FeatureView f)
+        {
+            var result = new List<ProvinceView>();
+            if (f.Data.lines == null) return result;
+            foreach (var line in f.Data.lines)
+            {
+                var pts = LineMeshBuilder.ToPoints(line.points);
+                for (int i = 0; i < pts.Length - 1; i++)
+                {
+                    int steps = Mathf.Max(1, Mathf.CeilToInt(Vector2.Distance(pts[i], pts[i + 1]) / 0.04f));
+                    for (int k = 0; k <= steps; k++)
+                    {
+                        Vector3 world = features.transform.TransformPoint(Vector2.Lerp(pts[i], pts[i + 1], k / (float)steps));
+                        Vector2 local = map.transform.InverseTransformPoint(world);
+                        foreach (var p in map.Provinces)
+                            if (!result.Contains(p) && p.Contains(local)) { result.Add(p); break; }
+                    }
+                }
+            }
+            return result;
         }
 
         // ================== Numaralı harita (ÖSYM tipi) ==================

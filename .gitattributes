@@ -66,3 +66,4 @@
 
 # Kabartma dokusu LFS dışında (bulut oturumundan LFS yüklemesi yapılamıyor; dosya küçük)
 Assets/_Project/Resources/Textures/*.png !filter !diff !merge -text
+Assets/_Project/Resources/Textures/Bosses/*.png !filter !diff !merge -text

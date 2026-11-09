@@ -53,6 +53,11 @@ namespace KPSSGeography.Quiz
 
         /// <summary>KPSS tipi öncül metni (giriş + maddeler); soru kâğıdı gibi solda ayrı bir panelde gösterilir.</summary>
         public string Body;
+
+        /// <summary>Boss savaşı: sorunun ait olduğu raund (1, 2…).</summary>
+        public int Round;
+        /// <summary>Bu soru başlamadan önceki ek bekleme (ör. boss değişimi animasyonu için), saniye.</summary>
+        public float PreDelay;
         /// <summary>İklim grafiği sorusu: soldaki panelde çizilecek il verisi (Body yerine).</summary>
         public ClimateCity Chart;
 

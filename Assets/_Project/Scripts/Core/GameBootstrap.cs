@@ -116,6 +116,8 @@ namespace KPSSGeography.Core
             study = new GameObject("StudyController").AddComponent<StudyScreen>();
             study.Initialize(uiRoot, map, features, camController, labels, effects, relief, sfx, palette);
             pointer.ProvinceClicked += study.OnProvinceClicked;
+            var bossScreen = new GameObject("BossController").AddComponent<BossScreen>();
+            bossScreen.Initialize(uiRoot, game, map, sfx);
             featurePointer.FeatureClicked += study.OnFeatureClicked;
 
             // Reklamlar: Ads Mediation (LevelPlay) kurulana kadar test reklamı
@@ -139,7 +141,7 @@ namespace KPSSGeography.Core
             exam.Initialize(camController, sfx);
 
             var flow = gameObject.AddComponent<AppFlow>();
-            flow.Initialize(game, hud, title, levels, catalog, progress, adPolicy, exam, study);
+            flow.Initialize(game, hud, title, levels, catalog, progress, adPolicy, exam, study, bossScreen);
 
             Debug.Log($"[KPSS] Hazır: {map.Provinces.Count} il, {features.Features.Count} yer şekli, {catalog.levels.Length} bölüm yüklendi.");
         }

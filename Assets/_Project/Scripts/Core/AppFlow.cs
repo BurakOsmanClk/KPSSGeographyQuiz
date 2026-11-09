@@ -22,12 +22,14 @@ namespace KPSSGeography.Core
         AdPolicy ads;
         ExamModeController exam;
         StudyScreen study;
+        BossScreen boss;
 
         public void Initialize(CityQuizGame quizGame, QuizHud quizHud, TitleScreen titleScreen, LevelSelectScreen levelSelect,
             LevelCatalog levelCatalog, ProgressStore progressStore, AdPolicy adPolicy, ExamModeController examController,
-            StudyScreen studyScreen)
+            StudyScreen studyScreen, BossScreen bossScreen)
         {
             study = studyScreen;
+            boss = bossScreen;
             ads = adPolicy;
             exam = examController;
             game = quizGame;
@@ -39,6 +41,9 @@ namespace KPSSGeography.Core
 
             title.PlayRequested += () => ShowLevels(null);
             title.StudyRequested += ShowStudy;
+            title.BossRequested += PlayBoss;
+            boss.ExitRequested += ShowTitle;
+            boss.RetryRequested += PlayBoss;
             study.BackRequested += ShowTitle;
             levels.BackRequested += ShowTitle;
             levels.PlayRequested += Play;
@@ -73,10 +78,23 @@ namespace KPSSGeography.Core
         void ShowTitle()
         {
             study.Hide();
+            boss.Hide();
             LeaveGame();
             levels.Hide();
             exam.SetLook(false, false); // giriş ekranında harita her zaman renkli
             title.Show();
+        }
+
+        /// <summary>Boss savaşı: iki raund (Fay Hattı, İller); ekranı BossScreen, akışı CityQuizGame yürütür.</summary>
+        void PlayBoss()
+        {
+            LeaveGame();
+            boss.Hide();
+            title.Hide();
+            levels.Hide();
+            study.Hide();
+            exam.SetLook(false, false); // boss savaşında harita her zaman renkli
+            game.StartLevel(BossScreen.Level);
         }
 
         /// <summary>Eğitim: soru yok; konular soldan seçilir, harita sağda adlarıyla gösterilir.</summary>
