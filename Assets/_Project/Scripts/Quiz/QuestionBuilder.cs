@@ -116,9 +116,14 @@ namespace KPSSGeography.Quiz
         }
 
         List<Question> Feature(LevelDefinition level) => level.category == GeoFeature.CoastType ? CoastTypes(level) :
-            Take(features.Features.Where(f => FeatureLayer.Matches(level.category, f.Category)), level.questionCount).Select(f =>
+            Take(features.Features.Where(f => FeatureLayer.Matches(level.category, f.Category) &&
+                                              (level.category != GeoFeature.Mine || string.IsNullOrEmpty(level.set) || f.Data.mineral == level.set)),
+                level.questionCount).Select(f =>
             {
-                var q = new Question { Prompt = $"BU {GeoFeatureDatabase.CategoryNoun(level.category)} HARİTADA BUL", Title = Up(f.DisplayName),
+                string prompt = level.category == GeoFeature.Mine
+                    ? (f.Data.IsFactory ? "BU FABRİKAYI HARİTADA BUL" : $"BU {Up(f.Data.MineralDisplay)} YATAĞINI HARİTADA BUL")
+                    : $"BU {GeoFeatureDatabase.CategoryNoun(level.category)} HARİTADA BUL";
+                var q = new Question { Prompt = prompt, Title = Up(f.DisplayName),
                     Type = AnswerType.Map, Layer = MapLayer.Features, Reveal = f, Info = f.Data.info, AnswerLabel = f.DisplayName };
                 q.Correct.Add(f);
                 return q;

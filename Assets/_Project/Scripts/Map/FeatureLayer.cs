@@ -63,12 +63,12 @@ namespace KPSSGeography.Map
         }
 
         /// <summary>Yer şekli bölümü: yalnızca o kategorideki öğeleri gösterir (isteğe bağlı tıklanabilir).</summary>
-        public void ShowCategory(string category, bool interactive = true)
+        public void ShowCategory(string category, bool interactive = true, System.Func<FeatureView, bool> filter = null)
         {
             foreach (var f in features)
             {
                 f.ResetVisual();
-                bool match = Matches(category, f.Category);
+                bool match = Matches(category, f.Category) && (filter == null || filter(f));
                 f.gameObject.SetActive(match);
                 f.Interactive = match && interactive;
             }

@@ -143,6 +143,10 @@ namespace KPSSGeography.Map
                     baseOrder = 28;
                     BuildGate(b, data.LabelPoint);
                     break;
+                case GeoFeature.Mine:
+                    baseOrder = 28;
+                    BuildMine(b, data);
+                    break;
                 case GeoFeature.CoastType:
                 {
                     // Kıyı tipi: kıyı çizgisi boyunca beyaz kenarlı renkli şerit; biriktirme şekli: renkli rozet
@@ -245,6 +249,38 @@ namespace KPSSGeography.Map
                     b.AddTriangle(c + new Vector2(-0.07f, -0.05f), c + new Vector2(0f, 0.08f), c + new Vector2(0.07f, -0.05f), Color.white);
                     break;
             }
+        }
+
+        /// <summary>
+        /// Maden işaretleri (ders atlaslarındaki gibi): yatak = beyaz rozet üzerinde maden renginde kare;
+        /// fabrika = beyaz rozet üzerinde bacalı, testere çatılı fabrika silueti (çatı şeridi maden renginde).
+        /// </summary>
+        void BuildMine(LineMeshBuilder b, GeoFeature data)
+        {
+            Vector2 c = data.LabelPoint;
+            Color ore = !string.IsNullOrEmpty(data.color) && ColorUtility.TryParseHtmlString(data.color, out var parsed)
+                ? parsed : palette.MineralColor(data.mineral);
+            b.AddCircle(c + new Vector2(0.012f, -0.02f), 0.16f, new Color(0f, 0f, 0f, 0.22f));
+            b.AddCircle(c, 0.155f, palette.markerEdge);
+            b.AddCircle(c, 0.13f, Color.white);
+            if (!data.IsFactory)
+            {
+                const float s = 0.075f;
+                b.AddQuad(c + new Vector2(-s, -s), c + new Vector2(s, -s), c + new Vector2(s, s), c + new Vector2(-s, s), ore);
+                return;
+            }
+            // Gövde
+            b.AddQuad(c + new Vector2(-0.09f, -0.075f), c + new Vector2(0.09f, -0.075f),
+                c + new Vector2(0.09f, 0.0f), c + new Vector2(-0.09f, 0.0f), palette.factory);
+            // Testere çatı (iki diş)
+            b.AddTriangle(c + new Vector2(-0.09f, 0.0f), c + new Vector2(-0.09f, 0.055f), c + new Vector2(-0.02f, 0.0f), palette.factory);
+            b.AddTriangle(c + new Vector2(-0.02f, 0.0f), c + new Vector2(-0.02f, 0.055f), c + new Vector2(0.05f, 0.0f), palette.factory);
+            // Baca
+            b.AddQuad(c + new Vector2(0.055f, 0.0f), c + new Vector2(0.085f, 0.0f),
+                c + new Vector2(0.085f, 0.1f), c + new Vector2(0.055f, 0.1f), palette.factory);
+            // Maden rengi şerit (hangi madeni işlediği)
+            b.AddQuad(c + new Vector2(-0.09f, -0.075f), c + new Vector2(0.09f, -0.075f),
+                c + new Vector2(0.09f, -0.05f), c + new Vector2(-0.09f, -0.05f), ore);
         }
 
         void BuildMassif(LineMeshBuilder b, Vector2 c)

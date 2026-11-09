@@ -6,6 +6,12 @@ Biçim: `ANA.KÜÇÜK.YAMA` — yeni özellik = KÜÇÜK +1, hata düzeltmesi = 
 
 
 ## Yayınlanmamış
+- **MADENLER sekmesi:** Madenler, Ekonomi'den ayrı sekmeye taşındı.
+- **Demir: Yataklar ve Fabrikalar** bölümü: ders atlaslarındaki gibi demir yatakları (Divriği, Hekimhan–Hasançelebi, Avnik,
+  Yahyalı) ve demir-çelik fabrikaları (Karabük, Ereğli, İskenderun) haritada ikonlarla; "haritada bul" soruları ve bilgi notları.
+- **EĞİTİM → Madenler:** 25 maden, 79 yer haritada (yataklar kare, işleme tesisleri bacalı ikon; maden başına renk). Alt başlıklar:
+  demir, bakır, krom, boksit, kurşun-çinko, manganez, cıva, nikel, volfram, antimon, altın, bor, kükürt, fosfat, tuz, mermer, zımpara,
+  lüle taşı, oltu taşı, feldispat, trona, ponza, barit, perlit, bentonit. Sorular şimdilik yalnızca demirde.
 - **Kıyı Tipleri ve Şekilleri** bölümü (Sular ve Kıyılar): boyuna (Karadeniz; Antalya–Anamur), enine (Ege), ria (İstanbul ve
   Çanakkale boğazları), dalmaçya (Kaş–Finike), kalanklı (Mersin–Silifke), limanlı (Çekmece kıyıları), tombolo (Kapıdağ, Sinop),
   lagün (Terkos, Akyatan), kıyı oku (Çardak, İztuzu). Kıyı tipleri haritada gerçek kıyı çizgisi boyunca renkli şerit. EĞİTİM ekranına aynı konu eklendi.

@@ -82,6 +82,13 @@ namespace KPSSGeography.Map
         public Color gateRed = new Color32(0xD6, 0x28, 0x28, 0xFF);
         public Color gatePost = new Color32(0x3A, 0x44, 0x50, 0xFF);
 
+        [Header("Madenler")]
+        /// <summary>Demir yatağı (ders atlaslarındaki gibi pas kırmızısı kare).</summary>
+        public Color mineIron = new Color32(0xA2, 0x3B, 0x22, 0xFF);
+        public Color mineOther = new Color32(0x6B, 0x4F, 0x9E, 0xFF);
+        public Color factory = new Color32(0x37, 0x41, 0x51, 0xFF);
+
+        public Color MineralColor(string mineral) => mineral == "demir" ? mineIron : mineOther;
         [Header("Kıyı tipleri")]
         public Color coastEdge = new Color(1f, 1f, 1f, 0.95f);
 

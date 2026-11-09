@@ -28,6 +28,8 @@ namespace KPSSGeography.Data
         public const string Country = "country";
         /// <summary>Kara hudut kapısı (nokta). subtype = açıldığı ülke.</summary>
         public const string Gate = "gate";
+        /// <summary>Maden yatağı ya da madeni işleyen fabrika (nokta). subtype = "&lt;maden&gt;-site" | "&lt;maden&gt;-factory".</summary>
+        public const string Mine = "mine";
         /// <summary>Kıyı tipi şeridi (çizgi) ya da kıyı biriktirme şekli (nokta). subtype = boyuna | enine | ria | dalmacya | kalankli | limanli | tombolo | lagun.</summary>
         public const string CoastType = "coasttype";
 
@@ -39,6 +41,14 @@ namespace KPSSGeography.Data
         public string kind;
         /// <summary>Alt tür: göl tipi, kıyı şekli türü (strait/gulf/peninsula/island/cape), unesco/park vb.</summary>
         public string subtype;
+        /// <summary>Maden öğelerinde maden kimliği (demir, bakır...).</summary>
+        public string mineral;
+        /// <summary>Maden öğelerinde madenin Türkçe adı (ör. "Kurşun-Çinko").</summary>
+        public string mineralName;
+        /// <summary>Maden öğelerinde harita ikonunun rengi (#RRGGBB).</summary>
+        public string color;
+        public string MineralDisplay => string.IsNullOrEmpty(mineralName) ? GeoFeatureDatabase.MineralName(mineral) : mineralName;
+        public bool IsFactory => subtype != null && subtype.EndsWith("-factory");
         /// <summary>Kıyı tiplerinde tipin adı ve tanımı (ör. "Ria Kıyı").</summary>
         public string typeName;
         public string typeInfo;
@@ -110,8 +120,16 @@ namespace KPSSGeography.Data
             GeoFeature.Fault => "FAY HATTINI",
             GeoFeature.Country => "ÜLKEYİ",
             GeoFeature.Gate => "SINIR KAPISINI",
+            GeoFeature.Mine => "MADEN YERİNİ",
             GeoFeature.CoastType => "KIYI TİPİNİ",
             _ => "YER ŞEKLİNİ"
+        };
+
+        /// <summary>Maden kimliğinin Türkçe adı (soru metinleri için).</summary>
+        public static string MineralName(string mineral) => mineral switch
+        {
+            "demir" => "Demir",
+            _ => string.IsNullOrEmpty(mineral) ? "Maden" : char.ToUpper(mineral[0]) + mineral.Substring(1)
         };
     }
 }
