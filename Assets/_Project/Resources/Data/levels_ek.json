@@ -1,0 +1,14 @@
+{
+  "groups": [{"id": "konum", "title": "KONUM", "after": "iller"}],
+  "levels": [
+    {"id": "uc-noktalar", "group": "konum", "title": "Uç Noktalar ve Güneş", "description": "En doğu, batı, kuzey, güney; güneşin doğuşu, gölge boyu, gündüz süresi.", "mode": "topic", "regions": [], "questionCount": 9, "timePerQuestion": 12, "maxMistakes": 3, "set": "konum"},
+    {"id": "enlem-boylam", "group": "konum", "title": "Enlem ve Boylam", "description": "Verilen paralel ya da meridyenin geçtiği bir ili bul.", "mode": "topic", "regions": [], "questionCount": 10, "timePerQuestion": 14, "maxMistakes": 3, "set": "enlem"},
+    {"id": "dis-kuvvet", "group": "yersekilleri", "title": "Dış Kuvvet Şekilleri", "description": "Peri bacası, traverten, obruk, mağara, kumul, sirk gölü, kanyon, delta, polye.", "mode": "topic", "regions": [], "questionCount": 9, "timePerQuestion": 14, "maxMistakes": 3, "set": "dis"},
+    {"id": "dogal-afetler", "group": "yersekilleri", "title": "Doğal Afetler", "description": "Deprem, heyelan, çığ, rüzgâr erozyonu ve büyük depremlerin merkezleri.", "mode": "topic", "regions": [], "questionCount": 9, "timePerQuestion": 14, "maxMistakes": 3, "set": "afet"},
+    {"id": "sicaklik-yagis", "group": "iklim", "title": "Sıcaklık ve Yağış", "description": "En çok ve en az yağış, en sıcak yaz, en ılık ve en soğuk kış.", "mode": "topic", "regions": [], "questionCount": 5, "timePerQuestion": 14, "maxMistakes": 3, "set": "iklim2"},
+    {"id": "sanayi", "group": "ekonomi", "title": "Sanayi", "description": "Demir-çelik, rafineri, otomotiv, alüminyum, çay, dokuma, tersane, vagon.", "mode": "topic", "regions": [], "questionCount": 8, "timePerQuestion": 14, "maxMistakes": 3, "set": "sanayi"},
+    {"id": "ulasim", "group": "ekonomi", "title": "Ulaşım", "description": "Limanlar, boru hatları, köprüler, hızlı tren, feribot ve dağ geçitleri.", "mode": "topic", "regions": [], "questionCount": 13, "timePerQuestion": 14, "maxMistakes": 3, "set": "ulasim"},
+    {"id": "goc-yerlesme", "group": "beseri", "title": "Göç ve Yerleşme", "description": "Göç alan ve veren iller, mevsimlik göç, kent fonksiyonları, yerleşme tipleri.", "mode": "topic", "regions": [], "questionCount": 9, "timePerQuestion": 14, "maxMistakes": 3, "set": "yerlesme"},
+    {"id": "kalkinma-projeleri", "group": "bolgeler", "title": "Bölgesel Kalkınma Projeleri", "description": "GAP, DAP, DOKAP, KOP, ZBK, Yeşilırmak: kapsadığı bir ili bul.", "mode": "topic", "regions": [], "questionCount": 6, "timePerQuestion": 14, "maxMistakes": 3, "set": "proje"}
+  ]
+}

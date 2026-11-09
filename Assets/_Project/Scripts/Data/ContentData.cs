@@ -44,6 +44,7 @@ namespace KPSSGeography.Data
     public class TopicDatabase
     {
         public const string ResourcePath = "Data/topics";
+        public const string ExtraResourcePath = "Data/topics_ek";
 
         public TopicSet[] topics;
         public AttributeDef[] attributes;
@@ -64,7 +65,20 @@ namespace KPSSGeography.Data
                 Debug.LogWarning($"[KPSS] Konu verisi bulunamadı: Resources/{ResourcePath}.json");
                 return new TopicDatabase { topics = Array.Empty<TopicSet>(), attributes = Array.Empty<AttributeDef>() };
             }
-            return JsonUtility.FromJson<TopicDatabase>(asset.text);
+            var db = JsonUtility.FromJson<TopicDatabase>(asset.text);
+            // Ek konu setleri (Tools/content/build_topics_ek.py): ayrı dosyada tutulur ki topics.json ile çakışmasın
+            var extraAsset = Resources.Load<TextAsset>(ExtraResourcePath);
+            if (extraAsset != null)
+            {
+                var extra = JsonUtility.FromJson<TopicDatabase>(extraAsset.text);
+                if (extra?.topics != null && extra.topics.Length > 0)
+                {
+                    var all = new List<TopicSet>(db.topics ?? Array.Empty<TopicSet>());
+                    all.AddRange(extra.topics);
+                    db.topics = all.ToArray();
+                }
+            }
+            return db;
         }
     }
 
