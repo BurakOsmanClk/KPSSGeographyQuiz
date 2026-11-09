@@ -1,0 +1,1176 @@
+{
+ "topics": [
+  {
+   "id": "en-dogu",
+   "set": "konum",
+   "title": "En Doğudaki İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    76
+   ],
+   "info": "Türkiye'nin en doğu noktası Iğdır'ın Aralık ilçesindeki Dilucu (44° 48' D). Yerel saat en ileri buradadır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "en-bati",
+   "set": "konum",
+   "title": "En Batıdaki İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    17
+   ],
+   "info": "En batı noktası Gökçeada'daki Avlaka Burnu (25° 40' D); karadaki en batı nokta Baba Burnu. İkisi de Çanakkale'dedir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "en-kuzey",
+   "set": "konum",
+   "title": "En Kuzeydeki İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    57
+   ],
+   "info": "En kuzey noktası Sinop'taki İnceburun (42° 06' K). Kuzey Kutbu'na en yakın il Sinop'tur.",
+   "source": "KPSS"
+  },
+  {
+   "id": "en-guney",
+   "set": "konum",
+   "title": "En Güneydeki İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    31
+   ],
+   "info": "En güney noktası Hatay Yayladağı'ndaki Beysun köyü (35° 49' K). Ekvator'a en yakın il Hatay'dır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "gunes-ilk",
+   "set": "konum",
+   "title": "Güneşin İlk Doğduğu İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    76
+   ],
+   "info": "Dünya batıdan doğuya döndüğü için güneş Türkiye'de ilk olarak en doğudaki Iğdır'da doğar.",
+   "source": "KPSS"
+  },
+  {
+   "id": "gunes-son",
+   "set": "konum",
+   "title": "Güneşin En Son Battığı İl",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    17
+   ],
+   "info": "Güneş en son en batıdaki Çanakkale'de batar. Doğu ile batı arasında 19 boylam × 4 dk = 76 dakika yerel saat farkı vardır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "golge-uzun",
+   "set": "konum",
+   "title": "Öğle Gölgesi En Uzun",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    57
+   ],
+   "info": "Kuzeye gidildikçe güneş ışınlarının geliş açısı küçülür; aynı anda öğle vakti cisimlerin gölgesi en uzun Sinop'ta olur.",
+   "source": "KPSS"
+  },
+  {
+   "id": "golge-kisa",
+   "set": "konum",
+   "title": "Öğle Gölgesi En Kısa",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    31
+   ],
+   "info": "En güneydeki Hatay'da güneş ışınları en büyük açıyla gelir; öğle gölgesi en kısadır. Türkiye'de ışınlar hiçbir zaman dik gelmez.",
+   "source": "KPSS"
+  },
+  {
+   "id": "gunduz-uzun",
+   "set": "konum",
+   "title": "21 Haziran'da Gündüzü En Uzun",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    57
+   ],
+   "info": "Kuzey Yarım Küre'de yaz gün dönümünde (21 Haziran) kuzeye gidildikçe gündüz uzar; en uzun gündüz Sinop'ta yaşanır. 21 Aralık'ta ise en kısa gündüz Sinop'tadır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "yagis-cok",
+   "set": "iklim2",
+   "title": "Yıllık Yağış En Fazla",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    53,
+    8,
+    61,
+    28
+   ],
+   "info": "Nemli kuzey rüzgârları Doğu Karadeniz Dağları'na çarpıp yükselir (orografik yağış). Rize yılda 2.000 mm'yi aşan yağışla ilk sıradadır; yağış her mevsime dağılmıştır.",
+   "source": "MGM / KPSS"
+  },
+  {
+   "id": "yagis-az",
+   "set": "iklim2",
+   "title": "Yıllık Yağış En Az",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    76,
+    42,
+    68,
+    70
+   ],
+   "info": "Denizden uzak, çevresi dağlarla kapalı çukur alanlar az yağış alır. Iğdır ile Tuz Gölü–Konya havzası Türkiye'nin en kurak yerleridir (yaklaşık 250–350 mm).",
+   "source": "MGM / KPSS"
+  },
+  {
+   "id": "kis-ilik",
+   "set": "iklim2",
+   "title": "Kışları En Ilık",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    7,
+    33,
+    31,
+    1
+   ],
+   "info": "Enlemin düşük olması ve Toros Dağları'nın soğuk kuzey rüzgârlarını engellemesi nedeniyle kışlar en ılık Akdeniz kıyılarında geçer; Alanya–Anamur arasında muz yetişir.",
+   "source": "MGM / KPSS"
+  },
+  {
+   "id": "kis-soguk",
+   "set": "iklim2",
+   "title": "Kışları En Soğuk",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    25,
+    36,
+    75,
+    4
+   ],
+   "info": "Yükseltinin fazla ve denizden uzak olması nedeniyle Erzurum–Kars yöresinde kışlar çok sert geçer; en düşük sıcaklıklar burada ölçülür, kar örtüsü yerde en uzun süre kalır.",
+   "source": "MGM / KPSS"
+  },
+  {
+   "id": "yaz-sicak",
+   "set": "iklim2",
+   "title": "Yazları En Sıcak",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    63,
+    21,
+    72,
+    73,
+    56
+   ],
+   "info": "Güneydoğu Anadolu'ya güneyden sıcak ve kuru hava gelir; denizden uzaklık ve alçak çanak yapısı nedeniyle Türkiye'nin en yüksek yaz sıcaklıkları burada (Cizre, Silopi, Diyarbakır) ölçülür.",
+   "source": "MGM / KPSS"
+  },
+  {
+   "id": "peri-bacasi",
+   "set": "dis",
+   "title": "Peri Bacaları",
+   "question": "GÖRÜLDÜĞÜ BİR İL SEÇ",
+   "plates": [
+    50,
+    38,
+    68
+   ],
+   "info": "Volkanik tüflerin akarsu ve sel suları tarafından aşındırılmasıyla oluşur; üstteki sert kayaç başlık gibi kalır. Kapadokya (Göreme, Ürgüp) en bilinen örnektir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "traverten",
+   "set": "dis",
+   "title": "Traverten",
+   "question": "GÖRÜLDÜĞÜ BİR İL SEÇ",
+   "plates": [
+    20
+   ],
+   "info": "Kalsiyum bikarbonatlı sıcak suların yüzeye çıkıp çökeltmesiyle oluşan basamaklı karstik birikim şekli; en ünlü örnek Pamukkale'dir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "obruk",
+   "set": "dis",
+   "title": "Obruk",
+   "question": "GÖRÜLDÜĞÜ BİR İL SEÇ",
+   "plates": [
+    42,
+    68
+   ],
+   "info": "Kalker ve jipsli arazide yer altındaki boşlukların tavanının çökmesiyle oluşan derin, dik kenarlı çukurlar; Konya Karapınar ve çevresinde yaygındır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "magara",
+   "set": "dis",
+   "title": "Karstik Mağaralar",
+   "question": "BULUNDUĞU BİR İL SEÇ",
+   "plates": [
+    7,
+    33,
+    67,
+    32
+   ],
+   "info": "Kalkerin yer altı sularıyla erimesiyle oluşur; içinde sarkıt, dikit ve sütunlar bulunur (Damlataş, Karain, Cennet–Cehennem, Gökgöl, Zindan).",
+   "source": "KPSS"
+  },
+  {
+   "id": "kumul",
+   "set": "dis",
+   "title": "Kumul (Rüzgâr Birikimi)",
+   "question": "GÖRÜLDÜĞÜ BİR İL SEÇ",
+   "plates": [
+    42
+   ],
+   "info": "Kurak ve bitki örtüsü zayıf alanlarda rüzgârın taşıdığı kumların birikmesiyle oluşur; Karapınar'da kumulları durdurmak için ağaçlandırma yapılmıştır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "buzul",
+   "set": "dis",
+   "title": "Buzul Şekilleri (Sirk Gölü)",
+   "question": "GÖRÜLDÜĞÜ BİR İL SEÇ",
+   "plates": [
+    53,
+    30,
+    4,
+    51
+   ],
+   "info": "Yüksek dağlarda buzulların aşındırdığı çanaklarda sirk gölleri oluşur; Kaçkar, Cilo–Sat, Ağrı ve Aladağlar'da görülür. Ağrı Dağı'nda güncel buzul vardır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "kanyon",
+   "set": "dis",
+   "title": "Kanyon Vadi",
+   "question": "BULUNDUĞU BİR İL SEÇ",
+   "plates": [
+    7,
+    64,
+    68,
+    48,
+    37
+   ],
+   "info": "Kalker gibi dirençli ama çatlaklı kayaçlarda akarsuyun derine aşındırmasıyla oluşan dik yamaçlı vadi: Köprülü (Antalya), Ulubey (Uşak), Ihlara (Aksaray), Saklıkent (Muğla), Valla (Kastamonu).",
+   "source": "KPSS"
+  },
+  {
+   "id": "delta",
+   "set": "dis",
+   "title": "Delta Ovası",
+   "question": "BULUNDUĞU BİR İL SEÇ",
+   "plates": [
+    55,
+    1,
+    33,
+    9,
+    35
+   ],
+   "info": "Akarsuyun taşıdığı alüvyonları denize döküldüğü yerde biriktirmesiyle oluşur: Bafra ve Çarşamba (Samsun), Çukurova (Adana), Silifke (Mersin), Balat (Aydın), Menemen (İzmir).",
+   "source": "KPSS"
+  },
+  {
+   "id": "polye",
+   "set": "dis",
+   "title": "Polye (Karstik Ova)",
+   "question": "GÖRÜLDÜĞÜ BİR İL SEÇ",
+   "plates": [
+    7,
+    48,
+    15,
+    20
+   ],
+   "info": "Kalkerli arazide erimeyle oluşan geniş, düz tabanlı çukurlar; tarım yapılır: Elmalı ve Korkuteli (Antalya), Muğla, Tefenni ve Kestel (Burdur), Acıpayam (Denizli).",
+   "source": "KPSS"
+  },
+  {
+   "id": "deprem-az",
+   "set": "afet",
+   "title": "Deprem Riski En Az",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    70,
+    42,
+    39,
+    22
+   ],
+   "info": "Fay hatlarından uzak, eski ve sert kütleler az risklidir: Konya–Karaman çevresi, Taşeli Platosu, Ergene Havzası ve Mardin Eşiği.",
+   "source": "KPSS / AFAD"
+  },
+  {
+   "id": "heyelan",
+   "set": "afet",
+   "title": "Heyelan En Sık",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    53,
+    61,
+    8,
+    28,
+    52
+   ],
+   "info": "Heyelan en çok eğimin fazla, yağışın bol ve arazinin killi olduğu Doğu Karadeniz'de, özellikle ilkbaharda kar erimeleriyle görülür.",
+   "source": "KPSS / AFAD"
+  },
+  {
+   "id": "cig",
+   "set": "afet",
+   "title": "Çığ En Sık",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    30,
+    13,
+    62,
+    12,
+    53
+   ],
+   "info": "Çığ, eğimli ve kar yağışının fazla olduğu dağlık alanlarda görülür: Doğu Anadolu'nun yüksek kesimleri ve Doğu Karadeniz dağları.",
+   "source": "KPSS / AFAD"
+  },
+  {
+   "id": "ruzgar-erozyonu",
+   "set": "afet",
+   "title": "Rüzgâr Erozyonu",
+   "question": "EN ŞİDDETLİ OLDUĞU BİR İL SEÇ",
+   "plates": [
+    42,
+    76
+   ],
+   "info": "Kurak ve bitki örtüsü zayıf alanlarda rüzgâr toprağı süpürür: Karapınar (Konya) ve Aralık (Iğdır) en bilinen örneklerdir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "deprem-1939",
+   "set": "afet",
+   "title": "1939 Depremi",
+   "question": "MERKEZ ÜSSÜ OLAN İLİ SEÇ",
+   "plates": [
+    24
+   ],
+   "info": "27 Aralık 1939 Erzincan depremi (7,9), Kuzey Anadolu Fayı üzerindedir; Cumhuriyet tarihinin en büyük depremlerindendir.",
+   "source": "AFAD"
+  },
+  {
+   "id": "deprem-1999",
+   "set": "afet",
+   "title": "17 Ağustos 1999 Depremi",
+   "question": "MERKEZ ÜSSÜ OLAN İLİ SEÇ",
+   "plates": [
+    41
+   ],
+   "info": "17 Ağustos 1999 Gölcük (Marmara) depremi, Kuzey Anadolu Fayı'nın batı kesiminde meydana gelmiştir.",
+   "source": "AFAD"
+  },
+  {
+   "id": "deprem-duzce",
+   "set": "afet",
+   "title": "12 Kasım 1999 Depremi",
+   "question": "MERKEZ ÜSSÜ OLAN İLİ SEÇ",
+   "plates": [
+    81
+   ],
+   "info": "Gölcük depreminden üç ay sonra, yine Kuzey Anadolu Fayı üzerinde Düzce'de meydana gelmiştir.",
+   "source": "AFAD"
+  },
+  {
+   "id": "deprem-2011",
+   "set": "afet",
+   "title": "2011 Depremi",
+   "question": "MERKEZ ÜSSÜ OLAN İLİ SEÇ",
+   "plates": [
+    65
+   ],
+   "info": "23 Ekim 2011 Van depremi (7,2) Doğu Anadolu'da meydana gelmiştir.",
+   "source": "AFAD"
+  },
+  {
+   "id": "deprem-2023",
+   "set": "afet",
+   "title": "6 Şubat 2023 Depremleri",
+   "question": "MERKEZ ÜSSÜ OLAN İLİ SEÇ",
+   "plates": [
+    46
+   ],
+   "info": "Pazarcık ve Elbistan merkezli iki büyük deprem Doğu Anadolu Fayı kuşağında meydana gelmiş, 11 ili etkilemiştir.",
+   "source": "AFAD"
+  },
+  {
+   "id": "demir-celik",
+   "set": "sanayi",
+   "title": "Demir-Çelik Fabrikası",
+   "question": "BULUNDUĞU BİR İL SEÇ",
+   "plates": [
+    78,
+    67,
+    31
+   ],
+   "info": "Karabük (1939, ilk fabrika; taşkömürüne yakınlık), Ereğli–Zonguldak (taşkömürü ve liman), İskenderun–Hatay (liman).",
+   "source": "KPSS"
+  },
+  {
+   "id": "rafineri",
+   "set": "sanayi",
+   "title": "Petrol Rafinerisi",
+   "question": "BULUNDUĞU BİR İL SEÇ",
+   "plates": [
+    41,
+    35,
+    71,
+    72
+   ],
+   "info": "İzmit (Kocaeli), Aliağa (İzmir), Kırıkkale ve Batman rafinerileri. Batman hammaddeye, diğerleri pazara ve limana yakınlık nedeniyle kurulmuştur.",
+   "source": "KPSS"
+  },
+  {
+   "id": "otomotiv",
+   "set": "sanayi",
+   "title": "Otomotiv Sanayisi",
+   "question": "EN GELİŞMİŞ OLDUĞU BİR İL SEÇ",
+   "plates": [
+    16,
+    41,
+    54
+   ],
+   "info": "Otomotiv fabrikaları pazara, limanlara ve yan sanayiye yakın Doğu Marmara'da toplanmıştır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "aluminyum",
+   "set": "sanayi",
+   "title": "Alüminyum Tesisi",
+   "question": "BULUNDUĞU İLİ SEÇ",
+   "plates": [
+    42
+   ],
+   "info": "Seydişehir Alüminyum Tesisleri, boksit yataklarına (hammaddeye) yakınlık nedeniyle Konya'da kurulmuştur.",
+   "source": "KPSS"
+  },
+  {
+   "id": "cay",
+   "set": "sanayi",
+   "title": "Çay Fabrikaları",
+   "question": "YOĞUNLAŞTIĞI BİR İL SEÇ",
+   "plates": [
+    53,
+    61,
+    8,
+    28
+   ],
+   "info": "Çay yaprağı toplandıktan sonra kısa sürede işlenmelidir; fabrikalar hammaddenin yetiştiği Doğu Karadeniz'dedir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "pamuklu",
+   "set": "sanayi",
+   "title": "Pamuklu Dokuma",
+   "question": "GELİŞMİŞ OLDUĞU BİR İL SEÇ",
+   "plates": [
+    1,
+    20,
+    27,
+    46
+   ],
+   "info": "Pamuklu dokuma sanayisi pamuğun yetiştiği Çukurova, Ege ve Güneydoğu'da gelişmiştir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "gemi",
+   "set": "sanayi",
+   "title": "Gemi Yapımı (Tersane)",
+   "question": "GELİŞMİŞ OLDUĞU BİR İL SEÇ",
+   "plates": [
+    34,
+    77,
+    41
+   ],
+   "info": "Tersaneler Tuzla (İstanbul), Altınova (Yalova) ve İzmit Körfezi çevresinde toplanmıştır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "lokomotif",
+   "set": "sanayi",
+   "title": "Lokomotif ve Vagon",
+   "question": "ÜRETİLDİĞİ BİR İL SEÇ",
+   "plates": [
+    26,
+    54,
+    58
+   ],
+   "info": "Demir yolu araçları Eskişehir (lokomotif), Sakarya (yolcu vagonu) ve Sivas'ta (yük vagonu) üretilir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "liman",
+   "set": "ulasim",
+   "title": "Büyük Limanlar",
+   "question": "BULUNDUĞU BİR İL SEÇ",
+   "plates": [
+    34,
+    41,
+    35,
+    33,
+    55,
+    31
+   ],
+   "info": "Limanların gelişmesinde hinterlant (art bölge) belirleyicidir: Mersin Çukurova ve İç Anadolu'ya, İzmir Ege'ye, Samsun Karadeniz ve İç Anadolu'ya açılır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "boru-hatti",
+   "set": "ulasim",
+   "title": "Petrol Boru Hatlarının Ulaştığı Liman",
+   "question": "BULUNDUĞU İLİ SEÇ",
+   "plates": [
+    1
+   ],
+   "info": "Bakü–Tiflis–Ceyhan ve Kerkük–Yumurtalık ham petrol boru hatları Adana'da Akdeniz'e ulaşır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "marmaray",
+   "set": "ulasim",
+   "title": "Marmaray",
+   "question": "BULUNDUĞU İLİ SEÇ",
+   "plates": [
+    34
+   ],
+   "info": "Marmaray (2013), İstanbul Boğazı'nın altından geçen demir yolu tüp tüneliyle Avrupa ve Asya yakalarını bağlar.",
+   "source": "KPSS"
+  },
+  {
+   "id": "osmangazi",
+   "set": "ulasim",
+   "title": "Osmangazi Köprüsü",
+   "question": "BAĞLADIĞI BİR İL SEÇ",
+   "plates": [
+    41,
+    77
+   ],
+   "info": "İzmit Körfezi'ni Dilovası (Kocaeli) ile Altınova (Yalova) arasında geçer; İstanbul–İzmir yolunu kısaltır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "canakkale-koprusu",
+   "set": "ulasim",
+   "title": "1915 Çanakkale Köprüsü",
+   "question": "BULUNDUĞU İLİ SEÇ",
+   "plates": [
+    17
+   ],
+   "info": "Çanakkale Boğazı'nı Lapseki ile Gelibolu arasında geçen, dünyanın en uzun orta açıklıklı asma köprüsü (2022).",
+   "source": "KPSS"
+  },
+  {
+   "id": "yht",
+   "set": "ulasim",
+   "title": "İlk Yüksek Hızlı Tren Hattı",
+   "question": "UÇLARINDAKİ BİR İL SEÇ",
+   "plates": [
+    6,
+    26
+   ],
+   "info": "Türkiye'nin ilk yüksek hızlı tren hattı 2009'da Ankara–Eskişehir arasında açılmıştır.",
+   "source": "KPSS"
+  },
+  {
+   "id": "feribot",
+   "set": "ulasim",
+   "title": "Van Gölü Feribotu",
+   "question": "BAĞLADIĞI BİR İL SEÇ",
+   "plates": [
+    13,
+    65
+   ],
+   "info": "Demir yolu, Van Gölü'nü Tatvan (Bitlis) ile Van arasında feribotla geçer.",
+   "source": "KPSS"
+  },
+  {
+   "id": "gulek",
+   "set": "ulasim",
+   "title": "Gülek Boğazı",
+   "question": "BULUNDUĞU İLİ SEÇ",
+   "plates": [
+    33
+   ],
+   "info": "Toroslar üzerinde, İç Anadolu'yu Çukurova'ya bağlayan tarihî geçit (Tarsus, Mersin).",
+   "source": "KPSS"
+  },
+  {
+   "id": "belen",
+   "set": "ulasim",
+   "title": "Belen Geçidi",
+   "question": "BULUNDUĞU İLİ SEÇ",
+   "plates": [
+    31
+   ],
+   "info": "Nur (Amanos) Dağları üzerinde, İskenderun'u Antakya ve Güneydoğu'ya bağlar.",
+   "source": "KPSS"
+  },
+  {
+   "id": "zigana",
+   "set": "ulasim",
+   "title": "Zigana Geçidi",
+   "question": "BAĞLADIĞI BİR İL SEÇ",
+   "plates": [
+    61,
+    29
+   ],
+   "info": "Doğu Karadeniz Dağları üzerinde, Trabzon limanını Gümüşhane üzerinden Doğu Anadolu'ya bağlar.",
+   "source": "KPSS"
+  },
+  {
+   "id": "kop",
+   "set": "ulasim",
+   "title": "Kop Geçidi",
+   "question": "BAĞLADIĞI BİR İL SEÇ",
+   "plates": [
+    69,
+    25
+   ],
+   "info": "Bayburt ile Erzurum arasında; Trabzon–Erzurum–İran transit yolu üzerindedir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "cubuk",
+   "set": "ulasim",
+   "title": "Çubuk Boğazı",
+   "question": "BAĞLADIĞI BİR İL SEÇ",
+   "plates": [
+    7,
+    15
+   ],
+   "info": "Batı Toroslar üzerinde, Antalya'yı Göller Yöresi ve İç Anadolu'ya bağlar.",
+   "source": "KPSS"
+  },
+  {
+   "id": "sertavul",
+   "set": "ulasim",
+   "title": "Sertavul Geçidi",
+   "question": "BAĞLADIĞI BİR İL SEÇ",
+   "plates": [
+    70,
+    33
+   ],
+   "info": "Orta Toroslar (Taşeli) üzerinde, Karaman'ı Silifke ve Akdeniz kıyısına bağlar.",
+   "source": "KPSS"
+  },
+  {
+   "id": "goc-alan",
+   "set": "yerlesme",
+   "title": "Göç Alan İller",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    34,
+    41,
+    16,
+    35,
+    6,
+    7,
+    59
+   ],
+   "info": "Sanayi, ticaret, turizm ve hizmetlerin geliştiği iller iş olanakları nedeniyle göç alır.",
+   "source": "TÜİK / KPSS"
+  },
+  {
+   "id": "goc-veren",
+   "set": "yerlesme",
+   "title": "Göç Veren İller",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    4,
+    49,
+    36,
+    75,
+    25
+   ],
+   "info": "İklimin sert, tarım alanının dar ve iş olanaklarının az olduğu Doğu Anadolu illeri göç verir.",
+   "source": "TÜİK / KPSS"
+  },
+  {
+   "id": "mevsimlik-tarim",
+   "set": "yerlesme",
+   "title": "Mevsimlik Tarım İşçisi Göçü",
+   "question": "ALAN BİR İL SEÇ",
+   "plates": [
+    1,
+    52,
+    28
+   ],
+   "info": "Hasat döneminde Çukurova'ya (pamuk) ve Doğu Karadeniz'e (fındık) mevsimlik işçi göçü olur.",
+   "source": "KPSS"
+  },
+  {
+   "id": "turizm-goc",
+   "set": "yerlesme",
+   "title": "Yazın Turizm Nedeniyle Nüfusu Artan",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    7,
+    48,
+    9
+   ],
+   "info": "Akdeniz ve Ege kıyılarında yaz turizmi mevsimlik iş göçüne ve nüfus artışına yol açar.",
+   "source": "KPSS"
+  },
+  {
+   "id": "maden-kenti",
+   "set": "yerlesme",
+   "title": "Madencilikle Gelişen Kent",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    67,
+    72
+   ],
+   "info": "Zonguldak taşkömürü, Batman petrol sayesinde gelişmiş maden kentleridir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "idari",
+   "set": "yerlesme",
+   "title": "İdari Fonksiyonuyla Gelişen Kent",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    6
+   ],
+   "info": "Ankara, başkent olduktan sonra idari fonksiyonuyla hızla büyümüştür.",
+   "source": "KPSS"
+  },
+  {
+   "id": "daginik",
+   "set": "yerlesme",
+   "title": "Dağınık Yerleşmenin Yaygın Olduğu",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    53,
+    61,
+    8,
+    28
+   ],
+   "info": "Doğu Karadeniz'de su kaynaklarının bol, arazinin engebeli ve tarım alanlarının parçalı olması dağınık yerleşmeye yol açar.",
+   "source": "KPSS"
+  },
+  {
+   "id": "kom",
+   "set": "yerlesme",
+   "title": "Kom Yerleşmesinin Görüldüğü",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    25,
+    36,
+    4
+   ],
+   "info": "Kom, Doğu Anadolu'da hayvancılık amacıyla kullanılan, ahır ve ağıllardan oluşan geçici yerleşmedir.",
+   "source": "KPSS"
+  },
+  {
+   "id": "kerpic",
+   "set": "yerlesme",
+   "title": "Kerpiç Meskenlerin Yaygın Olduğu",
+   "question": "BİR İL SEÇ",
+   "plates": [
+    42,
+    68,
+    40,
+    70
+   ],
+   "info": "Mesken malzemesini doğal çevre belirler: kurak İç Anadolu'da kerpiç, ormanlık Karadeniz'de ahşap, Akdeniz ve volkanik alanlarda taş.",
+   "source": "KPSS"
+  },
+  {
+   "id": "gap",
+   "set": "proje",
+   "title": "GAP (Güneydoğu Anadolu Projesi)",
+   "question": "KAPSADIĞI BİR İL SEÇ",
+   "plates": [
+    2,
+    72,
+    21,
+    27,
+    79,
+    47,
+    56,
+    63,
+    73
+   ],
+   "info": "Türkiye'nin en büyük bölgesel kalkınma projesi; Fırat ve Dicle üzerindeki barajlarla sulama ve enerji üretimini amaçlar. 9 ili kapsar.",
+   "source": "GAP İdaresi"
+  },
+  {
+   "id": "dap",
+   "set": "proje",
+   "title": "DAP (Doğu Anadolu Projesi)",
+   "question": "KAPSADIĞI BİR İL SEÇ",
+   "plates": [
+    4,
+    75,
+    12,
+    13,
+    23,
+    24,
+    25,
+    30,
+    76,
+    36,
+    44,
+    49,
+    62,
+    65
+   ],
+   "info": "Doğu Anadolu'da hayvancılık, tarım ve sanayiyi geliştirmeyi, göçü azaltmayı amaçlar.",
+   "source": "DAP İdaresi"
+  },
+  {
+   "id": "dokap",
+   "set": "proje",
+   "title": "DOKAP (Doğu Karadeniz Projesi)",
+   "question": "KAPSADIĞI BİR İL SEÇ",
+   "plates": [
+    8,
+    69,
+    28,
+    29,
+    52,
+    53,
+    55,
+    60,
+    61
+   ],
+   "info": "Doğu Karadeniz'de ulaşım, turizm (yayla) ve tarımı geliştirmeyi, göçü azaltmayı amaçlar.",
+   "source": "DOKAP İdaresi"
+  },
+  {
+   "id": "kop",
+   "set": "proje",
+   "title": "KOP (Konya Ovası Projesi)",
+   "question": "KAPSADIĞI BİR İL SEÇ",
+   "plates": [
+    42,
+    70,
+    68,
+    51,
+    50,
+    66,
+    71,
+    40
+   ],
+   "info": "Kurak Konya Havzası'nda sulamayı geliştirmeyi amaçlar; Mavi Tünel ile Göksu'dan Konya Ovası'na su aktarılır.",
+   "source": "KOP İdaresi"
+  },
+  {
+   "id": "zbk",
+   "set": "proje",
+   "title": "ZBK (Zonguldak–Bartın–Karabük) Projesi",
+   "question": "KAPSADIĞI BİR İL SEÇ",
+   "plates": [
+    67,
+    74,
+    78
+   ],
+   "info": "Taşkömürü ve demir-çeliğe bağımlı bölgede ekonomiyi çeşitlendirmeyi amaçlar.",
+   "source": "KPSS"
+  },
+  {
+   "id": "yesilirmak",
+   "set": "proje",
+   "title": "Yeşilırmak Havza Gelişim Projesi",
+   "question": "KAPSADIĞI BİR İL SEÇ",
+   "plates": [
+    5,
+    19,
+    55,
+    60
+   ],
+   "info": "Yeşilırmak havzasında taşkın, erozyon ve kirliliği önleyerek doğal kaynakların dengeli kullanımını amaçlar.",
+   "source": "KPSS"
+  },
+  {
+   "id": "enlem-37",
+   "set": "enlem",
+   "title": "37° Kuzey Enlemi",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    1,
+    7,
+    15,
+    20,
+    27,
+    30,
+    31,
+    33,
+    42,
+    47,
+    48,
+    63,
+    70,
+    79,
+    80
+   ],
+   "line": [
+    25.5,
+    37,
+    45.0,
+    37
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "37° K paraleli Türkiye'yi batıdan doğuya keser. Türkiye 36°–42° K enlemleri arasındadır; 1 enlem yaklaşık 111 km olduğundan kuzey–güney uzunluğu yaklaşık 660 km'dir."
+  },
+  {
+   "id": "enlem-38",
+   "set": "enlem",
+   "title": "38° Kuzey Enlemi",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    1,
+    2,
+    3,
+    9,
+    13,
+    20,
+    21,
+    32,
+    35,
+    38,
+    42,
+    44,
+    46,
+    51,
+    56,
+    63,
+    65,
+    68,
+    72
+   ],
+   "line": [
+    25.5,
+    38,
+    45.0,
+    38
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "38° K paraleli Türkiye'yi batıdan doğuya keser. Türkiye 36°–42° K enlemleri arasındadır; 1 enlem yaklaşık 111 km olduğundan kuzey–güney uzunluğu yaklaşık 660 km'dir."
+  },
+  {
+   "id": "enlem-39",
+   "set": "enlem",
+   "title": "39° Kuzey Enlemi",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    3,
+    6,
+    12,
+    13,
+    23,
+    35,
+    38,
+    40,
+    42,
+    43,
+    44,
+    45,
+    49,
+    50,
+    58,
+    62,
+    65,
+    68
+   ],
+   "line": [
+    25.5,
+    39,
+    45.0,
+    39
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "39° K paraleli Türkiye'yi batıdan doğuya keser. Türkiye 36°–42° K enlemleri arasındadır; 1 enlem yaklaşık 111 km olduğundan kuzey–güney uzunluğu yaklaşık 660 km'dir."
+  },
+  {
+   "id": "enlem-40",
+   "set": "enlem",
+   "title": "40° Kuzey Enlemi",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    6,
+    10,
+    11,
+    16,
+    17,
+    19,
+    24,
+    25,
+    26,
+    29,
+    36,
+    58,
+    60,
+    66,
+    71,
+    76
+   ],
+   "line": [
+    25.5,
+    40,
+    45.0,
+    40
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "40° K paraleli Türkiye'yi batıdan doğuya keser. Türkiye 36°–42° K enlemleri arasındadır; 1 enlem yaklaşık 111 km olduğundan kuzey–güney uzunluğu yaklaşık 660 km'dir."
+  },
+  {
+   "id": "enlem-41",
+   "set": "enlem",
+   "title": "41° Kuzey Enlemi",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    5,
+    8,
+    14,
+    18,
+    19,
+    22,
+    28,
+    34,
+    36,
+    37,
+    41,
+    52,
+    53,
+    54,
+    55,
+    59,
+    61,
+    75,
+    78,
+    81
+   ],
+   "line": [
+    25.5,
+    41,
+    45.0,
+    41
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "41° K paraleli Türkiye'yi batıdan doğuya keser. Türkiye 36°–42° K enlemleri arasındadır; 1 enlem yaklaşık 111 km olduğundan kuzey–güney uzunluğu yaklaşık 660 km'dir."
+  },
+  {
+   "id": "boylam-30",
+   "set": "enlem",
+   "title": "30° Doğu Boylamı",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    3,
+    7,
+    11,
+    15,
+    20,
+    41,
+    43,
+    54
+   ],
+   "line": [
+    30,
+    35.7,
+    30,
+    42.2
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "30° D meridyeni Türkiye'yi kuzeyden güneye keser. Türkiye 26°–45° D boylamları arasındadır; her boylam 4 dakikalık yerel saat farkı demektir."
+  },
+  {
+   "id": "boylam-32",
+   "set": "enlem",
+   "title": "32° Doğu Boylamı",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    6,
+    7,
+    14,
+    26,
+    42,
+    67
+   ],
+   "line": [
+    32,
+    35.7,
+    32,
+    42.2
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "32° D meridyeni Türkiye'yi kuzeyden güneye keser. Türkiye 26°–45° D boylamları arasındadır; her boylam 4 dakikalık yerel saat farkı demektir."
+  },
+  {
+   "id": "boylam-36",
+   "set": "enlem",
+   "title": "36° Doğu Boylamı",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    1,
+    5,
+    31,
+    38,
+    55,
+    58,
+    60,
+    66,
+    80
+   ],
+   "line": [
+    36,
+    35.7,
+    36,
+    42.2
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "36° D meridyeni Türkiye'yi kuzeyden güneye keser. Türkiye 26°–45° D boylamları arasındadır; her boylam 4 dakikalık yerel saat farkı demektir."
+  },
+  {
+   "id": "boylam-40",
+   "set": "enlem",
+   "title": "40° Doğu Boylamı",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    21,
+    23,
+    24,
+    61,
+    62,
+    63,
+    69
+   ],
+   "line": [
+    40,
+    35.7,
+    40,
+    42.2
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "40° D meridyeni Türkiye'yi kuzeyden güneye keser. Türkiye 26°–45° D boylamları arasındadır; her boylam 4 dakikalık yerel saat farkı demektir."
+  },
+  {
+   "id": "boylam-44",
+   "set": "enlem",
+   "title": "44° Doğu Boylamı",
+   "question": "GEÇTİĞİ BİR İL SEÇ",
+   "plates": [
+    4,
+    30,
+    65,
+    76
+   ],
+   "line": [
+    44,
+    35.7,
+    44,
+    42.2
+   ],
+   "source": "Natural Earth il sınırları",
+   "info": "44° D meridyeni Türkiye'yi kuzeyden güneye keser. Türkiye 26°–45° D boylamları arasındadır; her boylam 4 dakikalık yerel saat farkı demektir. Türkiye'nin ortak saati (UTC+3) 45° D boylamına göredir."
+  }
+ ],
+ "attributes": []
+}

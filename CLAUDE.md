@@ -69,3 +69,7 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - Bölge, iklim/bitki örtüsü ve "hepsini bul" modlarında iller nötr renge çevrilir (`TurkeyMap.SetNeutral`): bölge renkleri cevabı ele vermemeli.
 - İlerleme (yıldız, rekor, kilitler) `Meta/ProgressStore.cs` → PlayerPrefs. Yıldız: tamamlarsa 3 − hata (en az 1). Bir bölüm, önceki oynanabilir bölümden ≥1 yıldızla açılır. **Şu an geliştirme için tüm bölümler açık** (`GameBootstrap.UnlockAllLevelsForTesting = true`); yayından önce false yapılacak.
 - Harita renkleri bölgelere göre (`Map/MapPalette.cs`); doğru bilinen il bölge renginin doygun haline boyanır.
+
+## Ek içerik dosyaları (çakışmasız ekleme)
+- `Resources/Data/levels_ek.json` ve `Resources/Data/topics_ek.json` ana dosyalarla (`levels.json`, `topics.json`) çalışma anında birleştirilir (`LevelCatalog.MergeExtra`, `TopicDatabase.Load`). Amaç: iki geliştirici aynı anda içerik eklerken birleştirme çakışması olmasın. Yeni sekme = ek dosyada `groups` + `after`; bölümler kendi sekmesinin sonuna eklenir.
+- Ek konu setleri `python Tools/content/build_topics_ek.py` ile üretilir: `konum` (uç noktalar, güneş), `enlem` (paralel/meridyenin geçtiği iller, il sınırlarından hesaplanır), `iklim2` (sıcaklık–yağış), `dis` (dış kuvvet şekilleri), `afet` (doğal afetler), `sanayi`, `ulasim`, `yerlesme` (göç ve yerleşme), `proje` (GAP, DAP, DOKAP, KOP, ZBK, Yeşilırmak). Hepsi `topic` modunda il tıklamalı bölümlerdir.

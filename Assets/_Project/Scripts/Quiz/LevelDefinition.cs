@@ -109,6 +109,8 @@ namespace KPSSGeography.Quiz
     {
         public string id;
         public string title;
+        /// <summary>Yalnızca ek katalogda: bu sekme hangi sekmenin arkasına eklenecek (boşsa en sona, KPSS Soruları'ndan önce).</summary>
+        public string after;
     }
 
     [Serializable]
@@ -121,6 +123,45 @@ namespace KPSSGeography.Quiz
 
         public IReadOnlyList<LevelDefinition> Levels => levels;
 
+        /// <summary>
+        /// Ek katalog (Resources/Data/levels_ek.json): ana dosyaya dokunmadan bölüm eklemek için (birleştirme çakışması olmasın).
+        /// Yeni sekmeler <see cref="LevelGroup.after"/> sekmesinin arkasına, bölümler kendi sekmesinin son bölümünden sonra eklenir.
+        /// </summary>
+        public const string ExtraResourcePath = "Data/levels_ek";
+
+        void MergeExtra(TextAsset asset)
+        {
+            if (asset == null) return;
+            var extra = JsonUtility.FromJson<LevelCatalog>(asset.text);
+            if (extra == null) return;
+
+            var groupList = new List<LevelGroup>(groups);
+            foreach (var g in extra.groups ?? Array.Empty<LevelGroup>())
+            {
+                if (groupList.Exists(x => x.id == g.id)) continue;
+                int at = groupList.FindIndex(x => x.id == g.after);
+                if (at < 0) at = Mathf.Max(0, groupList.Count - 2); // sondaki KPSS Soruları sekmesinden önce
+                groupList.Insert(at + 1, g);
+            }
+            groups = groupList.ToArray();
+
+            var levelList = new List<LevelDefinition>(levels);
+            foreach (var l in extra.levels ?? Array.Empty<LevelDefinition>())
+            {
+                if (levelList.Exists(x => x.id == l.id)) continue;
+                int last = levelList.FindLastIndex(x => x.group == l.group);
+                if (last < 0)
+                {
+                    // Sekmenin ilk bölümü: sekme sırasına göre önceki sekmelerin son bölümünden sonra
+                    int gi = Array.FindIndex(groups, x => x.id == l.group);
+                    for (int k = gi - 1; k >= 0 && last < 0; k--)
+                        last = levelList.FindLastIndex(x => x.group == groups[k].id);
+                }
+                levelList.Insert(last + 1, l);
+            }
+            levels = levelList.ToArray();
+        }
+
         public static LevelCatalog Load()
         {
             var asset = Resources.Load<TextAsset>(ResourcePath);
@@ -132,6 +173,7 @@ namespace KPSSGeography.Quiz
             var catalog = JsonUtility.FromJson<LevelCatalog>(asset.text);
             if (catalog.groups == null || catalog.groups.Length == 0)
                 catalog.groups = new[] { new LevelGroup { id = "", title = "BÖLÜMLER" } };
+            catalog.MergeExtra(Resources.Load<TextAsset>(ExtraResourcePath));
             for (int i = 0; i < catalog.levels.Length; i++) catalog.levels[i].index = i;
             return catalog;
         }
