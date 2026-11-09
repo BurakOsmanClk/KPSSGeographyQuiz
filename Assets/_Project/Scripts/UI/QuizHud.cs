@@ -725,6 +725,7 @@ namespace KPSSGeography.UI
 
         void OnGameStarted()
         {
+            if (game.Mode == QuizMode.Boss) return; // boss savaşının kendi ekranı var (BossScreen)
             ExitReview(false);
             Labels?.SetProvinceLabels(ProvinceNamesAllowed());
             Labels?.SetCountryLabels(!game.HidesCountryNames);
@@ -756,6 +757,7 @@ namespace KPSSGeography.UI
 
         void OnCountdown(int n)
         {
+            if (game.Mode == QuizMode.Boss) return; // boss savaşının kendi ekranı var (BossScreen)
             countdownText.gameObject.SetActive(true);
             countdownText.text = n > 0 ? n.ToString() : "BAŞLA!";
             countdownText.fontSize = n > 0 ? 200 : 150;
@@ -771,6 +773,7 @@ namespace KPSSGeography.UI
 
         void OnQuestion(QuestionInfo info)
         {
+            if (game.Mode == QuizMode.Boss) return; // boss savaşının kendi ekranı var (BossScreen)
             var q = info.Question;
             currentQuestion = q;
             HideNameTag(false);
@@ -810,6 +813,7 @@ namespace KPSSGeography.UI
 
         void OnAnswer(AnswerResult r)
         {
+            if (game.Mode == QuizMode.Boss) return; // boss savaşının kendi ekranı var (BossScreen)
             var q = r.Question;
 
             if (q.Type == AnswerType.Choice)
@@ -895,6 +899,7 @@ namespace KPSSGeography.UI
 
         void OnGameEnded(GameResult res)
         {
+            if (game.Mode == QuizMode.Boss) return; // boss savaşının kendi ekranı var (BossScreen)
             HideNameTag(false);
             Labels?.ClearMarkers();
             ShowBody(null);
@@ -941,6 +946,7 @@ namespace KPSSGeography.UI
 
         void OnContinueOffered()
         {
+            if (game.Mode == QuizMode.Boss) return; // boss savaşının kendi ekranı var (BossScreen)
             HideNameTag(false);
             continueScreen.gameObject.SetActive(true);
             continueScreen.SetAsLastSibling();
@@ -981,6 +987,7 @@ namespace KPSSGeography.UI
 
         void OnContinueGranted()
         {
+            if (game.Mode == QuizMode.Boss) return; // boss savaşının kendi ekranı var (BossScreen)
             if (heartsShown >= hearts.Length) return;
             var h = hearts[heartsShown];
             heartsShown++;

@@ -15,6 +15,7 @@ namespace KPSSGeography.UI
 
         public event Action PlayRequested;
         public event Action StudyRequested;
+        public event Action BossRequested;
         public event Action ProgressReset;
 
         ProgressStore progress;
@@ -82,18 +83,24 @@ namespace KPSSGeography.UI
             UIFactory.Label("Subtitle", logo, "Türkiye haritasıyla öğren, oynayarak hatırla", 34, Theme.Sky, TextAnchor.MiddleCenter, FontStyle.Bold, true)
                 .rectTransform.Place(new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0, -288), new Vector2(1200, 46));
 
-            // --- Birincil eylemler: OYNA ve yanında EĞİTİM ---
-            playRect = UIFactory.Rect("Primary", Root).Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -110), new Vector2(900, 124));
+            // --- Birincil eylemler: OYNA, EĞİTİM ve BOSS ---
+            playRect = UIFactory.Rect("Primary", Root).Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -110), new Vector2(1140, 124));
             playGroup = playRect.gameObject.AddComponent<CanvasGroup>();
-            var play = UIFactory.Button("Play", playRect, "OYNA", Theme.Amber, new Vector2(430, 124), OnPlay, Theme.Ink, 58);
-            play.GetComponent<RectTransform>().Place(new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), Vector2.zero, new Vector2(430, 124));
+            var play = UIFactory.Button("Play", playRect, "OYNA", Theme.Amber, new Vector2(360, 124), OnPlay, Theme.Ink, 56);
+            play.GetComponent<RectTransform>().Place(new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), Vector2.zero, new Vector2(360, 124));
             play.gameObject.AddComponent<PulseScale>();
-            var study = UIFactory.Button("Study", playRect, "EĞİTİM", Theme.Teal, new Vector2(430, 124), () =>
+            var study = UIFactory.Button("Study", playRect, "EĞİTİM", Theme.Teal, new Vector2(360, 124), () =>
             {
                 sfx.Play(Sfx.Click);
                 StudyRequested?.Invoke();
+            }, Color.white, 50);
+            study.GetComponent<RectTransform>().Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(360, 124));
+            var boss = UIFactory.Button("Boss", playRect, "BOSS", Theme.Hex(0xD62828), new Vector2(360, 124), () =>
+            {
+                sfx.Play(Sfx.Click);
+                BossRequested?.Invoke();
             }, Color.white, 52);
-            study.GetComponent<RectTransform>().Place(new Vector2(1f, 0.5f), new Vector2(1f, 0.5f), Vector2.zero, new Vector2(430, 124));
+            boss.GetComponent<RectTransform>().Place(new Vector2(1f, 0.5f), new Vector2(1f, 0.5f), Vector2.zero, new Vector2(360, 124));
 
             // --- İkincil eylemler ---
             secondary = UIFactory.Rect("Secondary", Root).Place(new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -250), new Vector2(660, 84));

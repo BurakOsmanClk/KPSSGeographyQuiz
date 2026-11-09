@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using KPSSGeography.Core;
+using KPSSGeography.Data;
 using KPSSGeography.Map;
 using KPSSGeography.Meta;
 using UnityEngine;
@@ -24,6 +25,8 @@ namespace KPSSGeography.Quiz
         static readonly Rect NumberedViewport = new Rect(0.03f, 0.17f, 0.94f, 0.58f);
         /// <summary>Öncüllü (maddeli) sorular: solda soru kâğıdı, harita sağda.</summary>
         static readonly Rect BodyViewport = new Rect(0.36f, 0.17f, 0.62f, 0.58f);
+        /// <summary>Boss savaşı: üst yarıda boss ve diyalog kutusu, harita altta.</summary>
+        static readonly Rect BossViewport = new Rect(0.04f, 0.07f, 0.92f, 0.4f);
         static readonly Rect BodyGridViewport = new Rect(0.36f, 0.3f, 0.62f, 0.44f);
 
         public event Action GameStarted;
@@ -54,6 +57,7 @@ namespace KPSSGeography.Quiz
         readonly HashSet<IMapTarget> solved = new HashSet<IMapTarget>();
         Coroutine flow;
         bool continueUsed;
+        bool lastAnswerCorrect;
 
         public LevelDefinition Level { get; private set; }
 
@@ -118,7 +122,8 @@ namespace KPSSGeography.Quiz
         public bool IsSolved(IMapTarget target) => target != null && solved.Contains(target);
 
         /// <summary>Doğru bilinen hedefler bölüm boyunca boyalı kalsın mı? ("haritayı doldurma" modları)</summary>
-        bool PersistentMarks => !IsExam && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.Feature || Mode == QuizMode.RegionAll);
+        bool PersistentMarks => !IsExam && (Mode == QuizMode.FindProvince || Mode == QuizMode.Region || Mode == QuizMode.Feature ||
+                                           Mode == QuizMode.RegionAll || Mode == QuizMode.Boss);
 
         public float StreakMultiplier(int streak) =>
             1f + Mathf.Clamp(streak - 1, 0, config.maxStreakSteps) * config.streakStep;
@@ -144,7 +149,7 @@ namespace KPSSGeography.Quiz
             StopFlow();
             SetPaused(false);
             Level = level;
-            IsExam = GameSettings.ExamMode;
+            IsExam = GameSettings.ExamMode && level.Mode != QuizMode.Boss; // boss savaşı her zaman renkli
             flow = StartCoroutine(StartRoutine());
         }
 
@@ -197,7 +202,7 @@ namespace KPSSGeography.Quiz
             bool hasBody = questions.Exists(q => !string.IsNullOrEmpty(q.Body) || q.Chart != null);
             // Uzun şıklar ("I ve II", eşleştirme satırları) iki sütunlu ızgaraya dizilir ve daha çok yer kaplar
             bool gridChoices = questions.Exists(q => q.LongTitle && q.Choices != null && System.Array.Exists(q.Choices, c => c.Length > 12));
-            Rect viewport = hasBody ? (gridChoices ? BodyGridViewport : BodyViewport)
+            Rect viewport = Mode == QuizMode.Boss ? BossViewport : hasBody ? (gridChoices ? BodyGridViewport : BodyViewport)
                 : Mode == QuizMode.Mcq ? McqViewport : Mode == QuizMode.Numbered ? (gridChoices ? McqViewport : NumberedViewport)
                 : UsesChoices ? ChoiceViewport : FindViewport;
             cameraController.FocusOn(focus, viewport);
@@ -248,6 +253,10 @@ namespace KPSSGeography.Quiz
                     return Level.category == "country" ? CountriesView() : map.Bounds;
                 }
                 case QuizMode.Numbered:
+                    features.ShowDefault();
+                    map.SetFocus(null);
+                    return map.Bounds;
+                case QuizMode.Boss:
                     features.ShowDefault();
                     map.SetFocus(null);
                     return map.Bounds;
@@ -319,6 +328,12 @@ namespace KPSSGeography.Quiz
                 else features.ShowDefault();
             }
             if (Mode == QuizMode.Mcq || Mode == QuizMode.Numbered) ApplyMarkers();
+            if (Mode == QuizMode.Boss)
+            {
+                // Fay Hattı raundunda fay çizgileri ipucu olarak görünür (görece kolay raund)
+                if (Current.Round == 1) features.ShowCategory(GeoFeature.Fault, false);
+                else features.ShowDefault();
+            }
             if (!Current.FocusHidden) Current.Focus?.SetFocused(true);
 
             TimeLimit = QuestionTime;
@@ -506,6 +521,7 @@ namespace KPSSGeography.Quiz
 
         void ResolveCorrect(IMapTarget clicked, int chosenIndex)
         {
+            lastAnswerCorrect = true;
             Streak++;
             BestStreak = Mathf.Max(BestStreak, Streak);
             CorrectCount++;
@@ -542,6 +558,7 @@ namespace KPSSGeography.Quiz
 
         void ResolveWrong(IMapTarget clicked, int chosenIndex, bool timedOut)
         {
+            lastAnswerCorrect = false;
             Mistakes++;
             Streak = 0;
 
@@ -588,6 +605,14 @@ namespace KPSSGeography.Quiz
             yield return new WaitForSeconds(delay);
             if (!outOfLives)
             {
+                // Boss savaşında yanlış cevapta aynı soru tekrar sorulur: boss ancak doğru cevaplarla yenilir
+                if (Mode == QuizMode.Boss && !lastAnswerCorrect) QuestionIndex--;
+                // Raund geçişi (boss değişimi) gibi ek beklemeler
+                else
+                {
+                    int next = QuestionIndex + 1;
+                    if (next < questions.Count && questions[next].PreDelay > 0f) yield return new WaitForSeconds(questions[next].PreDelay);
+                }
                 NextQuestion();
                 yield break;
             }
@@ -595,7 +620,7 @@ namespace KPSSGeography.Quiz
             bool questionsLeft = Current != null && Current.RequireAll
                 ? found.Count < Current.Correct.Count
                 : QuestionIndex < questions.Count - 1;
-            bool canOffer = config.offerContinue && !continueUsed && questionsLeft && (CanOfferContinue == null || CanOfferContinue());
+            bool canOffer = Mode != QuizMode.Boss && config.offerContinue && !continueUsed && questionsLeft && (CanOfferContinue == null || CanOfferContinue());
             if (canOffer)
             {
                 State = QuizState.ContinueOffer;

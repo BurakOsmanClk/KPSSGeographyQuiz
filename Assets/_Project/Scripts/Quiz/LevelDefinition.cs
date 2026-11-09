@@ -30,6 +30,8 @@ namespace KPSSGeography.Quiz
         BorderCountry,
         /// <summary>ÖSYM tipi numaralı harita: haritada I–V işaretli yerler, soru A) I … E) V şıklarıyla.</summary>
         Numbered,
+        /// <summary>Boss savaşı: raundlar halinde il soruları; doğru il kalıcı olarak "kapanır" (BossScreen).</summary>
+        Boss,
         /// <summary>Henüz hazır olmayan bölüm ("Yakında").</summary>
         ComingSoon
     }
@@ -72,6 +74,7 @@ namespace KPSSGeography.Quiz
             "mcq" => QuizMode.Mcq,
             "bordercountry" => QuizMode.BorderCountry,
             "numbered" => QuizMode.Numbered,
+            "boss" => QuizMode.Boss,
             _ => QuizMode.ComingSoon
         };
 
@@ -92,6 +95,7 @@ namespace KPSSGeography.Quiz
             QuizMode.Mcq => "KPSS SORUSU",
             QuizMode.BorderCountry => "SINIR KOMŞUSU",
             QuizMode.Numbered => "NUMARALI HARİTA",
+            QuizMode.Boss => "BOSS",
             _ => "YAKINDA"
         };
 
