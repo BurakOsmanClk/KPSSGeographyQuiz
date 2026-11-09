@@ -23,6 +23,15 @@ KPSS Coğrafya konularına yönelik eğitim/quiz oyunu. Motor: **Unity 6**. Dil:
 - UI hedefi: **UI Toolkit** (UXML/USS). Şu anki arayüz (giriş ekranı, bölüm karuseli, HUD, sonuç ekranı) kodla kurulan uGUI'dir; renkler `UI/Theme.cs`, ikonlar `UI/ShapeSprites.cs` (SDF ile üretilir). UI Toolkit'e geçişte bu tasarım referans alınır.
 - Soru verileri koddan ayrı tutulur (JSON veya ScriptableObject).
 
+## Veri düzeni (kural; veri ekleyen herkes uyar)
+- **Katalog:** `docs/content/VERI_KAYNAKLARI.md`: her oyun verisinin dosyası, aracı, ham kaynağı, kurumu, yılı ve güncelleme sıklığı. Veri ekleyen ya da güncelleyen aynı PR'da kataloğu da günceller.
+- **Ham dosyalar:** kurumlardan indirilen orijinal dosyalar `Data/raw/<kurum>/<yıl>/` altına, **değiştirilmeden** konur (ayrıntı: `Data/raw/README.md`). CSV/XLSX tercih edilir; PDF'ler LFS'e gider (bulut oturumu LFS'e yükleyemez).
+- **Akış:** ham dosya → `Tools/` altındaki araç → `Assets/_Project/Resources/Data/*.json`. Oyun dosyaları elle değil araçla üretilir; istisna: `questions.json`, `levels.json`, `levels_ek.json` (elle).
+- **Kaynak ve yıl:** her konu kaydının `source` alanında kurum **ve yıl** yazar (ör. "TÜİK ADNKS 2025"). Her yıl değişen setlerde (tarım, hayvancılık, arıcılık, enerji, nüfus) yıl zorunlu.
+- **Ek dosyalar:** yeni konu setleri ve bölümler çakışma olmasın diye `topics_ek.json` (`build_topics_ek.py`) ve `levels_ek.json` dosyalarına eklenebilir; oyun ikisini birlikte okur.
+- **Denetim:** push etmeden önce `python Tools/content/check_data.py` → **0 hata** (uyarılar oyunu bozmaz, kataloğa not düşülür).
+- **Telif:** kitap, ÖSYM ve yayınevi metinleri, soruları ve haritaları kopyalanmaz; bilgi alınır, özgün cümlelerle yazılır.
+
 ## İl haritası verisi
 - Kaynak: Natural Earth 10m admin-1 (kamu malı) → `Tools/geo/ne_10m_admin1_turkey.geojson`.
 - `python Tools/geo/build_provinces.py` ile önceden üçgenlenmiş `Assets/_Project/Resources/Data/turkey_provinces.json` üretilir (plaka kodu, Türkçe ad, coğrafi bölge, etiket noktası, mesh, sınır halkaları).
